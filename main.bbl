@@ -1,0 +1,292 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{TCKPS20}
+
+\bibitem[BAA{\etalchar{+}}23]{barchid2023}
+Sami Barchid, Benjamin Allaert, Amel Aissaoui, Jos\'{e} Mennesson, and
+  Chaabane~C Djeraba.
+\newblock Spiking-fer: Spiking neural network for facial expression recognition
+  with event cameras.
+\newblock In {\em Proceedings of the 20th International Conference on
+  Content-Based Multimedia Indexing (CBMI '23)}, pages 1--7, 2023.
+
+\bibitem[BBJ{\etalchar{+}}19]{bing2019supervised}
+Zhenshan Bing, Ivan Baumann, Zhuangyi Jiang, Kai Huang, Caixia Cai, and Alois
+  Knoll.
+\newblock Supervised learning in snn via reward-modulated
+  spike-timing-dependent plasticity for a target reaching vehicle.
+\newblock {\em Frontiers in Neurorobotics}, 13:10, 2019.
+
+\bibitem[BL73]{bliss1973long}
+Timothy~VP Bliss and Terje L{\o}mo.
+\newblock Long-lasting potentiation of synaptic transmission in the dentate
+  area of the anaesthetized rabbit following stimulation of the perforant path.
+\newblock {\em The Journal of physiology}, 232(2):331--356, 1973.
+
+\bibitem[BP98]{bi1998synaptic}
+Guo-qiang Bi and Mu-ming Poo.
+\newblock Synaptic modifications in cultured hippocampal neurons: dependence on
+  spike timing, synaptic strength, and postsynaptic cell type.
+\newblock {\em Journal of Neuroscience}, 18(24):10464--10472, 1998.
+
+\bibitem[Bur06]{burkitt2006}
+Anthony~N Burkitt.
+\newblock A review of the integrate-and-fire neuron model: I. homogeneous
+  synaptic input.
+\newblock {\em Biological Cybernetics}, 95(1):1--19, 2006.
+
+\bibitem[Che17]{chen2017mechanisms}
+Yanqing Chen.
+\newblock Mechanisms of winner-take-all and group selection in neuronal spiking
+  networks.
+\newblock {\em Frontiers in computational neuroscience}, 11:20, 2017.
+
+\bibitem[DB92]{dudek1992homosynaptic}
+Serena~M Dudek and Mark~F Bear.
+\newblock Homosynaptic long-term depression in hippocampus induced by
+  low-frequency stimulation.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  89(10):4363--4367, 1992.
+
+\bibitem[DC15a]{diehl2015}
+Peter~U. Diehl and Matthew Cook.
+\newblock Unsupervised learning of digit recognition using
+  spike-timing-dependent plasticity.
+\newblock {\em Frontiers in Computational Neuroscience}, 9:99, 2015.
+
+\bibitem[DC15b]{diehl2015unsupervised}
+Peter~U Diehl and Matthew Cook.
+\newblock Unsupervised learning of digit recognition using
+  spike-timing-dependent plasticity.
+\newblock {\em Frontiers in computational neuroscience}, 9:99, 2015.
+
+\bibitem[DPT01]{delorme2001}
+Arnaud Delorme, Laurent Perrinet, and Simon~J Thorpe.
+\newblock Networks of integrate-and-fire neurons using rank order coding b:
+  Spike timing dependent plasticity and emergence of orientation selectivity.
+\newblock {\em Neurocomputing}, 38:539--545, 2001.
+
+\bibitem[EA24]{elassal2024}
+Mireille El-Assal.
+\newblock {\em Unsupervised STDP-based Feature Learning for Video Analysis with
+  Spiking Neural Networks}.
+\newblock Doctoral dissertation, Universit{\'e} de Lille, 2024.
+
+\bibitem[Fal19]{falez2019}
+Pierre Falez.
+\newblock {\em Improving Spiking Neural Networks Trained with Spike Timing
+  Dependent Plasticity for Image Recognition}.
+\newblock PhD thesis, Universit{\'e} de Lille, 2019.
+
+\bibitem[FMT18]{ferre2018unsupervised}
+Paul Ferr{\'e}, Franck Mamalet, and Simon~J Thorpe.
+\newblock Unsupervised feature learning with winner-takes-all based stdp.
+\newblock {\em Frontiers in computational neuroscience}, 12:24, 2018.
+
+\bibitem[FTB{\etalchar{+}}19]{falez2019multi}
+Pierre Falez, Pierre Tirilly, Ioan~Marius Bilasco, Philippe Devienne, and
+  Pierre Boulet.
+\newblock Multi-layered spiking neural network with target timestamp threshold
+  adaptation and stdp.
+\newblock In {\em International Joint Conference on Neural Networks (IJCNN)},
+  pages 1--8, 2019.
+
+\bibitem[GFES21]{guo2021}
+Wenzhe Guo, Mohammed~E. Fouda, Ahmed~M. Eltawil, and Khaled~Nabil Salama.
+\newblock Neural coding in spiking neural networks: A comparative study for
+  robust neuromorphic systems.
+\newblock {\em Frontiers in Neuroscience}, 15, 2021.
+
+\bibitem[GK02]{gerstner2002spiking}
+Wulfram Gerstner and Werner~M Kistler.
+\newblock {\em Spiking neuron models: Single neurons, populations, plasticity}.
+\newblock Cambridge university press, 2002.
+
+\bibitem[GM08]{gollisch2008}
+Tim Gollisch and Markus Meister.
+\newblock Rapid neural coding in the retina with relative spike latencies.
+\newblock {\em Science}, 319(5866):1108--1111, 2008.
+
+\bibitem[Gru23]{grum23}
+Marcus Grum.
+\newblock Learning representations by crystallized back-propagating errors.
+\newblock In {\em Artificial Intelligence and Soft Computing - 22nd
+  International Conference, {ICAISC} 2023, Zakopane, Poland, June 18-22, 2023,
+  Proceedings, Part{I}}, Lecture Notes in Computer Science, pages 78--100,
+  2023.
+
+\bibitem[Heb02]{hebb2002}
+Donald~O Hebb.
+\newblock {\em The Organization of Behavior: A Neuropsychological Theory}.
+\newblock 2002.
+
+\bibitem[HH52]{hodgkin1952}
+Alan~L Hodgkin and Andrew~F Huxley.
+\newblock A quantitative description of membrane current and its application to
+  conduction and excitation in nerve.
+\newblock {\em The Journal of Physiology}, 117(4):500--544, 1952.
+
+\bibitem[HLD21]{yuhuang2021}
+Yuhuang Hu, Shih-Chii Liu, and Tobi Delbruck.
+\newblock v2e: From video frames to realistic dvs events.
+\newblock In {\em 2021 IEEE/CVF Conference on Computer Vision and Pattern
+  Recognition Workshops (CVPRW)}, pages 1312--1321, 2021.
+
+\bibitem[HS81]{horn1981determining}
+Berthold~KP Horn and Brian~G Schunck.
+\newblock Determining optical flow.
+\newblock {\em Artificial intelligence}, 17(1-3):185--203, 1981.
+
+\bibitem[HZ23]{halvagal2023combination}
+Manu~Srinath Halvagal and Friedemann Zenke.
+\newblock The combination of hebbian and predictive plasticity learns invariant
+  object representations in deep sensory networks.
+\newblock {\em bioRxiv}, pages 2023--03, 2023.
+
+\bibitem[Izh04]{izhikevich2004}
+Eugene~M Izhikevich.
+\newblock Which model to use for cortical spiking neurons?
+\newblock {\em IEEE Transactions on Neural Networks}, 15(5):1063--1070, 2004.
+
+\bibitem[Kas14]{kasabov2014}
+Nikola~K. Kasabov.
+\newblock Neucube: A spiking neural network architecture for mapping, learning
+  and understanding of spatio-temporal brain data.
+\newblock {\em Neural Networks}, 52:62--76, 2014.
+
+\bibitem[KGTM18]{kheradpisheh2018stdp}
+Saeed~Reza Kheradpisheh, Mohammad Ganjtabesh, Simon~J. Thorpe, and Timoth{\'e}e
+  Masquelier.
+\newblock {STDP}-based spiking deep convolutional neural networks for object
+  recognition.
+\newblock {\em Neural Networks}, 99:56--67, 2018.
+
+\bibitem[KPPC20]{kugele2020}
+Alexander Kugele, Thomas Pfeil, Michael Pfeiffer, and Elisabetta Chicca.
+\newblock Efficient processing of spatio-temporal data streams with spiking
+  neural networks.
+\newblock {\em Frontiers in Neuroscience}, 14:439, 2020.
+
+\bibitem[LBY20]{liu2020}
+D.~Liu, N.~Bellotto, and S.~Yue.
+\newblock Deep spiking neural network for video-based disguise face recognition
+  based on dynamic facial movements.
+\newblock {\em IEEE Transactions on Neural Networks and Learning Systems},
+  31(6):1843--1855, 2020.
+
+\bibitem[LDP16]{lee2016}
+Jun~Haeng Lee, Tobi Delbruck, and Michael Pfeiffer.
+\newblock Training deep spiking neural networks using backpropagation.
+\newblock {\em Frontiers in Neuroscience}, 10:508, 2016.
+
+\bibitem[LK81]{lucas1981iterative}
+Bruce~D Lucas and Takeo Kanade.
+\newblock An iterative image registration technique with an application to
+  stereo vision.
+\newblock {\em IJCAI}, 1981.
+
+\bibitem[LPSR18]{lee2018_frontiers}
+Chankyu Lee, Priyadarshini Panda, Gopalakrishnan Srinivasan, and Kaushik Roy.
+\newblock Training deep spiking convolutional neural networks with stdp-based
+  unsupervised pre-training followed by supervised fine-tuning.
+\newblock {\em Frontiers in Neuroscience}, 12:435, 2018.
+
+\bibitem[LWG{\etalchar{+}}19]{li2019}
+Dahua Li, Zhe Wang, Qiang Gao, Yu~Song, Xiao Yu, and Chuhan Wang.
+\newblock Facial expression recognition based on electroencephalogram and
+  facial landmark localization.
+\newblock {\em Technology and Health Care}, 27:1--15, 01 2019.
+
+\bibitem[LXJL22]{lan2022pcsnn}
+Mengting Lan, Xiaogang Xiong, Zixuan Jiang, and Yunjiang Lou.
+\newblock {PC-SNN}: Supervised learning with local hebbian synaptic plasticity
+  based on predictive coding in spiking neural networks.
+\newblock {\em CoRR}, abs/2211.15386, 2022.
+
+\bibitem[MBY21]{mansouri2021}
+E.~Mansouri-Benssassi and J.~Ye.
+\newblock Generalisation and robustness investigation for facial and speech
+  emotion recognition using bio-inspired spiking neural networks.
+\newblock {\em Soft Computing}, 25:1717--1730, 2021.
+
+\bibitem[QBG11]{querlioz2011simulation}
+Damien Querlioz, Olivier Bichler, and Christian Gamrat.
+\newblock Simulation of a memristor-based spiking neural network immune to
+  device variations.
+\newblock In {\em International Joint Conference on Neural Networks (IJCNN)},
+  pages 1775--1781, 2011.
+
+\bibitem[SM07]{silberberg2007disynaptic}
+Gilad Silberberg and Henry Markram.
+\newblock Disynaptic inhibition between neocortical pyramidal cells mediated by
+  martinotti cells.
+\newblock {\em Neuron}, 53(5):735--746, 2007.
+
+\bibitem[SMA00]{song2000competitive}
+Sen Song, Kenneth~D Miller, and Laurence~F Abbott.
+\newblock Competitive hebbian learning through spike-timing-dependent synaptic
+  plasticity.
+\newblock {\em Nature Neuroscience}, 3(9):919--926, Sep 2000.
+
+\bibitem[ST94]{shi1994good}
+Jianbo Shi and Carlo Tomasi.
+\newblock Good features to track.
+\newblock In {\em 1994 Proceedings of IEEE Conference on Computer Vision and
+  Pattern Recognition}, pages 593--600, 1994.
+
+\bibitem[STZP13]{sagonas2013300w}
+Christos~health Sagonas, Georgios Tzimiropoulos, Stefanos Zafeiriou, and Maja
+  Pantic.
+\newblock 300 faces in-the-wild challenge: The first facial landmark
+  localization challenge.
+\newblock In {\em Proceedings of the IEEE international conference on computer
+  vision workshops}, pages 397--403, 2013.
+
+\bibitem[TCKPS20]{tan2020}
+C.~Tan, G.~Ceballos, N.~Kasabov, and N.~Puthanmadam~Subramaniyam.
+\newblock Fusionsense: Emotion classification using feature fusion of
+  multimodal data and deep learning in a brain-inspired spiking neural network.
+\newblock {\em Sensors}, 20(18):5328, 2020.
+
+\bibitem[TG98]{thorpe1998}
+Simon Thorpe and Jacques Gautrais.
+\newblock Rank order coding.
+\newblock In {\em Computational Neuroscience}, pages 113--118. 1998.
+
+\bibitem[TGK{\etalchar{+}}19]{tavanaei2019deep}
+Amirhossein Tavanaei, Masoud Ghodrati, Saeed~Reza Kheradpisheh, Timoth{\'e}e
+  Masquelier, and Anthony Maida.
+\newblock Deep learning in spiking neural networks.
+\newblock {\em Neural Networks}, 111:47--63, 2019.
+
+\bibitem[VJ01]{viola2001robust}
+Paul Viola and Michael Jones.
+\newblock Robust real-time face detection.
+\newblock In {\em Proceedings eighth IEEE international conference on computer
+  vision}, volume~2, pages 747--747, 2001.
+
+\bibitem[vRBT00]{rossum2000}
+M.~C.~W. van Rossum, G.~Q. Bi, and G.~G. Turrigiano.
+\newblock Stable hebbian learning from spike timing-dependent plasticity.
+\newblock 20(23):8812--8821, 2000.
+
+\bibitem[WDZ{\etalchar{+}}22]{wang2022}
+Binqiang Wang, Gang Dong, Yaqian Zhao, Rengang Li, Hongbin Yang, Wenfeng Yin,
+  and Lingyan Liang.
+\newblock Spiking emotions: Dynamic vision emotion recognition using spiking
+  neural networks.
+\newblock In {\em 2022 International Conference on Algorithms, High Performance
+  Computing and Artificial Intelligence (AHPCAI)}, pages 1--6, 2022.
+
+\bibitem[ZZL22]{zhao2022backeisnn}
+Dongcheng Zhao, Yi~Zeng, and Yang Li.
+\newblock Backeisnn: A deep spiking neural network with adaptive self-feedback
+  and balanced excitatory--inhibitory neurons.
+\newblock {\em Neural Networks}, 154:68--77, 2022.
+
+\bibitem[ZZPM16]{zadeh2016}
+Amir Zadeh, Rowan Zellers, Eli Pincus, and Louis-Philippe Morency.
+\newblock Mosi: Multimodal corpus of sentiment intensity and subjectivity
+  analysis in online opinion videos.
+\newblock {\em ArXiv}, abs/1606.06259, 2016.
+
+\end{thebibliography}

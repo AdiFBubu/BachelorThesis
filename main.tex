@@ -1,0 +1,84 @@
+%\documentclass[12pt]{scrreprt}
+\documentclass[12pt]{report} 
+
+% language may be romanian or english (default is english)
+% type may be bachelor or master (default is bachelor)
+\usepackage[language=romanian, type=bachelor]{style}
+
+\usepackage{tikz}    % Pachetul de bază pentru desene
+\usepackage{amsmath} % Pentru simbolurile matematice (\sum, \sigma)
+\usepackage{subcaption} % pune imagini pe aceeasi linie
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{longtable}
+\usepackage{array}
+
+% ===== In preambul =====
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+
+%\geometry{a4paper,top=2.5cm,left=3cm,right=2.5cm,bottom=2.5cm}
+%in style
+%controlling the appearance of your headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\renewcommand{\headrulewidth}{0.2pt}
+\renewcommand{\footrulewidth}{0.2pt}
+
+\begin{document}
+
+\specialization{INFORMATICĂ}	
+\title{Optimizarea prin preprocesare adaptivă a sistemelor de recunoaștere facială bazate pe rețele neuronale cu spiking}					   
+\author{Bubuianu Adrian-Florin}											
+\supervisor{Drd. Marc Daria \\ Prof. Dr. Pop Horia Florin}				
+				
+\maketitle
+
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
+\pagenumbering{roman} 
+
+\cleardoublepage
+ABSTRACT
+\vspace{0.5cm}	
+\hrule
+\vspace{0.5cm}	
+%\cleardoublepage
+
+Abstract: un rezumat în limba engleză cu prezentarea, pe scurt, a conținutului pe capitole, punând accent pe contribuțiile proprii și originalitate
+
+
+
+\tableofcontents
+
+
+\newpage
+\pagenumbering{arabic}
+
+\input{chapters/chapter1_introduction}
+%\addcontentsline{toc}{chapter}{Introducere}
+%\addcontentsline{toc}{chapter}{Introduction}
+
+\input{chapters/chapter1_1_literatura_specialitate}
+\input{chapters/chapter2}
+\input{chapters/chapter3}
+\input{chapters/chapter4}
+\input{chapters/chapter5}
+\input{chapters/chapter6}
+\input{chapters/chapter7}
+
+\input{chapters/chapter8_conclusions}
+%\addcontentsline{toc}{chapter}{Concluzii}
+%\addcontentsline{toc}{chapter}{Conclusions}
+
+\bibliography{references}
+
+\end{document}

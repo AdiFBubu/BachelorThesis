@@ -1,0 +1,137 @@
+\babel@toc {romanian}{}\relax 
+\contentsline {chapter}{Introducere}{1}{chapter*.2}%
+\contentsline {chapter}{Încadrarea în literatura de specialitate}{2}{chapter*.3}%
+\contentsline {section}{\numberline {0.1}Recunoașterea emoțiilor faciale folosind rețele SNN bio-inspirate}{2}{section.0.1}%
+\contentsline {section}{\numberline {0.2}Abordări bazate pe evenimente: Arhitectura Spiking-FER}{2}{section.0.2}%
+\contentsline {section}{\numberline {0.3}Fuziunea multimodală și arhitecturi evolutive: Modelul FusionSense}{3}{section.0.3}%
+\contentsline {section}{\numberline {0.4}Recunoașterea identității prin dinamica mișcărilor faciale}{4}{section.0.4}%
+\contentsline {section}{\numberline {0.5}Recunoașterea emoțiilor prin senzori de viziune dinamică simulați}{4}{section.0.5}%
+\contentsline {chapter}{\numberline {1}Fundamente teoretice despre inteligența artificială și rețele neuromorfice}{6}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Învățarea automată și rețele neuronale artificiale (ANN)}{6}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Trecerea de la ANN la Spiking Neural Networks (SNN)}{7}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Modelarea matematică a neuronului cu impulsuri}{8}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Dinamica membranei neuronale}{8}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Modele de neuroni: de la biologie la eficiență hardware}{9}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Formalizarea matematică a modelului Integrate-and-Fire}{10}{subsection.1.3.3}%
+\contentsline {section}{\numberline {1.4}Codificarea informației neurale (Neural Coding)}{11}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Rate Coding}{11}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Temporal Coding}{11}{subsection.1.4.2}%
+\contentsline {subsubsection}{Rank Order Coding}{11}{section*.7}%
+\contentsline {subsubsection}{Latency Coding}{12}{section*.8}%
+\contentsline {section}{\numberline {1.5}Mecanisme de învățare și plasticitate sinaptică}{12}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}Conversia ANN în SNN}{13}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.5.2}Spiking Back-propagation}{13}{subsection.1.5.2}%
+\contentsline {subsection}{\numberline {1.5.3}Învățarea de tip Hebbian}{14}{subsection.1.5.3}%
+\contentsline {subsection}{\numberline {1.5.4}Spike Timing-Dependent Plasticity (STDP)}{14}{subsection.1.5.4}%
+\contentsline {subsubsection}{Variante ale regulii STDP}{15}{section*.9}%
+\contentsline {paragraph}{1. STDP Biologic:}{15}{section*.10}%
+\contentsline {paragraph}{2. STDP Aditiv (Add-STDP):}{15}{section*.11}%
+\contentsline {paragraph}{3. STDP Multiplicativ (Mult-STDP):}{15}{section*.12}%
+\contentsline {subsection}{\numberline {1.5.5}Inhibiția}{15}{subsection.1.5.5}%
+\contentsline {subsection}{\numberline {1.5.6}Homeostazia}{16}{subsection.1.5.6}%
+\contentsline {section}{\numberline {1.6}Arhitecturi Spiking Convolutional Neural Networks (CSNN)}{17}{section.1.6}%
+\contentsline {subsection}{\numberline {1.6.1}Convoluția în domeniul impulsurilor (2D-CSNN)}{17}{subsection.1.6.1}%
+\contentsline {subsection}{\numberline {1.6.2}3D-CSNN pentru procesare video}{18}{subsection.1.6.2}%
+\contentsline {section}{\numberline {1.7}Algoritmi de preprocesare și detecție facială}{18}{section.1.7}%
+\contentsline {subsection}{\numberline {1.7.1}Detecția feței prin algoritmul Viola-Jones}{19}{subsection.1.7.1}%
+\contentsline {subsection}{\numberline {1.7.2}Extragerea și urmărirea punctelor de interes}{19}{subsection.1.7.2}%
+\contentsline {paragraph}{Algoritmul Min-Eigenvalue:}{20}{section*.15}%
+\contentsline {paragraph}{Urmărirea prin algoritmul KLT (Kanade-Lucas-Tomasi):}{20}{section*.16}%
+\contentsline {subsection}{\numberline {1.7.3}Transformări geometrice și alinierea feței}{20}{subsection.1.7.3}%
+\contentsline {paragraph}{Actualizarea ROI prin Geometric Transform:}{20}{section*.17}%
+\contentsline {section}{\numberline {1.8}Metode de eșantionare a datelor de intrare (Sampling)}{20}{section.1.8}%
+\contentsline {subsection}{\numberline {1.8.1}Eșantionarea Spațială (2D)}{21}{subsection.1.8.1}%
+\contentsline {subsubsection}{Eșantionarea Aleatorie}{21}{section*.18}%
+\contentsline {subsubsection}{Eșantionarea bazată pe Regiunea Facială}{21}{section*.19}%
+\contentsline {subsubsection}{Eșantionarea bazată pe Puncte de Reper}{21}{section*.20}%
+\contentsline {subsection}{\numberline {1.8.2}Eșantionarea Spatio-Temporală (3D)}{22}{subsection.1.8.2}%
+\contentsline {subsubsection}{Eșantionarea Aleatorie}{23}{section*.23}%
+\contentsline {subsubsection}{Strategii Faciale bazate pe Bounding Box}{23}{section*.24}%
+\contentsline {subsubsection}{Eșantionarea bazată pe Landmark-uri}{24}{section*.25}%
+\contentsline {section}{\numberline {1.9}Metode de Decodificare a Semnalelor Neuronale}{24}{section.1.9}%
+\contentsline {subsection}{\numberline {1.9.1}Decodificarea prin Declin Liniar (Linear Decay)}{24}{subsection.1.9.1}%
+\contentsline {subsection}{\numberline {1.9.2}Decodificarea prin Impuls Dreptunghiular (Rectangular Pulse)}{25}{subsection.1.9.2}%
+\contentsline {subsection}{\numberline {1.9.3}Decodificarea Gaussiană (Gaussian-based Importance)}{25}{subsection.1.9.3}%
+\contentsline {section}{\numberline {1.10}Percepția vizuală bazată pe evenimente}{25}{section.1.10}%
+\contentsline {subsection}{\numberline {1.10.1}Senzori de viziune dinamică (DVS)}{25}{subsection.1.10.1}%
+\contentsline {subsection}{\numberline {1.10.2}Recunoașterea activităților umane (HAR) folosind SNN}{25}{subsection.1.10.2}%
+\contentsline {chapter}{\numberline {2}Recunoașterea facială și procesarea semnalului vizual}{26}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Biometria facială: provocări și oportunități}{26}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Reprezentarea datelor sub formă de impulsuri (Spike Encoding)}{26}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Rate Coding vs. Temporal Coding}{26}{subsection.2.2.1}%
+\contentsline {section}{\numberline {2.3}Problematica zgomotului de fundal în sistemele neuromorfice}{26}{section.2.3}%
+\contentsline {chapter}{\numberline {3}Preprocesarea imaginii și segmentarea Regiunii de Interes (ROI)}{28}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Importanța segmentării în eficientizarea CSNN}{28}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Algoritmi pentru detecția feței}{28}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Extragerea ROI și normalizarea pentru conversia în impulsuri}{28}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Reducerea activității neuronale redundante prin eliminarea fundalului}{28}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Proiectarea și implementarea sistemului de recunoaștere facială}{30}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Arhitectura sistemului propus (Pipeline-ul de procesare)}{30}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Simulatorul CSNN}{30}{subsection.4.1.1}%
+\contentsline {section}{\numberline {4.2}Tehnologii și biblioteci utilizate}{30}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Biblioteci de procesare vizuală (OpenCV)}{30}{subsection.4.2.1}%
+\contentsline {section}{\numberline {4.3}Configurarea straturilor convoluționale ale CSNN}{30}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Mecanismul de antrenare}{30}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Experimente și analiza rezultatelor}{31}{chapter.5}%
+\contentsline {subsection}{\numberline {5.0.1}Analiza Arhitecturilor de Clasificare în CSNN}{31}{subsection.5.0.1}%
+\contentsline {subsubsection}{Abordarea Hibridă: CSNN cu Clasificator SVM}{31}{section*.27}%
+\contentsline {subsubsection}{Abordarea End-to-End: CSNN cu Straturi Fully Connected Spiking}{32}{section*.28}%
+\contentsline {section}{\numberline {5.1}Setul de date utilizat}{32}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Metodologia de testare a modelului}{32}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Cazul A: Recunoaștere pe imagini brute (cu fundal)}{32}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Cazul B: Recunoaștere pe imagini cu segmentare ROI}{32}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}Metrici de performanță}{32}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Analiza impactului zgomotului vizual asupra preciziei modelului}{32}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Numele aplicației}{33}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Colectarea cerințelor}{34}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Actorii sistemului}{34}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Diagrama cazurilor de utilizare}{34}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Descrierea detaliată a unui caz de utilizare}{35}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Cerințe nefuncționale (NFR)}{35}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Securitate și control acces}{35}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Confidențialitate și protecția datelor}{37}{subsection.7.4.2}%
+\contentsline {subsection}{\numberline {7.4.3}Performanță și timp real}{37}{subsection.7.4.3}%
+\contentsline {subsection}{\numberline {7.4.4}Fiabilitate și disponibilitate}{37}{subsection.7.4.4}%
+\contentsline {subsection}{\numberline {7.4.5}Uzabilitate și Mentenabilitate}{38}{subsection.7.4.5}%
+\contentsline {section}{\numberline {7.5}Modelul structural}{38}{section.7.5}%
+\contentsline {subsection}{\numberline {7.5.1}Backend}{38}{subsection.7.5.1}%
+\contentsline {subsection}{\numberline {7.5.2}Frontend}{40}{subsection.7.5.2}%
+\contentsline {subsection}{\numberline {7.5.3}Diagrama entitate--relație (ER)}{42}{subsection.7.5.3}%
+\contentsline {section}{\numberline {7.6}Modelul dinamic al sistemului}{43}{section.7.6}%
+\contentsline {subsection}{\numberline {7.6.1}Diagrama de secvență: Monitorizare live}{43}{subsection.7.6.1}%
+\contentsline {subsection}{\numberline {7.6.2}Diagrama de comunicare: Vizualizare timeline}{44}{subsection.7.6.2}%
+\contentsline {subsection}{\numberline {7.6.3}Diagrama de deployment}{45}{subsection.7.6.3}%
+\contentsline {subsubsection}{Motivația utilizării PostgreSQL + InfluxDB}{46}{section*.38}%
+\contentsline {subsection}{\numberline {7.6.4}Diagrama de stare: \textit {PatientAlert}}{47}{subsection.7.6.4}%
+\contentsline {subsection}{\numberline {7.6.5}Diagrama de activități: Check-in pacient}{49}{subsection.7.6.5}%
+\contentsline {section}{\numberline {7.7}Sistemul de alerte și notificări}{49}{section.7.7}%
+\contentsline {subsection}{\numberline {7.7.1}Evenimente clinice în sesiune (Live Session Events)}{51}{subsection.7.7.1}%
+\contentsline {subsection}{\numberline {7.7.2}Indicatori rezumați în UI}{51}{subsection.7.7.2}%
+\contentsline {subsubsection}{Clinical Risk Level (Low / Medium / High)}{51}{section*.44}%
+\contentsline {subsubsection}{Session Type (normal / positive / high-risk)}{52}{section*.46}%
+\contentsline {subsection}{\numberline {7.7.3}Notificare la schimbarea nivelului de risc}{53}{subsection.7.7.3}%
+\contentsline {subsection}{\numberline {7.7.4}Notificări operaționale (erori și stări de funcționare)}{53}{subsection.7.7.4}%
+\contentsline {section}{\numberline {7.8}Testarea aplicației}{54}{section.7.8}%
+\contentsline {subsection}{\numberline {7.8.1}Rezultatele testarii black-box pentru metoda de inregistrare a citirilor}{54}{subsection.7.8.1}%
+\contentsline {subsection}{\numberline {7.8.2}Testare white-box (varianta compacta)}{59}{subsection.7.8.2}%
+\contentsline {subsubsection}{Metoda analizata}{59}{section*.49}%
+\contentsline {subsubsection}{Complexitate ciclomatrica}{59}{section*.50}%
+\contentsline {subsubsection}{CFG}{59}{section*.51}%
+\contentsline {subsubsection}{Drumuri independente (set minim, CC=8)}{61}{section*.53}%
+\contentsline {section}{\numberline {7.9}Testarea de integrare}{61}{section.7.9}%
+\contentsline {subsection}{\numberline {7.9.1}Scop}{61}{subsection.7.9.1}%
+\contentsline {subsection}{\numberline {7.9.2}Strategie}{61}{subsection.7.9.2}%
+\contentsline {subsection}{\numberline {7.9.3}Scenarii implementate}{62}{subsection.7.9.3}%
+\contentsline {subsection}{\numberline {7.9.4}Mediu si executie}{62}{subsection.7.9.4}%
+\contentsline {subsection}{\numberline {7.9.5}Rezultate obtinute}{63}{subsection.7.9.5}%
+\contentsline {subsection}{\numberline {7.9.6}Concluzie}{63}{subsection.7.9.6}%
+\contentsline {section}{\numberline {7.10}Proiectare}{63}{section.7.10}%
+\contentsline {subsection}{\numberline {7.10.1}Analiza cerințelor}{63}{subsection.7.10.1}%
+\contentsline {subsection}{\numberline {7.10.2}Diagrama cazurilor de utilizare}{63}{subsection.7.10.2}%
+\contentsline {subsection}{\numberline {7.10.3}Diagrame de interacțiune}{63}{subsection.7.10.3}%
+\contentsline {section}{\numberline {7.11}Implementare}{63}{section.7.11}%
+\contentsline {subsection}{\numberline {7.11.1}Server}{63}{subsection.7.11.1}%
+\contentsline {subsection}{\numberline {7.11.2}Client}{63}{subsection.7.11.2}%
+\contentsline {section}{\numberline {7.12}Testare}{63}{section.7.12}%
+\contentsline {chapter}{\numberline {8}Concluzii}{64}{chapter.8}%
+\contentsline {chapter}{Bibliografie}{65}{chapter*.56}%
