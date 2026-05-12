@@ -1,0 +1,18 @@
+SVM pe pixeli raw:
+fold1: classification rate: 44.1176% (15/34)
+fold2: classification rate: 38.2353% (13/34)
+fold3: classification rate: 54.5455% (18/33)
+fold4: classification rate: 39.3939% (13/33)
+fold5: classification rate: 38.7097% (12/31)
+fold6: classification rate: 36.6667% (11/30)
+fold7: classification rate: 43.3333% (13/30)
+fold8: classification rate: 44.8276% (13/29)
+fold9: classification rate: 39.2857% (11/28)
+fold10: classification rate: 37.037% (10/27)
+
+
+auto &svm = experiment.push<layer::Stream>(1, 1, 1, 1); // nu modifica inputul
+auto &svm_out = experiment.output<NoOutputConversion>(svm); // nu se modifica valorile din tensori
+svm_out.add_postprocessing<process::SumPooling>(4, 4);
+svm_out.add_postprocessing<process::TemporalPooling>(2);
+svm_out.add_analysis<analysis::Svm>();

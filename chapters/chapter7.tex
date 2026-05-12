@@ -576,277 +576,455 @@ Pe lângă alertarea clinică, aplicația comunică și stări/erori operaționa
 
 \section{Testarea aplicației}
 
-\subsection{Rezultatele testarii black-box pentru metoda de inregistrare a citirilor}
-\label{subsec:rezultate-blackbox-readings}
-
-Testarea black-box pentru endpoint-ul \texttt{POST /api/doctor/patients/:patientId/readings}
-a fost organizata in doua etape: ECP si BVA.
-Toate cazurile din suita dedicata au trecut (\textbf{43/43}).
-
-\begingroup
-\small
-\setlength{\tabcolsep}{6pt}
-\renewcommand{\arraystretch}{1.15}
-
-\begin{longtable}{p{1.6cm}p{3.0cm}p{6.8cm}p{2.0cm}p{1.4cm}}
-\caption{ECP (Equivalence Class Partitioning) pentru endpoint-ul de readings}
-\label{tab:ecp-readings}\\
-\toprule
-\textbf{ID} & \textbf{Clasa} & \textbf{Date intrare (sinteza)} & \textbf{Rezultat asteptat} & \textbf{Status} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{ID} & \textbf{Clasa} & \textbf{Date intrare (sinteza)} & \textbf{Rezultat asteptat} & \textbf{Status} \\
-\midrule
-\endhead
-
-\midrule
-\multicolumn{5}{r}{\textit{Continua pe pagina urmatoare}} \\
-\endfoot
-
-\bottomrule
-\endlastfoot
-
-ECP-A1 & Auth invalid & Fara header \texttt{Authorization} & HTTP 401, mesaj \texttt{Missing authorization header} & Pass \\
-ECP-A2 & Auth invalid & Header in format gresit (\texttt{Token abc}) & HTTP 401, mesaj \texttt{Invalid authorization format} & Pass \\
-ECP-A3 & Auth invalid & JWT invalid (\texttt{Bearer not-a-valid-jwt}) & HTTP 401, mesaj \texttt{Invalid token} & Pass \\
-ECP-A4 & Rol nepermis & JWT valid cu rol \texttt{ADMIN} & HTTP 403, mesaj \texttt{Forbidden} & Pass \\
-
-ECP-B1 & Pacient invalid & Pacient inexistent & HTTP 404, mesaj \texttt{Patient not found} & Pass \\
-ECP-B2 & Pacient invalid & Pacient arhivat & HTTP 404, mesaj \texttt{Patient not found} & Pass \\
-ECP-B3 & Acces nepermis & Pacient alocat altui doctor & HTTP 403, mesaj \texttt{You can only push readings...} & Pass \\
-
-ECP-C1 & Payload valid & Emotii in campul \texttt{probabilities}: Anger/Fear/Sadness & HTTP 201, persistare corecta (normalizare) & Pass \\
-ECP-C2 & Payload valid & Emotii in body top-level (\texttt{anger}, \texttt{fear}, \texttt{sadness}) & HTTP 201, persistare corecta & Pass \\
-ECP-C3 & Payload invalid & Doar chei nerecunoscute (ex. Joy, Calmness) & HTTP 400, mesaj \texttt{Reading payload does not contain emotion values} & Pass \\
-ECP-C4 & Payload invalid & Chei valide, dar valori non-numerice (\texttt{Anger='abc'}) & HTTP 400, mesaj \texttt{Reading payload does not contain emotion values} & Pass \\
-
-ECP-D1 & Timestamp invalid & \texttt{timestamp='invalid-date'} & HTTP 400, mesaj \texttt{Invalid timestamp} & Pass \\
-ECP-D2 & Timestamp valid implicit & \texttt{timestamp} lipsa & HTTP 201, timestamp server-side valid & Pass \\
-
-ECP-E1 & Domeniu numeric extins & Valori sub 0 si peste 100 (ex. -10, 150) & HTTP 201, clamp in intervalul [0,100] & Pass \\
-
-ECP-F1 & Alertare - clasa joasa & Distress si pain sub pragul de alertare & HTTP 201, fara creare alerta & Pass \\
-ECP-F2 & Alertare - distress dominant & Scoruri ridicate cu distress dominant & HTTP 201, creare alerta \texttt{DISTRESS} (severitate corecta) & Pass \\
-ECP-F3 & Alertare - pain dominant & Scoruri ridicate cu pain dominant & HTTP 201, creare alerta \texttt{PAIN} (severitate corecta) & Pass \\
-ECP-F4 & Alerta existenta & Exista alerta activa de acelasi tip & HTTP 201, \texttt{update} alerta (nu \texttt{create}) & Pass \\
-ECP-F5 & Rezolvare alerta & Scoruri coborate sub prag de rezolvare & HTTP 201, \texttt{resolve} pentru alertele active relevante & Pass \\
-
-\end{longtable}
-\endgroup
-
-
-\begingroup
-\small
-\setlength{\tabcolsep}{6pt}
-\renewcommand{\arraystretch}{1.15}
-
-\begin{longtable}{p{1.6cm}p{3.3cm}p{6.5cm}p{2.0cm}p{1.4cm}}
-\caption{BVA (Boundary Value Analysis) pentru endpoint-ul de readings}
-\label{tab:bva-readings}\\
-\toprule
-\textbf{ID} & \textbf{Frontiera} & \textbf{Valoare testata} & \textbf{Rezultat asteptat} & \textbf{Status} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{ID} & \textbf{Frontiera} & \textbf{Valoare testata} & \textbf{Rezultat asteptat} & \textbf{Status} \\
-\midrule
-\endhead
-
-\midrule
-\multicolumn{5}{r}{\textit{Continua pe pagina urmatoare}} \\
-\endfoot
-
-\bottomrule
-\endlastfoot
-
-BVA-1a & hasData in jurul lui 0 & Anger = -1 & HTTP 400 (fara date emotionale valide) & Pass \\
-BVA-1b & hasData in jurul lui 0 & Anger = 0 & HTTP 400 (fara date emotionale valide) & Pass \\
-BVA-1c & hasData in jurul lui 0 & Anger = +1 & HTTP 201 (date valide) & Pass \\
-
-BVA-2a & Scalare la pragul 1 & Anger = 0.99 & HTTP 201, normalizare la 99 & Pass \\
-BVA-2b & Scalare la pragul 1 & Anger = 1.00 & HTTP 201, normalizare la 100 & Pass \\
-BVA-2c & Scalare la pragul 1 & Anger = 1.01 & HTTP 201, valoare ramane 1.01 (fara scalare x100) & Pass \\
-
-BVA-3a & Clamp superior la 100 & Anger = 99 & HTTP 201, valoare 99 & Pass \\
-BVA-3b & Clamp superior la 100 & Anger = 100 & HTTP 201, valoare 100 & Pass \\
-BVA-3c & Clamp superior la 100 & Anger = 101 & HTTP 201, clamp la 100 & Pass \\
-
-BVA-4a & Prag alertare 70 (\(\pm 1\)) & Distress = 69 & HTTP 201, fara alerta noua & Pass \\
-BVA-4b & Prag alertare 70 (\(\pm 1\)) & Distress = 70 & HTTP 201, creare alerta (LOW) & Pass \\
-BVA-4c & Prag alertare 70 (\(\pm 1\)) & Distress = 71 & HTTP 201, creare alerta (LOW) & Pass \\
-
-BVA-5a & Prag severitate 72 (\(\pm 1\)) & Scor = 71 & Severitate LOW & Pass \\
-BVA-5b & Prag severitate 72 (\(\pm 1\)) & Scor = 72 & Severitate MEDIUM & Pass \\
-BVA-5c & Prag severitate 72 (\(\pm 1\)) & Scor = 73 & Severitate MEDIUM & Pass \\
-
-BVA-6a & Prag severitate 85 (\(\pm 1\)) & Scor = 84 & Severitate MEDIUM & Pass \\
-BVA-6b & Prag severitate 85 (\(\pm 1\)) & Scor = 85 & Severitate HIGH & Pass \\
-BVA-6c & Prag severitate 85 (\(\pm 1\)) & Scor = 86 & Severitate HIGH & Pass \\
-
-BVA-7a & Prag resolve distress 55 (\(\pm 1\)) & Distress = 54 & HTTP 201, se executa resolve DISTRESS & Pass \\
-BVA-7b & Prag resolve distress 55 (\(\pm 1\)) & Distress = 55 & HTTP 201, fara resolve DISTRESS & Pass \\
-BVA-7c & Prag resolve distress 55 (\(\pm 1\)) & Distress = 56 & HTTP 201, fara resolve DISTRESS & Pass \\
-
-BVA-8a & Prag resolve pain 55 (\(\pm 1\)) & Pain = 54 & HTTP 201, se executa resolve PAIN & Pass \\
-BVA-8b & Prag resolve pain 55 (\(\pm 1\)) & Pain = 55 & HTTP 201, fara resolve PAIN & Pass \\
-BVA-8c & Prag resolve pain 55 (\(\pm 1\)) & Pain = 56 & HTTP 201, fara resolve PAIN & Pass \\
-
-\end{longtable}
-\endgroup
-
-
-\subsection{Testare white-box (varianta compacta)}
+\subsection{Testare white-box}
 \label{subsec:whitebox-compact}
 
 \subsubsection{Metoda analizata}
-Analiza white-box a fost realizata pe metoda \texttt{deriveProlongedAlert(...)} din serviciul de monitorizare, deoarece include ramificatii multiple, iteratie si o functie auxiliara (\texttt{flushStreak}) care influenteaza direct decizia de generare a alertelor.
+Analiza white-box a fost realizată pe metoda \texttt{deriveProlongedAlert} din serviciul de monitorizare, care se ocupă cu detectarea perioadelor de suferință prelungită (durere sau stres) ale unui pacient, analizând un istoric de date (timeline). Această funcție include ramificatii multiple, mai multe iterații și o funcție auxiliară (\texttt{flushStreak}) care influențează direct decizia de generare a alertelor.
 
-\subsubsection{Complexitate ciclomatrica}
-Pentru metoda analizata au fost identificate 8 predicate de decizie:
-\[
-D_1:\ timeline empty?\ 
-D_2:\ loop - mai sunt puncte?\ 
-D_3:\ value \ge 65,\ 
-D_4:\ streakStart < 0,\ 
-D_5:\ streakStart < 0\ (in\ flushStreak(index - 1)),\ 
-D_6:\ streakStart < 0\ (in\ flushStreak(timeline.length -1 )),\
-D_7:\ durationMinutes \ge 60 (in flushStreak(index - 1)),\ 
-D_8:\ durationMinutes \ge 60 (in flushStreak(timeline.length - 1))\ 
-\]
+\subsubsection{Complexitate ciclomatrică}
 
-\[
-CC = D + 1 = 8 + 1 = 9
-CC = E - N + 2P = 37 - 30 + 2*1 = 9
-\]
+Pentru metoda analizată, au fost identificate 8 predicate de decizie ($D$), care determină ramificarea fluxului de execuție, după cum se poate remarca în Tabelul \ref{tab:complexitate-ciclomatica}.
 
-Rezulta un minim de 9 drumuri independente care trebuie acoperite.
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|c|l|p{8.5cm}|}
+		\hline
+		\textbf{ID} & \textbf{Condiție (Predicat)} & \textbf{Descriere / Rol în fluxul de execuție} \\ \hline
+		$D_1$ & \texttt{timeline.length === 0} & Verificarea listei vide pentru \textit{early return}. \\ \hline
+		$D_2$ & \texttt{timeline.forEach} & Controlul iterațiilor prin punctele cronologiei. \\ \hline
+		$D_3$ & \texttt{value >= threshold} & Condiția de depășire a pragului (început/continuare \textit{streak}). \\ \hline
+		$D_4$ & \texttt{streakStart < 0} & Identificarea inițierii unui segment nou de alertă. \\ \hline
+		$D_5$ & \texttt{streakStart < 0} & Verificarea existenței unui \textit{streak} activ la apelul \texttt{flushStreak}. \\ \hline
+		$D_6$ & \texttt{streakStart < 0} & Verificarea \textit{streak}-ului rămas deschis după finalizarea buclei. \\ \hline
+		$D_7$ & \texttt{durationMinutes >= 60} & Validarea duratei minime necesare pentru generarea alertei. \\ \hline
+		$D_8$ & \texttt{durationMinutes >= 60} & Validarea duratei pentru \textit{streak}-ul procesat la finalul execuției. \\ \hline
+	\end{tabular}
+	\caption{Predicatele de decizie identificate pentru funcția de alertare.}
+	\label{tab:complexitate-ciclomatica}
+\end{table}
 
-\subsubsection{CFG}
+Determinarea complexității ciclomatrice ($CC$) se bazează pe teoria grafurilor aplicată fluxului de control al programului. Relația fundamentală utilizată este formula lui McCabe, introdusă de Thomas McCabe în lucrarea sa fundamentală din 1976 \cite{mccabe1976}, fiind definită în ecuația \ref{eq:mccabe}:
+
+\begin{equation} \label{eq:mccabe}
+	CC = E - N + 2P
+\end{equation}
+
+Unde variabilele reprezintă:
+\begin{itemize}
+	\item $E$ -- numărul de muchii (edges) din graful de flux;
+	\item $N$ -- numărul de noduri (nodes);
+	\item $P$ -- numărul de componente conexe (pentru o singură metodă, $P=1$).
+\end{itemize}
+
+Aplicând această metodologie asupra grafului de flux de control (CFG) generat - ilustrat în Figura \ref{fig:cfg-derive-prolonged-alert}, complexitatea a fost calculată prin trei metode convergente:
+
+\begin{align*}
+	1. & \quad CC = \text{numărul de regiuni planare ale grafului} = 9 \\
+	2. & \quad CC = D + 1 = 8 + 1 = 9 \\
+	3. & \quad \text{Conform ecuației \ref{eq:mccabe}: } CC = 37 - 30 + 2 * 1 = 9
+\end{align*}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.97\textwidth]{figures/diagrams/cfg.pdf}
+  \includegraphics[width=0.99\textwidth]{figures/diagrams/cfg.pdf}
   \caption{CFG pentru \texttt{deriveProlongedAlert}.}
   \label{fig:cfg-derive-prolonged-alert}
 \end{figure}
 
-\noindent\textit{Nota:} pentru lizibilitate, apelul final \texttt{flushStreak(timeline.length - 1)} este comprimat in nodul \texttt{final flush}.
+\subsubsection{Drumuri independente (set minim teoretic, CC=9)}
 
-\subsubsection{Drumuri independente (set minim, CC=8)}
+Pentru CFG-ul metodei, complexitatea ciclomatrica este $CC=9$, deci exista 9 drumuri independente teoretice  care trebuie parcurse în faza de testare unitară pentru a asigura o acoperire completă la nivel de decizie. În Tabelul \ref{tab:mapare-testare} este un set practic de drumuri independente descrise prin semnătura deciziilor $D_1 \ldots D_8$.
+
+
 \begin{table}[htbp]
-\centering
-\footnotesize
-\setlength{\tabcolsep}{5pt}
-\renewcommand{\arraystretch}{1.15}
-\begin{tabularx}{\textwidth}{p{0.9cm}p{3.6cm}p{4.9cm}X}
-\toprule
-\textbf{Path} & \textbf{Ramura noua acoperita} & \textbf{Date intrare (exemplu)} & \textbf{Rezultat asteptat} \\
-\midrule
-P1 & D1=True & \texttt{timeline=[]} & return lista vida, fara procesare. \\
-P2 & D3=False + D5=True & toate valorile sub prag & fara alerta (nu exista streak activ). \\
-P3 & D6=False & streak scurt (\(<60\) min) apoi intrerupere & fara alerta. \\
-P4 & D6=True + D7=True & streak valid DISTRESS, durata \(\ge 60\) min & 1 alerta DISTRESS. \\
-P5 & D6=True + D7=False & streak valid PAIN, durata \(\ge 60\) min & 1 alerta PAIN. \\
-P6 & D4=False (streak continua) & mai multe puncte consecutive peste prag & streak mentinut corect, alerta unica la inchidere. \\
-P7 & doua streak-uri mixte & primul \(<60\) min, al doilea \(\ge60\) min & exact 1 alerta (doar streak-ul valid). \\
-P8 & inchidere prin \texttt{final flush} & streak activ la finalul listei & evaluare corecta la final (cu/fara alerta dupa durata). \\
-\bottomrule
-\end{tabularx}
-\caption{Set compact de drumuri independente pentru acoperire basis-path.}
-\label{tab:whitebox-compact-paths}
+	\centering
+	\caption{Maparea corectată a cazurilor de testare (White-box)}
+	\label{tab:mapare-testare}
+	\begin{tabular}{|l|p{4cm}|p{8cm}|}
+		\hline
+		\rowcolor[HTML]{EFEFEF} 
+		\textbf{Scenariu} & \textbf{Descriere} & \textbf{Condiții Logice Corecte} \\ \hline
+		R1 & Early return (Timeline gol) & $D_1=T$ \\ \hline
+		R2 & Final cu streak lung (Alertă creată la flush-ul final) & $D_1=F, D_2=F, D_6=F, D_8=T$ \\ \hline
+		R3 & Nicio activitate (loop terminat, niciun streak găsit) & $D_1=F, D_2=F, D_6=T$ \\ \hline
+		R4 & Final cu streak scurt (Fără alertă la flush-ul final) & $D_1=F, D_2=F, D_6=F, D_8=F$ \\ \hline
+		R5 & Start Streak Nou (Prima valoare $\ge 65$) & $D_1=F, D_2=T, D_3=T, D_4=T, D_2=F, D_6=T$ \\ \hline
+		R6 & Ignorare valoare mică (Sub prag, dar nu eram în streak) & $D_1=F, D_2=T, D_3=F, D_5=T, D_2=F, D_6=T$ \\ \hline
+		R7 & Continuare Streak (Valoare $\ge 65$, dar deja în streak) & $D_1=F, D_2=T, D_3=T, D_4=F, D_2=F, D_6=T$ \\ \hline
+		R8 & Închidere streak lung (Sub prag, alertă creată în buclă) & $D_1=F, D_2=T, D_3=F, D_5=F, D_7=T, D_2=F, D_6=T$ \\ \hline
+		R9 & Închidere streak scurt (Sub prag, streak-ul nu are 60 min) & $D_1=F, D_2=T, D_3=F, D_5=F, D_7=F, D_2=F, D_6=T$ \\ \hline		
+	\end{tabular}
 \end{table}
+
+\subsubsection{Maparea testelor pe drumuri independente (P1--P9)}
+
+Pentru funcția analizată, setul de teste white-box, ilustrat în Tabelul \ref{tab:whitebox-io-compact}, a fost construit astfel încât fiecare drum independent din CFG să fie acoperit de cel puțin un test.
+
+\begin{table}[htbp]
+	\centering
+	\scriptsize
+	\setlength{\tabcolsep}{3pt}
+	\renewcommand{\arraystretch}{1.5} % Creștem spațiul pentru a evita suprapunerea liniilor la wrap
+	\caption{Corespondența testelor white-box pe drumuri (input / output așteptat)}
+	\label{tab:whitebox-io-compact}
+	\begin{tabularx}{\textwidth}{|l|l|>{\hsize=1.6\hsize\raggedright\arraybackslash}X|l|l|>{\hsize=0.4\hsize\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor[HTML]{EFEFEF}
+		\textbf{Test} & \textbf{Drum} & \textbf{Timeline (minute, scor)} & \textbf{Tip} & \textbf{Prag} & \textbf{Output} \\ \hline
+		
+		P1 & R1 & $[]$ & DISTR. & 65 & $[]$ \\ \hline
+		
+		P2 & R6 $\rightarrow$ R3 & $[(0,20)]$ & DISTR. & 65 & $[]$ \\ \hline
+		
+		P3 & R5 $\rightarrow$ R4 & $[(0,70)]$ & DISTR. & 65 & $[]$ \\ \hline
+		
+		P4 & R5 $\rightarrow$ R7 $\rightarrow$ R2 & $[(0,70), (65,80)]$ & DISTR. & 65 & 1 alertă; $t_{65}$ \\ \hline
+		
+		P5 & R5 $\rightarrow$ R7 $\rightarrow$ R8 $\rightarrow$ R3 & $[(0,70), (75,80), (80,20)]$ & DISTR. & 65 & 1 alertă; $t_{75}$ \\ \hline
+		
+		P6 & R5 $\rightarrow$ R7 $\rightarrow$ R9 $\rightarrow$ R3 & $[(0,70), (30,80), (45,20)]$ & DISTR. & 65 & $[]$ \\ \hline
+		
+	\end{tabularx}
+	
+	\vspace{4pt}
+	\textit{Notă:} În coloana „Drumuri asociate”, am listat succesiunea de ramificări logice prin care trece execuția. De exemplu, R5 $\rightarrow$ R7 $\rightarrow$ R2 înseamnă: deschidere streak în buclă , actualizare peak la a doua iterație și generare alertă la ieșirea finală din funcție.
+\end{table}
+
+\[
+\text{Path coverage} = \frac{9}{9} = 100\%
+\]
+
+\noindent
+Rezultatul confirmă acoperirea completă a setului minim de drumuri independente identificat prin complexitatea ciclomatrică.
 
 \section{Testarea de integrare}
 \label{sec:testare-integrare}
 
-\subsection{Scop}
-Scopul testarii de integrare a fost validarea fluxului complet pentru endpoint-ul
-\texttt{POST /api/doctor/patients/:patientId/readings}, de la nivel HTTP pana la nivel
-controller/service si, in varianta extinsa, pana la persistenta reala in PostgreSQL.
-S-au urmarit in special:
-\begin{itemize}
-  \item corectitudinea lantului \texttt{route -> middleware -> controller -> service};
-  \item respectarea regulilor de autentificare si autorizare;
-  \item persistenta corecta a citirilor emotionale;
-  \item logica de alertare (creare alerta activa in scenarii de risc).
-\end{itemize}
+% =========================================================
+% Testare de integrare (Top-down, Depth-first) — Step 1..5
+% (include containere Docker pentru Step 4 si Step 5)
+% =========================================================
 
-\subsection{Strategie}
-Au fost implementate doua suite complementare:
+\subsection{Testare de integrare (Top-down, Depth-first)}
+\label{subsec:integration-depth-first}
 
-\begin{itemize}
-  \item \textbf{\texttt{doctor.readings.test.ts}}: integrare la nivel aplicatie (HTTP real prin \texttt{app}), cu infrastructura externa controlata prin mock (\texttt{Prisma}, \texttt{Influx}). Aceasta suita valideaza rapid fluxul functional si ramurile principale de business.
-  \item \textbf{\texttt{doctor.readings.realdb.test.ts}}: integrare cu baza de date reala. Testul ruleaza pe schema dedicata \texttt{integration\_test}, aplica migrarile (\texttt{prisma migrate deploy}), face seed minim (\texttt{doctor/admin/ward/bed/patient}) si verifica efectiv datele scrise in PostgreSQL.
-\end{itemize}
+Validarea sistemului a fost realizată printr-o abordare incrementală de tip \textit{Top-down, Depth-first}. Această metodă a permis verificarea timpurie a fluxului critic de date, asigurându-se că integrarea componentelor respectă arhitectura definită și că datele circulă corect de la interfața HTTP până la nivelul de persistență.
 
-\subsection{Scenarii implementate}
+\subsubsection{Obiectiv și Strategie}
+
+Obiectivul principal a fost validarea completă a endpoint-ului \newline \texttt{POST /api/doctor/patients/:patientId/readings}, care reprezintă nucleul funcțional al aplicației (colectarea de telemetrie și generarea de alerte). Strategia adoptată a presupus integrarea progresivă a componentelor conform următorului lanț de dependențe:
+
+\[
+\text{App} \rightarrow \text{Route} \rightarrow \text{Middleware} \rightarrow \text{Controller} \rightarrow \text{Service} \rightarrow \{\text{Prisma/Postgres},\ \text{InfluxDB}\}
+\]
+
+Procesul a fost structurat în cinci etape distincte, detaliate în \textbf{Tabelul \ref{tab:integration-depth-first-steps}}. Fiecare pas a vizat extinderea razei de testare prin înlocuirea progresivă a componentelor simulate (\textit{stubs} și \textit{mocks}) cu implementări reale, până la obținerea unui sistem complet funcțional.
+
 \begin{table}[htbp]
-\centering
-\small
-\setlength{\tabcolsep}{5pt}
-\renewcommand{\arraystretch}{1.15}
-\begin{tabularx}{\textwidth}{p{1.2cm}p{3.8cm}X p{2.0cm}}
-\toprule
-\textbf{ID} & \textbf{Suita} & \textbf{Scenariu} & \textbf{Rezultat} \\
-\midrule
-INT-01 & \texttt{doctor.readings.test.ts} &
-Request fara header \texttt{Authorization} $\rightarrow$ raspuns \texttt{401}. &
-Pass \\
-INT-02 & \texttt{doctor.readings.test.ts} &
-Token valid, dar rol \texttt{ADMIN} pe ruta de doctor $\rightarrow$ \texttt{403}. &
-Pass \\
-INT-03 & \texttt{doctor.readings.test.ts} &
-Token \texttt{DOCTOR} valid + payload valid $\rightarrow$ \texttt{201}, apeluri corecte in service (\texttt{findUnique}, tranzactie, creare citire, logica alerta, apel Influx mock). &
-Pass \\
-\midrule
-INT-04 & \texttt{doctor.readings.realdb.test.ts} &
-Request fara \texttt{Authorization} in mediul cu DB real $\rightarrow$ \texttt{401}. &
-Pass \\
-INT-05 & \texttt{doctor.readings.realdb.test.ts} &
-Token \texttt{ADMIN} pe ruta de doctor in mediul cu DB real $\rightarrow$ \texttt{403}. &
-Pass \\
-INT-06 & \texttt{doctor.readings.realdb.test.ts} &
-Token \texttt{DOCTOR} valid + payload de risc ridicat $\rightarrow$ \texttt{201}; verificare in DB:
-\texttt{EmotionReading} persistat + \texttt{PatientAlert} activ (tip \texttt{DISTRESS}, severitate corecta). &
-Pass \\
-\bottomrule
-\end{tabularx}
-\caption{Scenarii de integrare pentru endpoint-ul de readings.}
-\label{tab:integration-readings}
+	\centering
+	\small
+	\renewcommand{\arraystretch}{1.15}
+	\caption{Strategie Depth-first: pași, focus și componente simulate}
+	\label{tab:integration-depth-first-steps}
+	\begin{tabular}{|c|p{3.6cm}|p{7.0cm}|p{3.2cm}|}
+		\hline
+		\textbf{Step} & \textbf{Nivel introdus} & \textbf{Ce testezi efectiv (Focus)} & \textbf{Componente simulate} \\ \hline
+		1 & Entry Point \& Security & App + Route + Middleware. Verificarea autentificării și autorizării la nivel de rută. & Controller (Stub) \\ \hline
+		2 & Orchestrare API & Integrarea Controller-ului: extragerea parametrilor și delegarea către logica de business. & Service (Stub) \\ \hline
+		3 & Business Logic & Integrarea Service-ului real: calculul scorului de distress și logica de declanșare a alertelor. & Prisma + Influx (Mocks) \\ \hline
+		4 & Data Access & Integrarea cu Postgres (via Prisma): persistența reală a citirilor și alertelor. & Influx (Mock) \\ \hline
+		5 & Time-series / Telemetry & Integrarea cu InfluxDB: flux complet de scriere și citire a metricilor pe axa temporală. & Fără (Sistem complet) \\ \hline
+	\end{tabular}
 \end{table}
 
-\subsection{Mediu si executie}
-Suita real-DB este controlata prin variabila de mediu \texttt{RUN\_DB\_INTEGRATION=1}.
-Daca exista \texttt{DATABASE\_URL} in mediu, testul foloseste schema izolata
-\texttt{integration\_test}; in lipsa acesteia, este prevazut fallback pe container PostgreSQL.
+\subsubsection{Validarea Fluxului de Date (Input/Output)}
 
-\noindent Comenzi de rulare:
-\begin{verbatim}
-# suita mock/full-app flow (rapid)
-npm test --silent -- --runInBand --runTestsByPath src/__tests__/doctor.readings.test.ts
+Pentru fiecare etapă definită anterior, au fost stabilite seturi riguroase de date de intrare și rezultate așteptate. Această trasabilitate asigură faptul că nicio componentă nouă introdusă în lanț nu alterează logica validată anterior.
 
-# suita cu baza reala (PowerShell)
-$env:RUN_DB_INTEGRATION='1'
-npm test --silent -- --runInBand --runTestsByPath src/__tests__/doctor.readings.realdb.test.ts
-Remove-Item Env:RUN_DB_INTEGRATION
-\end{verbatim}
+Corelarea dintre input-ul simulat și răspunsul sistemului pentru fiecare pas de integrare este sintetizată în \textbf{Tabelul \ref{tab:integration-depth-first-io}}. Se observă tranziția de la un simplu răspuns de tip \textit{hook} (Step 1) către o validare complexă a stării bazei de date și a consistenței telemetriei (Step 5).
 
-\subsection{Rezultate obtinute}
-La rularea curenta, ambele suite de integrare au trecut complet:
+\begin{table}[htbp]
+	\centering
+	\small
+	\renewcommand{\arraystretch}{1.15}
+	\caption{Input și output așteptat pe pașii de integrare}
+	\label{tab:integration-depth-first-io}
+	\begin{tabular}{|c|p{6.4cm}|p{7.6cm}|}
+		\hline
+		\textbf{Step} & \textbf{Input (rezumat)} & \textbf{Output așteptat (rezumat)} \\ \hline
+		1 & Request HTTP \texttt{POST} cu JWT valid. & Status \texttt{202} și confirmarea atingerii rutei. \\ \hline
+		2 & Request HTTP cu payload valid. & Status \texttt{201} și apelarea service-ului cu parametrii corecți. \\ \hline
+		3 & Payload ce induce scor de distress ridicat. & Status \texttt{201} și validarea logică a calculului de alertă. \\ \hline
+		4 & Request cu Postgres activ în container. & Status \texttt{201} și persistența confirmată în tabelele SQL. \\ \hline
+		5 & Secvență \texttt{POST} urmată de \texttt{GET}. & Status \texttt{200} și timeline consistent extras din InfluxDB. \\ \hline
+	\end{tabular}
+\end{table}
+
+\subsubsection{Mediu de Testare și Infrastructură}
+
+Pentru a garanta fidelitatea testelor față de mediul de producție, s-a renunțat la bazele de date \textit{in-memory} în favoarea unor instanțe reale rulate în containere. Suita de teste utilizează următoarele instrumente:
+
 \begin{itemize}
-  \item \texttt{doctor.readings.test.ts}: \textbf{3/3} teste trecute;
-  \item \texttt{doctor.readings.realdb.test.ts}: \textbf{3/3} teste trecute;
-  \item total integrare pe fluxul de readings: \textbf{6/6} teste trecute.
+	\item \textbf{Jest \& Supertest:} Cadru de testare și bibliotecă pentru simularea cererilor HTTP fără ridicarea manuală a serverului.
+	\item \textbf{Testcontainers:} Gestionarea automată a ciclului de viață pentru containerele Docker (\texttt{postgres:16-alpine} și \texttt{influxdb:2.7-alpine}).
+	\item \textbf{Prisma Migrations:} Sincronizarea automată a schemei bazei de date înainte de execuția testelor prin \texttt{prisma migrate deploy}.
 \end{itemize}
 
-\subsection{Concluzie}
-Prin combinarea suitei de integrare pe flux complet HTTP (cu dependinte externe controlate)
-si a suitei de integrare cu persistenta reala, s-a obtinut un nivel bun de incredere asupra
-functionalitatii endpoint-ului de readings: autentificarea/autorizarea, procesarea payload-ului,
-persistenta datelor clinice si logica de alertare functioneaza corect in scenariile critice.
+Această infrastructură permite izolarea completă a fiecărui test, asigurând un mediu curat (prin mecanisme de \textit{cleanup} post-test) pentru fiecare iterație a strategiei \textit{depth-first}.
+
+%\subsection{Sistemul testat}
+%Sistemul sub test (SUT) este backend-ul \texttt{Neuro-Guardian}, expus prin endpoint-uri REST:
+%\begin{itemize}
+%	\item \texttt{/api/auth/*}
+%	\item \texttt{/api/admin/*}
+%	\item \texttt{/api/doctor/*}
+%\end{itemize}
+%
+%In acest capitol, infrastructura rulata este:
+%\begin{itemize}
+%	\item Node.js + Express (real);
+%	\item PostgreSQL in container (real);
+%	\item Prisma ORM (real).
+%\end{itemize}
+%
+%Pentru a izola focusul pe reguli functionale de sistem, integrarea Influx este dezactivata in aceasta suita.
+
+%\subsection{Tehnici de proiectare a testelor}
+%\subsubsection{ECP (Equivalence Class Partitioning)}
+%Datele de intrare sunt partitionate in clase echivalente valide si invalide.
+%S-a aplicat pe endpoint-ul de check-in administrativ:
+%\begin{itemize}
+%	\item clasa rol invalid pentru endpoint-ul admin (DOCTOR pe ruta ADMIN) $\rightarrow 403$;
+%	\item clasa payload incomplet (camp obligatoriu lipsa) $\rightarrow 400$;
+%	\item clasa pat inexistent $\rightarrow 404$;
+%	\item clasa valida (pat liber, payload complet) $\rightarrow 201$.
+%\end{itemize}
+%
+%\subsubsection{BVA (Boundary Value Analysis)}
+%S-a analizat frontiera pragului de alerta pentru scorul de distres.
+%Din logica de business:
+%$$
+%\text{distressScore} = \frac{anger + fear + sadness}{3}
+%$$
+%Alerta activa de tip DISTRESS este creata daca scorul este $\ge 70$.
+%
+%Au fost testate punctele de frontiera:
+%\begin{itemize}
+%	\item $69.99$ (imediat sub prag) $\rightarrow$ fara alerta activa DISTRESS;
+%	\item $70.00$ (exact prag) $\rightarrow$ alerta activa DISTRESS;
+%	\item $70.01$ (imediat peste prag, \textit{justAboveThreshold}) $\rightarrow$ alerta DISTRESS ramane activa.
+%\end{itemize}
+%
+%\subsubsection{State Transition Testing}
+%Pentru fluxul de refresh token, comportamentul depinde de starea curenta a token-ului.
+%Modelul de stare validat:
+%\begin{center}
+%	\texttt{valid} $\rightarrow$ \texttt{rotated} $\rightarrow$ \texttt{invalid (old)} $\rightarrow$ \texttt{invalid (logout)}
+%\end{center}
+%
+%Concret:
+%\begin{itemize}
+%	\item un refresh token valid poate fi folosit o singura data pentru refresh;
+%	\item token-ul vechi devine invalid dupa rotatie;
+%	\item token-ul nou devine invalid dupa logout.
+%\end{itemize}
+%
+%\subsection{Cazuri de test (System E2E)}
+%\begin{table}[h]
+%	\centering
+%	\begin{tabularx}{\textwidth}{|l|l|X|l|} % X va ocupa restul spațiului disponibil
+%		\hline
+%		\textbf{ID} & \textbf{Tehnica} & \textbf{Scenariu} & \textbf{Rezultat așteptat} \\
+%		\hline
+%		ECP-1 & ECP & Token DOCTOR pe \texttt{/api/admin/check-in} & 403 Forbidden \\
+%		\hline
+%		ECP-2 & ECP & Check-in fără toate câmpurile obligatorii & 400 Bad Request \\
+%		\hline
+%		ECP-3 & ECP & Check-in cu \texttt{bedId} inexistent & 404 Not Found \\
+%		\hline
+%		ECP-4 & ECP & Primul check-in valid pe pat liber, apoi al doilea pe același pat & 201 apoi 409 Conflict \\
+%		\hline
+%		BVA-1 & BVA & Distress = 69.99, apoi 70.00, apoi 70.01 pe același pacient & Fără alertă sub prag, etc. \\
+%		\hline
+%		BVA-2 & BVA & Distress = 70.00 & Alertă \\
+%		\hline
+%		BVA-3 & BVA & Distress = 70.01 & Alertă \\
+%		\hline
+%		ST-1 & State & Register $\rightarrow$ Refresh $\rightarrow$ Reuse token $\rightarrow$ Logout $\rightarrow$ Refresh & 200, 200, 401... \\
+%		\hline
+%	\end{tabularx}
+%	\caption{Setul de teste System E2E pentru capitolul final}
+%	\label{tab:system-e2e-step6}
+%\end{table}
+%
+%\subsection{Concluzie}
+%Prin combinarea ECP, BVA si State Transition la nivel System (E2E), capitolul final acopera atat validari de input si praguri critice, cat si comportamente stateful de securitate (refresh/logout), oferind incredere crescuta in functionarea backend-ului in scenarii reale de utilizare.
+
+% NOTE:
+% - Capitol concis pentru “Manual de utilizare”.
+% - “Pozele simbolice” sunt puse ca placeholder (casete) ca să compileze fără fișiere.
+%   În varianta finală, înlocuiește caseta \fbox{...} cu \includegraphics{...} (dacă folosești screenshot-uri reale).
+
+\section{Manual de utilizare al aplicației}
+\label{ch:manual}
+
+\subsection{Scopul aplicației și roluri}
+Aplicația \textbf{Neuro-Guardian} este o platformă web de monitorizare clinică asistată de analiză emoțională, destinată utilizării în context spitalicesc.
+Utilizarea este organizată pe două roluri:
+\begin{itemize}
+	\item \textbf{ADMIN} (personal administrativ): gestionează internarea/externarea pacienților și alocarea lor pe secție/pat.
+	\item \textbf{DOCTOR} (personal medical): preia pacienți disponibili și urmărește tabloul de monitorizare (vizualizări, alerte, trenduri).
+\end{itemize}
+
+\subsection{Accesarea aplicației}
+Aplicația se accesează dintr-un browser modern (Chrome/Edge/Firefox), prin adresa pusă la dispoziție (de ex. \texttt{http://localhost:5173/} în rulare locală).
+După autentificare, interfața este afișată automat în funcție de rol (ADMIN sau DOCTOR).
+
+\subsection{Autentificare și creare cont}
+\subsubsection{Autentificare (Sign in)}
+Pentru autentificare se introduce adresa de e-mail și parola, apoi se apasă butonul \textit{Sign in}.
+În cazul unor date invalide, aplicația afișează un mesaj de eroare.
+
+\subsubsection{Creare cont (Create account)}
+Pentru înregistrare se introduc e-mailul și parola, apoi se selectează rolul (\textit{Doctor} sau \textit{Administrative}) și se apasă \textit{Create account}.
+Într-un scenariu real, conturile cu rol administrativ pot fi restricționate conform politicilor instituției.
+
+\begin{figure}[htbp]
+	\centering
+	% Prima imagine (Login)
+	\begin{subfigure}[b]{0.40\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/app/login.png}
+		\caption{Interfața de autentificare}
+		\label{fig:login}
+	\end{subfigure}
+	\hfill % Adaugă spațiu elastic între imagini
+	% A doua imagine (Create Account)
+	\begin{subfigure}[b]{0.36\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/app/create-account.png}
+		\caption{Interfața de creare cont}
+		\label{fig:create-account}
+	\end{subfigure}
+	
+	\caption{Ecranele de autentificare și creare cont.}
+	\label{fig:manual-auth}
+\end{figure}
+
+\subsection{Modul ADMIN: Administrative Dashboard}
+După autentificare cu rolul ADMIN, utilizatorul accesează \textit{Administrative Dashboard}, care include următoarele funcționalități principale:
+
+\subsubsection{Reîmprospătare și deconectare}
+În partea superioară există:
+\begin{itemize}
+	\item \textbf{Refresh}: reîncarcă listele de secții/paturi și pacienții activi.
+	\item \textbf{Logout}: închide sesiunea curentă.
+\end{itemize}
+
+\subsubsection{Internare pacient (Patient Check-in)}
+Secțiunea \textit{Patient Check-in} permite înregistrarea unui pacient activ în sistem:
+\begin{enumerate}
+	\item Se completează \textit{First name}, \textit{Last name} și \textit{National ID / CNP}.
+	\item Opțional, se completează \textit{Diagnosis} și \textit{Medical history}.
+	\item Se selectează \textit{Ward} (secția) și \textit{Bed} (patul disponibil).
+	\item Se apasă \textit{Check in patient}.
+\end{enumerate}
+Aplicația nu permite alocarea unui pat deja ocupat (paturile disponibile sunt filtrate automat).
+
+\subsubsection{Pacienți activi (Active Patients) și externare (Check-out)}
+În \textit{Active Patients} se afișează pacienții internați (activi), împreună cu secția/patul și momentul internării.
+Pentru externarea unui pacient se apasă butonul \textit{Check-out} corespunzător.
+
+\subsubsection{Management secții/paturi (Ward Management)}
+Secțiunea \textit{Ward Management} oferă o vedere de ansamblu asupra:
+\begin{itemize}
+	\item gradului de ocupare (paturi libere/ocupate),
+	\item stării camerei asociate patului (\textit{ONLINE/OFFLINE/MAINTENANCE}),
+	\item pacientului asociat (dacă patul este ocupat).
+\end{itemize}
+
+\begin{figure}[htbp]
+	\centering
+	% Prima imagine: Dashboard Administrativ
+	\begin{subfigure}[b]{0.43\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/app/administrative-dashboard.png}
+		\caption{Dashboard administrativ}
+		\label{fig:admin-dash}
+	\end{subfigure}
+	\hfill % Spațiu între cele două coloane
+	% A doua imagine: Ward Management
+	\begin{subfigure}[b]{0.56\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/app/ward-management.png}
+		\caption{Managementul secției și paturilor}
+		\label{fig:ward-mgmt}
+	\end{subfigure}
+	
+	\caption{Modul ADMIN: internare/externare și managementul secției.}
+	\label{fig:manual-admin}
+\end{figure}
+
+\subsection{Modul DOCTOR: Doctor Panel și Monitoring Dashboard}
+După autentificare cu rolul DOCTOR, utilizatorul poate gestiona pacienții disponibili și poate accesa tabloul de monitorizare.
+
+\subsubsection{Lista pacienților și preluare (Take patient)}
+În \textit{Doctor Panel} sunt afișate două liste:
+\begin{itemize}
+	\item \textbf{Available Patients}: pacienți nealocați; pot fi preluați prin \textit{Take patient}.
+	\item \textbf{My Patients}: pacienți alocați doctorului; pot fi selectați pentru monitorizare.
+\end{itemize}
+Butonul \textit{Refresh patients} reîncarcă listele. Dacă nu există pacienți disponibili/ai doctorului, aplicația afișează mesaje de tip \textit{No unassigned patients right now} sau \textit{Pick a patient from the available list to start monitoring}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.3\textwidth]{figures/app/doctor-panel.png}
+	\caption{Modul DOCTOR: preluarea și selectarea pacienților.}
+	\label{fig:manual-doctor-panel}
+\end{figure}
+
+\subsubsection{Tabloul de monitorizare (Monitoring Dashboard)}
+După selectarea unui pacient, aplicația afișează tabloul de monitorizare, care include:
+\begin{itemize}
+	\item \textbf{Header de sesiune}: status (\textit{Normal Session}, \textit{High Risk: Agitation}, \textit{Positive Engagement}),
+	butoanele \textit{Live Monitor}, \textit{Insights}, afișare/ascundere panou și \textit{Logout}.
+	\item \textbf{Patient Sidebar}: informații despre pacient și nivelul de risc curent (Low/Medium/High).
+	\item \textbf{Zona principală}: flux camera (stream) și distribuția emoțiilor curente.
+\end{itemize}
+
+\subsubsection{Live Monitor (vizualizare istoric și spike-uri)}
+Prin butonul \textit{Live Monitor} se deschide o fereastră peste ecran (overlay) care prezintă un grafic cu istoricul emoțiilor, o figură reprezentativă fiind \ref{fig:visual-timeline}. Fereastra se închide cu butonul \textit{Close} sau prin click în afara zonei.
+
+\subsubsection{Insights (alerte și interpretare clinică)}
+Prin butonul \textit{Insights} se deschide un panou lateral cu:
+\begin{itemize}
+	\item alerte curente și alerte prelungite (prolonged),
+	\item evenimente clinice derivate (listate cronologic).
+\end{itemize}
+Scopul este de a sintetiza situațiile relevante (ex. creșteri susținute ale indicatorilor negativi).
+
+\subsubsection{Notificări de risc}
+La schimbarea nivelului de risc, aplicația afișează o notificare scurtă (\textit{Risk Increased} / \textit{Risk Decreased}) cu tranziția dintre niveluri.
+Notificarea dispare automat după câteva secunde.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.88\textwidth]{figures/app/monitoring-dashboard.png}
+	\caption{Modul DOCTOR: tabloul de monitorizare și instrumentele de analiză.}
+	\label{fig:manual-monitoring}
+\end{figure}
+
+%\subsection{Situații frecvente și depanare (scurt)}
+%\begin{itemize}
+%	\item \textbf{Nu apar pacienți la DOCTOR}: verifică dacă există pacienți internați (ADMIN) și folosește \textit{Refresh patients}.
+%	\item \textbf{Erori de încărcare / Request failed}: reîncearcă \textit{Refresh}; dacă persistă, re-autentifică-te.
+%	\item \textbf{Camera OFFLINE / MAINTENANCE}: se verifică în modul ADMIN la \textit{Ward Management} și se urmează procedurile tehnice interne.
+%\end{itemize}
+
+\subsection{Confidențialitate și bune practici}
+Aplicația gestionează informații sensibile; se recomandă utilizarea în rețele securizate, păstrarea credențialelor confidențiale și folosirea \textit{Logout} pe dispozitive partajate.
+
 
 
 \section{Proiectare}

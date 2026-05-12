@@ -1,10 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.4.17)  19 APR 2026 01:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.4.17)  12 MAY 2026 19:11
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/info/anul3/licenta/teza/main.tex
-(c:/info/anul3/licenta/teza/main.tex
+**./main.tex
+(main.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-03-20>
 (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/base\report.cls
@@ -24,14 +23,19 @@ File: size12.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 \abovecaptionskip=\skip49
 \belowcaptionskip=\skip50
 \bibindent=\dimen150
-) (style.sty (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+)
+(style.sty
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
 Package: geometry 2026/03/07 v6.0 Page Geometry
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks17
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 ))
 \Gm@cnth=\count284
@@ -46,21 +50,29 @@ Package: iftex 2024/12/12 v1.0g TeX engine tests
 \Gm@layouthoffset=\dimen157
 \Gm@layoutvoffset=\dimen158
 \Gm@dimlist=\toks18
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg)) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\palatino.sty
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\palatino.sty
 Package: palatino 2020/03/25 PSNFSS-v9.3 (SPQR) 
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
 Package: setspace 2022/12/04 v6.7b set line spacing
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
 Package: inputenc 2024/02/08 v1.3d Input encoding file
 \inpenc@prehook=\toks19
 \inpenc@posthook=\toks20
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
 Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
 Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
 Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 106.
@@ -72,7 +84,8 @@ File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
 ) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/tocbibind\tocbibind.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/tocbibind\tocbibind.sty
 Package: tocbibind 2010/10/13 v1.5k extra ToC listings
 Package tocbibind Info: The document has chapter divisions on input line 50.
 
@@ -81,17 +94,25 @@ Package tocbibind Note: Using chapter style headings, unless overridden.
 
 ) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
 Package: hyperref 2026-01-29 v7.01p Hypertext links for LaTeX
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefineke
+ys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.sty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
 Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty
-Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.s
+ty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
@@ -99,21 +120,28 @@ Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 )) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2026-01-29 v2.58 Cross-referencing by name of section
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitle
+string.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
 \c@section@level=\count287
 ) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
 Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count288
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.sty
-Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
+)
 )
 \@linkdim=\dimen161
 \Hy@linkcounter=\count289
@@ -122,11 +150,13 @@ Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 File: pd1enc.def 2026-01-29 v7.01p Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
 \Hy@SavedSpaceFactor=\count291
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
 File: puenc.def 2026-01-29 v7.01p Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
@@ -142,10 +172,14 @@ Package hyperref Info: Bookmarks ON on input line 4468.
 \c@Hy@tempcnt=\count292
 LaTeX Info: Redefining \url on input line 4807.
 \XeTeXLinkMargin=\dimen162
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty
-Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc.s
+ty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
 ))
 \Fld@menulength=\count293
 \Field@Width=\dimen163
@@ -162,33 +196,50 @@ Package hyperref Info: PDF/A mode OFF on input line 6114.
 \c@Hfootnote=\count296
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
 File: hpdftex.def 2026-01-29 v7.01p Hyperref driver for pdfTeX
 \Fld@listcount=\count297
 \c@bookmark@seq@number=\count298
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.sty
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfilec
+heck.sty
 Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquecounter.sty
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquecou
+nter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
-Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 284.
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+84.
 )
 \Hy@SectionHShift=\skip51
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
 Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
-Package: babel 2026/03/24 v26.5 The multilingual framework for LuaLaTeX, pdfLaTeX and XeLaTeX
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
+Package: babel 2026/03/24 v26.5 The multilingual framework for LuaLaTeX, pdfLaT
+eX and XeLaTeX
 \babel@savecnt=\count299
-LaTeX Encoding Info:    Redeclaring text command \ij (encoding OT1) on input line 2078.
-LaTeX Encoding Info:    Redeclaring text command \IJ (encoding OT1) on input line 2080.
-LaTeX Encoding Info:    Redeclaring text command \ij (encoding T1) on input line 2082.
-LaTeX Encoding Info:    Redeclaring text command \IJ (encoding T1) on input line 2083.
-LaTeX Encoding Info:    Ignoring declaration for text command \ij (encoding ?) on input line 2084.
-LaTeX Encoding Info:    Ignoring declaration for text command \IJ (encoding ?) on input line 2086.
-LaTeX Encoding Info:    Ignoring declaration for text command \SS (encoding ?) on input line 2111.
+LaTeX Encoding Info:    Redeclaring text command \ij (encoding OT1) on input li
+ne 2078.
+LaTeX Encoding Info:    Redeclaring text command \IJ (encoding OT1) on input li
+ne 2080.
+LaTeX Encoding Info:    Redeclaring text command \ij (encoding T1) on input lin
+e 2082.
+LaTeX Encoding Info:    Redeclaring text command \IJ (encoding T1) on input lin
+e 2083.
+LaTeX Encoding Info:    Ignoring declaration for text command \ij (encoding ?) 
+on input line 2084.
+LaTeX Encoding Info:    Ignoring declaration for text command \IJ (encoding ?) 
+on input line 2086.
+LaTeX Encoding Info:    Ignoring declaration for text command \SS (encoding ?) 
+on input line 2111.
 \U@D=\dimen165
 \l@unhyphenated=\language79
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
 \bbl@readstream=\read2
 \bbl@dirlevel=\count300
 Package babel Info: Configuration files are deprecated, as
@@ -199,28 +250,53 @@ Package babel Info: Configuration files are deprecated, as
 * Local config file bblopts.cfg used
 *
 (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
-File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of babel
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/ro\babel-romanian.tex)
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
+ babel
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/ro\babel-r
+omanian.tex)
 Package babel Info: Importing font and identification data for romanian
 (babel)             from babel-ro.ini. Reported on input line 4330.
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/babel-romanian\romanian.ldf
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/babel-romanian\romanian.l
+df
 Language: romanian 2021/04/04 v1.2m Romanian support from the babel system
-))) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlayer\tikz.sty (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfrcs.sty (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-common.tex
+)))
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlayer\tikz.st
+y (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfrcs.sty
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-c
+ommon.tex
 \pgfutil@everybye=\toks21
 \pgfutil@tempdima=\dimen166
 \pgfutil@tempdimb=\dimen167
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-latex.def
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-l
+atex.def
 \pgfutil@abb=\box53
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfrcs.code.tex (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revision.tex)
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfrcs.co
+de.tex
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revision.tex)
 Package: pgfrcs 2025-08-29 v3.1.11a (3.1.11a)
 ))
 Package: pgf 2025-08-29 v3.1.11a (3.1.11a)
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgfcore.sty (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/systemlayer\pgfsys.sty (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys.code.tex
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgfcore.st
+y
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/systemlayer\pgfsys.st
+y
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys.
+code.tex
 Package: pgfsys 2025-08-29 v3.1.11a (3.1.11a)
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys.c
+ode.tex
 \pgfkeys@pathtoks=\toks22
 \pgfkeys@temptoks=\toks23
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeyslibraryfiltered.code.tex
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeysli
+braryfiltered.code.tex
 \pgfkeys@tmptoks=\toks24
 ))
 \pgf@x=\dimen168
@@ -243,27 +319,39 @@ Package: pgfsys 2025-08-29 v3.1.11a (3.1.11a)
 \t@pgf@tokb=\toks26
 \t@pgf@tokc=\toks27
 \pgf@sys@id@count=\count305
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgf.cfg
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgf.cfg
 File: pgf.cfg 2025-08-29 v3.1.11a (3.1.11a)
 )
 Driver file for pgf: pgfsys-pdftex.def
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-pdftex.def
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-
+pdftex.def
 File: pgfsys-pdftex.def 2025-08-29 v3.1.11a (3.1.11a)
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-common-pdf.def
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-
+common-pdf.def
 File: pgfsys-common-pdf.def 2025-08-29 v3.1.11a (3.1.11a)
-))) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsyssoftpath.code.tex
+)))
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsyss
+oftpath.code.tex
 File: pgfsyssoftpath.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgfsyssoftpath@smallbuffer@items=\count306
 \pgfsyssoftpath@bigbuffer@items=\count307
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsysprotocol.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsysp
+rotocol.code.tex
 File: pgfsysprotocol.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+))
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
 Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 274.
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
 Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
 Package xcolor Info: Model `RGB' extended on input line 1365.
@@ -273,18 +361,52 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore.
+code.tex
 Package: pgfcore 2025-08-29 v3.1.11a (3.1.11a)
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathutil.code.tex) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathparser.code.tex
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.t
+ex
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathutil.co
+de.tex)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathparser.
+code.tex
 \pgfmath@dimen=\dimen178
 \pgfmath@count=\count308
 \pgfmath@box=\box54
 \pgfmath@toks=\toks28
 \pgfmath@stack@operand=\toks29
 \pgfmath@stack@operation=\toks30
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.code.tex) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.basic.code.tex) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.trigonometric.code.tex) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.random.code.tex) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.comparison.code.tex) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.base.code.tex) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.round.code.tex) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.misc.code.tex) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.integerarithmetics.code.tex) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathcalc.code.tex) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfloat.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctio
+ns.code.tex)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctio
+ns.basic.code.tex)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctio
+ns.trigonometric.code.tex)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctio
+ns.random.code.tex)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctio
+ns.comparison.code.tex)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctio
+ns.base.code.tex)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctio
+ns.round.code.tex)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctio
+ns.misc.code.tex)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctio
+ns.integerarithmetics.code.tex)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathcalc.co
+de.tex)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfloat.c
+ode.tex
 \c@pgfmathroundto@lastzeros=\count309
-)) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfint.code.tex) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepoints.code.tex
+))
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfint.code.te
+x)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorep
+oints.code.tex
 File: pgfcorepoints.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgf@picminx=\dimen179
 \pgf@picmaxx=\dimen180
@@ -300,75 +422,129 @@ File: pgfcorepoints.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgf@yy=\dimen190
 \pgf@zx=\dimen191
 \pgf@zy=\dimen192
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathconstruct.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorep
+athconstruct.code.tex
 File: pgfcorepathconstruct.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgf@path@lastx=\dimen193
 \pgf@path@lasty=\dimen194
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathusage.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorep
+athusage.code.tex
 File: pgfcorepathusage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgf@shorten@end@additional=\dimen195
 \pgf@shorten@start@additional=\dimen196
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorescopes.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcores
+copes.code.tex
 File: pgfcorescopes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgfpic=\box55
 \pgf@hbox=\box56
 \pgf@layerbox@main=\box57
 \pgf@picture@serial@count=\count310
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoregraphicstate.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreg
+raphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgflinewidth=\dimen197
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransformations.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoret
+ransformations.code.tex
 File: pgfcoretransformations.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgf@pt@x=\dimen198
 \pgf@pt@y=\dimen199
 \pgf@pt@temp=\dimen256
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorequick.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreq
+uick.code.tex
 File: pgfcorequick.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreobjects.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreo
+bjects.code.tex
 File: pgfcoreobjects.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathprocessing.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorep
+athprocessing.code.tex
 File: pgfcorepathprocessing.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorearrows.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorea
+rrows.code.tex
 File: pgfcorearrows.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgfarrowsep=\dimen257
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreshade.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcores
+hade.code.tex
 File: pgfcoreshade.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgf@max=\dimen258
 \pgf@sys@shading@range@num=\count311
 \pgf@shadingcount=\count312
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreimage.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorei
+mage.code.tex
 File: pgfcoreimage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreexternal.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoree
+xternal.code.tex
 File: pgfcoreexternal.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgfexternal@startupbox=\box58
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorelayers.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorel
+ayers.code.tex
 File: pgfcorelayers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransparency.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoret
+ransparency.code.tex
 File: pgfcoretransparency.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepatterns.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorep
+atterns.code.tex
 File: pgfcorepatterns.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorerdf.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorer
+df.code.tex
 File: pgfcorerdf.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-))) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmoduleshapes.code.tex
+)))
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodulesh
+apes.code.tex
 File: pgfmoduleshapes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgfnodeparttextbox=\box59
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmoduleplot.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodulepl
+ot.code.tex
 File: pgfmoduleplot.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-0-65.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp
+-version-0-65.sty
 Package: pgfcomp-version-0-65 2025-08-29 v3.1.11a (3.1.11a)
 \pgf@nodesepstart=\dimen259
 \pgf@nodesepend=\dimen260
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-1-18.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp
+-version-1-18.sty
 Package: pgfcomp-version-1-18 2025-08-29 v3.1.11a (3.1.11a)
-)) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgffor.sty (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfkeys.sty (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex)) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfmath.sty (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex)) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgffor.code.tex
+))
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgffor.sty
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfkeys.sty
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys.c
+ode.tex))
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfmath.sty
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.t
+ex))
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgffor.co
+de.tex
 Package: pgffor 2025-08-29 v3.1.11a (3.1.11a)
 \pgffor@iter=\dimen261
 \pgffor@skip=\dimen262
 \pgffor@stack=\toks31
 \pgffor@toks=\toks32
-)) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz\tikz.code.tex
+))
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz\
+tikz.code.tex
 Package: tikz 2025-08-29 v3.1.11a (3.1.11a)
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibraryplothandlers.code.tex
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibrar
+yplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgf@plot@mark@count=\count313
 \pgfplotmarksize=\dimen263
@@ -389,30 +565,38 @@ File: pgflibraryplothandlers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \tikznumberofchildren=\count315
 \tikznumberofcurrentchild=\count316
 \tikz@fig@count=\count317
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodulematrix.code.tex
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodulema
+trix.code.tex
 File: pgfmodulematrix.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgfmatrixcurrentrow=\count318
 \pgfmatrixcurrentcolumn=\count319
 \pgf@matrix@numberofcolumns=\count320
 )
 \tikz@expandcount=\count321
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarytopaths.code.tex
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/
+libraries\tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-))) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+)))
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
 Package: amsmath 2025/07/09 v2.17z AMS math features
 \@mathmargin=\skip52
 
 For additional information on amsmath, use the `?' option.
 (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
 Package: amstext 2024/11/17 v2.01 AMS text
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks33
 \ex@=\dimen272
-)) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+))
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen273
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
 \inf@bad=\count322
@@ -462,11 +646,14 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \mathdisplay@stack=\toks37
 LaTeX Info: Redefining \[ on input line 2950.
 LaTeX Info: Redefining \] on input line 2951.
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
 Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
 Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
 \caption@tempdima=\dimen281
 \captionmargin=\dimen282
@@ -486,9 +673,11 @@ Package caption Info: New subtype `subfigure' on input line 238.
 \c@subfigure=\count336
 Package caption Info: New subtype `subtable' on input line 238.
 \c@subtable=\count337
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
 Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
 Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
 \col@sep=\dimen289
 \ar@mcellbox=\box66
@@ -505,12 +694,14 @@ Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
 \TX@delta=\dimen295
 \TX@cols=\count338
 \TX@ftn=\toks39
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
 Package: colortbl 2024/10/29 v1.0k Color table columns (DPC)
 \everycr=\toks40
 \minrowclearance=\skip57
 \rownum=\count339
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \heavyrulewidth=\dimen296
 \lightrulewidth=\dimen297
@@ -529,18 +720,21 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@thisruleclass=\count342
 \@lastruleclass=\count343
 \@thisrulewidth=\dimen308
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
 Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
 \multirow@colwidth=\skip58
 \multirow@cntb=\count344
 \multirow@dima=\skip59
 \bigstrutjot=\dimen309
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/makecell\makecell.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/makecell\makecell.sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 \rotheadsize=\dimen310
 \c@nlinenum=\count345
 \TeXr@lab=\toks41
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtable.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtable.sty
 Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
 \LTleft=\skip60
 \LTright=\skip61
@@ -558,20 +752,30 @@ Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
 \c@LT@tables=\count349
 \c@LT@chunks=\count350
 \LT@p@ftn=\toks42
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibraryarrows.meta.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibrar
+yarrows.meta.code.tex
 File: pgflibraryarrows.meta.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgfarrowinset=\dimen312
 \pgfarrowlength=\dimen313
 \pgfarrowwidth=\dimen314
 \pgfarrowlinewidth=\dimen315
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarypositioning.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/
+libraries\tikzlibrarypositioning.code.tex
 File: tikzlibrarypositioning.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibraryshapes.geometric.code.tex
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/
+libraries\tikzlibraryshapes.geometric.code.tex
 File: tikzlibraryshapes.geometric.code.tex 2025-08-29 v3.1.11a (3.1.11a)
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/shapes\pgflibraryshapes.geometric.code.tex
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/shapes\pg
+flibraryshapes.geometric.code.tex
 File: pgflibraryshapes.geometric.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
+))
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
 Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
+
 \f@nch@headwidth=\skip64
 \f@nch@offset@elh=\skip65
 \f@nch@offset@erh=\skip66
@@ -588,10 +792,14 @@ Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 \f@nch@widthR=\skip77
 \@temptokenb=\toks43
 )
-LaTeX Font Info:    Trying to load font information for OT1+ppl on input line 33.
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ppl.fd
+LaTeX Font Info:    Trying to load font information for OT1+ppl on input line 3
+3.
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdfte
+x.def
 File: l3backend-pdftex.def 2026-02-18 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count351
 ) (main.aux)
@@ -650,6 +858,7 @@ LaTeX Font Info:    ... okay on input line 33.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
+
 (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count352
@@ -663,10 +872,14 @@ LaTeX Font Info:    ... okay on input line 33.
 \MPnumerator=\count356
 \makeMPintoPDFobject=\count357
 \everyMPtoPDFconversion=\toks45
-) (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+)
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-bas
+e.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
-Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package hyperref Info: Link coloring OFF on input line 33.
@@ -676,14 +889,18 @@ Package hyperref Info: Link coloring OFF on input line 33.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: longtable package is loaded.
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/caption\ltcaption.sty
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/caption\ltcaption.sty
 Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
- [1
 
-{C:/Users/Adi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+[1
+
+{C:/Users/Adi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Adi/Ap
+pData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.46 \newpage
@@ -729,11 +946,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [5] (chapters/chapter1_introduction.tex
 Overfull \hbox (4.24855pt too wide) in paragraph at lines 6--7
-\OT1/ppl/m/n/12 mei, pre-zen-ta-rea contribu[]iei pro-prii, res-pec-tiv a re-zul-ta-te-lor ori-gi-nale []i men[]ionarea
+\OT1/ppl/m/n/12 mei, pre-zen-ta-rea contribu[]iei pro-prii, res-pec-tiv a re-zu
+l-ta-te-lor ori-gi-nale []i men[]ionarea
  []
 
 ) (chapters/chapter1_1_literatura_specialitate.tex
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.1 \chapter
@@ -742,11 +961,13 @@ l.1 \chapter
 ]
 Overfull \hbox (3.00606pt too wide) in paragraph at lines 4--4
 []\OT1/ppl/b/n/17.28 Recunoa[]terea emo[]iilor fa-ci-ale fo-lo-sind re[]ele SNN
+
  []
 
 
 Overfull \hbox (13.70284pt too wide) in paragraph at lines 8--8
-[]\OT1/ppl/b/n/17.28 Abord^^Uari ba-zate pe eve-ni-mente: Ar-hi-tec-tura Spiking-
+[]\OT1/ppl/b/n/17.28 Abord^^Uari ba-zate pe eve-ni-mente: Ar-hi-tec-tura Spikin
+g-
  []
 
 [2
@@ -761,7 +982,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [3]
 Overfull \hbox (26.9421pt too wide) in paragraph at lines 18--19
-\OT1/ppl/m/n/12 Lucrarea pro-pus[]a de Liu et al. [[]] in-tro-duce o pa-ra-digm[]a ino-va-toare de recunoa[]tere
+\OT1/ppl/m/n/12 Lucrarea pro-pus[]a de Liu et al. [[]] in-tro-duce o pa-ra-digm
+[]a ino-va-toare de recunoa[]tere
  []
 
 ) (chapters/chapter2.tex
@@ -784,25 +1006,28 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 Capitolul 1.
 
 Overfull \hbox (29.32365pt too wide) in paragraph at lines 2--2
-[][]\OT1/ppl/b/n/17.28 Inv^^Ua[]area auto-mat^^Ua []i re[]ele ne-u-ro-nale ar-ti-fi-ci-ale (ANN) 
+[][]\OT1/ppl/b/n/17.28 Inv^^Ua[]area auto-mat^^Ua []i re[]ele ne-u-ro-nale ar-t
+i-fi-ci-ale (ANN) 
  []
 
 
 Overfull \hbox (11.55455pt too wide) in paragraph at lines 6--7
-[]\OT1/ppl/m/n/12 Func[]ionarea unei re[]ele ne-u-ro-nale stan-dard se ba-zeaz[]a pe trans-mi-te-rea informa[]iei
+[]\OT1/ppl/m/n/12 Func[]ionarea unei re[]ele ne-u-ro-nale stan-dard se ba-zeaz[
+]a pe trans-mi-te-rea informa[]iei
  []
 
 [6
 
 ]
-<images/neuron_artificial.jpg, id=652, 596.2275pt x 317.185pt>
+<images/neuron_artificial.jpg, id=656, 596.2275pt x 317.185pt>
 File: images/neuron_artificial.jpg Graphic file (type jpg)
 <use images/neuron_artificial.jpg>
 Package pdftex.def Info: images/neuron_artificial.jpg  used on input line 22.
 (pdftex.def)             Requested size: 308.71106pt x 164.23051pt.
 
 Overfull \hbox (1.34517pt too wide) in paragraph at lines 31--32
-\OT1/ppl/m/n/12 Limit[]arile ener-ge-tice men[]ionate an-te-rior au im-pus tranzi[]ia c[]atre o nou[]a pa-ra-digm[]a:
+\OT1/ppl/m/n/12 Limit[]arile ener-ge-tice men[]ionate an-te-rior au im-pus tran
+zi[]ia c[]atre o nou[]a pa-ra-digm[]a:
  []
 
 
@@ -813,22 +1038,26 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
 
 [7 <./images/neuron_artificial.jpg>]
-<figures/artificial_vs_spiking_neuron.png, id=666, 370.38374pt x 396.2805pt>
+<figures/artificial_vs_spiking_neuron.png, id=670, 370.38374pt x 396.2805pt>
 File: figures/artificial_vs_spiking_neuron.png Graphic file (type png)
 <use figures/artificial_vs_spiking_neuron.png>
-Package pdftex.def Info: figures/artificial_vs_spiking_neuron.png  used on input line 37.
+Package pdftex.def Info: figures/artificial_vs_spiking_neuron.png  used on inpu
+t line 37.
 (pdftex.def)             Requested size: 264.61333pt x 283.12071pt.
 
 Overfull \hbox (5.35344pt too wide) in paragraph at lines 44--45
-\OT1/ppl/m/n/12 poten[]ial de ac[]iune, o desc[]arcare elec-tric[]a de scurt[]a du-rat[]a care trans-port[]a informa[]ia
+\OT1/ppl/m/n/12 poten[]ial de ac[]iune, o desc[]arcare elec-tric[]a de scurt[]a
+ du-rat[]a care trans-port[]a informa[]ia
  []
 
 
 Overfull \hbox (8.22069pt too wide) in paragraph at lines 47--48
-\OT1/ppl/m/n/12 Mecanismul de func[]ionare al unui ne-u-ron de tip \OT1/ppl/m/it/12 spi-king \OT1/ppl/m/n/12 este de-fi-nit prin interac[]iunea
+\OT1/ppl/m/n/12 Mecanismul de func[]ionare al unui ne-u-ron de tip \OT1/ppl/m/i
+t/12 spi-king \OT1/ppl/m/n/12 este de-fi-nit prin interac[]iunea
  []
 
-LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 50.
+LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 5
+0.
 (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ppl.fd
 File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
 )
@@ -840,10 +1069,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
 
 [8 <./figures/artificial_vs_spiking_neuron.png>]
-<figures/dinamica_membranei.png, id=677, 585.387pt x 410.7345pt>
+<figures/dinamica_membranei.png, id=681, 585.387pt x 410.7345pt>
 File: figures/dinamica_membranei.png Graphic file (type png)
 <use figures/dinamica_membranei.png>
 Package pdftex.def Info: figures/dinamica_membranei.png  used on input line 60.
+
 (pdftex.def)             Requested size: 396.91325pt x 278.49355pt.
 
 
@@ -855,12 +1085,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [9 <./figures/dinamica_membranei.png>]
 Overfull \hbox (31.01552pt too wide) in paragraph at lines 99--100
-\OT1/ppl/m/n/12 mem-bran[]a dep[]a[]e[]te pra-gul $\OML/cmm/m/it/12 V[]$\OT1/ppl/m/n/12 , s[]a aib[]a loc desc[]arcarea, ur-mat[]a de re-se-ta-rea poten[]ialului: 
+\OT1/ppl/m/n/12 mem-bran[]a dep[]a[]e[]te pra-gul $\OML/cmm/m/it/12 V[]$\OT1/pp
+l/m/n/12 , s[]a aib[]a loc desc[]arcarea, ur-mat[]a de re-se-ta-rea poten[]ialu
+lui: 
  []
 
 
 Overfull \hbox (0.63pt too wide) in paragraph at lines 110--111
-\OT1/ppl/m/n/12 tem-po-ral de-fi-nit, cu-nos-cut sub nu-mele de pe-ri-oad[]a de ex-pu-nere sau $\OML/cmm/m/it/12 t[]$ \OT1/ppl/m/n/12 [[]]. 
+\OT1/ppl/m/n/12 tem-po-ral de-fi-nit, cu-nos-cut sub nu-mele de pe-ri-oad[]a de
+ ex-pu-nere sau $\OML/cmm/m/it/12 t[]$ \OT1/ppl/m/n/12 [[]]. 
  []
 
 
@@ -872,12 +1105,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [10]
 Overfull \hbox (6.48662pt too wide) in paragraph at lines 115--116
-\OT1/ppl/m/n/12 Codificarea prin rat[]a co-re-leaz[]a in-ten-si-ta-tea sti-mu-lu-lui de in-trare $\OML/cmm/m/it/12 x \OMS/cmsy/m/n/12 2 \OT1/cmr/m/n/12 [0\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 1]$ \OT1/ppl/m/n/12 cu frecven[]a
+\OT1/ppl/m/n/12 Codificarea prin rat[]a co-re-leaz[]a in-ten-si-ta-tea sti-mu-l
+u-lui de in-trare $\OML/cmm/m/it/12 x \OMS/cmsy/m/n/12 2 \OT1/cmr/m/n/12 [0\OML
+/cmm/m/it/12 ; \OT1/cmr/m/n/12 1]$ \OT1/ppl/m/n/12 cu frecven[]a
  []
 
 
 Overfull \hbox (9.7091pt too wide) in paragraph at lines 129--130
-\OT1/ppl/m/n/12 ne-u-ro-nii dintr-o popula[]ie declan[]eaz[]a im-pul-suri poart[]a informa[]ia esen[]ial[]a [[]].
+\OT1/ppl/m/n/12 ne-u-ro-nii dintr-o popula[]ie declan[]eaz[]a im-pul-suri poart
+[]a informa[]ia esen[]ial[]a [[]].
  []
 
 
@@ -889,7 +1125,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [11]
 Overfull \hbox (32.28061pt too wide) in paragraph at lines 150--151
-\OT1/ppl/m/n/12 recep[]ionat, []^^Pn timp ce o pon-dere sc[]azut[]a ate-nu-eaz[]a im-pac-tul aces-tuia asu-pra poten[]ialului
+\OT1/ppl/m/n/12 recep[]ionat, []^^Pn timp ce o pon-dere sc[]azut[]a ate-nu-eaz[
+]a im-pac-tul aces-tuia asu-pra poten[]ialului
  []
 
 
@@ -909,22 +1146,26 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [13]
 Overfull \hbox (19.75015pt too wide) in paragraph at lines 179--180
-[]\OT1/ppl/m/n/12 Mecanismul de baz[]a pre-su-pune mo-di-fi-ca-rea greut[]a[]ii si-nap-tice []^^Pn func[]ie de corela[]ia
+[]\OT1/ppl/m/n/12 Mecanismul de baz[]a pre-su-pune mo-di-fi-ca-rea greut[]a[]ii
+ si-nap-tice []^^Pn func[]ie de corela[]ia
  []
 
 
 Overfull \hbox (16.48982pt too wide) in paragraph at lines 183--184
-\OT1/ppl/m/n/12 ment[]arile pe har-dware ne-u-ro-mor-fic cu con-sum re-dus, fi-ind ca-pa-bil[]a s[]a ex-trag[]a tr[]as[]aturi
+\OT1/ppl/m/n/12 ment[]arile pe har-dware ne-u-ro-mor-fic cu con-sum re-dus, fi-
+ind ca-pa-bil[]a s[]a ex-trag[]a tr[]as[]aturi
  []
 
 
 Overfull \hbox (14.2689pt too wide) in paragraph at lines 188--189
-\OT1/ppl/m/n/12 Aceasta in-dic[]a fap-tul c[]a sem-na-lul de in-trare nu a avut un rol ca-u-zal []^^Pn declan[]area
+\OT1/ppl/m/n/12 Aceasta in-dic[]a fap-tul c[]a sem-na-lul de in-trare nu a avut
+ un rol ca-u-zal []^^Pn declan[]area
  []
 
 
 Overfull \hbox (27.58548pt too wide) in paragraph at lines 191--192
-[]\OT1/ppl/m/n/12 Aceast[]a di-na-mic[]a per-mite re[]elei s[]a pri-o-ri-ti-zeze con-e-xiu-nile care trans-port[]a informa[]ie
+[]\OT1/ppl/m/n/12 Aceast[]a di-na-mic[]a per-mite re[]elei s[]a pri-o-ri-ti-zez
+e con-e-xiu-nile care trans-port[]a informa[]ie
  []
 
 
@@ -936,7 +1177,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [14]
 Overfull \hbox (7.37865pt too wide) in paragraph at lines 241--242
-[]\OT1/ppl/m/n/12 Cea mai uti-li-zat[]a me-tod[]a de inhibi[]ie []^^Pn faza de an-tre-nare este me-ca-nis-mul \OT1/ppl/m/it/12 Winner-
+[]\OT1/ppl/m/n/12 Cea mai uti-li-zat[]a me-tod[]a de inhibi[]ie []^^Pn faza de 
+an-tre-nare este me-ca-nis-mul \OT1/ppl/m/it/12 Winner-
  []
 
 
@@ -948,12 +1190,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [15]
 Overfull \hbox (2.6951pt too wide) in paragraph at lines 247--248
-\OT1/ppl/m/n/12 [[]], uti-li-zat[]a []^^Pn conjunc[]ie cu LAT []^^Pn mo-de-lele de tip CSNN de ul-tim[]a genera[]ie
+\OT1/ppl/m/n/12 [[]], uti-li-zat[]a []^^Pn conjunc[]ie cu LAT []^^Pn mo-de-lele
+ de tip CSNN de ul-tim[]a genera[]ie
  []
 
 
 Overfull \hbox (3.41293pt too wide) in paragraph at lines 256--257
-\OT1/ppl/m/n/12 mo-men-tul declan[][]arii im-pul-su-lui, $[]$ este tim-pul []int[]a do-rit, iar $\OML/cmm/m/it/12 ^^Q[]$ \OT1/ppl/m/n/12 este rata de []^^Pnv[]a[]are
+\OT1/ppl/m/n/12 mo-men-tul declan[][]arii im-pul-su-lui, $[]$ este tim-pul []in
+t[]a do-rit, iar $\OML/cmm/m/it/12 ^^Q[]$ \OT1/ppl/m/n/12 este rata de []^^Pnv[
+]a[]are
  []
 
 
@@ -970,10 +1215,11 @@ Overfull \hbox (8.36287pt too wide) in paragraph at lines 276--276
 
 
 Overfull \hbox (10.248pt too wide) in paragraph at lines 280--281
-[]\OT1/ppl/m/n/12 1. \OT1/ppl/b/n/12 Etapa de ^^^Pnv^^Ua[]are (Lear-ning Phase): []\OT1/ppl/m/n/12 In aceast[]a faz[]a, fi-e-care nu-cleu de convolu[]ie
+[]\OT1/ppl/m/n/12 1. \OT1/ppl/b/n/12 Etapa de ^^^Pnv^^Ua[]are (Lear-ning Phase)
+: []\OT1/ppl/m/n/12 In aceast[]a faz[]a, fi-e-care nu-cleu de convolu[]ie
  []
 
-<figures/2d-csnn.png, id=810, 1086.0575pt x 899.36pt>
+<figures/2d-csnn.png, id=814, 1086.0575pt x 899.36pt>
 File: figures/2d-csnn.png Graphic file (type png)
 <use figures/2d-csnn.png>
 Package pdftex.def Info: figures/2d-csnn.png  used on input line 295.
@@ -986,7 +1232,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
 
 [17]
-<figures/3d-csnn.png, id=820, 968.61874pt x 874.26625pt>
+<figures/3d-csnn.png, id=824, 968.61874pt x 874.26625pt>
 File: figures/3d-csnn.png Graphic file (type png)
 <use figures/3d-csnn.png>
 Package pdftex.def Info: figures/3d-csnn.png  used on input line 315.
@@ -1001,7 +1247,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [18 <./figures/2d-csnn.png>]
 Overfull \hbox (23.90555pt too wide) in paragraph at lines 335--336
- []\OT1/ppl/b/n/12 Algoritmul Min-Eigenvalue:[] \OT1/ppl/m/n/12 Pen-tru a se-lecta cele mai ro-buste puncte pen-tru urm[]arire,
+ []\OT1/ppl/b/n/12 Algoritmul Min-Eigenvalue:[] \OT1/ppl/m/n/12 Pen-tru a se-le
+cta cele mai ro-buste puncte pen-tru urm[]arire,
  []
 
 
@@ -1013,7 +1260,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [19 <./figures/3d-csnn.png>]
 Overfull \hbox (24.31232pt too wide) in paragraph at lines 349--350
-\OT1/ppl/m/n/12 ima-gine este pro-ce-sat[]a uni-form, si-mu-la-toa-rele de SNN pot uti-liza stra-te-gii de e[]antionare
+\OT1/ppl/m/n/12 ima-gine este pro-ce-sat[]a uni-form, si-mu-la-toa-rele de SNN 
+pot uti-liza stra-te-gii de e[]antionare
  []
 
 
@@ -1032,7 +1280,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
 
 [21]
-<figures/landmarks_68.png, id=864, 638.385pt x 516.7305pt>
+<figures/landmarks_68.png, id=868, 638.385pt x 516.7305pt>
 File: figures/landmarks_68.png Graphic file (type png)
 <use figures/landmarks_68.png>
 Package pdftex.def Info: figures/landmarks_68.png  used on input line 387.
@@ -1057,24 +1305,28 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
 
 [23]
-<figures/linear_decay_decoding.png, id=884, 714.7503pt x 426.393pt>
+<figures/linear_decay_decoding.png, id=888, 714.7503pt x 426.393pt>
 File: figures/linear_decay_decoding.png Graphic file (type png)
 <use figures/linear_decay_decoding.png>
-Package pdftex.def Info: figures/linear_decay_decoding.png  used on input line 450.
+Package pdftex.def Info: figures/linear_decay_decoding.png  used on input line 
+450.
 (pdftex.def)             Requested size: 141.12889pt x 84.19054pt.
-<figures/rectangular_pulse_decoding.png, id=885, 714.7503pt x 426.393pt>
+<figures/rectangular_pulse_decoding.png, id=889, 714.7503pt x 426.393pt>
 File: figures/rectangular_pulse_decoding.png Graphic file (type png)
 <use figures/rectangular_pulse_decoding.png>
-Package pdftex.def Info: figures/rectangular_pulse_decoding.png  used on input line 457.
+Package pdftex.def Info: figures/rectangular_pulse_decoding.png  used on input 
+line 457.
 (pdftex.def)             Requested size: 141.12889pt x 84.19054pt.
-<figures/gaussian-based-decoding.png, id=886, 714.7503pt x 426.393pt>
+<figures/gaussian-based-decoding.png, id=890, 714.7503pt x 426.393pt>
 File: figures/gaussian-based-decoding.png Graphic file (type png)
 <use figures/gaussian-based-decoding.png>
-Package pdftex.def Info: figures/gaussian-based-decoding.png  used on input line 464.
+Package pdftex.def Info: figures/gaussian-based-decoding.png  used on input lin
+e 464.
 (pdftex.def)             Requested size: 141.12889pt x 84.19054pt.
 
 Overfull \hbox (10.82542pt too wide) in paragraph at lines 473--474
-\OT1/ppl/m/n/12 rea simpl[]a a me-mo-riei pe ter-men scurt a ne-u-ro-ni-lor, ofe-rind o pe-na-li-zare propor[]ional[]a
+\OT1/ppl/m/n/12 rea simpl[]a a me-mo-riei pe ter-men scurt a ne-u-ro-ni-lor, of
+e-rind o pe-na-li-zare propor[]ional[]a
  []
 
 
@@ -1084,9 +1336,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
 
-[24 <./figures/linear_decay_decoding.png> <./figures/rectangular_pulse_decoding.png> <./figures/gaussian-based-decoding.png>]
+[24 <./figures/linear_decay_decoding.png> <./figures/rectangular_pulse_decoding
+.png> <./figures/gaussian-based-decoding.png>]
 Overfull \hbox (9.36801pt too wide) in paragraph at lines 475--475
-[]\OT1/ppl/b/n/14.4 Decodificarea prin Im-puls Drept-un-ghiu-lar (Rec-tan-gu-lar Pulse) 
+[]\OT1/ppl/b/n/14.4 Decodificarea prin Im-puls Drept-un-ghiu-lar (Rec-tan-gu-la
+r Pulse) 
  []
 
 ) (chapters/chapter3.tex
@@ -1102,6 +1356,7 @@ Capitolul 2.
 
 Overfull \hbox (12.0612pt too wide) in paragraph at lines 3--3
 []\OT1/ppl/b/n/17.28 Reprezentarea da-te-lor sub form^^Ua de im-pul-suri (Spike
+
  []
 
 [26
@@ -1118,7 +1373,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 Capitolul 3.
 
 Overfull \hbox (2.02185pt too wide) in paragraph at lines 7--7
-[]\OT1/ppl/b/n/17.28 Reducerea ac-ti-vit^^Ua[]ii ne-u-ro-nale re-dun-dante prin eli-
+[]\OT1/ppl/b/n/17.28 Reducerea ac-ti-vit^^Ua[]ii ne-u-ro-nale re-dun-dante prin
+ eli-
  []
 
 [28
@@ -1145,7 +1401,8 @@ Package hyperref Warning: Difference (2) between bookmark levels is greater
 
 ]
 Overfull \hbox (12.76627pt too wide) in paragraph at lines 29--30
-\OT1/ppl/m/n/12 pa-ga-tion prin timp (BPTT) cu gradien[]i substitui[]i per-mite op-ti-mi-za-rea []^^Pntregului
+\OT1/ppl/m/n/12 pa-ga-tion prin timp (BPTT) cu gradien[]i substitui[]i per-mite
+ op-ti-mi-za-rea []^^Pntregului
  []
 
 ) (chapters/chapter7.tex
@@ -1162,10 +1419,11 @@ Capitolul 6.
 
 ]
 Capitolul 7.
-<figures/diagrams/UseCaseDiagram.jpg, id=943, 1733.47626pt x 1528.71124pt>
+<figures/diagrams/UseCaseDiagram.jpg, id=947, 1733.47626pt x 1528.71124pt>
 File: figures/diagrams/UseCaseDiagram.jpg Graphic file (type jpg)
 <use figures/diagrams/UseCaseDiagram.jpg>
-Package pdftex.def Info: figures/diagrams/UseCaseDiagram.jpg  used on input line 25.
+Package pdftex.def Info: figures/diagrams/UseCaseDiagram.jpg  used on input lin
+e 25.
 (pdftex.def)             Requested size: 366.04552pt x 322.7883pt.
 [34
 
@@ -1194,15 +1452,19 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [37]
-<figures/diagrams/backend-class-diagram-1.pdf, id=964, 2902.845pt x 2902.845pt>
+<figures/diagrams/backend-class-diagram-1.pdf, id=968, 2902.845pt x 2902.845pt>
+
 File: figures/diagrams/backend-class-diagram-1.pdf Graphic file (type pdf)
 <use figures/diagrams/backend-class-diagram-1.pdf>
-Package pdftex.def Info: figures/diagrams/backend-class-diagram-1.pdf  used on input line 136.
+Package pdftex.def Info: figures/diagrams/backend-class-diagram-1.pdf  used on 
+input line 136.
 (pdftex.def)             Requested size: 436.60997pt x 436.6039pt.
-<figures/diagrams/backend-class-diagram-2.png, id=965, 7166.775pt x 1304.875pt>
+<figures/diagrams/backend-class-diagram-2.png, id=969, 7166.775pt x 1304.875pt>
+
 File: figures/diagrams/backend-class-diagram-2.png Graphic file (type png)
 <use figures/diagrams/backend-class-diagram-2.png>
-Package pdftex.def Info: figures/diagrams/backend-class-diagram-2.png  used on input line 145.
+Package pdftex.def Info: figures/diagrams/backend-class-diagram-2.png  used on 
+input line 145.
 (pdftex.def)             Requested size: 436.60997pt x 79.48376pt.
 
 
@@ -1220,21 +1482,28 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[39 <./figures/diagrams/backend-class-diagram-1.pdf> <./figures/diagrams/backend-class-diagram-2.png>]
-<figures/diagrams/frontend-class-diagram-1.pdf, id=1126, 2902.845pt x 904.33856pt>
+[39 <./figures/diagrams/backend-class-diagram-1.pdf> <./figures/diagrams/backen
+d-class-diagram-2.png>]
+<figures/diagrams/frontend-class-diagram-1.pdf, id=1130, 2902.845pt x 904.33856
+pt>
 File: figures/diagrams/frontend-class-diagram-1.pdf Graphic file (type pdf)
 <use figures/diagrams/frontend-class-diagram-1.pdf>
-Package pdftex.def Info: figures/diagrams/frontend-class-diagram-1.pdf  used on input line 175.
+Package pdftex.def Info: figures/diagrams/frontend-class-diagram-1.pdf  used on
+ input line 175.
 (pdftex.def)             Requested size: 308.71106pt x 96.16577pt.
-<figures/diagrams/frontend-class-diagram-2.pdf, id=1127, 2902.845pt x 2902.845pt>
+<figures/diagrams/frontend-class-diagram-2.pdf, id=1131, 2902.845pt x 2902.845p
+t>
 File: figures/diagrams/frontend-class-diagram-2.pdf Graphic file (type pdf)
 <use figures/diagrams/frontend-class-diagram-2.pdf>
-Package pdftex.def Info: figures/diagrams/frontend-class-diagram-2.pdf  used on input line 184.
+Package pdftex.def Info: figures/diagrams/frontend-class-diagram-2.pdf  used on
+ input line 184.
 (pdftex.def)             Requested size: 308.71106pt x 308.68343pt.
-<figures/diagrams/frontend-class-diagram-3.pdf, id=1128, 2902.845pt x 1584.88106pt>
+<figures/diagrams/frontend-class-diagram-3.pdf, id=1132, 2902.845pt x 1584.8810
+6pt>
 File: figures/diagrams/frontend-class-diagram-3.pdf Graphic file (type pdf)
 <use figures/diagrams/frontend-class-diagram-3.pdf>
-Package pdftex.def Info: figures/diagrams/frontend-class-diagram-3.pdf  used on input line 193.
+Package pdftex.def Info: figures/diagrams/frontend-class-diagram-3.pdf  used on
+ input line 193.
 (pdftex.def)             Requested size: 286.65883pt x 156.49017pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 194--194
@@ -1256,11 +1525,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[41 <./figures/diagrams/frontend-class-diagram-1.pdf> <./figures/diagrams/frontend-class-diagram-2.pdf> <./figures/diagrams/frontend-class-diagram-3.pdf>]
-<figures/diagrams/entity_relationship_diagram.png, id=1528, 7410.68625pt x 4669.445pt>
+[41 <./figures/diagrams/frontend-class-diagram-1.pdf> <./figures/diagrams/front
+end-class-diagram-2.pdf> <./figures/diagrams/frontend-class-diagram-3.pdf>]
+<figures/diagrams/entity_relationship_diagram.png, id=1532, 7410.68625pt x 4669
+.445pt>
 File: figures/diagrams/entity_relationship_diagram.png Graphic file (type png)
 <use figures/diagrams/entity_relationship_diagram.png>
-Package pdftex.def Info: figures/diagrams/entity_relationship_diagram.png  used on input line 215.
+Package pdftex.def Info: figures/diagrams/entity_relationship_diagram.png  used
+ on input line 215.
 (pdftex.def)             Requested size: 396.91325pt x 250.08716pt.
 
 
@@ -1271,10 +1543,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [42 <./figures/diagrams/entity_relationship_diagram.png>]
-<figures/diagrams/diagrama-SD.pdf, id=1537, 2902.845pt x 1699.30856pt>
+<figures/diagrams/diagrama-SD.pdf, id=1541, 2902.845pt x 1699.30856pt>
 File: figures/diagrams/diagrama-SD.pdf Graphic file (type pdf)
 <use figures/diagrams/diagrama-SD.pdf>
-Package pdftex.def Info: figures/diagrams/diagrama-SD.pdf  used on input line 234.
+Package pdftex.def Info: figures/diagrams/diagrama-SD.pdf  used on input line 2
+34.
 (pdftex.def)             Requested size: 436.60997pt x 255.58537pt.
 
 
@@ -1285,17 +1558,21 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [43 <./figures/diagrams/diagrama-SD.pdf>]
-<figures/diagrams/diagrama-CD.pdf, id=1700, 2902.845pt x 2580.76157pt>
+<figures/diagrams/diagrama-CD.pdf, id=1704, 2902.845pt x 2580.76157pt>
 File: figures/diagrams/diagrama-CD.pdf Graphic file (type pdf)
 <use figures/diagrams/diagrama-CD.pdf>
-Package pdftex.def Info: figures/diagrams/diagrama-CD.pdf  used on input line 250.
+Package pdftex.def Info: figures/diagrams/diagrama-CD.pdf  used on input line 2
+50.
 (pdftex.def)             Requested size: 308.71106pt x 274.43364pt.
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 255.
- (C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 2
+55.
+
+(C:\Users\Adi\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 Overfull \hbox (21.58556pt too wide) in paragraph at lines 255--255
-[]\OT1/ppl/m/n/12 Figura []7.6[] eviden[]iaz[]a participan[]ii []i dependen[]ele din-tre ei pen-tru afi[]area timeline-
+[]\OT1/ppl/m/n/12 Figura []7.6[] eviden[]iaz[]a participan[]ii []i dependen[]el
+e din-tre ei pen-tru afi[]area timeline-
  []
 
 
@@ -1307,27 +1584,33 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [44 <./figures/diagrams/diagrama-CD.pdf>]
 Overfull \hbox (11.28342pt too wide) in paragraph at lines 255--256
-\OT1/ppl/m/it/12 tory\OT1/ppl/m/n/12 ) a ce-lor dou[]a flu-xuri: \OT1/pcr/m/n/12 timelineHistory \OT1/ppl/m/n/12 (da-tele per-sis-tate) []i \OT1/pcr/m/n/12 emotionHistory
+\OT1/ppl/m/it/12 tory\OT1/ppl/m/n/12 ) a ce-lor dou[]a flu-xuri: \OT1/pcr/m/n/1
+2 timelineHistory \OT1/ppl/m/n/12 (da-tele per-sis-tate) []i \OT1/pcr/m/n/12 em
+otionHistory
  []
 
-<figures/app/live-spike-monitor.png, id=1823, 936.49875pt x 433.01775pt>
+<figures/app/live-spike-monitor.png, id=1827, 936.49875pt x 433.01775pt>
 File: figures/app/live-spike-monitor.png Graphic file (type png)
 <use figures/app/live-spike-monitor.png>
-Package pdftex.def Info: figures/app/live-spike-monitor.png  used on input line 259.
+Package pdftex.def Info: figures/app/live-spike-monitor.png  used on input line
+ 259.
 (pdftex.def)             Requested size: 436.60997pt x 201.87975pt.
-<figures/diagrams/diagrama-deployment.pdf, id=1824, 2902.845pt x 853.26776pt>
+<figures/diagrams/diagrama-deployment.pdf, id=1828, 2902.845pt x 853.26776pt>
 File: figures/diagrams/diagrama-deployment.pdf Graphic file (type pdf)
 <use figures/diagrams/diagrama-deployment.pdf>
-Package pdftex.def Info: figures/diagrams/diagrama-deployment.pdf  used on input line 269.
+Package pdftex.def Info: figures/diagrams/diagrama-deployment.pdf  used on inpu
+t line 269.
 (pdftex.def)             Requested size: 436.60997pt x 128.33617pt.
 
 Overfull \hbox (3.42146pt too wide) in paragraph at lines 274--275
-\OT1/ppl/m/n/12 ser (interfa[]a Re-act) []i co-mu-nic[]a cu backend-ul Node.js at[]at sin-cron prin REST/HTTP
+\OT1/ppl/m/n/12 ser (interfa[]a Re-act) []i co-mu-nic[]a cu backend-ul Node.js 
+at[]at sin-cron prin REST/HTTP
  []
 
 
 Overfull \hbox (0.93825pt too wide) in paragraph at lines 279--282
-\OT1/ppl/m/n/12 Pentru persisten[][]a am ales o abor-dare hi-brid[]a, se-par[]and da-tele \OT1/ppl/b/n/12 tranzac[]ionale \OT1/ppl/m/n/12 (struc-
+\OT1/ppl/m/n/12 Pentru persisten[][]a am ales o abor-dare hi-brid[]a, se-par[]a
+nd da-tele \OT1/ppl/b/n/12 tranzac[]ionale \OT1/ppl/m/n/12 (struc-
  []
 
 
@@ -1339,7 +1622,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [45 <./figures/app/live-spike-monitor.png>]
 Overfull \hbox (0.33583pt too wide) in paragraph at lines 284--290
-\OT1/ppl/m/n/12 priet[]a[]i sunt im-por-tante pen-tru a evita st[]ari in-va-lide (ex. pa-cient f[]ar[]a pat/ward
+\OT1/ppl/m/n/12 priet[]a[]i sunt im-por-tante pen-tru a evita st[]ari in-va-lid
+e (ex. pa-cient f[]ar[]a pat/ward
  []
 
 
@@ -1350,15 +1634,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [46 <./figures/diagrams/diagrama-deployment.pdf>]
-<figures/diagrams/diagrama-stari.pdf, id=1963, 2902.845pt x 1340.1267pt>
+<figures/diagrams/diagrama-stari.pdf, id=1967, 2902.845pt x 1340.1267pt>
 File: figures/diagrams/diagrama-stari.pdf Graphic file (type pdf)
 <use figures/diagrams/diagrama-stari.pdf>
-Package pdftex.def Info: figures/diagrams/diagrama-stari.pdf  used on input line 316.
+Package pdftex.def Info: figures/diagrams/diagrama-stari.pdf  used on input lin
+e 316.
 (pdftex.def)             Requested size: 264.61333pt x 122.1603pt.
-<figures/histerezis_alerte.pdf, id=1966, 578.16pt x 289.08pt>
+<figures/histerezis_alerte.pdf, id=1970, 578.16pt x 289.08pt>
 File: figures/histerezis_alerte.pdf Graphic file (type pdf)
 <use figures/histerezis_alerte.pdf>
 Package pdftex.def Info: figures/histerezis_alerte.pdf  used on input line 325.
+
 (pdftex.def)             Requested size: 352.81552pt x 176.4047pt.
 
 
@@ -1378,27 +1664,32 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [48 <./figures/histerezis_alerte.pdf>]
 Overfull \hbox (13.27196pt too wide) in paragraph at lines 367--368
-[]\OT1/ppl/m/n/12 Severitatea este cal-cu-lat[]a dup[]a aceea[]i lo-gic[]a (HIGH/MEDIUM/LOW) []^^Pn func[]ie
+[]\OT1/ppl/m/n/12 Severitatea este cal-cu-lat[]a dup[]a aceea[]i lo-gic[]a (HIG
+H/MEDIUM/LOW) []^^Pn func[]ie
  []
 
-<figures/app/current-alerts.png, id=2122, 233.673pt x 250.536pt>
+<figures/app/current-alerts.png, id=2126, 233.673pt x 250.536pt>
 File: figures/app/current-alerts.png Graphic file (type png)
 <use figures/app/current-alerts.png>
-Package pdftex.def Info: figures/app/current-alerts.png  used on input line 377.
+Package pdftex.def Info: figures/app/current-alerts.png  used on input line 377
+.
 (pdftex.def)             Requested size: 211.68661pt x 226.95975pt.
-<figures/app/prolonged-alerts.png, id=2123, 236.082pt x 255.95625pt>
+<figures/app/prolonged-alerts.png, id=2127, 236.082pt x 255.95625pt>
 File: figures/app/prolonged-alerts.png Graphic file (type png)
 <use figures/app/prolonged-alerts.png>
-Package pdftex.def Info: figures/app/prolonged-alerts.png  used on input line 384.
+Package pdftex.def Info: figures/app/prolonged-alerts.png  used on input line 3
+84.
 (pdftex.def)             Requested size: 211.68661pt x 229.50706pt.
-<figures/diagrams/diagrama-activitati.pdf, id=2124, 2902.845pt x 2894.89513pt>
+<figures/diagrams/diagrama-activitati.pdf, id=2128, 2902.845pt x 2894.89513pt>
 File: figures/diagrams/diagrama-activitati.pdf Graphic file (type pdf)
 <use figures/diagrams/diagrama-activitati.pdf>
-Package pdftex.def Info: figures/diagrams/diagrama-activitati.pdf  used on input line 395.
+Package pdftex.def Info: figures/diagrams/diagrama-activitati.pdf  used on inpu
+t line 395.
 (pdftex.def)             Requested size: 427.78773pt x 426.61787pt.
 
 Overfull \hbox (43.84871pt too wide) in paragraph at lines 400--401
-\OT1/ppl/m/n/12 ocup[]arii si-mul-tane. Opera[]ia este tra-tat[]a tranzac[]ional, ast-fel []^^Pnc[]at []^^Pnregistrarea/actualizarea
+\OT1/ppl/m/n/12 ocup[]arii si-mul-tane. Opera[]ia este tra-tat[]a tranzac[]iona
+l, ast-fel []^^Pnc[]at []^^Pnregistrarea/actualizarea
  []
 
 
@@ -1418,13 +1709,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [50 <./figures/diagrams/diagrama-activitati.pdf>]
 Overfull \hbox (29.6641pt too wide) in paragraph at lines 428--429
-[]\OT1/ppl/b/n/12 Feedback vi-zual\OT1/ppl/m/n/12 : emo[]ia de-tec-tat[]a este eviden[]iat[]a tem-po-rar (efect de tip \OT1/ppl/m/it/12 flash/pulse\OT1/ppl/m/n/12 ). 
+[]\OT1/ppl/b/n/12 Feedback vi-zual\OT1/ppl/m/n/12 : emo[]ia de-tec-tat[]a este 
+eviden[]iat[]a tem-po-rar (efect de tip \OT1/ppl/m/it/12 flash/pulse\OT1/ppl/m/
+n/12 ). 
  []
 
-<figures/app/sentiment-distribution.png, id=2255, 269.808pt x 409.53pt>
+<figures/app/sentiment-distribution.png, id=2259, 269.808pt x 409.53pt>
 File: figures/app/sentiment-distribution.png Graphic file (type png)
 <use figures/app/sentiment-distribution.png>
-Package pdftex.def Info: figures/app/sentiment-distribution.png  used on input line 435.
+Package pdftex.def Info: figures/app/sentiment-distribution.png  used on input 
+line 435.
 (pdftex.def)             Requested size: 154.35889pt x 234.30312pt.
 
 Underfull \hbox (badness 7558) in paragraph at lines 436--436
@@ -1436,10 +1730,11 @@ Underfull \hbox (badness 1895) in paragraph at lines 436--436
 \OT1/ppl/m/n/12 emo[]iilor []i a in-ten-sit[]a[]ilor
  []
 
-<figures/app/clinical-events.png, id=2256, 232.4685pt x 207.77625pt>
+<figures/app/clinical-events.png, id=2260, 232.4685pt x 207.77625pt>
 File: figures/app/clinical-events.png Graphic file (type png)
 <use figures/app/clinical-events.png>
-Package pdftex.def Info: figures/app/clinical-events.png  used on input line 442.
+Package pdftex.def Info: figures/app/clinical-events.png  used on input line 44
+2.
 (pdftex.def)             Requested size: 220.50887pt x 197.0978pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1449,20 +1744,24 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [51]
-<figures/app/low-clinical-risk-level.png, id=2266, 219.219pt x 82.50826pt>
+<figures/app/low-clinical-risk-level.png, id=2270, 219.219pt x 82.50826pt>
 File: figures/app/low-clinical-risk-level.png Graphic file (type png)
 <use figures/app/low-clinical-risk-level.png>
-Package pdftex.def Info: figures/app/low-clinical-risk-level.png  used on input line 476.
+Package pdftex.def Info: figures/app/low-clinical-risk-level.png  used on input
+ line 476.
 (pdftex.def)             Requested size: 136.71442pt x 51.45924pt.
-<figures/app/medium-clinical-risk-level.png, id=2267, 215.00325pt x 72.87225pt>
+<figures/app/medium-clinical-risk-level.png, id=2271, 215.00325pt x 72.87225pt>
+
 File: figures/app/medium-clinical-risk-level.png Graphic file (type png)
 <use figures/app/medium-clinical-risk-level.png>
-Package pdftex.def Info: figures/app/medium-clinical-risk-level.png  used on input line 482.
+Package pdftex.def Info: figures/app/medium-clinical-risk-level.png  used on in
+put line 482.
 (pdftex.def)             Requested size: 158.76665pt x 53.8123pt.
-<figures/app/high-clinical-risk-level.png, id=2268, 215.6055pt x 78.89474pt>
+<figures/app/high-clinical-risk-level.png, id=2272, 215.6055pt x 78.89474pt>
 File: figures/app/high-clinical-risk-level.png Graphic file (type png)
 <use figures/app/high-clinical-risk-level.png>
-Package pdftex.def Info: figures/app/high-clinical-risk-level.png  used on input line 488.
+Package pdftex.def Info: figures/app/high-clinical-risk-level.png  used on inpu
+t line 488.
 (pdftex.def)             Requested size: 136.71442pt x 50.02896pt.
 
 
@@ -1472,31 +1771,38 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[52 <./figures/app/sentiment-distribution.png> <./figures/app/clinical-events.png> <./figures/app/low-clinical-risk-level.png> <./figures/app/medium-clinical-risk-level.png> <./figures/app/high-clinical-risk-level.png>]
-<figures/app/normal-session.png, id=2278, 141.52875pt x 36.73724pt>
+[52 <./figures/app/sentiment-distribution.png> <./figures/app/clinical-events.p
+ng> <./figures/app/low-clinical-risk-level.png> <./figures/app/medium-clinical-
+risk-level.png> <./figures/app/high-clinical-risk-level.png>]
+<figures/app/normal-session.png, id=2282, 141.52875pt x 36.73724pt>
 File: figures/app/normal-session.png Graphic file (type png)
 <use figures/app/normal-session.png>
-Package pdftex.def Info: figures/app/normal-session.png  used on input line 515.
+Package pdftex.def Info: figures/app/normal-session.png  used on input line 515
+.
 (pdftex.def)             Requested size: 119.07666pt x 30.91006pt.
-<figures/app/positive-engagement-session.png, id=2279, 176.45924pt x 38.544pt>
+<figures/app/positive-engagement-session.png, id=2283, 176.45924pt x 38.544pt>
 File: figures/app/positive-engagement-session.png Graphic file (type png)
 <use figures/app/positive-engagement-session.png>
-Package pdftex.def Info: figures/app/positive-engagement-session.png  used on input line 521.
+Package pdftex.def Info: figures/app/positive-engagement-session.png  used on i
+nput line 521.
 (pdftex.def)             Requested size: 141.12889pt x 30.82759pt.
-<figures/app/high-risk-session.png, id=2280, 171.039pt x 37.94176pt>
+<figures/app/high-risk-session.png, id=2284, 171.039pt x 37.94176pt>
 File: figures/app/high-risk-session.png Graphic file (type png)
 <use figures/app/high-risk-session.png>
-Package pdftex.def Info: figures/app/high-risk-session.png  used on input line 527.
+Package pdftex.def Info: figures/app/high-risk-session.png  used on input line 
+527.
 (pdftex.def)             Requested size: 141.12889pt x 31.30753pt.
-<figures/app/risk-increased.png, id=2282, 137.91525pt x 62.03175pt>
+<figures/app/risk-increased.png, id=2286, 137.91525pt x 62.03175pt>
 File: figures/app/risk-increased.png Graphic file (type png)
 <use figures/app/risk-increased.png>
-Package pdftex.def Info: figures/app/risk-increased.png  used on input line 551.
+Package pdftex.def Info: figures/app/risk-increased.png  used on input line 551
+.
 (pdftex.def)             Requested size: 132.30666pt x 59.51192pt.
-<figures/app/risk-decreased.png, id=2283, 160.1985pt x 62.03175pt>
+<figures/app/risk-decreased.png, id=2287, 160.1985pt x 62.03175pt>
 File: figures/app/risk-decreased.png Graphic file (type png)
 <use figures/app/risk-decreased.png>
-Package pdftex.def Info: figures/app/risk-decreased.png  used on input line 557.
+Package pdftex.def Info: figures/app/risk-decreased.png  used on input line 557
+.
 (pdftex.def)             Requested size: 149.94441pt x 58.06468pt.
 
 
@@ -1506,448 +1812,24 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[53 <./figures/app/normal-session.png> <./figures/app/positive-engagement-session.png> <./figures/app/high-risk-session.png> <./figures/app/risk-increased.png> <./figures/app/risk-decreased.png>]
-Overfull \hbox (85.55159pt too wide) in paragraph at lines 582--585
-\OT1/ppl/m/n/12 Testarea black-box pen-tru endpoint-ul \OT1/pcr/m/n/12 POST /api/doctor/patients/:patientId/readings
+[53 <./figures/app/normal-session.png> <./figures/app/positive-engagement-sessi
+on.png> <./figures/app/high-risk-session.png> <./figures/app/risk-increased.png
+> <./figures/app/risk-decreased.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 596--596
+[]|\OT1/ppl/m/n/12 Condi[]ia de dep[]a[]ire a pra-gu-lui
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 595--595
-[]|\OT1/ppl/b/n/10.95 Rezultat
+Overfull \hbox (4.29443pt too wide) in paragraph at lines 591--603
+ [][] 
  []
 
 
-Overfull \hbox (40.08311pt too wide) in alignment at lines 591--597
- [] [] [] [] [] 
+Overfull \hbox (2.33458pt too wide) in paragraph at lines 607--608
+[]\OT1/ppl/m/n/12 Determinarea com-ple-xit[]a[]ii ci-clo-ma-trice ($\OML/cmm/m/
+it/12 CC$\OT1/ppl/m/n/12 ) se ba-zeaz[]a pe te-o-ria gra-fu-ri-lor apli-
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 600--600
-[]|\OT1/ppl/b/n/10.95 Rezultat
- []
-
-
-Overfull \hbox (40.08311pt too wide) in alignment at lines 597--602
- [] [] [] [] [] 
- []
-
-
-Overfull \hbox (40.08311pt too wide) in alignment at lines 602--606
- [] [] [] [] [] 
- []
-
-
-Overfull \hbox (40.08311pt too wide) in alignment at lines 606--609
- [] [] [] [] [] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 611--611
-[]|\OT1/ppl/m/n/10.95 HTTP
- []
-
-
-Underfull \hbox (badness 4699) in paragraph at lines 611--611
-\OT1/ppl/m/n/10.95 401, me-saj
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 611--611
-\OT1/pcr/m/n/10.95 Missing
- []
-
-
-Overfull \hbox (28.5044pt too wide) in paragraph at lines 611--611
-\OT1/pcr/m/n/10.95 authorization
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 612--612
-[]|\OT1/ppl/m/n/10.95 HTTP
- []
-
-
-Underfull \hbox (badness 4699) in paragraph at lines 612--612
-\OT1/ppl/m/n/10.95 401, me-saj
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 612--612
-\OT1/pcr/m/n/10.95 Invalid
- []
-
-
-Overfull \hbox (28.5044pt too wide) in paragraph at lines 612--612
-\OT1/pcr/m/n/10.95 authorization
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 613--613
-[]|\OT1/ppl/m/n/10.95 JWT in-va-lid (\OT1/pcr/m/n/10.95 Bearer
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 613--613
-[]|\OT1/ppl/m/n/10.95 HTTP
- []
-
-
-Underfull \hbox (badness 4699) in paragraph at lines 613--613
-\OT1/ppl/m/n/10.95 401, me-saj
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 613--613
-\OT1/pcr/m/n/10.95 Invalid
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 614--614
-[]|\OT1/ppl/m/n/10.95 HTTP
- []
-
-
-Underfull \hbox (badness 4699) in paragraph at lines 614--614
-\OT1/ppl/m/n/10.95 403, me-saj
- []
-
-
-Overfull \hbox (2.22443pt too wide) in paragraph at lines 614--614
-\OT1/pcr/m/n/10.95 Forbidden| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 616--616
-[]|\OT1/ppl/m/n/10.95 HTTP
- []
-
-
-Underfull \hbox (badness 4699) in paragraph at lines 616--616
-\OT1/ppl/m/n/10.95 404, me-saj
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 616--616
-\OT1/pcr/m/n/10.95 Patient
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 616--616
-\OT1/pcr/m/n/10.95 not
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 617--617
-[]|\OT1/ppl/m/n/10.95 HTTP
- []
-
-
-Underfull \hbox (badness 4699) in paragraph at lines 617--617
-\OT1/ppl/m/n/10.95 404, me-saj
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 617--617
-\OT1/pcr/m/n/10.95 Patient
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 617--617
-\OT1/pcr/m/n/10.95 not
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 618--618
-[]|\OT1/ppl/m/n/10.95 HTTP 403,
- []
-
-
-Underfull \hbox (badness 7291) in paragraph at lines 618--618
-\OT1/ppl/m/n/10.95 me-saj \OT1/pcr/m/n/10.95 You
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 618--618
-\OT1/pcr/m/n/10.95 can only
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 618--618
-\OT1/pcr/m/n/10.95 push
- []
-
-
-Overfull \hbox (15.36441pt too wide) in paragraph at lines 618--618
-\OT1/pcr/m/n/10.95 readings...| 
- []
-
-
-Underfull \hbox (badness 5637) in paragraph at lines 620--620
-[]|\OT1/ppl/m/n/10.95 Emotii in cam-pul \OT1/pcr/m/n/10.95 probabilities\OT1/ppl/m/n/10.95 :
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 620--620
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 620--620
-\OT1/ppl/m/n/10.95 per-sis-tare
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 620--620
-\OT1/ppl/m/n/10.95 co-recta
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 620--620
-\OT1/ppl/m/n/10.95 (nor-ma-li-
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 621--621
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 621--621
-\OT1/ppl/m/n/10.95 per-sis-tare
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 622--622
-[]|\OT1/ppl/m/n/10.95 HTTP
- []
-
-
-Underfull \hbox (badness 4699) in paragraph at lines 622--622
-\OT1/ppl/m/n/10.95 400, me-saj
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 622--622
-\OT1/pcr/m/n/10.95 Reading
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 622--622
-\OT1/pcr/m/n/10.95 payload
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 622--622
-\OT1/pcr/m/n/10.95 does not
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 622--622
-\OT1/pcr/m/n/10.95 contain
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 622--622
-\OT1/pcr/m/n/10.95 emotion
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 623--623
-[]|\OT1/ppl/m/n/10.95 HTTP
- []
-
-
-Underfull \hbox (badness 4699) in paragraph at lines 623--623
-\OT1/ppl/m/n/10.95 400, me-saj
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 623--623
-\OT1/pcr/m/n/10.95 Reading
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 623--623
-\OT1/pcr/m/n/10.95 payload
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 623--623
-\OT1/pcr/m/n/10.95 does not
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 623--623
-\OT1/pcr/m/n/10.95 contain
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 623--623
-\OT1/pcr/m/n/10.95 emotion
- []
-
-
-Underfull \hbox (badness 1057) in paragraph at lines 625--625
-[]|\OT1/ppl/m/n/10.95 Timestamp in-va-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 625--625
-[]|\OT1/ppl/m/n/10.95 HTTP
- []
-
-
-Underfull \hbox (badness 4699) in paragraph at lines 625--625
-\OT1/ppl/m/n/10.95 400, me-saj
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 625--625
-\OT1/pcr/m/n/10.95 Invalid
- []
-
-
-Overfull \hbox (2.22443pt too wide) in paragraph at lines 625--625
-\OT1/pcr/m/n/10.95 timestamp| 
- []
-
-
-Underfull \hbox (badness 1184) in paragraph at lines 626--626
-[]|\OT1/ppl/m/n/10.95 Timestamp va-lid
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 626--626
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 626--626
-\OT1/ppl/m/n/10.95 ti-mes-tamp
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 626--626
-\OT1/ppl/m/n/10.95 server-side
- []
-
-
-Underfull \hbox (badness 3861) in paragraph at lines 628--628
-[]|\OT1/ppl/m/n/10.95 Domeniu nu-me-
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 628--628
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 628--628
-\OT1/ppl/m/n/10.95 clamp in
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 628--628
-\OT1/ppl/m/n/10.95 in-ter-va-lul
- []
-
-
-Underfull \hbox (badness 6047) in paragraph at lines 630--630
-[]|\OT1/ppl/m/n/10.95 Alertare - clasa
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 630--630
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 5274) in paragraph at lines 630--630
-\OT1/ppl/m/n/10.95 fara cre-are
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 631--631
-[]|\OT1/ppl/m/n/10.95 HTTP
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 631--631
-\OT1/ppl/m/n/10.95 201, cre-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 631--631
-\OT1/ppl/m/n/10.95 are alerta
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 631--631
-\OT1/pcr/m/n/10.95 DISTRESS
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 631--631
-\OT1/ppl/m/n/10.95 (se-ve-ri-tate
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 632--632
-[]|\OT1/ppl/m/n/10.95 Alertare - pain
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 632--632
-[]|\OT1/ppl/m/n/10.95 HTTP
- []
-
-
-Underfull \hbox (badness 2393) in paragraph at lines 632--632
-\OT1/ppl/m/n/10.95 201, cre-are
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 632--632
-\OT1/ppl/m/n/10.95 (se-ve-ri-tate
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 633--633
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 633--633
-\OT1/pcr/m/n/10.95 update
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 633--633
-\OT1/ppl/m/n/10.95 alerta (nu
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 634--634
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 634--634
-\OT1/pcr/m/n/10.95 resolve
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 634--634
-\OT1/ppl/m/n/10.95 tele ac-tive
- []
-
-
-Overfull \hbox (40.08311pt too wide) in alignment at lines 609--636
- [] [] [] [] [] 
- []
-
-
-ignored: Infinite glue shrinkage found in box being split
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1956,7 +1838,57 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [54]
-ignored: Infinite glue shrinkage found in box being split
+<figures/diagrams/cfg.pdf, id=2316, 2902.845pt x 2902.845pt>
+File: figures/diagrams/cfg.pdf Graphic file (type pdf)
+<use figures/diagrams/cfg.pdf>
+Package pdftex.def Info: figures/diagrams/cfg.pdf  used on input line 630.
+(pdftex.def)             Requested size: 436.60997pt x 436.6039pt.
+
+Underfull \hbox (badness 3612) in paragraph at lines 648--648
+[]|\OT1/ppl/m/n/12 Early re-turn (Ti-me-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 649--649
+\OT1/ppl/m/n/12 (Alert[]a creat[]a la
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 650--650
+\OT1/ppl/m/n/12 ter-mi-nat, niciun
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 652--652
+[]|\OT1/ppl/m/n/12 Start Streak Nou
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 653--653
+[]|\OT1/ppl/m/n/12 Ignorare va-loare
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 654--654
+[]|\OT1/ppl/m/n/12 Continuare Streak
+ []
+
+
+Underfull \hbox (badness 1558) in paragraph at lines 654--654
+\OT1/ppl/m/n/12 (Va-loare $\OMS/cmsy/m/n/12 ^^U \OT1/cmr/m/n/12 65$\OT1/ppl/m/n
+/12 , dar
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 655--655
+\OT1/ppl/m/n/12 (Sub prag, alert[]a
+ []
+
+
+Underfull \hbox (badness 1226) in paragraph at lines 656--656
+\OT1/ppl/m/n/12 (Sub prag, streak-ul
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1965,350 +1897,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [55]
-Underfull \hbox (badness 10000) in paragraph at lines 649--649
-[]|\OT1/ppl/b/n/10.95 Rezultat
- []
-
-
-Overfull \hbox (40.08311pt too wide) in alignment at lines 645--651
- [] [] [] [] [] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 654--654
-[]|\OT1/ppl/b/n/10.95 Rezultat
- []
-
-
-Overfull \hbox (40.08311pt too wide) in alignment at lines 651--656
- [] [] [] [] [] 
- []
-
-
-Overfull \hbox (40.08311pt too wide) in alignment at lines 656--660
- [] [] [] [] [] 
- []
-
-
-Overfull \hbox (40.08311pt too wide) in alignment at lines 660--663
- [] [] [] [] [] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 665--665
-[]|\OT1/ppl/m/n/10.95 HTTP 400
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 665--665
-\OT1/ppl/m/n/10.95 (fara date
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 665--665
-\OT1/ppl/m/n/10.95 emo-tio-nale
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 666--666
-[]|\OT1/ppl/m/n/10.95 HTTP 400
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 666--666
-\OT1/ppl/m/n/10.95 (fara date
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 666--666
-\OT1/ppl/m/n/10.95 emo-tio-nale
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 667--667
-[]|\OT1/ppl/m/n/10.95 HTTP
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 667--667
-\OT1/ppl/m/n/10.95 201 (date
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 669--669
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 669--669
-\OT1/ppl/m/n/10.95 nor-ma-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 669--669
-\OT1/ppl/m/n/10.95 li-zare la
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 670--670
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 670--670
-\OT1/ppl/m/n/10.95 nor-ma-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 670--670
-\OT1/ppl/m/n/10.95 li-zare la
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 671--671
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 671--671
-\OT1/ppl/m/n/10.95 va-loare
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 671--671
-\OT1/ppl/m/n/10.95 ra-mane
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 671--671
-\OT1/ppl/m/n/10.95 1.01 (fara
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 671--671
-\OT1/ppl/m/n/10.95 sca-lare
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 673--673
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 674--674
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 675--675
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 675--675
-\OT1/ppl/m/n/10.95 clamp la
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 677--677
-[]|\OT1/ppl/m/n/10.95 Prag aler-tare 70
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 677--677
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 677--677
-\OT1/ppl/m/n/10.95 fara alerta
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 678--678
-[]|\OT1/ppl/m/n/10.95 Prag aler-tare 70
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 678--678
-[]|\OT1/ppl/m/n/10.95 HTTP
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 678--678
-\OT1/ppl/m/n/10.95 201, cre-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 678--678
-\OT1/ppl/m/n/10.95 are alerta
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 679--679
-[]|\OT1/ppl/m/n/10.95 Prag aler-tare 70
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 679--679
-[]|\OT1/ppl/m/n/10.95 HTTP
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 679--679
-\OT1/ppl/m/n/10.95 201, cre-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 679--679
-\OT1/ppl/m/n/10.95 are alerta
- []
-
-
-Underfull \hbox (badness 1596) in paragraph at lines 681--681
-[]|\OT1/ppl/m/n/10.95 Prag se-ve-ri-tate 72
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 681--681
-[]|\OT1/ppl/m/n/10.95 Severitate
- []
-
-
-Underfull \hbox (badness 1596) in paragraph at lines 682--682
-[]|\OT1/ppl/m/n/10.95 Prag se-ve-ri-tate 72
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 682--682
-[]|\OT1/ppl/m/n/10.95 Severitate
- []
-
-
-Underfull \hbox (badness 1596) in paragraph at lines 683--683
-[]|\OT1/ppl/m/n/10.95 Prag se-ve-ri-tate 72
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 683--683
-[]|\OT1/ppl/m/n/10.95 Severitate
- []
-
-
-Underfull \hbox (badness 1596) in paragraph at lines 685--685
-[]|\OT1/ppl/m/n/10.95 Prag se-ve-ri-tate 85
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 685--685
-[]|\OT1/ppl/m/n/10.95 Severitate
- []
-
-
-Underfull \hbox (badness 1596) in paragraph at lines 686--686
-[]|\OT1/ppl/m/n/10.95 Prag se-ve-ri-tate 85
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 686--686
-[]|\OT1/ppl/m/n/10.95 Severitate
- []
-
-
-Underfull \hbox (badness 1596) in paragraph at lines 687--687
-[]|\OT1/ppl/m/n/10.95 Prag se-ve-ri-tate 85
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 687--687
-[]|\OT1/ppl/m/n/10.95 Severitate
- []
-
-
-Underfull \hbox (badness 6380) in paragraph at lines 689--689
-[]|\OT1/ppl/m/n/10.95 Prag re-solve dis-
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 689--689
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 689--689
-\OT1/ppl/m/n/10.95 se exe-cuta
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 689--689
-\OT1/ppl/m/n/10.95 re-solve
- []
-
-
-Underfull \hbox (badness 6380) in paragraph at lines 690--690
-[]|\OT1/ppl/m/n/10.95 Prag re-solve dis-
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 690--690
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 6380) in paragraph at lines 691--691
-[]|\OT1/ppl/m/n/10.95 Prag re-solve dis-
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 691--691
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 2564) in paragraph at lines 693--693
-[]|\OT1/ppl/m/n/10.95 Prag re-solve pain
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 693--693
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 693--693
-\OT1/ppl/m/n/10.95 se exe-cuta
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 693--693
-\OT1/ppl/m/n/10.95 re-solve
- []
-
-
-Underfull \hbox (badness 2564) in paragraph at lines 694--694
-[]|\OT1/ppl/m/n/10.95 Prag re-solve pain
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 694--694
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Underfull \hbox (badness 2564) in paragraph at lines 695--695
-[]|\OT1/ppl/m/n/10.95 Prag re-solve pain
- []
-
-
-Underfull \hbox (badness 4543) in paragraph at lines 695--695
-[]|\OT1/ppl/m/n/10.95 HTTP 201,
- []
-
-
-Overfull \hbox (40.08311pt too wide) in alignment at lines 663--697
- [] [] [] [] [] 
- []
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2316,8 +1904,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[56]
-ignored: Infinite glue shrinkage found in box being split
+[56 <./figures/diagrams/cfg.pdf>]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2326,7 +1913,42 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [57]
-ignored: Infinite glue shrinkage found in box being split
+Overfull \hbox (8.2247pt too wide) in paragraph at lines 716--717
+\OT1/pcr/m/n/12 POST /api/doctor/patients/:patientId/readings\OT1/ppl/m/n/12 , 
+care re-pre-zint[]a nu-cleul
+ []
+
+
+Overfull \hbox (22.38702pt too wide) detected at line 720
+[] \OMS/cmsy/m/n/12 ! [] ! [] ! [] ! [] ! f[]\OML/cmm/m/it/12 ;  []\OMS/cmsy/m/
+n/12 g
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 732--732
+[]|\OT1/ppl/b/n/10.95 Componente si-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 735--735
+[]|\OT1/ppl/m/n/10.95 Prisma + In-flux
+ []
+
+
+Underfull \hbox (badness 7273) in paragraph at lines 736--736
+[]|\OT1/ppl/m/n/10.95 Integrarea cu Pos-tgres (via Prisma):
+ []
+
+
+Underfull \hbox (badness 5050) in paragraph at lines 737--737
+[]|\OT1/ppl/m/n/10.95 Time-series / Te-le-
+ []
+
+
+Overfull \hbox (24.13248pt too wide) in paragraph at lines 730--739
+ [][] 
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2335,38 +1957,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [58]
-Overfull \hbox (1227.04327pt too wide) detected at line 718
-\OML/cmm/m/it/12 D[] \OT1/cmr/m/n/12 :  \OML/cmm/m/it/12 timelineempty\OT1/cmr/m/n/12 ? \OML/cmm/m/it/12 D[] \OT1/cmr/m/n/12 :  \OML/cmm/m/it/12 loop \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 maisuntpuncte\OT1/cmr/m/n/12 ? \OML/cmm/m/it/12 D[] \OT1/cmr/m/n/12 :  \OML/cmm/m/it/12 value \OMS/cmsy/m/n/12 ^^U \OT1/cmr/m/n/12 65\OML/cmm/m/it/12 ;  D[] \OT1/cmr/m/n/12 :  \OML/cmm/m/it/12 streakStart < \OT1/cmr/m/n/12 0\OML/cmm/m/it/12 ;  D[] \OT1/cmr/m/n/12 :  \OML/cmm/m/it/12 streakStart < \OT1/cmr/m/n/12 0 (\OML/cmm/m/it/12 in flushStreak\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 index \OMS/cmsy/m/n/12 ^^@ \OT1/cmr/m/n/12 1))\OML/cmm/m/it/12 ;  D[] \OT1/cmr/m/n/12 :  \OML/cmm/m/it/12 streakStart < \OT1/cmr/m/n/12 0 (\OML/cmm/m/it/12 in flushStreak\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 timeline:length \OMS/cmsy/m/n/12 ^^@ \OT1/cmr/m/n/12 1))\OML/cmm/m/it/12 ;  D[] \OT1/cmr/m/n/12 :  \OML/cmm/m/it/12 durationMinutes \OMS/cmsy/m/n/12 ^^U \OT1/cmr/m/n/12 60(\OML/cmm/m/it/12 influshStreak\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 index \OMS/cmsy/m/n/12 ^^@ \OT1/cmr/m/n/12 1))\OML/cmm/m/it/12 ;  D[] \OT1/cmr/m/n/12 :  \OML/cmm/m/it/12 durationMinutes \OMS/cmsy/m/n/12 ^^U \OT1/cmr/m/n/12 60(\OML/cmm/m/it/12 influshStreak\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 timeline:length \OMS/cmsy/m/n/12 ^^@ \OT1/cmr/m/n/12 1)) 
- []
-
-<figures/diagrams/cfg.pdf, id=2314, 2902.845pt x 2902.845pt>
-File: figures/diagrams/cfg.pdf Graphic file (type pdf)
-<use figures/diagrams/cfg.pdf>
-Package pdftex.def Info: figures/diagrams/cfg.pdf  used on input line 731.
-(pdftex.def)             Requested size: 427.78773pt x 427.78943pt.
-
-Overfull \hbox (0.57903pt too wide) in paragraph at lines 736--737
-\OT1/ppl/m/it/12 Nota: \OT1/ppl/m/n/12 pen-tru li-zi-bi-li-tate, ape-lul fi-nal \OT1/pcr/m/n/12 flushStreak(timeline.length - 1) \OT1/ppl/m/n/12 este
+Overfull \hbox (17.42296pt too wide) in paragraph at lines 753--762
+ [][] 
  []
 
 
-Underfull \hbox (badness 2781) in paragraph at lines 757--757
-[]|\OT1/ppl/b/n/10 Ramura noua aco-pe-
- []
-
-
-Underfull \hbox (badness 1484) in paragraph at lines 757--757
-[]|\OT1/ppl/m/n/10 inchidere prin \OT1/pcr/m/n/10 final
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 757--757
-[]|\OT1/ppl/m/n/10 evaluare co-recta la fi-nal
- []
-
-
-Overfull \hbox (4.73216pt too wide) in paragraph at lines 766--770
-\OT1/pcr/m/n/12 POST /api/doctor/patients/:patientId/readings\OT1/ppl/m/n/12 , de la nivel HTTP pana
+Overfull \hbox (11.60341pt too wide) in paragraph at lines 876--877
+[]\OT1/ppl/b/n/12 ADMIN \OT1/ppl/m/n/12 (per-so-nal ad-mi-nis-tra-tiv): ges-tio
+-neaz[]a in-ter-na-rea/externarea pacien[]ilor
  []
 
 
@@ -2377,6 +1975,22 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [59]
+Overfull \hbox (7.23814pt too wide) in paragraph at lines 881--883
+\OT1/ppl/m/n/12 Aplica[]ia se ac-ce-seaz[]a dintr-un brow-ser mo-dern (Chrome/E
+dge/Firefox), prin adresa
+ []
+
+<figures/app/login.png, id=2492, 457.10776pt x 350.5095pt>
+File: figures/app/login.png Graphic file (type png)
+<use figures/app/login.png>
+Package pdftex.def Info: figures/app/login.png  used on input line 898.
+(pdftex.def)             Requested size: 176.40439pt x 135.27014pt.
+<figures/app/create-account.png, id=2493, 457.10776pt x 387.849pt>
+File: figures/app/create-account.png Graphic file (type png)
+<use figures/app/create-account.png>
+Package pdftex.def Info: figures/app/create-account.png  used on input line 906
+.
+(pdftex.def)             Requested size: 158.76665pt x 134.7135pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2384,25 +1998,19 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[60 <./figures/diagrams/cfg.pdf>]
-Overfull \hbox (30.14697pt too wide) in paragraph at lines 771--772
-[]\OT1/ppl/m/n/12 corectitudinea lan-tu-lui \OT1/pcr/m/n/12 route -> middleware -> controller -> service\OT1/ppl/m/n/12 ; 
- []
-
-
-Overfull \hbox (10.78949pt too wide) in paragraph at lines 781--782
-\OT1/pcr/m/n/12 app\OT1/ppl/m/n/12 ), cu in-fras-truc-tura ex-terna con-tro-lata prin mock (\OT1/pcr/m/n/12 Prisma\OT1/ppl/m/n/12 , \OT1/pcr/m/n/12 Influx\OT1/ppl/m/n/12 ). Aceasta
- []
-
-
-Overfull \hbox (1.35823pt too wide) in paragraph at lines 782--783
-\OT1/ppl/m/n/12 tul ru-leaza pe schema de-di-cata \OT1/pcr/m/n/12 integration[]test\OT1/ppl/m/n/12 , aplica mi-gra-rile (\OT1/pcr/m/n/12 prisma
- []
-
-
-Overfull \hbox (2.35599pt too wide) in paragraph at lines 782--783
-\OT1/pcr/m/n/12 migrate deploy\OT1/ppl/m/n/12 ), face seed mi-nim (\OT1/pcr/m/n/12 doctor/admin/ward/bed/patient\OT1/ppl/m/n/12 )
- []
+[60 <./figures/app/login.png> <./figures/app/create-account.png>]
+<figures/app/administrative-dashboard.png, id=2502, 1138.85475pt x 497.4585pt>
+File: figures/app/administrative-dashboard.png Graphic file (type png)
+<use figures/app/administrative-dashboard.png>
+Package pdftex.def Info: figures/app/administrative-dashboard.png  used on inpu
+t line 952.
+(pdftex.def)             Requested size: 189.63438pt x 82.82857pt.
+<figures/app/ward-management.png, id=2503, 1083.44775pt x 366.77025pt>
+File: figures/app/ward-management.png Graphic file (type png)
+<use figures/app/ward-management.png>
+Package pdftex.def Info: figures/app/ward-management.png  used on input line 96
+0.
+(pdftex.def)             Requested size: 246.96884pt x 83.59985pt.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2412,78 +2020,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [61]
-Overfull \hbox (42.98927pt too wide) in paragraph at lines 816--816
-[]|\OT1/pcr/m/n/10.95 doctor.readings.test.ts| 
- []
+<figures/app/doctor-panel.png, id=2516, 347.49825pt x 540.8205pt>
+File: figures/app/doctor-panel.png Graphic file (type png)
+<use figures/app/doctor-panel.png>
+Package pdftex.def Info: figures/app/doctor-panel.png  used on input line 982.
+(pdftex.def)             Requested size: 132.30666pt x 205.91827pt.
 
-
-Overfull \hbox (42.98927pt too wide) in paragraph at lines 816--816
-[]|\OT1/pcr/m/n/10.95 doctor.readings.test.ts| 
- []
-
-
-Overfull \hbox (42.98927pt too wide) in paragraph at lines 816--816
-[]|\OT1/pcr/m/n/10.95 doctor.readings.test.ts| 
- []
-
-
-Underfull \hbox (badness 6608) in paragraph at lines 816--816
-[]|\OT1/ppl/m/n/10.95 Token \OT1/pcr/m/n/10.95 DOCTOR \OT1/ppl/m/n/10.95 va-lid + pa-y-load va-
- []
-
-
-Underfull \hbox (badness 1859) in paragraph at lines 816--816
-\OT1/ppl/m/n/10.95 lid $\OMS/cmsy/m/n/10.95 !$ \OT1/pcr/m/n/10.95 201\OT1/ppl/m/n/10.95 , ape-luri co-recte in ser-vice
- []
-
-
-Overfull \hbox (88.97922pt too wide) in paragraph at lines 816--816
-[]|\OT1/pcr/m/n/10.95 doctor.readings.realdb.test.ts| 
- []
-
-
-Overfull \hbox (88.97922pt too wide) in paragraph at lines 816--816
-[]|\OT1/pcr/m/n/10.95 doctor.readings.realdb.test.ts| 
- []
-
-
-Overfull \hbox (88.97922pt too wide) in paragraph at lines 816--816
-[]|\OT1/pcr/m/n/10.95 doctor.readings.realdb.test.ts| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 816--816
-[]|\OT1/ppl/m/n/10.95 Token \OT1/pcr/m/n/10.95 DOCTOR \OT1/ppl/m/n/10.95 va-lid + pa-y-load de
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 816--816
-\OT1/ppl/m/n/10.95 risc ri-di-cat $\OMS/cmsy/m/n/10.95 !$ \OT1/pcr/m/n/10.95 201\OT1/ppl/m/n/10.95 ; ve-ri-fi-care in
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 816--816
-\OT1/ppl/m/n/10.95 DB: \OT1/pcr/m/n/10.95 EmotionReading \OT1/ppl/m/n/10.95 per-sis-tat +
- []
-
-
-Underfull \hbox (badness 5939) in paragraph at lines 816--816
-\OT1/pcr/m/n/10.95 PatientAlert \OT1/ppl/m/n/10.95 ac-tiv (tip \OT1/pcr/m/n/10.95 DISTRESS\OT1/ppl/m/n/10.95 ,
- []
-
-
-Overfull \hbox (34.16661pt too wide) in paragraph at lines 822--825
-\OT1/ppl/m/n/12 Daca exista \OT1/pcr/m/n/12 DATABASE[]URL \OT1/ppl/m/n/12 in me-diu, tes-tul fo-lo-seste schema izo-lata \OT1/pcr/m/n/12 integration[]test\OT1/ppl/m/n/12 ;
- []
-
-
-Overfull \hbox (185.382pt too wide) in paragraph at lines 835--835
-[]\OT1/pcr/m/n/12 npm test --silent -- --runInBand --runTestsByPath src/__tests__/doctor.readings.test.ts[] 
- []
-
-
-Overfull \hbox (235.78198pt too wide) in paragraph at lines 835--835
-[]\OT1/pcr/m/n/12 npm test --silent -- --runInBand --runTestsByPath src/__tests__/doctor.readings.realdb.test.ts[] 
+Overfull \hbox (57.70818pt too wide) in paragraph at lines 992--993
+[]\OT1/ppl/b/n/12 Patient Si-de-bar\OT1/ppl/m/n/12 : informa[]ii des-pre pa-cie
+nt []i nive-lul de risc cu-rent (Low/Medium/High). 
  []
 
 
@@ -2493,12 +2038,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[62]
-Overfull \hbox (5.44894pt too wide) in paragraph at lines 846--850
-\OT1/ppl/m/n/12 cre-dere asu-pra func-tio-na-li-ta-tii endpoint-ului de rea-dings: au-ten-ti-fi-ca-rea/autorizarea,
- []
+[62 <./figures/app/administrative-dashboard.png> <./figures/app/ward-management
+.png> <./figures/app/doctor-panel.png>]
+<figures/app/monitoring-dashboard.png, id=2526, 1154.51324pt x 541.42274pt>
+File: figures/app/monitoring-dashboard.png Graphic file (type png)
+<use figures/app/monitoring-dashboard.png>
+Package pdftex.def Info: figures/app/monitoring-dashboard.png  used on input li
+ne 1013.
+(pdftex.def)             Requested size: 388.09775pt x 181.9994pt.
 
-) (chapters/chapter8_conclusions.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2506,25 +2054,27 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[63]
+[63 <./figures/app/monitoring-dashboard.png>])
+(chapters/chapter8_conclusions.tex
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[64]
 Capitolul 8.
-) (main.bbl [64
+) (main.bbl [65
 
-] [65
+] [66
 
 ]
 Underfull \hbox (badness 4084) in paragraph at lines 110--116
-[]\OT1/ppl/m/n/12 Marcus Grum.  Lear-ning re-pre-sen-ta-tions by crys-ta-l-li-zed back-
+[]\OT1/ppl/m/n/12 Marcus Grum.  Lear-ning re-pre-sen-ta-tions by crys-ta-l-li-z
+ed back-
  []
 
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[66]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2540,7 +2090,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[68])
+[68]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2548,26 +2098,50 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[69] (main.aux)
+[69])
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[70] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-03-20>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 9DB6078CBE7E54E99A44C5C21C15728E;28026.
+(rerunfilecheck)             Checksum: 673BB4CF1AD9380618CD7C1A97A59E23;28673.
  ) 
 Here is how much of TeX's memory you used:
- 25813 strings out of 467690
- 492517 string characters out of 5415934
- 927380 words of memory out of 5000000
- 54077 multiletter control sequences out of 15000+600000
- 662993 words of font info for 128 fonts, out of 8000000 for 9000
+ 25890 strings out of 467690
+ 494562 string characters out of 5415934
+ 914260 words of memory out of 5000000
+ 54130 multiletter control sequences out of 15000+600000
+ 664017 words of font info for 128 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,18n,104p,2442b,687s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrb8a.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplbi8a.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (76 pages, 5787712 bytes).
+ 90i,18n,104p,2417b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+ex10.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
+s/cm/cmmi12.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/public/
+amsfonts/cm/cmmi6.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmmi8.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmr12.pfb><C:/Users/Adi/AppData/Local/Programs/MiKTeX/f
+onts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/Adi/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Adi/AppData/Local/Program
+s/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Adi/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/Adi/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/Adi/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/Adi/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/Adi/A
+ppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplbi8a.pfb><C:/Users/Adi
+/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/Ad
+i/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/A
+di/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on main.pdf (77 pages, 6268192 bytes).
 PDF statistics:
- 2654 PDF objects out of 2984 (max. 8388607)
- 323 named destinations out of 1000 (max. 500000)
- 1089 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2708 PDF objects out of 2984 (max. 8388607)
+ 350 named destinations out of 1000 (max. 500000)
+ 1127 words of extra memory for PDF output out of 10000 (max. 10000000)
 

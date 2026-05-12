@@ -112,26 +112,41 @@
 \contentsline {subsection}{\numberline {7.7.3}Notificare la schimbarea nivelului de risc}{53}{subsection.7.7.3}%
 \contentsline {subsection}{\numberline {7.7.4}Notificări operaționale (erori și stări de funcționare)}{53}{subsection.7.7.4}%
 \contentsline {section}{\numberline {7.8}Testarea aplicației}{54}{section.7.8}%
-\contentsline {subsection}{\numberline {7.8.1}Rezultatele testarii black-box pentru metoda de inregistrare a citirilor}{54}{subsection.7.8.1}%
-\contentsline {subsection}{\numberline {7.8.2}Testare white-box (varianta compacta)}{59}{subsection.7.8.2}%
-\contentsline {subsubsection}{Metoda analizata}{59}{section*.49}%
-\contentsline {subsubsection}{Complexitate ciclomatrica}{59}{section*.50}%
-\contentsline {subsubsection}{CFG}{59}{section*.51}%
-\contentsline {subsubsection}{Drumuri independente (set minim, CC=8)}{61}{section*.53}%
-\contentsline {section}{\numberline {7.9}Testarea de integrare}{61}{section.7.9}%
-\contentsline {subsection}{\numberline {7.9.1}Scop}{61}{subsection.7.9.1}%
-\contentsline {subsection}{\numberline {7.9.2}Strategie}{61}{subsection.7.9.2}%
-\contentsline {subsection}{\numberline {7.9.3}Scenarii implementate}{62}{subsection.7.9.3}%
-\contentsline {subsection}{\numberline {7.9.4}Mediu si executie}{62}{subsection.7.9.4}%
-\contentsline {subsection}{\numberline {7.9.5}Rezultate obtinute}{63}{subsection.7.9.5}%
-\contentsline {subsection}{\numberline {7.9.6}Concluzie}{63}{subsection.7.9.6}%
-\contentsline {section}{\numberline {7.10}Proiectare}{63}{section.7.10}%
-\contentsline {subsection}{\numberline {7.10.1}Analiza cerințelor}{63}{subsection.7.10.1}%
-\contentsline {subsection}{\numberline {7.10.2}Diagrama cazurilor de utilizare}{63}{subsection.7.10.2}%
-\contentsline {subsection}{\numberline {7.10.3}Diagrame de interacțiune}{63}{subsection.7.10.3}%
-\contentsline {section}{\numberline {7.11}Implementare}{63}{section.7.11}%
-\contentsline {subsection}{\numberline {7.11.1}Server}{63}{subsection.7.11.1}%
-\contentsline {subsection}{\numberline {7.11.2}Client}{63}{subsection.7.11.2}%
-\contentsline {section}{\numberline {7.12}Testare}{63}{section.7.12}%
-\contentsline {chapter}{\numberline {8}Concluzii}{64}{chapter.8}%
-\contentsline {chapter}{Bibliografie}{65}{chapter*.56}%
+\contentsline {subsection}{\numberline {7.8.1}Testare white-box}{54}{subsection.7.8.1}%
+\contentsline {subsubsection}{Metoda analizata}{54}{section*.49}%
+\contentsline {subsubsection}{Complexitate ciclomatrică}{54}{section*.50}%
+\contentsline {subsubsection}{Drumuri independente (set minim teoretic, CC=9)}{55}{section*.53}%
+\contentsline {subsubsection}{Maparea testelor pe drumuri independente (P1--P9)}{55}{section*.55}%
+\contentsline {section}{\numberline {7.9}Testarea de integrare}{55}{section.7.9}%
+\contentsline {subsection}{\numberline {7.9.1}Testare de integrare (Top-down, Depth-first)}{55}{subsection.7.9.1}%
+\contentsline {subsubsection}{Obiectiv și Strategie}{58}{section*.57}%
+\contentsline {subsubsection}{Validarea Fluxului de Date (Input/Output)}{58}{section*.59}%
+\contentsline {subsubsection}{Mediu de Testare și Infrastructură}{59}{section*.61}%
+\contentsline {section}{\numberline {7.10}Manual de utilizare al aplicației}{59}{section.7.10}%
+\contentsline {subsection}{\numberline {7.10.1}Scopul aplicației și roluri}{59}{subsection.7.10.1}%
+\contentsline {subsection}{\numberline {7.10.2}Accesarea aplicației}{60}{subsection.7.10.2}%
+\contentsline {subsection}{\numberline {7.10.3}Autentificare și creare cont}{60}{subsection.7.10.3}%
+\contentsline {subsubsection}{Autentificare (Sign in)}{60}{section*.62}%
+\contentsline {subsubsection}{Creare cont (Create account)}{60}{section*.63}%
+\contentsline {subsection}{\numberline {7.10.4}Modul ADMIN: Administrative Dashboard}{60}{subsection.7.10.4}%
+\contentsline {subsubsection}{Reîmprospătare și deconectare}{61}{section*.65}%
+\contentsline {subsubsection}{Internare pacient (Patient Check-in)}{61}{section*.66}%
+\contentsline {subsubsection}{Pacienți activi (Active Patients) și externare (Check-out)}{61}{section*.67}%
+\contentsline {subsubsection}{Management secții/paturi (Ward Management)}{61}{section*.68}%
+\contentsline {subsection}{\numberline {7.10.5}Modul DOCTOR: Doctor Panel și Monitoring Dashboard}{61}{subsection.7.10.5}%
+\contentsline {subsubsection}{Lista pacienților și preluare (Take patient)}{62}{section*.70}%
+\contentsline {subsubsection}{Tabloul de monitorizare (Monitoring Dashboard)}{62}{section*.72}%
+\contentsline {subsubsection}{Live Monitor (vizualizare istoric și spike-uri)}{63}{section*.73}%
+\contentsline {subsubsection}{Insights (alerte și interpretare clinică)}{63}{section*.74}%
+\contentsline {subsubsection}{Notificări de risc}{63}{section*.75}%
+\contentsline {subsection}{\numberline {7.10.6}Confidențialitate și bune practici}{64}{subsection.7.10.6}%
+\contentsline {section}{\numberline {7.11}Proiectare}{64}{section.7.11}%
+\contentsline {subsection}{\numberline {7.11.1}Analiza cerințelor}{64}{subsection.7.11.1}%
+\contentsline {subsection}{\numberline {7.11.2}Diagrama cazurilor de utilizare}{64}{subsection.7.11.2}%
+\contentsline {subsection}{\numberline {7.11.3}Diagrame de interacțiune}{64}{subsection.7.11.3}%
+\contentsline {section}{\numberline {7.12}Implementare}{64}{section.7.12}%
+\contentsline {subsection}{\numberline {7.12.1}Server}{64}{subsection.7.12.1}%
+\contentsline {subsection}{\numberline {7.12.2}Client}{64}{subsection.7.12.2}%
+\contentsline {section}{\numberline {7.13}Testare}{64}{section.7.13}%
+\contentsline {chapter}{\numberline {8}Concluzii}{65}{chapter.8}%
+\contentsline {chapter}{Bibliografie}{66}{chapter*.77}%

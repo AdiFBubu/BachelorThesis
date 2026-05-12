@@ -1,0 +1,4 @@
+pot sa pun modelul ala cu 88% pe 10 folds (untitled8) - dar sa mentionez arhitectura + transformarile pt augumentare poze
+pot sa mentionez si un model aprox ann echivalent (untited9), unde nu am augumentat pozele si am obtinut cam 80% (dar trb lasat sa ruleze pana la capat)
+
+!! ATENTIE -> la ambele e ideea ca antrenarea a avut loc strict pe fete crop-uite

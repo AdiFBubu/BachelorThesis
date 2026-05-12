@@ -1,0 +1,198 @@
+acuratete pt fiecare fold luat ca test:
+
+fold1: classification rate: 58.8235% (20/34)
+fold2: classification rate: 47.0588% (16/34)
+fold3: classification rate: 51.5152% (17/33)
+fold4: classification rate: 45.4545% (15/33)
+fold5: classification rate: 41.9355% (13/31)
+fold6: classification rate: 53.3333% (16/30)
+fold7: classification rate: 50% (15/30)
+fold8: classification rate: 48.2759% (14/29)
+fold9: classification rate: 35.7143% (10/28)
+fold10: classification rate: 48.1481% (13/27)
+
+pt fold 1:
+
+clasa 1 (ff aproape ca probab de clasa 3 care e maximul): 0+0+0+0
+clasa 2: 0+0+
+clasa 3: 1+1+1+1+1+1
+clasa 4: 0+0+0+
+clasa 5 (cu probab ff mare): 1+1+1+1+1+1+1
+clasa 6: 0+0+0
+clasa 7 (cu probab ff mari si aici): 1+1+1+1+0+1+1+1
+
+
+dimensiuni:
+
+DefaultOnOffFilter 1:  [48, 48, 2, 10]
+Process.DefaultOnOffFilter {
+        center_dev: 0.100000
+        cutoff: 0.000000
+        filter_size: 7
+        surround_dev: 1.000000
+}
+
+FeatureMaps 2:  [48, 48, 2, 10]
+Process.FeatureMaps {
+        cell_h: 128
+        cell_w: 128
+}
+
+MaxScaling 3:  [48, 48, 2, 10]
+Process.MaxScaling {
+}
+
+LatencyCoding 4:  [48, 48, 2, 10]
+InputConverter.LatencyCoding {
+}
+
+DistributionAnalysis 5:  [48, 48, 2, 10]
+Process.DistributionAnalysis {
+}
+
+Convolution3D 6: conv1 [44, 44, 64, 8]
+Layer.Convolution3D (conv1) {
+        annealing: 0.950000
+        draw: 0
+        draw_feature_maps: 0
+        epoch: 800
+        filter_conv_depth: 3
+        filter_height: 5
+        filter_number: 64
+        filter_width: 5
+        inhibition: 1
+        log_spiking_neuron: 0
+        lr_th: 0.090000
+        min_th: 1.000000
+        padding_k: 0
+        padding_x: 0
+        padding_y: 0
+        sampler: ISampler3D.Sampler3DLandmark {
+        }
+        save_random_start: 0
+        save_weights: 0
+        stdp: STDP.Biological {
+                am: 0.009000
+                ap: 0.009000
+                tau: 0.100000
+        }
+        stride_k: 1
+        stride_x: 1
+        stride_y: 1
+        t_obj: 0.800000
+        th: Gaussian(mean: 4.000000, dev: 0.100000) [64]
+        w: Uniform(min: 0.000000, max: 1.000000) [5, 5, 2, 64, 3]
+        wta_infer: 0
+}
+
+DistributionAnalysis 7:  [44, 44, 64, 8]
+Process.DistributionAnalysis {
+}
+
+ReorderSpikes 8:  [44, 44, 64, 8]
+Process.ReorderSpikes {
+        sigma: 0.100000
+        t_obj: 0.800000
+}
+
+DistributionAnalysis 9:  [44, 44, 64, 8]
+Process.DistributionAnalysis {
+}
+
+
+Output 1 of conv1 [44, 44, 64, 8]: CK_Plus_1778621550_3D_5x5x3_tp2_sp4_fold1_epochs800_seed42-conv1
+OutputConverter.TimeObjectiveOutput {
+        method: 1
+        t_obj: 0.800000
+}
+
+Output 1, Postprocess 1 [44, 44, 64, 8]:
+Process.FeatureMaps {
+        cell_h: 128
+        cell_w: 128
+}
+
+Output 1, Postprocess 2 [4, 4, 64, 8]:
+Process.SumPooling {
+}
+
+Output 1, Postprocess 3 [4, 4, 64, 2]:
+Process.TemporalPooling {
+}
+
+Output 1, Postprocess 4 [4, 4, 64, 2]:
+Process.FeatureScaling {
+}
+
+Output 1, Analysis: 1
+Analysis.Activity {
+}
+
+Output 1, Analysis: 2
+Analysis.Coherence {
+}
+
+Output 1, Analysis: 3
+Analysis.Svm {
+        c: 1.000000
+}
+
+Process Process.DistributionAnalysis
+
+distributie pe folds:
+
+Dataset loaded: 309 sequences across 10 folds (using seed: 42)
+Emotion distribution per fold:
+  Fold     Anger  Contempt   Disgust      Fear Happiness   Sadness  Surprise   Total
+     1         5         2         6         3         7         3         8      34
+     2         5         2         6         3         7         3         8      34
+     3         5         1         6         3         7         3         8      33
+     4         5         1         6         3         7         3         8      33
+     5         5         1         5         2         7         3         8      31
+     6         4         1         5         2         7         3         8      30
+     7         4         1         5         2         7         3         8      30
+     8         4         1         5         2         7         3         7      29
+     9         4         1         5         2         7         2         7      28
+    10         4         1         5         2         6         2         7      27
+ Total        45        12        54        24        69        28        77     309
+
+
+
+
+fold 1 - test:
+inainte de conv (dupa latency encoding):
+
+==========================================================
+   GLOBAL VALUE DISTRIBUTION ANALYSIS
+   Total elements processed: 6335178
+==========================================================
+   [0.0 - 0.1] :   0.06% (3592 px)
+   [0.1 - 0.2] :   0.11% (7262 px)
+   [0.2 - 0.3] :   0.22% (13830 px)
+   [0.3 - 0.4] :   0.42% (26721 px)
+   [0.4 - 0.5] :   0.85% (54105 px)
+   [0.5 - 0.6] :   1.71% (108152 px)
+   [0.6 - 0.7] :   3.37% (213552 px)
+   [0.7 - 0.8] :   6.57% (416255 px)
+   [0.8 - 0.9] :  14.01% (887273 px)
+   [0.9 - 1.0] :  72.68% (4604436 px)
+==========================================================
+
+
+dupa conv - distributie spikes:
+
+==========================================================
+   GLOBAL VALUE DISTRIBUTION ANALYSIS
+   Total elements processed: 272588800
+==========================================================
+   [0.0 - 0.1] :   0.00% (0 px)
+   [0.1 - 0.2] :   0.00% (0 px)
+   [0.2 - 0.3] :   0.00% (0 px)
+   [0.3 - 0.4] :   0.00% (309 px)
+   [0.4 - 0.5] :   0.01% (21251 px)
+   [0.5 - 0.6] :   0.14% (386077 px)
+   [0.6 - 0.7] :   1.24% (3377199 px)
+   [0.7 - 0.8] :   6.34% (17277190 px)
+   [0.8 - 0.9] :  22.49% (61312759 px)
+   [0.9 - 1.0] :  69.78% (190214015 px)
+==========================================================

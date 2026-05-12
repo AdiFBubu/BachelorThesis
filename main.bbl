@@ -208,6 +208,12 @@ E.~Mansouri-Benssassi and J.~Ye.
   emotion recognition using bio-inspired spiking neural networks.
 \newblock {\em Soft Computing}, 25:1717--1730, 2021.
 
+\bibitem[McC76]{mccabe1976}
+T.~J. McCabe.
+\newblock A complexity measure.
+\newblock {\em IEEE Transactions on Software Engineering}, SE-2(4):308--320,
+  1976.
+
 \bibitem[QBG11]{querlioz2011simulation}
 Damien Querlioz, Olivier Bichler, and Christian Gamrat.
 \newblock Simulation of a memristor-based spiking neural network immune to
