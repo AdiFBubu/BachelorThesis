@@ -1,0 +1,63 @@
+\chapter{Motivația și formularea problemei}
+
+\section{Contextul general și relevanța problemei}
+
+Emoțiile reprezintă un canal fundamental de comunicare umană, dinamica lor fiind intens studiată în cadrul psihologiei sociale și a comunicării. Cercetările de pionierat realizate de Mehrabian et al. \cite{mehrabian1967decoding, mehrabian1967inference} demonstrează că, în contextul transmiterii mesajelor afective (atitudini și sentimente), în special atunci când apar neconcordanțe între canalele de comunicare, informația este decodificată asimetric de către interlocutor. Mai exact, semnificația totală a mesajului este determinată în proporție 
+de $55\%$ de expresiile faciale, $38\%$ de indicii vocali (tonul, ritmul și volumul vocii) și doar $7\%$ de cuvintele propriu-zise \cite{mehrabian1971silent}. Astfel, indicii nonverbali cumulează $93\%$ din impactul total în evaluarea atitudinii emoționale. Cu toate acestea, sistemele informatice convenționale tratează interacțiunea cu utilizatorul aproape exclusiv prin conținut verbal sau textual, ignorând această dimensiune esențială a comunicării.
+
+Deficitul devine critic în contextele în care persoana nu poate sau nu dorește să verbalizeze starea afectivă:
+\begin{itemize}
+	\item Pacienții cu boli neurodegenerative (demență, Alzheimer);
+	\item Persoanele cu tulburări din spectrul autist;
+	\item Pacienții sedați sau postoperator;
+	\item Copiii mici sau persoanele care nu vorbesc limba personalului medical.
+\end{itemize}
+
+În toate aceste situații, un sistem capabil să detecteze automat și în timp real stările emoționale exclusiv pe baza expresiei faciale ar constitui un instrument clinic de valoare considerabilă, permițând personalului medical să reacționeze prompt la semnale de disconfort, durere sau anxietate care altfel ar trece neobservate.
+
+Dincolo de contextul clinic, aplicațiile recunoașterii automate a emoțiilor faciale (\textit{Facial Emotion Recognition} - FER) acoperă un spectru larg: monitorizarea atenției șoferilor, sisteme de tutoriat inteligent, analize de marketing și interfețe om-calculator adaptive pentru realitate virtuală.
+
+\section{Formularea problemei}
+
+Problema abordată în prezenta lucrare poate fi enunțată formal astfel: dat fiind un flux video al feței unui subiect uman, să se construiască un sistem automat care mapează fiecare secvență de cadre la una dintre cele șapte categorii emoționale fundamentale definite în modelul extins al lui Ekman \cite{ekman1986new, ekman1992argument}: \textit{Anger, Contempt, Disgust, Fear, Happiness, Sadness} și \textit{Surprise}.
+
+\begin{description}
+	\item[Intrarea sistemului:] O secvență de cadre video (în cazul de față, câte $10$ cadre extrase din setul de date CK+), care surprind evoluția temporală a expresiei faciale de la starea neutră până la apexul emoției. 
+	\item[Ieșirea sistemului:] Un vector de probabilități al emoțiilor. În cadrul aplicației \textbf{Neuro-Guardian}, aceste date sunt agregate temporal pentru calculul scorurilor de \textit{suferință} și \textit{durere}.
+\end{description}
+
+Procesul intern investigat în cazul rețelelor neuronale bazate pe spike-uri este un pipeline în trei etape, ilustrat schematic în Figura \ref{fig:pipeline_general}:
+\begin{enumerate}
+	\item \textbf{Preprocesarea adaptivă:} eșantionarea centrată pe repere faciale;
+	\item \textbf{Codificarea neurală:} Conversia în trenuri de impulsuri prin \textit{latency coding} și filtrare On/Off;
+	\item \textbf{Procesarea SNN:} Extragerea de trăsături prin straturi convoluționale spiking (CSNN) antrenate prin STDP și clasificarea finală.
+\end{enumerate}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figures/pipeline.drawio.png} 
+	\caption{Schema bloc a sistemului propus: de la fluxul video la clasificarea emoțiilor prin SNN.}
+	\label{fig:pipeline_general}
+\end{figure}
+
+\section{Dificultatea recunoașterii emoțiilor}
+
+Spre deosebire de recunoașterea obiectelor statice, FER se confruntă cu provocări unice:
+
+\begin{itemize}[noitemsep]
+	\item \textbf{Variabilitatea intra-clasă ridicată:} Același individ poate exprima fericirea în moduri vizual diferite (zâmbet larg vs. ridicarea subtilă a pomeților).
+	\item \textbf{Similitudinea inter-clasă:} Perechi precum \textit{Fear} și \textit{Surprise} partajează elemente vizuale comune (ochi larg deschiși), diferențierea fiind posibilă doar prin dinamica temporală fină.
+	\item \textbf{Dezechilibrul de clase:} Seturile de date academice (precum CK+) prezintă adesea o distribuție neuniformă (ex: 77 secvențe de \textit{Surprise} vs. 12 de \textit{Contempt}), ceea ce îngreunează antrenarea nesupervizată prin STDP.
+	\item \textbf{Eficiența computațională:} Necesitatea procesării în timp real pentru aplicația Neuro-Guardian impune o latență redusă, limitând utilizarea modelelor \textit{deep learning} extrem de masive.
+\end{itemize}
+
+Deși arhitecturile clasice (CNN-LSTM) ating acuratețe ridicată (de $88.37\%$ în cadrul experimentelor realizate), ele implică un cost energetic substanțial prin înmulțiri matriciale continue. 
+
+Rețelele neuronale cu impulsuri adresează această ineficiență prin:
+\begin{enumerate}[noitemsep]
+	\item \textbf{Activare bazată pe evenimente:} Neuronii consumă energie doar atunci când generează un \textit{spike}. În perioadele de imobilitate facială, activitatea rețelei este minimă.
+	\item \textbf{Filtrarea naturală a zgomotului:} Prin filtrarea On/Off, pixelii statici din fundal nu generează impulsuri, concentrând calculul exclusiv pe zonele cu dinamică relevantă.
+	\item \textbf{Codificarea temporală (\textit{Latency Coding}):} Trăsăturile proeminente produc impulsuri timpurii, creând o ierarhie temporală pe care regula STDP o exploatează pentru a învăța trăsături spațio-temporale fără a avea nevoie de etichete în faza de antrenare.
+\end{enumerate}
+
+Argumentul central al lucrării este că un pipeline adaptiv care izolează \textit{Regiunea de Interes} (ROI) permite unui CSNN să extragă trăsături suficient de puternice pentru a depăși metodele liniare clasice, oferind o alternativă eficientă energetic pentru sistemele de \textit{Edge AI} clinice.

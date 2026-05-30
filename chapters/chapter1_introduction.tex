@@ -1,7 +1,45 @@
 \chapter*{Introducere}
 \addcontentsline{toc}{chapter}{Introducere}  
 
-\label{intro}
+Recunoașterea automată a emoțiilor faciale reprezintă una dintre cele mai active direcții de cercetare la intersecția dintre inteligența artificială, neuroștiință și viziunea computerizată. Aplicațiile sale acoperă un spectru larg, de la sisteme de asistență pentru persoane cu dizabilități de comunicare și detectarea stărilor afective în contexte clinice, până la interfețe om-calculator adaptive și sisteme de supraveghere a siguranței la volan.
 
-\par Introducere: obiectivele lucrării și descrierea succintă a capitolelor, prezentarea temei, prezentarea contribuției proprii, respectiv a rezultatelor originale și menționarea (dacă este cazul) a sesiunii de comunicări unde a fost prezentată sau a revistei unde a fost publicată.
+Odată cu creșterea exponențială a volumelor de date vizuale și cu necesitatea procesării în timp real pe dispozitive cu resurse limitate, limitele energetice ale arhitecturilor clasice de tip ANN devin din ce în ce mai vizibile, deschizând calea pentru paradigme computaționale alternative.
 
+Rețelele neuronale cu impulsuri (\textit{Spiking Neural Networks} – SNN) constituie a treia generație a modelelor neuronale artificiale și se aseamănă mult mai fidel cu mecanismele biologice ale creierului uman. În aceste modele, informația este transmisă prin trenuri de impulsuri discrete, iar neuronii se activează rar, doar atunci când potențialul acumulat depășește un prag critic. Această caracteristică de activare rară (\textit{sparse activation}) reduce drastic numărul operațiilor de calcul față de rețelele clasice și face SNN-urile ideal potrivite pentru implementare pe hardware neuromorfic dedicat, cum ar fi Intel Loihi sau IBM NorthPole, unde consumul energetic poate fi redus cu până la 75\% față de echivalentele ANN \cite{wang2022}.
+
+\section*{Obiectivele lucrării}
+Prezenta lucrare de licență are ca obiectiv central investigarea potențialului rețelelor neuronale convoluționale de tip spiking (CSNN) în sarcina recunoașterii emoțiilor faciale, cu accent pe impactul preprocesării adaptive asupra calității trăsăturilor extrase. Concret, obiectivele urmărite sunt:
+
+\begin{itemize}
+	\item \textbf{Implementarea unui simulator CSNN 3D} cu învățare nesupervizată prin regula STDP (\textit{Spike Timing-Dependent Plasticity}), capabil să proceseze secvențe video ale expresiilor faciale.
+	\item \textbf{Proiectarea unui pipeline de preprocesare adaptivă} care permite eșantionarea locală, în jurul celor 68 de repere faciale, facilitând analiza dinamică a musculaturii feței pe parcursul cadrelor videoclipului.
+	\item \textbf{Evaluarea comparativă} a modelului SNN propus față de un clasificator SVM pe pixeli bruți, un ANN echivalent cu \textit{backpropagation} supervizat și o arhitectură hibridă CNN-LSTM.
+	\item \textbf{Dezvoltarea aplicației Neuro-Guardian}, un sistem clinic de monitorizare în timp real pentru urmărirea stărilor emoționale ale pacienților internați.
+\end{itemize}
+
+\section*{Contribuții proprii}
+Contribuțiile originale ale prezentei lucrări includ: 
+\begin{enumerate}
+	\item Proiectarea unui pipeline de preprocesare adaptivă bazat pe repere faciale, cu trei strategii de eșantionare (aleatorie, \textit{bounding-box} și \textit{landmark-centrată});
+	\item Studiul comparativ sistematic între patru paradigme de clasificare pe același set de date;
+	\item Proiectarea și implementarea completă a aplicației clinice \textbf{Neuro-Guardian}, incluzând canalul de inferență în timp real prin WebSocket–TCP și baza de date time-series InfluxDB.
+\end{enumerate}
+
+\chapter*{Structura lucrării}
+\addcontentsline{toc}{chapter}{Structura lucrării}
+
+Lucrarea este organizată în opt capitole, după cum urmează:
+
+\begin{description}
+	\item[Capitolul 1 – Formularea problemei] prezintă grupul țintă vizat de aplicație și datele de intrare-ieșire.
+	 
+	\item[Încadrarea în literatura de specialitate] trece în revistă cele mai relevante rezultate: capacitatea rețelelor bazate pe spike-uri neuronale de a integra date multimodale, de a utiliza dinamica mișcărilor faciale pentru a detecta cu succes persoane deghizate, robustețea și puterea de generalizare când antrenarea și testarea au loc pe seturi diferite de date, respectiv consumul redus de energie.
+	
+	\item[Capitolul 2 – Fundamente teoretice] prezintă baza matematică: tranziția de la ANN la SNN, modelele de neuron (Hodgkin-Huxley, Integrate-and-Fire), schemele de codificare (Rate, Latency, Rank Order) și mecanismele de plasticitate sinaptică (STDP).
+	
+	\item[Capitolul 3 – Experimente și analiza rezultatelor] constituie nucleul experimental. Include detaliile setului de date CK+, metodologia 10-fold cross-validation și rezultatele comparative (SNN: 48.02\% vs. CNN-LSTM: 88.37\%).
+	
+	\item[Capitolul 4 - Neuro-Guardian] prezintă aplicația construită.
+	
+	\item[Capitolul 5 – Concluzii] sintetizează contribuțiile originale și direcțiile de cercetare viitoare.
+\end{description}

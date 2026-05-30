@@ -71,6 +71,16 @@ Mireille El-Assal.
   Spiking Neural Networks}.
 \newblock Doctoral dissertation, Universit{\'e} de Lille, 2024.
 
+\bibitem[EF86]{ekman1986new}
+Paul Ekman and Wallace~V. Friesen.
+\newblock A new pan-cultural facial expression of emotion.
+\newblock {\em Motivation and Emotion}, 10(2):159--168, 1986.
+
+\bibitem[Ekm92]{ekman1992argument}
+Paul Ekman.
+\newblock An argument for basic emotions.
+\newblock {\em Cognition \& Emotion}, 6(3-4):169--200, 1992.
+
 \bibitem[Fal19]{falez2019}
 Pierre Falez.
 \newblock {\em Improving Spiking Neural Networks Trained with Spike Timing
@@ -136,11 +146,22 @@ Berthold~KP Horn and Brian~G Schunck.
 \newblock Determining optical flow.
 \newblock {\em Artificial intelligence}, 17(1-3):185--203, 1981.
 
+\bibitem[HS97]{hochreiter1997}
+Sepp Hochreiter and J{\"u}rgen Schmidhuber.
+\newblock Long short-term memory.
+\newblock {\em Neural Computation}, 9(8):1735--1780, November 1997.
+
 \bibitem[HZ23]{halvagal2023combination}
 Manu~Srinath Halvagal and Friedemann Zenke.
 \newblock The combination of hebbian and predictive plasticity learns invariant
   object representations in deep sensory networks.
 \newblock {\em bioRxiv}, pages 2023--03, 2023.
+
+\bibitem[HZRS16]{he2016}
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
+\newblock Deep residual learning for image recognition.
+\newblock In {\em Proceedings of the IEEE Conference on Computer Vision and
+  Pattern Recognition (CVPR)}, pages 770--778. IEEE, June 2016.
 
 \bibitem[Izh04]{izhikevich2004}
 Eugene~M Izhikevich.
@@ -214,6 +235,22 @@ T.~J. McCabe.
 \newblock {\em IEEE Transactions on Software Engineering}, SE-2(4):308--320,
   1976.
 
+\bibitem[Meh71]{mehrabian1971silent}
+Albert Mehrabian.
+\newblock {\em Silent Messages}.
+\newblock Wadsworth, Belmont, CA, 1971.
+
+\bibitem[MF67]{mehrabian1967inference}
+Albert Mehrabian and Susan~R. Ferris.
+\newblock Inference of attitudes from nonverbal communication in two channels.
+\newblock {\em Journal of Consulting Psychology}, 31(3):248--252, 1967.
+
+\bibitem[MW67]{mehrabian1967decoding}
+Albert Mehrabian and Morton Wiener.
+\newblock Decoding of inconsistent communications.
+\newblock {\em Journal of Personality and Social Psychology}, 6(1):109--114,
+  1967.
+
 \bibitem[QBG11]{querlioz2011simulation}
 Damien Querlioz, Olivier Bichler, and Christian Gamrat.
 \newblock Simulation of a memristor-based spiking neural network immune to
@@ -247,6 +284,12 @@ Christos~health Sagonas, Georgios Tzimiropoulos, Stefanos Zafeiriou, and Maja
 \newblock In {\em Proceedings of the IEEE international conference on computer
   vision workshops}, pages 397--403, 2013.
 
+\bibitem[SZ15]{simonyan2015very}
+Karen Simonyan and Andrew Zisserman.
+\newblock Very deep convolutional networks for large-scale image recognition.
+\newblock In {\em International Conference on Learning Representations (ICLR)},
+  2015.
+
 \bibitem[TCKPS20]{tan2020}
 C.~Tan, G.~Ceballos, N.~Kasabov, and N.~Puthanmadam~Subramaniyam.
 \newblock Fusionsense: Emotion classification using feature fusion of
@@ -263,6 +306,12 @@ Amirhossein Tavanaei, Masoud Ghodrati, Saeed~Reza Kheradpisheh, Timoth{\'e}e
   Masquelier, and Anthony Maida.
 \newblock Deep learning in spiking neural networks.
 \newblock {\em Neural Networks}, 111:47--63, 2019.
+
+\bibitem[Vap95]{vapnik1995}
+Vladimir~N. Vapnik.
+\newblock {\em The Nature of Statistical Learning Theory}.
+\newblock Springer Tracks in Natural Computing. Springer-Verlag, New York, NY,
+  USA, 1995.
 
 \bibitem[VJ01]{viola2001robust}
 Paul Viola and Michael Jones.

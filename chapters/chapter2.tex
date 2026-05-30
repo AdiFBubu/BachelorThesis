@@ -1,5 +1,11 @@
 \chapter{Fundamente teoretice despre inteligența artificială și rețele neuromorfice}
-\section{Învățarea automată și rețele neuronale artificiale (ANN)}
+\label{ch:fundamente_teoretice}
+
+\section{Modele neuronale artificiale de a doua generație}
+
+Prima parte a capitolului este dedicată analizei fundamentelor teoretice care stau la baza modelelor computaționale de a doua generație utilizate în prezenta lucrare. Se va realiza o trecere în revistă a evoluției de la algoritmii clasici de învățare automată până la arhitecturile complexe de învățare profundă, evidențiind principiile lor de funcționare, avantajele structurale și limitările matematice care au condus la necesitatea dezvoltării rețelelor neuromorfice.
+
+\subsection{Învățarea automată și rețele neuronale artificiale (ANN)}
 
 Învățarea automată (\textit{Machine Learning}) constituie pilonul central al inteligenței artificiale contemporane, oferind sistemelor computaționale capacitatea de a identifica tipare complexe în seturi de date fără a necesita o programare algoritmică explicită pentru fiecare regulă de decizie. În centrul acestei paradigme se află rețelele neuronale artificiale (ANN), arhitecturi proiectate ca o abstractizare a rețelelor neuronale biologice, însă simplificate structural pentru a fi compatibile cu hardware-ul convențional.
 
@@ -7,7 +13,7 @@ Funcționarea unei rețele neuronale standard se bazează pe transmiterea inform
 
 \begin{equation}
 \label{eq:suma_ponderata}
-z = \sum_{i=1}^{n} w_i x_i + b
+z = \sum_{i=1}^{n} w_i x_i + b,
 \end{equation}
 
 unde $x_i$ reprezintă intrările sistemului, $w_i$ sunt ponderile asociate, iar $b$ este termenul de \textit{bias}. În a doua etapă, pentru a introduce neliniaritatea necesară modelării unor fenomene complexe, rezultatul $z$ este procesat de o funcție de activare $\sigma$. Valoarea finală de ieșire a neuronului, $y$, este definită de ecuația \eqref{eq:activare}, procesul fiind ilustrat schematic în Figura \ref{fig:neuron_artificial}:
@@ -19,12 +25,103 @@ y = \sigma(z) = \sigma \left( \sum_{i=1}^{n} w_i x_i + b \right)
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{images/neuron_artificial.jpg} 
+    \includegraphics[width=0.6\textwidth]{images/neuron_artificial.jpg} 
     \caption{Reprezentarea schematică a unui neuron artificial: procesarea intrărilor prin ponderare și aplicarea funcției de activare.}
     \label{fig:neuron_artificial}
 \end{figure}
 
 Deși aceste rețele, integrate în ceea ce comunitatea științifică numește „a doua generație” de modele neuronale, au demonstrat performanțe remarcabile, ele prezintă limitări inerente. Utilizarea valorilor numerice continue, conform modelului descris în ecuația \eqref{eq:activare}, forțează sistemul să realizeze calcule intensive în mod constant. Acest aspect conduce la un cost computațional ridicat și la un consum energetic substanțial, care rămâne invariant indiferent de relevanța sau densitatea informației procesate.
+
+\subsection{Rețele Neuronale Convoluționale (CNN)}
+Rețelele neuronale convoluționale (\textit{Convolutional Neural Networks} -- CNN) reprezintă o categorie specializată de arhitecturi ANN, proiectate explicit pentru procesarea datelor cu structură spațială, cum ar fi imaginile sau secvențele video. Spre deosebire de rețelele complet conectate (\textit{fully connected}), care tratează fiecare pixel ca o intrare independentă, CNN-urile exploatează corelațiile locale dintre pixelii vecini prin intermediul operației de convoluție, reducând drastic numărul de parametri și conferind invarianță la translație.
+
+Operația de convoluție constituie nucleul funcțional al acestor arhitecturi. Un filtru (\textit{kernel}) de dimensiune redusă $k \times k$ este aplicat glisant pe întreaga suprafață a imaginii de intrare, calculând la fiecare poziție $(x,y)$ produsul scalar dintre valorile locale și ponderile filtrului, după cum reiese din ecuația \ref{eq:convolutie}:
+\begin{equation}
+	\label{eq:convolutie}
+	\text{FeatureMap}(x, y) = \sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I(x+i, y+j) \cdot W(i, j) + b
+\end{equation}
+unde $I$ reprezintă imaginea de intrare, $W$ este matricea de ponderi a filtrului, iar $b$ este termenul de \textit{bias}. Rezultatul acestei operații este o \textbf{hartă de trăsături} (\textit{feature map}), care codifică prezența unui anumit tipar vizual (de exemplu, o margine orizontală sau un colț) în diverse regiuni ale imaginii.
+
+O arhitectură CNN tipică este compusă din mai multe tipuri de straturi:
+\begin{itemize}[noitemsep]
+	\item \textbf{Straturi convoluționale}: Aplică un set de filtre antrenabile, generând hărți de trăsături pentru tipare de complexitate crescândă pe măsura adâncirii rețelei.
+	\item \textbf{Straturi de pooling}: Reduc rezoluția spațială a hărților de trăsături prin agregarea valorilor dintr-o vecinătate locală (ex. \textit{MaxPooling}, \textit{AvgPooling}), conferind robustețe la mici variații de poziție.
+	\item \textbf{Straturi de activare}: Introduc neliniaritatea necesară, funcția \textit{ReLU} (\textit{Rectified Linear Unit}), $\sigma(z) = \max(0, z)$, fiind cea mai frecvent utilizată în arhitecturile moderne datorită eficienței sale computaționale și comportamentului stabil la antrenare.
+	\item \textbf{Straturi complet conectate (Fully Connected)}: Situate la finalul rețelei, realizează maparea vectorului de trăsături extrase către spațiul claselor de ieșire.
+\end{itemize}
+
+Antrenarea CNN-urilor se realizează prin algoritmul de \textit{backpropagation}, care propagă eroarea de la stratul de ieșire către straturile anterioare și actualizează ponderile filtrelor prin metoda gradientului descendent. Gradul de expresivitate al acestor rețele crește exponențial cu adâncimea lor, arhitecturi profunde precum ResNet \cite{he2016} sau VGG \cite{simonyan2015very} reușind să extragă trăsături semantice de nivel înalt.
+
+ResNet18, utilizat ca extractor de trăsături spațiale în arhitectura hibridă CNN-LSTM din cadrul acestei lucrări, introduce mecanismul \textit{residual connections} (conexiuni reziduale), prin care ieșirea unui bloc de straturi este adunată cu intrarea sa originală în ecuația \ref{eq:resnet}:
+\begin{equation}
+	\label{eq:resnet}
+	\mathbf{y} = \mathcal{F}(\mathbf{x}, \{W_i\}) + \mathbf{x}
+\end{equation}
+Această abordare rezolvă problema dispariției gradientului (\textit{vanishing gradient}) în rețelele adânci, permițând antrenarea eficientă a arhitecturilor cu zeci sau sute de straturi.
+
+\subsection{Rețele Recurente și LSTM}
+Rețelele neuronale complet conectate și CNN-urile tratează fiecare intrare ca independentă, ignorând orice dependență temporală sau secvențială. Pentru sarcinile în care ordinea elementelor este esențială -- recunoașterea vorbirii, analiza seriilor de timp sau recunoașterea expresiilor faciale dintr-o secvență video -- această limitare devine critică.
+
+\textbf{Rețelele neuronale recurente} (\textit{Recurrent Neural Networks} -- RNN) adresează această problemă prin introducerea unei bucle de feedback: ieșirea neuronului la pasul temporal $t$ este transmisă ca intrare suplimentară la pasul $t+1$, permițând rețelei să mențină o \textbf{stare ascunsă} (\textit{hidden state}) $\mathbf{h}_t$ care codifică informația acumulată din pașii anteriori. după cum se poate observa în ecuația \ref{eq:rnn}:
+\begin{equation}
+	\label{eq:rnn}
+	\mathbf{h}_t = \sigma\left(W_h \mathbf{h}_{t-1} + W_x \mathbf{x}_t + b\right)
+\end{equation}
+
+Cu toate acestea, RNN-urile clasice suferă de problema dispariției sau explozia gradientului în secvențe lungi: gradientul propagat înapoi prin multe etape temporale tinde fie să se anuleze (împiedicând învățarea dependențelor pe termen lung), fie să crească exponențial (destabilizând antrenamentul).
+
+\textbf{Rețelele LSTM} (\textit{Long Short-Term Memory}), introduse de Hochreiter și Schmidhuber \cite{hochreiter1997}, rezolvă această problemă printr-un mecanism explicit de \textbf{memorie gestionată prin porți} (\textit{gated memory}). Unitatea LSTM menține două stări: starea celulei $\mathbf{c}_t$ (memoria pe termen lung) și starea ascunsă $\mathbf{h}_t$ (memoria pe termen scurt), actualizate conform componentelor descrise în Tabelul~\ref{tab:lstm_components}.
+
+\begin{table}[htbp]
+	\centering
+	\caption{Componentele structurale ale unei unități LSTM și ecuațiile lor matematice.}
+	\label{tab:lstm_components}
+	\small % reduce ușor dimensiunea textului pentru a se asigura că ecuațiile lungi încap perfect
+	\begin{tabular}{@{} l p{6.5cm} l @{}}
+		\hline
+		\textbf{Componentă} & \textbf{Rol funcțional} & \textbf{Ecuație de calcul} \\ \hline
+		\rule{0pt}{3ex}Poarta de uitare & Decide ce informație din starea anterioară a celulei trebuie eliminată. & $\displaystyle \mathbf{f}_t = \sigma\left(W_f \cdot [\mathbf{h}_{t-1}, \mathbf{x}_t] + b_f\right)$ \\[1.5ex]
+		Poarta de intrare & Determină ce proporție din informația nouă va fi transmisă mai departe. & $\displaystyle \mathbf{i}_t = \sigma\left(W_i \cdot [\mathbf{h}_{t-1}, \mathbf{x}_t] + b_i\right)$ \\[1.5ex]
+		Starea candidată & Creează un vector cu noile valori potențiale ce pot fi adăugate în starea celulei. & $\displaystyle \tilde{\mathbf{c}}_t = \tanh\left(W_c \cdot [\mathbf{h}_{t-1}, \mathbf{x}_t] + b_c\right)$ \\[1.5ex]
+		Poarta de ieșire & Determină ce parte din starea celulei este propagată ca ieșire curentă. & $\displaystyle \mathbf{o}_t = \sigma\left(W_o \cdot [\mathbf{h}_{t-1}, \mathbf{x}_t] + b_o\right)$ \\[1ex] \hline
+	\end{tabular}
+\end{table}
+
+Actualizarea stărilor se realizează conform relațiilor \ref{eq:lstm_c_u_update}:
+\begin{equation}
+	\label{eq:lstm_c_u_update}
+	\mathbf{c}_t = \mathbf{f}_t \odot \mathbf{c}_{t-1} + \mathbf{i}_t \odot \tilde{\mathbf{c}}_t, \qquad \mathbf{h}_t = \mathbf{o}_t \odot \tanh(\mathbf{c}_t)
+\end{equation}
+unde $\odot$ denotă produsul element-cu-element (Hadamard). Prin această arhitectură, LSTM-ul poate reține în mod selectiv informații relevante pe durate arbitrar de lungi, ignorând zgomotul temporal.
+
+În contextul recunoașterii expresiilor faciale, LSTM-ul este deosebit de util pentru modelarea dinamicii temporale a expresiei: trecerea de la o față neutră la apexul emoției implică o secvență specifică de mișcări musculare care nu poate fi surprinsă dintr-un singur cadru izolat.
+
+\subsection{Mașini cu Vectori Suport (SVM)}
+Mașinile cu vectori suport (\textit{Support Vector Machines} -- SVM) reprezintă o clasă de algoritmi de clasificare supervizată bazată pe principii ale teoriei statistice a învățării (\textit{Statistical Learning Theory}), formalizată de Vapnik și Chervonenkis \cite{vapnik1995}. Spre deosebire de rețelele neuronale, SVM-ul nu necesită o arhitectură adâncă și se comportă eficient inclusiv în spații de trăsături de dimensionalitate ridicată, cu seturi de date relativ mici.
+
+\textbf{Principiul fundamental} al SVM constă în identificarea unui \textbf{hiperplan de separare optim} în spațiul trăsăturilor, definit ca hiperplanul care maximizează \textbf{marginea} (\textit{margin}) dintre clasele de date. Formal, pentru un set de date $\{(\mathbf{x}_i, y_i)\}_{i=1}^{N}$, cu $y_i \in \{-1, +1\}$, se caută vectorul de ponderi $\mathbf{w}$ și pragul $b$ care satisfac \ref{eq:svm_hard}:
+\begin{equation}
+	\label{eq:svm_hard}
+	\min_{\mathbf{w}, b}\ \frac{1}{2}\|\mathbf{w}\|^2 \quad \text{a.î.} \quad y_i(\mathbf{w}^\top \mathbf{x}_i + b) \geq 1, \quad \forall i = 1, \dots, N.
+\end{equation}
+
+Vectorii de antrenare situați pe granița marginii (la distanța minimă față de hiperplan) poartă denumirea de vectori suport (\textit{support vectors}) și sunt singurii care influențează poziția hiperplanului de decizie, conferind modelului robustețe la \textit{outlieri}.
+
+\textbf{Extensia pentru date neseparabile liniar} se realizează prin introducerea variabilelor de relaxare (\textit{slack variables}) $\xi_i \geq 0$ și a parametrului de regularizare $C$, care controlează în ecuația \ref{eq:svm_soft} compromisul dintre maximizarea marginii și toleranța la erori de clasificare (\textit{soft-margin SVM}):
+\begin{equation}
+	\label{eq:svm_soft}
+	\min_{\mathbf{w}, b, \boldsymbol{\xi}}\ \frac{1}{2}\|\mathbf{w}\|^2 + C\sum_{i=1}^{N}\xi_i
+\end{equation}
+
+\textbf{Trucul kernel} (\textit{kernel trick}) permite SVM-ului să opereze implicit în spații de trăsături de dimensionalitate foarte mare (sau infinită), fără a calcula explicit transformarea. Prin înlocuirea produsului scalar cu o funcție kernel $K(\mathbf{x}_i, \mathbf{x}_j)$, se pot separa date care nu sunt liniar separabile în spațiul original. Cele mai frecvent utilizate funcții kernel includ:
+\begin{itemize}
+	\item Kernel liniar: $K(\mathbf{x}_i, \mathbf{x}_j) = \mathbf{x}_i^\top \mathbf{x}_j$
+	\item \textbf{Kernel RBF} (\textit{Radial Basis Function}): $K(\mathbf{x}_i, \mathbf{x}_j) = \exp\left(-\gamma \|\mathbf{x}_i - \mathbf{x}_j\|^2\right)$
+\end{itemize}
+
+Extensia la clasificare multiclasă (necesară pentru cele 7 emoții din setul CK+) se realizează prin strategii de tip \textit{One-vs-One} (un clasificator binar pentru fiecare pereche de clase) sau \textit{One-vs-Rest} (un clasificator per clasă față de restul).
+
+În cadrul lucrării de față, SVM-ul este utilizat în două ipostaze distincte: ca model de referință \textit{baseline} aplicat direct pe pixeli bruți (fără extracție de trăsături), și ca clasificator final în pipeline-ul propus, primind ca intrare vectorii de trăsături spațio-temporale extrași de stratul convoluțional SNN prin operațiile de \textit{SumPooling} și \textit{TemporalPooling}. Această separare între etapa de extracție a trăsăturilor (nesupervizată, prin STDP) și etapa de clasificare (supervizată, prin SVM) este o abordare consacrată în literatura de specialitate, care permite evaluarea izolată a calității reprezentărilor învățate de rețeaua neuronală cu impulsuri.
 
 \section{Trecerea de la ANN la Spiking Neural Networks (SNN)}
 
@@ -33,17 +130,16 @@ Limitările energetice menționate anterior au impus tranziția către o nouă p
 Spre deosebire de modelele clasice, SNN-urile adoptă o abordare bazată pe evenimente (\textit{event-driven}), caracterizată printr-o activare rară (\textit{sparse activation}), așa cum se poate observa în Figura \ref{fig:ann_vs_snn}. În acest context, neuronii procesează evenimente distribuite temporal, activându-se doar atunci când stimulii recepționați ating un anumit prag critic. Această proprietate elimină necesitatea calculelor redundante în perioadele de inactivitate, optimizând consumul de resurse \cite{falez2019multi}. Mai mult, natura asincronă a acestor rețele facilitează paralelizarea proceselor, oferind avantaje clare de viteză pe hardware neuromorfic dedicat \cite{bing2019supervised}.
 
 \begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.6\textwidth]{figures/artificial_vs_spiking_neuron.png}
-    \caption{A comparison between an artificial neuron and a spiking neuron. The structure is common between ANNs and SNNs. However, (a) an artificial neuron receives numerical values to compute an output numerical value, while (b) a spiking neuron receives sparse events called spikes and generates a sequence of output spikes. Sursă: \cite{elassal2024}.}
-    \label{fig:ann_vs_snn}
+	\centering
+	\includegraphics[width=0.45\textwidth]{figures/artificial_vs_spiking_neuron.png}
+	\caption{Comparație între un neuron artificial și un neuron cu impulsuri (\textit{spiking neuron}). Deși structura de bază este comună în cadrul ANN-urilor și SNN-urilor, funcționarea diferă: (a) un neuron artificial primește valori numerice continue pentru a calcula o valoare numerică de ieșire, în timp ce (b) un neuron cu impulsuri primește evenimente discrete și parsimonioase (numite impulsuri sau \textit{spikes}) și generează o secvență de impulsuri de ieșire. Sursă: \cite{elassal2024}.}
+	\label{fig:ann_vs_snn}
 \end{figure}
 
 \section{Modelarea matematică a neuronului cu impulsuri}
 
 Spre deosebire de modelele generațiilor anterioare, rețelele neuronale cu impulsuri (SNN) utilizează ca unitate fundamentală de comunicare fluxuri de impulsuri discrete, cunoscute sub denumirea de \textit{spike trains}. Fiecare impuls reprezintă un potențial de acțiune, o descărcare electrică de scurtă durată care transportă informația prin rețea, imitând fidel procesele electro-chimice din creierul uman.
 
-\subsection{Dinamica membranei neuronale}
 Mecanismul de funcționare al unui neuron de tip \textit{spiking} este definit prin interacțiunea dintre potențialul de membrană și un prag de activare (\textit{firing threshold}). Procesul poate fi sintetizat în patru etape critice:
 
 \begin{itemize}
@@ -57,12 +153,12 @@ Evoluția temporală a acestor etape și modul în care potențialul de membran�
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/dinamica_membranei.png}
+    \includegraphics[width=0.75\textwidth]{figures/dinamica_membranei.png}
     \caption{Evoluția potențialului de membrană al unui neuron de tip \textit{spiking} ca răspuns la un tren de impulsuri de intrare. Se observă fazele de acumulare, atingerea pragului critic, generarea impulsului și perioada de resetare. Sursă: \cite{elassal2024}.}
     \label{fig:dinamica_membrana}
 \end{figure}
 
-\subsection{Modele de neuroni: de la biologie la eficiență hardware}
+\subsection*{Modele de neuroni: de la biologie la eficiență hardware}
 În literatura de specialitate, există o varietate de modele matematice care descriu acest comportament, prezentând un compromis direct între plauzibilitatea biologică și complexitatea computațională \cite{izhikevich2004}.
 
 \begin{enumerate}
@@ -70,7 +166,6 @@ Evoluția temporală a acestor etape și modul în care potențialul de membran�
     \item \textbf{Modelul Integrate-and-Fire (IF) \cite{burkitt2006}:} Reprezintă varianta cea mai simplificată și eficientă din punct de vedere algoritmic. În ciuda arhitecturii sale elementare, modelul IF s-a dovedit a fi un instrument robust în aplicațiile de învățare vizuală și recunoaștere a formelor, fiind preferat în designul sistemelor de tip \textit{edge AI}.
 \end{enumerate}
 
-\subsection{Formalizarea matematică a modelului Integrate-and-Fire}
 Modelul IF descrie evoluția potențialului de membrană $V_m(t)$ ca o acumulare liniară a ponderilor sinaptice asociate impulsurilor recepționate. Dinamica sistemului, guvernată de capacitatea membranei $c_m$, este exprimată prin relația \eqref{eq:if_dinamica}:
 
 \begin{equation}
@@ -96,7 +191,7 @@ f_s(x) =
 \end{cases}
 \end{equation}
 
-Regula de actualizare a stării neuronului impune ca atunci când potențialul de membrană depășește pragul $V_{th}$, să aibă loc descărcarea, urmată de resetarea potențialului:
+Regula de actualizare a stării neuronului impune ca atunci când potențialul de membrană depășește pragul $V_{th}$, să aibă loc descărcarea, urmată de resetarea potențialului, așa cum reiese din ecuația \ref{eq:reset_rule}:
 
 \begin{equation}
 \label{eq:reset_rule}
@@ -111,10 +206,11 @@ Această abordare matematică permite procesarea eficientă a datelor asincrone,
 
 Deși există numeroase scheme de codificare, acestea pot fi clasificate în două categorii majore, în funcție de modul în care informația este reprezentată în raport cu timpul.
 
-\subsection{Rate Coding}
-Codificarea prin rată corelează intensitatea stimulului de intrare $x \in [0, 1]$ cu frecvența de apariție a impulsurilor. Din punct de vedere computațional, acest proces este modelat printr-un proces stochastic Poisson \cite{gerstner2002spiking}. Probabilitatea ca un neuron $i$ să emită un impuls ($S_i = 1$) într-un interval de timp discret foarte mic $\Delta t$ este proporțională cu valoarea semnalului de intrare:
+\subsection*{Rate Coding}
+Codificarea prin rată corelează intensitatea stimulului de intrare $x \in [0, 1]$ cu frecvența de apariție a impulsurilor. Din punct de vedere computațional, acest proces este modelat printr-un proces stochastic Poisson \cite{gerstner2002spiking}. Probabilitatea ca un neuron $i$ să emită un impuls ($S_i = 1$) într-un interval de timp discret foarte mic $\Delta t$ este proporțională cu valoarea semnalului de intrare, aspect ilustrat în ecuația \ref{eq:impuls_rate_coding}:
 
 \begin{equation}
+\label{eq:impuls_rate_coding}
 P(S_i[t] = 1) = x \cdot \Delta t
 \end{equation}
 
@@ -122,7 +218,7 @@ unde $x$ reprezintă intensitatea stimulului (rata de descărcare dorită), $\De
 
 Deși este robustă, codificarea prin rată prezintă limitări semnificative în ceea ce privește viteza de procesare. Pentru a obține o reprezentare precisă a valorii codificate, neuronii post-sinaptici trebuie să integreze un număr ridicat de impulsuri pe o durată extinsă \cite{guo2021}. Acest fenomen introduce o latență inerentă în rețea, deoarece decizia este condiționată de acumularea unei statistici suficiente a impulsurilor.
 
-\subsection{Temporal Coding}
+\subsection*{Temporal Coding}
 Spre deosebire de codificarea prin rată, metodele temporale utilizează momentul precis al apariției impulsurilor (\textit{timestamps}) pentru a reprezenta informația, oferind o eficiență energetică și temporală superioară.
 
 \subsubsection{Rank Order Coding}
@@ -130,7 +226,7 @@ Codificarea prin ordinea rangului \cite{thorpe1998} se bazează pe premisa că o
 
 \begin{equation}
 \label{eq:rank_order}
-f_{in}(x_i) = r(x_i) \times \frac{1}{n}
+f_{in}(x_i) = r(x_i) \times \frac{1}{n},
 \end{equation}
 
 unde $x_i$ este valoarea de intrare, $n$ reprezintă numărul total de conexiuni, iar $r(x_i)$ reprezintă rangul (poziția în ordine descrescătoare) al valorii $x_i$ în setul de intrări.
@@ -140,18 +236,18 @@ Codificarea prin latență \cite{gollisch2008} reprezintă intensitatea stimulul
 
 \begin{equation}
 \label{eq:latency}
-f_{in}(x) = (1.0 - x) \times t_{exposition}
+f_{in}(x) = (1.0 - x) \times t_{exposition},
 \end{equation}
 
 Această abordare este deosebit de eficientă pentru procesarea video (HAR), deoarece permite rețelei să reacționeze extrem de rapid la schimbările semnificative din câmpul vizual, procesând prioritar cele mai relevante informații.
 
 \section{Mecanisme de învățare și plasticitate sinaptică}
 
-Capacitatea de procesare a informației în cadrul rețelelor SNN rezidă în conexiunile sinaptice dintre neuroni. \textbf{Plasticitatea sinaptică} reprezintă proprietatea fundamentală a acestor conexiuni de a-și modifica intensitatea (ponderea sinaptică) în funcție de tiparele activității neuronale și de regulile de învățare aplicate. Din punct de vedere funcțional, ponderile sinaptice modulează probabilitatea de declanșare a neuronului post-sinaptic: o pondere ridicată amplifică contribuția unui impuls recepționat, în timp ce o pondere scăzută atenuează impactul acestuia asupra potențialului de membrană.
+Capacitatea de procesare a informației în cadrul rețelelor SNN rezidă în conexiunile sinaptice dintre neuroni. \textbf{Plasticitatea sinaptică} reprezintă proprietatea fundamentală a acestor conexiuni de a-și modifica intensitatea (ponderea sinaptică) în funcție de tiparele activității neuronale și de regulile de învățare aplicate. Din punct de vedere funcțional, ponderile sinaptice modulează probabilitatea de declanșare a neuronului post-sinaptic: o pondere ridicată amplifică contribuția unui impuls recepționat, în timp ce o pondere scăzută atenuează impactul acestuia asupra po\-ten\-ți\-a\-lu\-lui de membrană.
 
 Antrenarea acestor rețele presupune ajustarea sistematică a ponderilor și a pragurilor de activare pentru a permite sistemului să identifice trăsături relevante în datele de intrare. În literatura de specialitate, metodele de antrenare a SNN-urilor pot fi clasificate în trei paradigme majore.
 
-\subsection{Conversia ANN în SNN}
+\subsection*{Conversia ANN în SNN}
 Această abordare presupune antrenarea prealabilă a unei rețele neuronale artificiale (ANN) convenționale, utilizând algoritmi standard precum \textit{Backpropagation}, urmată de transferul și adaptarea ponderilor învățate către o arhitectură SNN echivalentă \cite{kugele2020}. 
 
 Procesul de conversie urmărește conservarea funcționalității și a performanței rețelei originale prin scalarea ponderilor și ajustarea acestora la intervalul dinamic specific modelului de neuron cu impulsuri ales. Deși această metodă oferă rezultate competitive și permite utilizarea infrastructurii software existente pentru \textit{Deep Learning}, ea prezintă limitări critice:
@@ -161,7 +257,7 @@ Procesul de conversie urmărește conservarea funcționalității și a performa
     \item Nu exploatează pe deplin avantajele temporale native ale SNN-urilor în timpul procesului de învățare.
 \end{itemize}
 
-\subsection{Spiking Back-propagation}
+\subsection*{Spiking Back-propagation}
 O altă metodă supervizată constă în adaptarea directă a algoritmului \textit{Backpropagation} pentru domeniul impulsurilor \cite{grum23}. Această tehnică optimizează ponderile prin calcularea unei funcții de cost bazată pe eroarea dintre ieșirea dorită și cea prezisă, eroarea fiind ulterior propagată de la stratul de ieșire către straturile anterioare.
 
 Principala provocare a acestei metode rezidă în faptul că funcția de activare a unui neuron \textit{spiking} (funcția Heaviside) este discontinuă și, prin urmare, nederivabilă \cite{lee2016}. Acest aspect împiedică calculul direct al gradientului necesar optimizării. Pentru a depăși acest obstacol, cercetările recente propun:
@@ -172,13 +268,13 @@ Principala provocare a acestei metode rezidă în faptul că funcția de activar
 
 Deși metoda este eficientă pentru obținerea unei precizii ridicate, ea rămâne costisitoare din punct de vedere computațional și necesită volume mari de date etichetate, ceea ce limitează aplicabilitatea sa în sistemele de tip \textit{on-chip learning} cu resurse reduse \cite{lee2018_frontiers}.
 
-\subsection{Învățarea de tip Hebbian}
+\subsection*{Învățarea de tip Hebbian}
 
 Plasticitatea de tip Hebbian constituie un principiu fundamental în neuroștiințe, stipulând că intensitatea unei sinapse între doi neuroni este determinată de corelația activităților acestora. Conform celebrului postulat al lui Donald Hebb: „neuronii care se activează împreună, se conectează împreună” (\textit{neurons that fire together, wire together}) \cite{hebb2002}. În domeniul SNN, învățarea Hebbiană este utilizată pe scară largă pentru antrenarea rețelelor în regim supervizat \cite{lan2022pcsnn}, nesupervizat \cite{kheradpisheh2018stdp} sau auto-supervizat \cite{halvagal2023combination}.
 
 Mecanismul de bază presupune modificarea greutății sinaptice în funcție de corelația dintre activitatea pre-sinaptică (intrarea) și cea post-sinaptică (ieșirea). Deși există mai multe reguli de plasticitate, precum \textit{Spike-Driven Synaptic Plasticity} (SDSP), majoritatea aplicațiilor contemporane se bazează pe \textbf{Spike Timing-Dependent Plasticity (STDP)}, datorită robusteții sale în procesarea semnalelor temporale.
 
-\subsection{Spike Timing-Dependent Plasticity (STDP)}
+\subsection*{Spike Timing-Dependent Plasticity (STDP)}
 
 STDP este o regulă de învățare cu înaltă plauzibilitate biologică \cite{song2000competitive} ce ajustează ponderile sinaptice pe baza diferenței temporale relative dintre impulsurile pre-sinaptice și cele post-sinaptice. Această metodă este esențială pentru implementările pe hardware neuromorfic cu consum redus, fiind capabilă să extragă trăsături complexe fără necesitatea unei supervizări externe.
 
@@ -189,10 +285,6 @@ Principiul de funcționare al STDP se bazează pe două fenomene opuse, așa cum
 \end{itemize}
 
 Această dinamică permite rețelei să prioritizeze conexiunile care transportă informație relevantă pentru modelul identificat, ignorând în același timp zgomotul sau semnalele necorelate temporal.
-
-
-
-\subsubsection{Variante ale regulii STDP}
 
 În funcție de complexitatea dorită și de constrângerile hardware, STDP poate fi implementată prin mai multe modele matematice:
 
@@ -211,7 +303,7 @@ Este forma de bază care utilizează o descreștere exponențială a actualizăr
 unde $\eta_w$ reprezintă rata de învățare, iar $\tau_{STDP}$ este constanta de timp ce definește fereastra de învățare.
 
 \paragraph{2. STDP Aditiv (Add-STDP):}
-O variantă simplificată unde modificarea ponderii depinde doar de semnul diferenței temporale, nu și de magnitudine. Deoarece poate conduce la instabilitate, aceasta necesită limite stricte de control (\textit{hard boundaries}), rezultând adesea în ponderi binare (0 sau 1) \cite{song2000competitive}:
+O variantă simplificată unde modificarea ponderii depinde doar de semnul diferenței temporale, nu și de magnitudine. Deoarece poate conduce la instabilitate, aceasta necesită limite stricte de control (\textit{hard boundaries}), rezultând adesea în ponderi binare (0 sau 1) \cite{song2000competitive}, așa cum este ilustrat în ecuația \ref{eq:add_stdp}:
 
 \begin{equation}
 \label{eq:add_stdp}
@@ -223,7 +315,7 @@ O variantă simplificată unde modificarea ponderii depinde doar de semnul difer
 \end{equation}
 
 \paragraph{3. STDP Multiplicativ (Mult-STDP):}
-Această variantă introduce dependența de valoarea curentă a ponderii, prevenind saturarea și oferind o distribuție mai fină a greutăților sinaptice, comparativ cu modelul aditiv \cite{rossum2000}. Actualizarea este reglată astfel încât ponderile mici să poată crește mai rapid, în timp ce ponderile mari sunt limitate superior:
+Această variantă introduce dependența de valoarea curentă a ponderii, prevenind saturarea și oferind o distribuție mai fină a greutăților sinaptice, comparativ cu modelul aditiv \cite{rossum2000}. Actualizarea surprinsă în ecuația \ref{eq:mult_stdp} este reglată astfel încât ponderile mici să poată crește mai rapid, în timp ce ponderile mari sunt limitate superior:
 
 \begin{equation}
 \label{eq:mult_stdp}
@@ -234,26 +326,27 @@ Această variantă introduce dependența de valoarea curentă a ponderii, preven
 \end{cases}
 \end{equation}
 
-\subsection{Inhibiția}
+\subsection*{Inhibiția}
 
 Inhibiția reprezintă procesul de diminuare sau suprimare a activității neuronale, fiind un mecanism fundamental pentru reglarea dinamicii corticale \cite{silberberg2007disynaptic}. Într-o rețea neuronală cu impulsuri (SNN), inhibiția joacă un rol vital în menținerea echilibrului dintre mecanismele excitatorii și cele inhibitorii, permițând un control precis asupra fluxului de informație și a momentelor de declanșare a impulsurilor \cite{zhao2022backeisnn}.
 
 Cea mai utilizată metodă de inhibiție în faza de antrenare este mecanismul \textit{Winner-Take-All} (WTA) \cite{querlioz2011simulation, chen2017mechanisms}. Conform acestei reguli, primul neuron dintr-un strat care generează un impuls este declarat „câștigător” și transmite imediat un semnal inhibitor către ceilalți neuroni din același strat pentru a le bloca activitatea. Această strategie este deosebit de eficientă în învățarea nesupervizată bazată pe STDP, deoarece introduce o competiție între neuroni \cite{ferre2018unsupervised}. Prin împiedicarea mai multor neuroni să răspundă simultan la același stimul, rețeaua este forțată să învețe trăsături distincte și mai puțin corelate, optimizând astfel capacitatea de reprezentare a sistemului.
 
-\subsection{Homeostazia}
+\subsection*{Homeostazia}
 
 Deși mecanismul \textit{Winner-Take-All} (WTA) este esențial pentru diversificarea procesului de învățare, acesta poate introduce un dezechilibru în care un număr restrâns de neuroni devin dominanți. Acești neuroni „câștigători” tind să se declanșeze repetat, monopolizând procesul de adaptare a ponderilor, în timp ce restul unităților rămân inactive. Pentru a evita această saturație și a menține stabilitatea sistemului, este necesară implementarea unor mecanisme de homeostazie prin adaptarea pragului de declanșare (\textit{threshold adaptation}).
 
 În cadrul acestei arhitecturi, se utilizează două metode complementare de adaptare a pragului. Prima și cea mai importantă este \textbf{Leaky Adaptive Threshold (LAT)} \cite{diehl2015unsupervised}, utilizată pentru a asigura o competiție echitabilă între neuroni. Cea de-a doua este metoda \textbf{adaptării pragului bazată pe un timp țintă} (\textit{target timestamp}) \cite{falez2019multi}, utilizată în conjuncție cu LAT în modelele de tip CSNN de ultimă generație \cite{falez2019}. Aceasta din urmă forțează neuronii să tindă spre un moment de declanșare predefinit $\hat{t}$, permițând modelului să se specializeze pe anumite tipare temporale, contribuind în același timp la homeostazia rețelei.
 
-Pragurile tuturor neuronilor dintr-un strat (atât pentru cel câștigător, cât și pentru cei care au primit semnal de inhibiție) sunt actualizate la fiecare declanșare a unui impuls sau la recepția unui semnal inhibitor. Din punct de vedere matematic, modificarea pragului se bazează pe două componente, $\Delta_{th}^1$ și $\Delta_{th}^2$, după cum urmează:
+Pragurile tuturor neuronilor dintr-un strat (atât pentru cel câștigător, cât și pentru cei care au primit semnal de inhibiție) sunt actualizate la fiecare declanșare a unui impuls sau la recepția unui semnal inhibitor. Din punct de vedere matematic, modificarea pragului se bazează pe două componente, $\Delta_{th}^1$ și $\Delta_{th}^2$, după cum reiese din ecuația \ref{eq:target_timestamp}:
 
 \begin{equation}
 \label{eq:target_timestamp}
-\Delta_{th}^1 = -\eta_{th}(t - \hat{t})
+\Delta_{th}^1 = -\eta_{th}(t - \hat{t}),
 \end{equation}
 
-unde Equation \eqref{eq:target_timestamp} reprezintă adaptarea bazată pe timpul țintă, în care $t$ este momentul declanșării impulsului, $\hat{t}$ este timpul țintă dorit, iar $\eta_{th}$ este rata de învățare a pragului. Componenta LAT este definită în Equation \eqref{eq:lat_update}:
+unde $t$ este momentul declanșării impulsului, $\hat{t}$ este timpul țintă dorit, iar $\eta_{th}$ este rata de învățare a pragului. 
+Componenta LAT este definită în ecuația \eqref{eq:lat_update}:
 
 \begin{equation}
 \label{eq:lat_update}
@@ -261,7 +354,7 @@ unde Equation \eqref{eq:target_timestamp} reprezintă adaptarea bazată pe timpu
 \begin{cases} 
 \eta_{th}, & \text{dacă } t_i = \min\{t_0, \dots, t_N\} \\
 -\frac{\eta_{th}}{ld(n)}, & \text{în caz contrar}
-\end{cases}
+\end{cases},
 \end{equation}
 
 unde $t_i$ reprezintă timpul de declanșare al neuronului $i$, $\min\{t_0, \dots, t_N\}$ corespunde neuronului care a generat primul impuls (câștigătorul), iar $ld(n)$ reprezintă numărul de neuroni aflați în competiție în stratul respectiv. În final, actualizarea potențialului pragului de membrană $V_{th}$ se realizează conform Equation \eqref{eq:vth_final}:
@@ -281,7 +374,7 @@ Arhitecturile Spiking Convolutional Neural Networks (CSNN) combină capacitatea 
 
 2. \textbf{Etapa de testare/inferență (Inference Phase):} Odată ce ponderile au fost învățate, acestea sunt „înghețate” și replicate pe întreaga suprafață a intrării. În această etapă, se asociază neuroni virtuali pentru fiecare element din hărțile de trăsături rezultate. Esențial este faptul că toate unitățile dintr-o hartă de trăsături partajează același nucleu învățat anterior, asigurând invarianța la translație.
 
-\subsection{Convoluția în domeniul impulsurilor (2D-CSNN)}
+\subsection*{Convoluția în domeniul impulsurilor (2D-CSNN)}
 
 Generarea hărților de trăsături în etapa de inferență se realizează prin aplicarea glisantă a filtrului, unde dinamica potențialului de membrană pentru un neuron de tip \textit{Integrate-and-Fire} (IF) de la coordonatele $(x, y)$ este calculată conform ecuației \eqref{eq:conv_spiking}:
 
@@ -297,11 +390,11 @@ V_{m_{x,y,k}}(t) = \sum_{i \in E} W_{n(x_i), j(y_i), k_i, k} \cdot f_s(t - t_i)
     \label{fig:conv2d}
 \end{figure}
 
-\subsection{3D-CSNN pentru procesare video}
+\subsection*{3D-CSNN pentru procesare video}
 
 Extensia către 3D-CSNN urmează aceeași logică bimodală (învățare vs. testare), dar extinde domeniul de aplicare în dimensiunea temporală. Această arhitectură permite extragerea directă a trăsăturilor spatio-temporale, eliminând necesitatea unor algoritmi externi de calcul al fluxului optic \cite{horn1981determining}.
 
-În etapa de inferență 3D, nucleul glisant integrează informația dintr-un volum de intrare (lățime, înălțime și adâncime temporală). Toți neuronii dintr-un volum de ieșire $k$ utilizează același set de ponderi 3D învățate, calculând potențialul de membrană la momentul $t$ conform formulei:
+În etapa de inferență 3D, nucleul glisant integrează informația dintr-un volum de intrare (lățime, înălțime și adâncime temporală). Toți neuronii dintr-un volum de ieșire $k$ utilizează același set de ponderi 3D învățate, calculând potențialul de membrană la momentul $t$ conform formulei \ref{eq:conv3d_spiking}:
 
 \begin{equation}
 \label{eq:conv3d_spiking}
@@ -319,45 +412,39 @@ unde $h(z_i)$ mapează coordonata temporală a impulsului în fereastra nucleulu
 
 \section{Algoritmi de preprocesare și detecție facială}
 
-Pentru a asigura o rată ridicată de recunoaștere a emoțiilor, sistemul utilizează o etapă riguroasă de preprocesare. Aceasta are rolul de a extrage doar informația relevantă (fața subiectului) și de a menține alinierea acesteia pe parcursul întregii secvențe video, proces adaptat conform metodologiei descrise în \cite{tan2020}.
-
-\subsection{Detecția feței prin algoritmul Viola-Jones}
+Pentru a asigura o rată ridicată de recunoaștere a emoțiilor în cazul în care se dorește antrenarea pe un set de date pentru care nu sunt disponiible cele 68 de puncte faciale de referință asociate cadrelor, sistemul utilizează o etapă riguroasă de preprocesare. Aceasta are rolul de a extrage doar informația relevantă (fața subiectului) și de a menține alinierea acesteia pe parcursul întregii secvențe video, proces adaptat conform metodologiei descrise în \cite{tan2020}.
 
 În primul cadru al secvenței video, sistemul nu deține informații despre locația subiectului. Pentru inițializare, se utilizează algoritmul \textbf{Viola-Jones} \cite{viola2001robust}, un standard în domeniu datorită eficienței sale computaționale. 
 
 Algoritmul funcționează prin scanarea imaginii cu ferestre glisante de dimensiuni variabile, căutând trăsături simple numite \textit{Haar-like features}. Acestea se bazează pe diferențele de intensitate dintre regiuni adiacente (de exemplu, zona ochilor este de regulă mai întunecată decât pomeții, iar puntea nasului este mai luminoasă decât zonele laterale). Rezultatul acestei etape este definirea unei \textbf{Regiuni de Interes (ROI)} sub forma unui dreptunghi care încadrează fața detectată.
 
-\subsection{Extragerea și urmărirea punctelor de interes}
-
 Odată ce ROI a fost stabilit, procesarea întregii suprafețe a pielii în fiecare cadru ar fi ineficientă și predispusă la erori din cauza texturii uniforme. Din acest motiv, se trece la identificarea unor puncte de „ancoră”.
 
-\paragraph{Algoritmul Min-Eigenvalue:}
 Pentru a selecta cele mai robuste puncte pentru urmărire, se utilizează metoda \textit{Min-Eigenvalue} (cunoscută și sub numele de detectorul Shi-Tomasi \cite{shi1994good}). Acest algoritm identifică colțuri — puncte în care intensitatea pixelilor se schimbă brusc în două direcții ortogonale. Sunt selectate astfel puncte unice precum colțurile ochilor, vârful nasului sau extremitățile gurii, acestea fiind ușor de „agățat” și urmărit în cadrele subsecvente.
 
-\paragraph{Urmărirea prin algoritmul KLT (Kanade-Lucas-Tomasi):}
 În loc să ruleze detecția Viola-Jones în fiecare cadru (proces costisitor), sistemul utilizează algoritmul KLT \cite{lucas1981iterative}. Acesta reprezintă „motorul” de mișcare al preprocesării, analizând fluxul optic (\textit{optical flow}) pentru a determina unde s-au mutat punctele ancoră din cadrul curent în cadrul următor. KLT este optimizat pentru „micro-mișcări”, fiind mult mai rapid decât o detecție de la zero.
-
-\subsection{Transformări geometrice și alinierea feței}
 
 Deoarece subiectul se poate mișca liber (rotații ale capului, aplecări sau schimbări de scară), simpla urmărire a punctelor nu este suficientă pentru a menține un cadru stabil pentru SNN.
 
-\paragraph{Actualizarea ROI prin Geometric Transform:}
 Dacă punctele ancoră detectate la pasul anterior și-au schimbat coordonatele, dreptunghiul inițial trebuie actualizat, acest lucru având loc cu ajutorul matricii de transformare $M$ (translație, rotație și scalare) care descrie mișcarea medie a tuturor punctelor. Această matrice este aplicată întregului poligon ROI, permițând „ramei” feței să sară exact pe noua poziție.
 
 \section{Metode de eșantionare a datelor de intrare (Sampling)}
 
-În cadrul arhitecturilor de tip Convolutional Spiking Neural Networks (CSNN), procesul de eșantionare (sampling) joacă un rol critic în eficiența procesării informației vizuale. Spre deosebire de rețelele neurale convoluționale clasice, unde întreaga imagine este procesată uniform, simulatoarele de SNN pot utiliza strategii de eșantionare pentru a selecta ferestre locale (patch-uri) care urmează să fie convertite în trenuri de impulsuri (spikes). 
+În cadrul arhitecturilor de tip Convolutional Spiking Neural Networks (CSNN), procesul de eșantionare (sampling) joacă un rol critic în eficiența procesării informației vizuale. Spre deosebire de rețelele neurale convoluționale clasice, unde întreaga imagine este procesată uniform, simulatoarele de SNN pot utiliza strategii de e\-șan\-ti\-o\-na\-re pentru a selecta ferestre locale (patch-uri) care urmează să fie convertite în trenuri de impulsuri (spikes). 
 
 Această abordare este inspirată din mecanismele biologice de atenție vizuală, permițând modelului să se concentreze pe regiunile cele mai informative ale imaginii, reducând astfel costul computațional și zgomotul de fundal. În cadrul acestui simulator, au fost implementate trei strategii principale de eșantionare, atât 2D, cât și 3D.
 
-\subsection{Eșantionarea Spațială (2D)}
+\subsection*{Eșantionarea Spațială (2D)}
+
+Trei strategii distincte de eșantionare spațială au fost analizate și implementate, fiecare prezentând un grad diferit de complexitate și specificitate raportat la geometria feței. Acestea evoluează de la o abordare stohastică globală, complet independentă de conținutul imaginii, până la tehnici ghidate de structura anatomică a subiectului, capabile să localizeze trăsăturile cu densitate informațională maximă. În continuare, sunt detaliate principiile matematice și logica algoritmică a fiecărei metode în parte.
 
 \subsubsection{Eșantionarea Aleatorie}
 
-Metoda de eșantionare aleatorie reprezintă abordarea de bază, în care locația ferestrei de filtrare este determinată în mod stohastic pe întreaga suprafață a imaginii de intrare. Coordonatele colțului stânga-sus al ferestrei, $(x, y)$, sunt extrase dintr-o distribuție uniformă, respectând constrângerile dimensionale ale imaginii:
+Metoda de eșantionare aleatorie reprezintă abordarea de bază, în care locația ferestrei de filtrare este determinată în mod stohastic pe întreaga suprafață a imaginii de intrare. Coordonatele colțului stânga-sus al ferestrei, $(x, y)$, sunt extrase dintr-o distribuție uniformă, respectând constrângerile dimensionale ale imaginii, conform ecuației \ref{eq:distributie-uniforma}:
 
 \begin{equation}
-    x \sim \mathcal{U}(0, W - w_f), \quad y \sim \mathcal{U}(0, H - h_f)
+    x \sim \mathcal{U}(0, W - w_f), \quad y \sim \mathcal{U}(0, H - h_f),
+    \label{eq:distributie-uniforma}
 \end{equation}
 
 unde $W, H$ reprezintă lățimea și înălțimea imaginii, iar $w_f, h_f$ dimensiunile filtrului. Deși această metodă asigură o acoperire imparțială a spațiului de intrare, ea este ineficientă în sarcini de recunoaștere a emoțiilor faciale, deoarece o mare parte din eșantioane pot proveni din zone irelevante (fundal).
@@ -410,14 +497,15 @@ Contur Interior Gură     & 60 -- 67                    \\ \hline
 
 Prin utilizarea acestor repere, procesul de eșantionare imită modul în care sistemul vizual uman prioritizează punctele de înaltă frecvență informațională pentru a recunoaște expresiile faciale complexe.
 
-\subsection{Eșantionarea Spatio-Temporală (3D)}
+\subsection*{Eșantionarea Spatio-Temporală (3D)}
 
 În cazul procesării secvențelor video pentru recunoașterea emoțiilor faciale, modelul trebuie să capteze nu doar trăsăturile statice, ci și dinamica temporală a expresiilor. Astfel, eșantionarea 3D extinde conceptele anterioare prin adăugarea unei a treia dimensiuni: timpul ($t$). Rezultatul procesului de eșantionare este un volum de date definit de coordonatele $(x, y, t)$, unde $t$ reprezintă punctul de start al ferestrei temporale.
 
 \subsubsection{Eșantionarea Aleatorie}
-Această metodă generează în mod stohastic toate cele trei coordonate. Fereastra temporală este selectată dintr-o distribuție uniformă, asigurând că volumul extras se încadrează în durata totală a secvenței video ($T$):
+Această metodă generează în mod stohastic toate cele trei coordonate. Fereastra temporală este selectată dintr-o distribuție uniformă \ref{eq:uniform_distribution}, asigurând că volumul extras se încadrează în durata totală a secvenței video ($T$).
 \begin{equation}
-    t \sim \mathcal{U}(0, T - t_f)
+	\label{eq:uniform_distribution}
+    t \sim \mathcal{U}(0, T - t_f),
 \end{equation}
 unde $t_f$ reprezintă dimensiunea filtrului pe axa temporală.
 
@@ -469,16 +557,11 @@ Comportamentul vizual al acestor funcții de decodificare este prezentat în Fig
     \label{fig:metode_decoding}
 \end{figure}
 
-\subsection{Decodificarea prin Declin Liniar (Linear Decay)}
+\subsection*{Decodificarea prin Declin Liniar (Linear Decay)}
 Această metodă, ilustrată în Figura \ref{fig:linear}, aplică o descreștere constantă a importanței semnalului pe măsură ce timpul $t$ avansează dincolo de pragul $t_{obj}$. Ea a fost selectată pentru eficiența sa computațională și pentru capacitatea de a modela degradarea simplă a memoriei pe termen scurt a neuronilor, oferind o penalizare proporțională pentru spike-urile care apar târziu în fereastra de procesare a expresiei faciale.
 
-\subsection{Decodificarea prin Impuls Dreptunghiular (Rectangular Pulse)}
+\subsection*{Decodificarea prin Impuls Dreptunghiular (Rectangular Pulse)}
 Metoda impulsului dreptunghiular (Figura \ref{fig:pulse}) acționează ca un filtru binar de tip "fereastră". Aceasta atribuie o importanță maximă (1.0) tuturor spike-urilor care apar într-un interval strict de $\pm 0.1$ față de centrul $t_{obj}$, ignorând complet restul activității. Această abordare este utilă pentru detectarea coincidențelor temporale rigide, eliminând zgomotul de fond și spike-urile izolate care nu se încadrează în dinamica temporală specifică unei anumite micro-expresii.
 
-\subsection{Decodificarea Gaussiană (Gaussian-based Importance)}
+\subsection*{Decodificarea Gaussiană (Gaussian-based Importance)}
 Cea mai sofisticată metodă, bazată pe funcția de eroare ($\text{erf}$), generează o curbă de tip clopot centrată pe $t_{obj}$ (Figura \ref{fig:gaussian}). Spre deosebire de metodele anterioare, aceasta aproximează cel mai bine variabilitatea biologică a neuronilor și oferă o tranziție lină (smooth transition), fiind robustă la mici variații temporale.
-
-
-\section{Percepția vizuală bazată pe evenimente}
-\subsection{Senzori de viziune dinamică (DVS)}
-\subsection{Recunoașterea activităților umane (HAR) folosind SNN}

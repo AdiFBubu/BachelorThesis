@@ -2,4 +2,49 @@
 %\chapter*{Concluzii}
 \label{conclusions}
 
-\par Concluzii ...
+Prezenta lucrare a abordat optimizarea sistemelor de recunoaștere a emoțiilor faciale bazate pe rețele neuronale cu impulsuri prin preprocesare adaptivă, urmărind atât validarea potențialului SNN-urilor ca extractoare de trăsături spațio-temporale, cât și integrarea practică a unui motor de inferență neuromorfic într-o aplicație clinică funcțională.
+
+\section{Sinteza concluziilor experimentale}
+
+Evaluarea pe setul de date CK+ prin \textit{10-fold cross-validation} a confirmat că modelul CSNN 3D antrenat nesupervizat prin STDP extrage trăsături temporale relevante pentru clasificarea emoțiilor faciale. Rezultatele comparative obținute sunt sintetizate după cum urmează:
+
+\begin{itemize}
+	\item \textbf{Modelul CSNN 3D (propus):} Atinge o acuratețe medie de \textbf{48.02\%}, depășind clasificatorul de referință (SVM pe pixeli bruți, 41.61\%) cu un câștig net de \textbf{6.41\%}. Acest fapt demonstrează că nucleele convoluționale specializate prin STDP codifică corelații spațio-temporale discriminative.
+	\item \textbf{Modelul ANN echivalent:} A obținut \textbf{73.23\%}, cuantificând costul utilizării unei reguli de învățare locale și nesupervizate față de optimizarea globală prin gradient (\textit{backpropagation}).
+	\item \textbf{Arhitectura CNN-LSTM:} Proiectată ca referință de tip \textit{State-of-the-Art}, a atins \textbf{88.37\% $\pm$ 5.65\%}, confirmând superioritatea transferului de cunoștințe (ResNet18) și a modelării explicite a dinamicii temporale.
+\end{itemize}
+
+Analiza hărților de trăsături a evidențiat că modelul SNN funcționează ca un extractor de trăsături fiziologice: emoțiile cu activare musculară intensă (\textit{Happiness, Disgust}) au obținut un \textit{recall} de \textbf{100\%} pe anumite fold-uri, în timp ce emoțiile subtile (\textit{Contempt, Sadness}) au condus la confuzii sistematice.
+
+\section{Impactul preprocesării adaptive}
+
+Experimentele au subliniat un avantaj structural al arhitecturii SNN: filtrul On/Off și codificarea prin latență oferă o robustețe nativă la zgomotul vizual. Pixelii statici din fundal nu generează impulsuri, spre deosebire de modelele ANN unde fundalul poate scădea acuratețea la aproximativ 30--40\% în absența decupării. Pipeline-ul propus (Viola-Jones, KLT și eșantionarea centrată pe reperele faciale 17--67 din standardul 300-W) asigură concentrarea activității neuronale pe zonele cu relevanță semantică maximă (ochi, sprâncene, gură).
+
+\section{Sistemul Neuro-Guardian}
+
+Aplicația dezvoltată demonstrează viabilitatea integrării unui motor neuromorfic într-un flux clinic real. Elementele cheie ale implementării includ:
+\begin{itemize}
+	\item \textbf{Arhitectura hibridă:} WebSocket pentru latență redusă, TCP pentru comunicarea cu serverul C++, PostgreSQL pentru date clinice și \textbf{InfluxDB} pentru monitorizarea seriilor temporale ale emoțiilor.
+	\item \textbf{Mecanismul de histerezis:} Utilizarea pragurilor \textit{70/55} pentru alertele de tip \textit{Distress} și \textit{Pain} elimină oscilațiile la pragurile de decizie, oferind notificări stabile.
+	\item \textbf{Validare:} Testarea \textit{white-box} a confirmat acoperirea completă a celor 9 drumuri independente (Complexitate Ciclomatică = 9).
+\end{itemize}
+
+\section{Limitări identificate}
+
+Lucrarea prezintă câteva limitări inerente:
+\begin{enumerate}
+	\item \textbf{Setul de date:} CK+ este colectat în condiții controlate, ceea ce poate limita generalizarea la emoții spontane.
+	\item \textbf{Dezechilibrul claselor:} Numărul redus de exemple pentru \textit{Contempt} și \textit{Fear} afectează negativ performanța, STDP prioritizând trăsăturile frecvente.
+	\item \textbf{Hardware:} Modelul rulează pe hardware convențional, beneficiile energetice ale SNN fiind maximizate doar pe cipuri precum Intel Loihi.
+\end{enumerate}
+
+\section{Direcții viitoare de cercetare}
+
+Pe baza rezultatelor obținute, se propun următoarele direcții de extindere:
+\begin{itemize}
+	\item \textbf{Optimizarea hiperparametrilor:} Rafinarea pragului de activare ($\theta$) și a ratei de învățare ($\mu_{th}$) prin optimizare bayesiană.
+	\item \textbf{Codificare temporală:} Înlocuirea \textit{latency coding} alte metode de encodaare la nivelul întregii arhitecturi.
+	\item \textbf{Antrenare End-to-End:} Implementarea unui strat \textit{Fully Connected Spiking} antrenat fie prin \textit{surrogate gradients}, fie prin STDP pentru a elimina necesitatea unui SVM extern.
+\end{itemize}
+
+În concluzie, lucrarea demonstrează că rețelele neuronale cu impulsuri sunt capabile să extragă trăsături relevante chiar și în regim nesupervizat, deschizând perspective reale pentru sisteme de recunoaștere a emoțiilor eficiente energetic, de tip \textit{Edge AI}.

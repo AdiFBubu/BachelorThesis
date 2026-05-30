@@ -1,14 +1,14 @@
-\chapter{Numele aplicației}
+\chapter{Neuro-Guardian}
 
-\chapter{Colectarea cerințelor}
+\section{Colectarea cerințelor}
 
 În cadrul acestui capitol sunt detaliate funcționalitățile sistemului Neuro-Guardian, interacțiunile dintre utilizatori și platformă, precum și constrângerile tehnice sub care funcționează soluția propusă.
 
-\section{Actorii sistemului}
+\subsection*{Actorii sistemului}
 
 Actorii reprezintă entitățile externe care interacționează cu sistemul. În cadrul platformei Neuro-Guardian, am identificat următoarele categorii:
 
-\begin{itemize}
+\begin{itemize}[noitemsep]
     \item \textbf{Angajat Spital:} Actorul generic care include funcționalitățile de bază de autentificare (Înregistrare, Autentificare, Deconectare).
     \item \textbf{Administrator:} Moștenește trăsăturile angajatului și are responsabilitatea gestionării fluxului administrativ al pacienților (internări, externări și alocarea resurselor/paturilor).
     \item \textbf{Doctor:} Actorul principal în procesul de îngrijire, responsabil de preluarea pacienților și monitorizarea stării lor clinice și emoționale în timp real.
@@ -16,7 +16,7 @@ Actorii reprezintă entitățile externe care interacționează cu sistemul. În
     \item \textbf{CSNN - Convolutional Spiking Neural Network (Sistem Extern):} Modelul de inteligență artificială care procesează cadrele recepționate și returnează predicțiile emoționale.
 \end{itemize}
 
-\section{Diagrama cazurilor de utilizare}
+\subsection*{Diagrama cazurilor de utilizare}
 
 Diagrama cazurilor de utilizare, prezentată în Figura \ref{fig:diagrama_uml}, oferă o imagine de ansamblu asupra modului în care funcționalitățile sunt distribuite între actori.
 
@@ -27,7 +27,7 @@ Diagrama cazurilor de utilizare, prezentată în Figura \ref{fig:diagrama_uml}, 
     \label{fig:diagrama_uml}
 \end{figure}
 
-\section{Descrierea detaliată a unui caz de utilizare}
+\subsection*{Descrierea detaliată a unui caz de utilizare}
 
 În această secțiune este detaliat fluxul principal de interacțiune pentru cazul de utilizare \textbf{Gestionare Pacienți}, reprezentat grafic în Figura \ref{fig:diagrama_uml}. Acest caz de utilizare este central pentru activitatea clinică a medicului, asigurând tranziția între selecția pacienților și monitorizarea activă.
 
@@ -69,7 +69,7 @@ Diagrama cazurilor de utilizare, prezentată în Figura \ref{fig:diagrama_uml}, 
 3a. Lista „Available patients” apare goală; medicul poate gestiona doar portofoliul actual de pacienți (se revine la pasul 6 din MSS). \\ \hline
 
 \rowcolor[HTML]{EFEFEF} 
-\multicolumn{1}{|l|}{\textbf{Excepții}} \\ \hline
+\multicolumn{2}{|l|}{\textbf{Excepții}} \\ \hline
 \textbf{Excepție 1} & \textbf{Pacientul este externat simultan:} Sistemul blochează preluarea și notifică medicul că datele nu mai sunt disponibile. \\ \hline
 
 \rowcolor[HTML]{EFEFEF} 
@@ -81,12 +81,12 @@ Diagrama cazurilor de utilizare, prezentată în Figura \ref{fig:diagrama_uml}, 
 \label{tab:detaliu_gestiune}
 \end{table}
 
-\section{Cerințe nefuncționale (NFR)}
+\subsection*{Cerințe nefuncționale (NFR)}
 
 Cerințele nefuncționale definesc criteriile de calitate și constrângerile tehnice ale sistemului.
 
-\subsection{Securitate și control acces}
-\begin{itemize}
+\subsubsection{Securitate și control acces}
+\begin{itemize}[noitemsep]
     \item \textbf{NFR-S1:} Toate operațiile sensibile necesită autentificare pe bază de Bearer JWT.
     \item \textbf{NFR-S2:} Autorizare strictă pe rol (ADMIN vs DOCTOR); medicii pot vizualiza doar pacienții care le sunt asignați.
     \item \textbf{NFR-S3:} Parolele sunt stocate exclusiv în format hashed folosind algoritmul \textit{bcrypt}.
@@ -94,29 +94,29 @@ Cerințele nefuncționale definesc criteriile de calitate și constrângerile te
     \item \textbf{NFR-S5:} Validarea riguroasă a input-ului la frontierele API (câmpuri obligatorii, formate de timestamp valide).
 \end{itemize}
 
-\subsection{Confidențialitate și protecția datelor}
-\begin{itemize}
+\subsubsection{Confidențialitate și protecția datelor}
+\begin{itemize}[noitemsep]
     \item \textbf{NFR-P1:} Datele pacienților sunt accesibile doar personalului medical autorizat direct.
     \item \textbf{NFR-P2:} Minimizarea expunerii datelor; sistemul nu afișează informații care nu sunt necesare contextului clinic curent.
     \item \textbf{NFR-P3:} Comunicația între client și server se realizează prin protocoale criptate HTTPS/WSS (TLS).
 \end{itemize}
 
-\subsection{Performanță și timp real}
-\begin{itemize}
+\subsubsection{Performanță și timp real}
+\begin{itemize}[noitemsep]
     \item \textbf{NFR-F1:} Afișarea emoțiilor se realizează aproape în timp real prin WebSocket, cu o latență minimă, în timp ce persistarea în baza de date se face periodic.
     \item \textbf{NFR-F2:} Limitarea backlog-ului de cadre video procesate pentru a preveni consumul excesiv de memorie RAM pe client.
     \item \textbf{NFR-F3:} Dashboard-ul rămâne responsiv și funcțional chiar și în perioadele de indisponibilitate a motorului de analiză AI.
 \end{itemize}
 
-\subsection{Fiabilitate și disponibilitate}
-\begin{itemize}
+\subsubsection{Fiabilitate și disponibilitate}
+\begin{itemize}[noitemsep]
     \item \textbf{NFR-R1:} Mecanism de \textit{fallback}: dacă InfluxDB este indisponibil, sistemul utilizează baza de date principală (Postgres) sau date sintetice pentru continuitate.
     \item \textbf{NFR-R2:} Interfața semnalează vizual deconectarea modelului AI, permițând utilizatorului să continue alte activități administrative.
     \item \textbf{NFR-R3:} Operațiile critice (Check-in/Check-out) sunt tratate tranzacțional pentru a menține consistența între starea patului și cea a pacientului.
 \end{itemize}
 
-\subsection{Uzabilitate și Mentenabilitate}
-\begin{itemize}
+\subsubsection{Uzabilitate și Mentenabilitate}
+\begin{itemize}[noitemsep]
     \item \textbf{NFR-U1:} Interfața oferă feedback vizual clar pentru stările de încărcare sau eroare (Loading/Error states).
     \item \textbf{NFR-M1:} Arhitectură modulară bazată pe TypeScript, cu separare clară între controller, rute și servicii.
     \item \textbf{NFR-M3:} Aplicația este cross-platform (Windows/Linux) utilizând stack-ul Node.js și Vite.
@@ -125,7 +125,7 @@ Cerințele nefuncționale definesc criteriile de calitate și constrângerile te
 \section{Modelul structural}
 \label{sec:model-structural}
 
-\subsection{Backend}
+\subsection*{Backend}
 \label{subsec:model-structural-backend}
 
 \begin{figure}[htbp]
@@ -162,7 +162,7 @@ Pentru integrarea cu infrastructura, arhitectura este extinsă cu etichetele \te
 
 Persistența și integrarea sunt decuplate prin gateway-uri: \textit{PrismaClient} mediază accesul la baza de date relațională (PostgreSQL), iar \textit{InfluxGateway} asigură scrierea/citirea seriilor temporale în InfluxDB, pentru vizualizări și analiză istorică. Separat de fluxul HTTP, Figura~\ref{fig:backend-ecb-stream} prezintă canalul de procesare în timp real pentru inferență: \textit{WsServer} acceptă conexiuni de la clientul WebSocket al aplicației web, iar \textit{WsTcpBridge} orchestrează fluxul dintre WebSocket și modelul extern, trimițând frame-urile prin \textit{TcpModelClient} către \textit{TcpModelServer}. Rezultatele inferenței (probabilități) sunt retransmise către client, păstrând responsabilitățile de transport separate de logica de business și de mecanismele de stocare.
 
-\subsection{Frontend}
+\subsection*{Frontend}
 \label{subsec:model-structural-frontend}
 
 % Necesită \usepackage{subcaption} în preambul (pentru subfigure).
@@ -207,7 +207,7 @@ Figura~\ref{fig:frontend-ecb-doctor} descrie fluxul principal al medicului: \tex
 
 În Figura~\ref{fig:frontend-ecb-admin} este reprezentat fluxul administrativ, unde \textit{AdminDashboard} gestionează operațiile de check-in/check-out și statusul secțiilor/paturilor folosind DTO-uri precum \textit{WardStatus}, \textit{WardBedStatus} și \textit{AdminPatient}. Ca și în cazul medicului, comunicarea cu backend-ul este abstractizată prin \textit{useAuth} și aceeași infrastructură de transport/configurare, menținând UI-ul concentrat pe logică de prezentare și pe interacțiunile specifice rolului.
 
-\subsection{Diagrama entitate--relație (ER)}
+\subsection*{Diagrama entitate--relație (ER)}
 \label{subsec:model-structural-er}
 
 \begin{figure}[htbp]
@@ -226,7 +226,7 @@ Modelarea spitalului și a monitorizării este structurată în jurul entități
 \section{Modelul dinamic al sistemului}
 \label{sec:model-dinamic}
 
-\subsection{Diagrama de secvență: Monitorizare live}
+\subsection*{Diagrama de secvență: Monitorizare live}
 \label{subsec:model-dinamic-secventa-live}
 
 \begin{figure}[htbp]
@@ -242,7 +242,7 @@ Pe backend, serverul WebSocket primește cadrele și le direcționează către u
 
 La nivel de UI, probabilitățile primite sunt folosite pentru actualizarea stării de monitorizare (grafice, distribuții, evenimente clinice) fără a bloca interacțiunea utilizatorului. Oprirea monitorizării închide conexiunea WebSocket și eliberează resursele de captură (oprirea track-urilor camerei), închizând complet bucla de streaming.
 
-\subsection{Diagrama de comunicare: Vizualizare timeline}
+\subsection*{Diagrama de comunicare: Vizualizare timeline}
 \label{subsec:model-dinamic-comunicare-timeline}
 
 \begin{figure}[htbp]
@@ -252,7 +252,14 @@ La nivel de UI, probabilitățile primite sunt folosite pentru actualizarea stă
   \label{fig:comm-timeline}
 \end{figure}
 
-Figura~\ref{fig:comm-timeline} evidențiază participanții și dependențele dintre ei pentru afișarea timeline-ului clinic. Interfața medicului declanșează cererea \texttt{/detail}, autorizată prin token JWT, proces prin care backend-ul orchestrează încărcarea metadatelor pacientului și a istoricului de monitorizare. Datele istorice, denumite \texttt{timelineHistory}, sunt preluate preferențial din \textit{InfluxDB} via \textit{gateway}, aplicându-se un mecanism de \textit{fallback} pe \textit{PostgreSQL} în cazul indisponibilității bazei de date temporale. La fiecare nouă inferență de emoții aceste date istorice sunt actualizate prin adăugarea ultimelor probabilități primite. Pentru a asigura continuitatea vizuală a graficului și o experiență de utilizare fluidă, sistemul implementează un mecanism de eșantionare locală la nivelul interfeței. Astfel, la fiecare $500$ ms, buffer-ul local de memorie, \texttt{emotionHistory} — care reține datele din ultimele $65$ de minute — este actualizat prin adăugarea de noi puncte de date. În intervalele în care nu sunt recepționate cadre noi de la motorul de inferență AI, valorile emoțiilor sunt menținute constante, corespunzând ultimelor probabilități identificate. Matematic, acest comportament este echivalent cu un filtru de menținere de ordin zero (\textit{Zero-Order Hold}), unde valoarea funcției de stare $E(t)$ rămâne invariantă între două momente de detecție succesive $t_n$ și $t_{n+1}$:\begin{equation}E(t) = E(t_n), \quad \text{pentru} \quad t_n \leq t < t_{n+1}\label{eq:zoh_emotions}\end{equation}În final, payload-ul vizualizat de medic reprezintă o concatenare (\textit{mergedMonitorHistory}) a celor două fluxuri: \texttt{timelineHistory} (datele persistate) și \texttt{emotionHistory} (datele curente din memoria volatilă). Acest set de date unificat este mapat către componenta \textit{LiveSpikeMonitor}, care utilizează biblioteca \textit{Recharts} pentru randarea graficului în timp real, oferind o rezoluție de $0.5$ secunde. Un exemplu vizual intuitiv este oferit în Figura~\ref{fig:visual-timeline}. Alertele actualizate sunt folosite de mecanismul de notificări pentru a anunța doctorul schimbări importante legate de starea emoțională a pacientului. 
+Figura~\ref{fig:comm-timeline} evidențiază participanții și dependențele dintre ei pentru afișarea timeline-ului clinic. Interfața medicului declanșează cererea \texttt{/detail}, autorizată prin token JWT, proces prin care backend-ul orchestrează încărcarea metadatelor pacientului și a istoricului de monitorizare. Datele istorice, denumite \texttt{timelineHistory}, sunt preluate preferențial din \textit{InfluxDB} via \textit{gateway}, aplicându-se un mecanism de \textit{fallback} pe \textit{PostgreSQL} în cazul indisponibilității bazei de date temporale. La fiecare nouă inferență de emoții aceste date istorice sunt actualizate prin adăugarea ultimelor probabilități primite. Pentru a asigura continuitatea vizuală a graficului și o experiență de utilizare fluidă, sistemul implementează un mecanism de eșantionare locală la nivelul interfeței. Astfel, la fiecare $500$ ms, buffer-ul local de memorie, \texttt{emotionHistory} — care reține datele din ultimele $65$ de minute — este actualizat prin adăugarea de noi puncte de date. În intervalele în care nu sunt recepționate cadre noi de la motorul de inferență AI, valorile emoțiilor sunt menținute constante, corespunzând ultimelor probabilități identificate. Matematic \ref{eq:zoh_emotions}, acest comportament este echivalent cu un filtru de menținere de ordin zero (\textit{Zero-Order Hold}), unde valoarea funcției de stare $E(t)$ rămâne invariantă între două momente de detecție succesive $t_n$ și $t_{n+1}$.
+
+\begin{equation}
+	E(t) = E(t_n), \quad \text{pentru} \quad t_n \leq t < t_{n+1}
+	\label{eq:zoh_emotions}
+	\end{equation}
+
+În final, payload-ul vizualizat de medic reprezintă o concatenare (\textit{mergedMonitorHistory}) a celor două fluxuri: \texttt{timelineHistory} (datele persistate) și \texttt{emotionHistory} (datele curente din memoria volatilă). Acest set de date unificat este mapat către componenta \textit{LiveSpikeMonitor}, care utilizează biblioteca \textit{Recharts} pentru randarea graficului în timp real, oferind o rezoluție de $0.5$ secunde. Un exemplu vizual intuitiv este oferit în Figura~\ref{fig:visual-timeline}. Alertele actualizate sunt folosite de mecanismul de notificări pentru a anunța doctorul schimbări importante legate de starea emoțională a pacientului. 
 
 \begin{figure}[htbp]
   \centering
@@ -261,7 +268,7 @@ Figura~\ref{fig:comm-timeline} evidențiază participanții și dependențele di
   \label{fig:visual-timeline}
 \end{figure}
 
-\subsection{Diagrama de deployment}
+\subsection*{Diagrama de deployment}
 \label{subsec:model-structural-deployment}
 
 \begin{figure}[htbp]
@@ -271,7 +278,7 @@ Figura~\ref{fig:comm-timeline} evidențiază participanții și dependențele di
   \label{fig:deployment}
 \end{figure}
 
-Figura~\ref{fig:deployment} evidențiază distribuția fizică a sistemului: aplicația web rulează în browser (interfața React) și comunică cu backend-ul Node.js atât sincron prin REST/HTTP (pentru operații CRUD și încărcarea datelor), cât și asincron prin WebSocket (pentru streaming de cadre și rezultate). Backend-ul accesează persistența relațională în PostgreSQL prin Prisma și utilizează InfluxDB ca depozit time-series pentru timeline-uri, iar inferența este externalizată către un server de model dedicat, accesat prin TCP. Între TCP și WS există o punte de legătură (\textit{TsTcpBridge}) ce asigură comunicarea între cele 2 protocoale.
+Figura~\ref{fig:deployment} evidențiază distribuția fizică a sistemului: aplicația web rulează în browser (interfața React) și comunică cu backend-ul Node.js atât sincron prin REST/ HTTP (pentru operații CRUD și încărcarea datelor), cât și asincron prin WebSocket (pentru streaming de cadre și rezultate). Backend-ul accesează persistența relațională în PostgreSQL prin Prisma și utilizează InfluxDB ca depozit time-series pentru timeline-uri, iar inferența este externalizată către un server de model dedicat, accesat prin TCP. Între TCP și WS există o punte de legătură (\textit{TsTcpBridge}) ce asigură comunicarea între cele 2 protocoale.
 
 \subsubsection{Motivația utilizării PostgreSQL + InfluxDB}
 \label{subsubsec:postgres-influx-motivatie}
@@ -308,7 +315,7 @@ Arhitectura permite ca timeline-ul să fie citit cu prioritate din InfluxDB (dac
 iar în caz contrar din persistența relațională; astfel, sistemul rămâne funcțional chiar și în situații de configurare incompletă
 sau indisponibilitate temporară a depozitului time-series.
 
-\subsection{Diagrama de stare: \textit{PatientAlert}}
+\subsection*{Diagrama de stare: \textit{PatientAlert}}
 \label{subsec:model-dinamic-stare-patientalert}
 
 \begin{figure}[htbp]
@@ -350,7 +357,7 @@ Cea de-a doua metrică, scorul de \textbf{Pain} ($S_P$), reprezintă o medie pon
 
 O alertă trece în starea \textit{Active} atunci când valoarea rezultată din ecuația~\eqref{eq:final_score} respectă condiția $S_{final} \geq 70$. În timpul stării active, severitatea și mesajul sunt actualizate dinamic pe baza noilor citiri. Pentru a evita declanșarea repetitivă a notificărilor la fluctuații minore, rezolvarea alertei se produce doar atunci când $S_{final} < 55$, moment în care alertarea este dezactivată și se înregistrează timpul de rezolvare.
 Toate aceste actualizări au loc la persistarea unui nou reading de emoții, backendul calculând severitatea pe baza scorului:
-  \begin{itemize}
+  \begin{itemize}[noitemsep]
     \item \texttt{HIGH} dacă $\text{score} \ge 85$,
     \item \texttt{MEDIUM} dacă $\text{score} \ge 72$,
     \item \texttt{LOW} în caz contrar.
@@ -360,7 +367,7 @@ Toate aceste actualizări au loc la persistarea unui nou reading de emoții, bac
 Sistemul calculează și alerte \textbf{derivate} (nepersistate), pe baza unui \textit{timeline} de emoții pe o fereastră de timp
 (ex. 24h sau 7d). Aceste alerte urmăresc episoade susținute, nu doar vârfuri scurte:
 
-\begin{itemize}
+\begin{itemize}[noitemsep]
   \item Se generează o alertă de tip \texttt{DISTRESS} sau \texttt{PAIN} dacă scorul corespunzător rămâne peste \textbf{65\%}
         timp de cel puțin \textbf{60 minute}.
   \item Mesajul include durata episodului și vârful (peak) atins în acea perioadă.
@@ -387,12 +394,12 @@ obținere a unui nou \textit{snapshot} de monitorizare din backend.
     \end{minipage}
 \end{figure}
 
-\subsection{Diagrama de activități: Check-in pacient}
+\subsection*{Diagrama de activități: Check-in pacient}
 \label{subsec:model-dinamic-activity-checkin}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.97\textwidth]{figures/diagrams/diagrama-activitati.pdf}
+  \includegraphics[height=0.45\textheight, keepaspectratio]{figures/diagrams/diagrama-activitati.pdf}
   \caption{Diagrama de activități pentru use case-ul \textit{Check-in pacient}.}
   \label{fig:activity-checkin}
 \end{figure}
@@ -406,7 +413,7 @@ Aplicația integrează un mecanism multi-nivel de alertare, destinat în princip
 Semnalele sunt generate atât \textbf{în timp real} (din probabilitățile inferate de model), cât și \textbf{la nivel backend}
 (din istoricul pacientului și alertele persistate). În plus, există notificări operaționale (erori/stări de funcționare).
 
-\subsection{Evenimente clinice în sesiune (Live Session Events)}
+\subsection*{Evenimente clinice în sesiune (Live Session Events)}
 \label{subsec:live-session-events}
 
 La recepționarea fiecărui vector de probabilități de la modelul de inferență, valorile emoționale sunt supuse unui proces de normalizare în intervalul $[0, 100]$, fiind ulterior redate în interfața medicului sub formă de procente. Această vizualizare a emoțiilor curente, exemplificată în Figura~\ref{fig:sentiment-distribution-ui}, oferă o analiză granulară a profilului afectiv, permițând identificarea rapidă a stărilor dominante și a nuanțelor emoționale ale pacientului. Simultan cu afișarea brută a datelor, sistemul execută un mecanism de analiză euristică pentru identificarea episoadelor emoționale semnificative. Se determină emoția dominantă ($E_{max}$) prin identificarea valorii maxime din setul de probabilități curente. Dacă această valoare depășește pragul critic de activare, stabilit la un nivel de încredere de $60\%$, sistemul generează automat un eveniment clinic (\textit{Clinical Event}), conform logicii descrise în relația~\eqref{eq:clinical_event_trigger}:
@@ -421,7 +428,7 @@ La recepționarea fiecărui vector de probabilități de la modelul de inferenț
 
 Structura și comportamentul acestor evenimente sunt definite prin următoarele caracteristici tehnice, așa cum reiese și din detaliile surprinse în figurile de mai jos:
 
-\begin{itemize}
+\begin{itemize}[noitemsep]
   \item \textbf{Trigger}: $\max(\text{emotii}) > 60\%$.
   \item \textbf{Conținut}: emoția dominantă, intensitatea (în \%), timestamp și un mesaj selectat aleator din 3 variante predefinite (pentru a evita repetitivitatea).
   \item \textbf{Afișare}: evenimentele apar în panoul \textit{Clinical Insights} la secțiunea \textit{Live Session Events}.
@@ -446,8 +453,10 @@ Structura și comportamentul acestor evenimente sunt definite prin următoarele 
 \end{figure}
 
 
-\subsection{Indicatori rezumați în UI}
+\subsection*{Indicatori rezumați în UI}
 \label{subsec:ui-indicators}
+
+Pentru a facilita monitorizarea rapidă și eficientă a stării pacientului, interfața grafică a aplicației integrează o serie de indicatori sintetici care agregă datele brute în metrici vizuale de nivel înalt. Aceștia au rolul de a traduce fluxurile complexe de date emoționale în informații intuitive și direct acționabile pentru cadrul clinic. În continuare, sunt detaliate logica matematică de calcul și modalitățile de reprezentare în interfață pentru cele două componente principale: nivelul de risc clinic (\textit{Clinical Risk Level}) și tipul sesiunii (\textit{Session Type}).
 
 \subsubsection{Clinical Risk Level (Low / Medium / High)}
 \label{subsubsec:clinical-risk-level}
@@ -477,7 +486,7 @@ Exemplele vizuale pentru cele trei niveluri sunt prezentate în Figura~\ref{fig:
     \caption{Low}
     \label{fig:risk-low}
   \end{subfigure}\hfill
-  \begin{subfigure}[t]{0.36\textwidth}
+  \begin{subfigure}[t]{0.34\textwidth}
     \centering
     \includegraphics[width=\linewidth]{figures/app/medium-clinical-risk-level.png}
     \caption{Medium}
@@ -532,7 +541,7 @@ Exemplele vizuale pentru cele trei tipuri sunt prezentate în Figura~\ref{fig:se
   \label{fig:session-types}
 \end{figure}
 
-\subsection{Notificare la schimbarea nivelului de risc}
+\subsection*{Notificare la schimbarea nivelului de risc}
 \label{subsec:risk-change-notification}
 
 Sistemul urmărește dinamica lui \textit{riskLevel} și notifică medicul \textbf{doar când există o schimbare}:
@@ -546,15 +555,15 @@ Exemplele vizuale ce apar timp de 5 secunde în partea dreaptă de sus pentru ce
 
 \begin{figure}[htbp]
   \centering
-  \begin{subfigure}[t]{0.30\textwidth}
+  \begin{subfigure}[t]{0.48\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{figures/app/risk-increased.png}
+    \includegraphics[width=0.55\linewidth]{figures/app/risk-increased.png}
     \caption{Notificare de degradare (\textit{Risk Increased}).}
     \label{fig:risk-increased}
   \end{subfigure}\hfill
-  \begin{subfigure}[t]{0.34\textwidth}
+  \begin{subfigure}[t]{0.48\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{figures/app/risk-decreased.png}
+    \includegraphics[width=0.60\linewidth]{figures/app/risk-decreased.png}
     \caption{Notificare de îmbunătățire (\textit{Risk Decreased}).}
     \label{fig:risk-decreased}
   \end{subfigure}
@@ -562,7 +571,7 @@ Exemplele vizuale ce apar timp de 5 secunde în partea dreaptă de sus pentru ce
   \label{fig:risk-notification}
 \end{figure}
 
-\subsection{Notificări operaționale (erori și stări de funcționare)}
+\subsection*{Notificări operaționale (erori și stări de funcționare)}
 \label{subsec:operational-notifications}
 
 Pe lângă alertarea clinică, aplicația comunică și stări/erori operaționale prin mesaje vizuale:
@@ -576,7 +585,7 @@ Pe lângă alertarea clinică, aplicația comunică și stări/erori operaționa
 
 \section{Testarea aplicației}
 
-\subsection{Testare white-box}
+\subsection*{Testare white-box}
 \label{subsec:whitebox-compact}
 
 \subsubsection{Metoda analizata}
@@ -607,23 +616,18 @@ Pentru metoda analizată, au fost identificate 8 predicate de decizie ($D$), car
 Determinarea complexității ciclomatrice ($CC$) se bazează pe teoria grafurilor aplicată fluxului de control al programului. Relația fundamentală utilizată este formula lui McCabe, introdusă de Thomas McCabe în lucrarea sa fundamentală din 1976 \cite{mccabe1976}, fiind definită în ecuația \ref{eq:mccabe}:
 
 \begin{equation} \label{eq:mccabe}
-	CC = E - N + 2P
+	CC = E - N + 2P,
 \end{equation}
-
-Unde variabilele reprezintă:
-\begin{itemize}
-	\item $E$ -- numărul de muchii (edges) din graful de flux;
-	\item $N$ -- numărul de noduri (nodes);
-	\item $P$ -- numărul de componente conexe (pentru o singură metodă, $P=1$).
-\end{itemize}
+unde variabilele reprezintă:
+$E$ -- numărul de muchii (edges) din graful de flux; $N$ -- numărul de noduri (nodes); $P$ -- numărul de componente conexe (pentru o singură metodă, $P=1$).
 
 Aplicând această metodologie asupra grafului de flux de control (CFG) generat - ilustrat în Figura \ref{fig:cfg-derive-prolonged-alert}, complexitatea a fost calculată prin trei metode convergente:
 
-\begin{align*}
-	1. & \quad CC = \text{numărul de regiuni planare ale grafului} = 9 \\
-	2. & \quad CC = D + 1 = 8 + 1 = 9 \\
-	3. & \quad \text{Conform ecuației \ref{eq:mccabe}: } CC = 37 - 30 + 2 * 1 = 9
-\end{align*}
+\begin{itemize}[noitemsep]
+	\item CC = \text{numărul de regiuni planare ale grafului} = 9 
+	\item CC = D + 1 = 8 + 1 = 9
+	\item \text{Conform ecuației \ref{eq:mccabe}: } CC = 37 - 30 + 2 * 1 = 9
+\end{itemize}
 
 \begin{figure}[htbp]
   \centering
@@ -631,8 +635,6 @@ Aplicând această metodologie asupra grafului de flux de control (CFG) generat 
   \caption{CFG pentru \texttt{deriveProlongedAlert}.}
   \label{fig:cfg-derive-prolonged-alert}
 \end{figure}
-
-\subsubsection{Drumuri independente (set minim teoretic, CC=9)}
 
 Pentru CFG-ul metodei, complexitatea ciclomatrica este $CC=9$, deci exista 9 drumuri independente teoretice  care trebuie parcurse în faza de testare unitară pentru a asigura o acoperire completă la nivel de decizie. În Tabelul \ref{tab:mapare-testare} este un set practic de drumuri independente descrise prin semnătura deciziilor $D_1 \ldots D_8$.
 
@@ -656,8 +658,6 @@ Pentru CFG-ul metodei, complexitatea ciclomatrica este $CC=9$, deci exista 9 dru
 		R9 & Închidere streak scurt (Sub prag, streak-ul nu are 60 min) & $D_1=F, D_2=T, D_3=F, D_5=F, D_7=F, D_2=F, D_6=T$ \\ \hline		
 	\end{tabular}
 \end{table}
-
-\subsubsection{Maparea testelor pe drumuri independente (P1--P9)}
 
 Pentru funcția analizată, setul de teste white-box, ilustrat în Tabelul \ref{tab:whitebox-io-compact}, a fost construit astfel încât fiecare drum independent din CFG să fie acoperit de cel puțin un test.
 
@@ -691,27 +691,10 @@ Pentru funcția analizată, setul de teste white-box, ilustrat în Tabelul \ref{
 	\textit{Notă:} În coloana „Drumuri asociate”, am listat succesiunea de ramificări logice prin care trece execuția. De exemplu, R5 $\rightarrow$ R7 $\rightarrow$ R2 înseamnă: deschidere streak în buclă , actualizare peak la a doua iterație și generare alertă la ieșirea finală din funcție.
 \end{table}
 
-\[
-\text{Path coverage} = \frac{9}{9} = 100\%
-\]
-
-\noindent
-Rezultatul confirmă acoperirea completă a setului minim de drumuri independente identificat prin complexitatea ciclomatrică.
-
-\section{Testarea de integrare}
+\section{Testarea de integrare (Top-down, Depth-first)}
 \label{sec:testare-integrare}
 
-% =========================================================
-% Testare de integrare (Top-down, Depth-first) — Step 1..5
-% (include containere Docker pentru Step 4 si Step 5)
-% =========================================================
-
-\subsection{Testare de integrare (Top-down, Depth-first)}
-\label{subsec:integration-depth-first}
-
 Validarea sistemului a fost realizată printr-o abordare incrementală de tip \textit{Top-down, Depth-first}. Această metodă a permis verificarea timpurie a fluxului critic de date, asigurându-se că integrarea componentelor respectă arhitectura definită și că datele circulă corect de la interfața HTTP până la nivelul de persistență.
-
-\subsubsection{Obiectiv și Strategie}
 
 Obiectivul principal a fost validarea completă a endpoint-ului \newline \texttt{POST /api/doctor/patients/:patientId/readings}, care reprezintă nucleul funcțional al aplicației (colectarea de telemetrie și generarea de alerte). Strategia adoptată a presupus integrarea progresivă a componentelor conform următorului lanț de dependențe:
 
@@ -737,8 +720,6 @@ Procesul a fost structurat în cinci etape distincte, detaliate în \textbf{Tabe
 		5 & Time-series / Telemetry & Integrarea cu InfluxDB: flux complet de scriere și citire a metricilor pe axa temporală. & Fără (Sistem complet) \\ \hline
 	\end{tabular}
 \end{table}
-
-\subsubsection{Validarea Fluxului de Date (Input/Output)}
 
 Pentru fiecare etapă definită anterior, au fost stabilite seturi riguroase de date de intrare și rezultate așteptate. Această trasabilitate asigură faptul că nicio componentă nouă introdusă în lanț nu alterează logica validată anterior.
 
@@ -766,110 +747,16 @@ Corelarea dintre input-ul simulat și răspunsul sistemului pentru fiecare pas d
 Pentru a garanta fidelitatea testelor față de mediul de producție, s-a renunțat la bazele de date \textit{in-memory} în favoarea unor instanțe reale rulate în containere. Suita de teste utilizează următoarele instrumente:
 
 \begin{itemize}
-	\item \textbf{Jest \& Supertest:} Cadru de testare și bibliotecă pentru simularea cererilor HTTP fără ridicarea manuală a serverului.
+	\item \textbf{Jest \& Supertest:} Cadru de testare și bibliotecă pentru simularea cererilor HTTP fără pornirea manuală a serverului.
 	\item \textbf{Testcontainers:} Gestionarea automată a ciclului de viață pentru containerele Docker (\texttt{postgres:16-alpine} și \texttt{influxdb:2.7-alpine}).
 	\item \textbf{Prisma Migrations:} Sincronizarea automată a schemei bazei de date înainte de execuția testelor prin \texttt{prisma migrate deploy}.
 \end{itemize}
 
 Această infrastructură permite izolarea completă a fiecărui test, asigurând un mediu curat (prin mecanisme de \textit{cleanup} post-test) pentru fiecare iterație a strategiei \textit{depth-first}.
 
-%\subsection{Sistemul testat}
-%Sistemul sub test (SUT) este backend-ul \texttt{Neuro-Guardian}, expus prin endpoint-uri REST:
-%\begin{itemize}
-%	\item \texttt{/api/auth/*}
-%	\item \texttt{/api/admin/*}
-%	\item \texttt{/api/doctor/*}
-%\end{itemize}
-%
-%In acest capitol, infrastructura rulata este:
-%\begin{itemize}
-%	\item Node.js + Express (real);
-%	\item PostgreSQL in container (real);
-%	\item Prisma ORM (real).
-%\end{itemize}
-%
-%Pentru a izola focusul pe reguli functionale de sistem, integrarea Influx este dezactivata in aceasta suita.
-
-%\subsection{Tehnici de proiectare a testelor}
-%\subsubsection{ECP (Equivalence Class Partitioning)}
-%Datele de intrare sunt partitionate in clase echivalente valide si invalide.
-%S-a aplicat pe endpoint-ul de check-in administrativ:
-%\begin{itemize}
-%	\item clasa rol invalid pentru endpoint-ul admin (DOCTOR pe ruta ADMIN) $\rightarrow 403$;
-%	\item clasa payload incomplet (camp obligatoriu lipsa) $\rightarrow 400$;
-%	\item clasa pat inexistent $\rightarrow 404$;
-%	\item clasa valida (pat liber, payload complet) $\rightarrow 201$.
-%\end{itemize}
-%
-%\subsubsection{BVA (Boundary Value Analysis)}
-%S-a analizat frontiera pragului de alerta pentru scorul de distres.
-%Din logica de business:
-%$$
-%\text{distressScore} = \frac{anger + fear + sadness}{3}
-%$$
-%Alerta activa de tip DISTRESS este creata daca scorul este $\ge 70$.
-%
-%Au fost testate punctele de frontiera:
-%\begin{itemize}
-%	\item $69.99$ (imediat sub prag) $\rightarrow$ fara alerta activa DISTRESS;
-%	\item $70.00$ (exact prag) $\rightarrow$ alerta activa DISTRESS;
-%	\item $70.01$ (imediat peste prag, \textit{justAboveThreshold}) $\rightarrow$ alerta DISTRESS ramane activa.
-%\end{itemize}
-%
-%\subsubsection{State Transition Testing}
-%Pentru fluxul de refresh token, comportamentul depinde de starea curenta a token-ului.
-%Modelul de stare validat:
-%\begin{center}
-%	\texttt{valid} $\rightarrow$ \texttt{rotated} $\rightarrow$ \texttt{invalid (old)} $\rightarrow$ \texttt{invalid (logout)}
-%\end{center}
-%
-%Concret:
-%\begin{itemize}
-%	\item un refresh token valid poate fi folosit o singura data pentru refresh;
-%	\item token-ul vechi devine invalid dupa rotatie;
-%	\item token-ul nou devine invalid dupa logout.
-%\end{itemize}
-%
-%\subsection{Cazuri de test (System E2E)}
-%\begin{table}[h]
-%	\centering
-%	\begin{tabularx}{\textwidth}{|l|l|X|l|} % X va ocupa restul spațiului disponibil
-%		\hline
-%		\textbf{ID} & \textbf{Tehnica} & \textbf{Scenariu} & \textbf{Rezultat așteptat} \\
-%		\hline
-%		ECP-1 & ECP & Token DOCTOR pe \texttt{/api/admin/check-in} & 403 Forbidden \\
-%		\hline
-%		ECP-2 & ECP & Check-in fără toate câmpurile obligatorii & 400 Bad Request \\
-%		\hline
-%		ECP-3 & ECP & Check-in cu \texttt{bedId} inexistent & 404 Not Found \\
-%		\hline
-%		ECP-4 & ECP & Primul check-in valid pe pat liber, apoi al doilea pe același pat & 201 apoi 409 Conflict \\
-%		\hline
-%		BVA-1 & BVA & Distress = 69.99, apoi 70.00, apoi 70.01 pe același pacient & Fără alertă sub prag, etc. \\
-%		\hline
-%		BVA-2 & BVA & Distress = 70.00 & Alertă \\
-%		\hline
-%		BVA-3 & BVA & Distress = 70.01 & Alertă \\
-%		\hline
-%		ST-1 & State & Register $\rightarrow$ Refresh $\rightarrow$ Reuse token $\rightarrow$ Logout $\rightarrow$ Refresh & 200, 200, 401... \\
-%		\hline
-%	\end{tabularx}
-%	\caption{Setul de teste System E2E pentru capitolul final}
-%	\label{tab:system-e2e-step6}
-%\end{table}
-%
-%\subsection{Concluzie}
-%Prin combinarea ECP, BVA si State Transition la nivel System (E2E), capitolul final acopera atat validari de input si praguri critice, cat si comportamente stateful de securitate (refresh/logout), oferind incredere crescuta in functionarea backend-ului in scenarii reale de utilizare.
-
-% NOTE:
-% - Capitol concis pentru “Manual de utilizare”.
-% - “Pozele simbolice” sunt puse ca placeholder (casete) ca să compileze fără fișiere.
-%   În varianta finală, înlocuiește caseta \fbox{...} cu \includegraphics{...} (dacă folosești screenshot-uri reale).
-
 \section{Manual de utilizare al aplicației}
 \label{ch:manual}
 
-\subsection{Scopul aplicației și roluri}
 Aplicația \textbf{Neuro-Guardian} este o platformă web de monitorizare clinică asistată de analiză emoțională, destinată utilizării în context spitalicesc.
 Utilizarea este organizată pe două roluri:
 \begin{itemize}
@@ -877,16 +764,14 @@ Utilizarea este organizată pe două roluri:
 	\item \textbf{DOCTOR} (personal medical): preia pacienți disponibili și urmărește tabloul de monitorizare (vizualizări, alerte, trenduri).
 \end{itemize}
 
-\subsection{Accesarea aplicației}
-Aplicația se accesează dintr-un browser modern (Chrome/Edge/Firefox), prin adresa pusă la dispoziție (de ex. \texttt{http://localhost:5173/} în rulare locală).
+Aplicația se accesează dintr-un browser modern (Chrome/Edge/Firefox), prin adresa pusă la dispoziție în rulare locală).
 După autentificare, interfața este afișată automat în funcție de rol (ADMIN sau DOCTOR).
 
-\subsection{Autentificare și creare cont}
-\subsubsection{Autentificare (Sign in)}
+\subsection*{Autentificare și creare cont}
+
 Pentru autentificare se introduce adresa de e-mail și parola, apoi se apasă butonul \textit{Sign in}.
 În cazul unor date invalide, aplicația afișează un mesaj de eroare.
 
-\subsubsection{Creare cont (Create account)}
 Pentru înregistrare se introduc e-mailul și parola, apoi se selectează rolul (\textit{Doctor} sau \textit{Administrative}) și se apasă \textit{Create account}.
 Într-un scenariu real, conturile cu rol administrativ pot fi restricționate conform politicilor instituției.
 
@@ -912,7 +797,7 @@ Pentru înregistrare se introduc e-mailul și parola, apoi se selectează rolul 
 	\label{fig:manual-auth}
 \end{figure}
 
-\subsection{Modul ADMIN: Administrative Dashboard}
+\subsection*{Modul ADMIN: Administrative Dashboard}
 După autentificare cu rolul ADMIN, utilizatorul accesează \textit{Administrative Dashboard}, care include următoarele funcționalități principale:
 
 \subsubsection{Reîmprospătare și deconectare}
@@ -966,7 +851,7 @@ Secțiunea \textit{Ward Management} oferă o vedere de ansamblu asupra:
 	\label{fig:manual-admin}
 \end{figure}
 
-\subsection{Modul DOCTOR: Doctor Panel și Monitoring Dashboard}
+\subsection*{Modul DOCTOR: Doctor Panel și Monitoring Dashboard}
 După autentificare cu rolul DOCTOR, utilizatorul poate gestiona pacienții disponibili și poate accesa tabloul de monitorizare.
 
 \subsubsection{Lista pacienților și preluare (Take patient)}
@@ -1014,24 +899,3 @@ Notificarea dispare automat după câteva secunde.
 	\caption{Modul DOCTOR: tabloul de monitorizare și instrumentele de analiză.}
 	\label{fig:manual-monitoring}
 \end{figure}
-
-%\subsection{Situații frecvente și depanare (scurt)}
-%\begin{itemize}
-%	\item \textbf{Nu apar pacienți la DOCTOR}: verifică dacă există pacienți internați (ADMIN) și folosește \textit{Refresh patients}.
-%	\item \textbf{Erori de încărcare / Request failed}: reîncearcă \textit{Refresh}; dacă persistă, re-autentifică-te.
-%	\item \textbf{Camera OFFLINE / MAINTENANCE}: se verifică în modul ADMIN la \textit{Ward Management} și se urmează procedurile tehnice interne.
-%\end{itemize}
-
-\subsection{Confidențialitate și bune practici}
-Aplicația gestionează informații sensibile; se recomandă utilizarea în rețele securizate, păstrarea credențialelor confidențiale și folosirea \textit{Logout} pe dispozitive partajate.
-
-
-
-\section{Proiectare}
-\subsection{Analiza cerințelor}
-\subsection{Diagrama cazurilor de utilizare}
-\subsection{Diagrame de interacțiune}
-\section{Implementare}
-\subsection{Server}
-\subsection{Client}
-\section{Testare}

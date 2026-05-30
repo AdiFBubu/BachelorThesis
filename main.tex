@@ -15,6 +15,8 @@
 \usepackage{makecell}
 \usepackage{longtable}
 \usepackage{array}
+\usepackage{graphicx}
+\usepackage{enumitem}
 
 % ===== In preambul =====
 \usepackage{tikz}
@@ -53,7 +55,10 @@ ABSTRACT
 \vspace{0.5cm}	
 %\cleardoublepage
 
-Abstract: un rezumat în limba engleză cu prezentarea, pe scurt, a conținutului pe capitole, punând accent pe contribuțiile proprii și originalitate
+This thesis investigates the optimization of facial emotion recognition (FER) systems based on Spiking Neural Networks (SNN) through adaptive preprocessing techniques. SNNs represent the third generation of neural network models, processing information via sparse discrete spikes rather than continuous values, offering significant advantages in biological plausibility and energy efficiency.
+The theoretical foundation covers the mathematical modeling of spiking neurons (Leaky Integrate-and-Fire model), neural coding schemes (Rate Coding, Temporal/Latency Coding, Rank Order Coding), synaptic plasticity mechanisms (STDP and its variants), homeostasis through adaptive threshold adaptation, and 3D Convolutional Spiking Neural Network (CSNN) architectures. The preprocessing pipeline integrates the Viola-Jones face detection algorithm, KLT optical flow tracking, 68-point facial landmark extraction, and three sampling strategies (random, bounding-box-based, and landmark-centred) to isolate the Region of Interest before spike conversion.
+Experiments are conducted on the CK+ dataset (309 sequences, 7 emotion classes) using 10-fold cross-validation. The proposed 3D CSNN with unsupervised STDP learning achieves a mean accuracy of 48.02\%, outperforming the raw-pixel SVM baseline (41.61\%) and demonstrating that bio-inspired feature extraction encodes temporally discriminative information. An equivalent ANN with supervised backpropagation achieves 73.23\%, while a high-performance hybrid CNN-LSTM model (ResNet18 backbone) reaches 88.37\% ± 5.65\%, providing a state-of-the-art reference. Feature map and Grad-CAM analyses offer qualitative validation of the regions each model attends to for each emotion class.
+The practical application, Neuro-Guardian, is a real-time clinical monitoring platform that integrates the CSNN inference engine into a hospital workflow. The system comprises a Node.js/Express backend, a React/TypeScript frontend, PostgreSQL for relational data, InfluxDB for emotion time-series, and a WebSocket–TCP bridge for live inference streaming. The alert subsystem implements a hysteresis mechanism (thresholds 70/55) and computes Distress and Pain scores from the inferred emotion probabilities to notify the attending physician of sustained negative emotional states.
 
 
 
@@ -67,12 +72,11 @@ Abstract: un rezumat în limba engleză cu prezentarea, pe scurt, a conținutulu
 %\addcontentsline{toc}{chapter}{Introducere}
 %\addcontentsline{toc}{chapter}{Introduction}
 
+\input{chapters/chapter1_motivatie}
 \input{chapters/chapter1_1_literatura_specialitate}
 \input{chapters/chapter2}
 \input{chapters/chapter3}
-\input{chapters/chapter4}
-\input{chapters/chapter5}
-\input{chapters/chapter6}
+
 \input{chapters/chapter7}
 
 \input{chapters/chapter8_conclusions}
