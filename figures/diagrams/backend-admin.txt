@@ -1,0 +1,48 @@
+---
+config:
+  layout: elk
+  themeVariables:
+    fontSize: '30px'
+---
+classDiagram
+    direction LR
+    class AdminRoutes {}
+    class AdminController {}
+    class AdminService {}
+    class HospitalSetup {}
+    class PrismaClient {}
+    class PostgresDB {}
+    class Ward {}
+    class Bed {}
+    class Patient {}
+    class PatientAlert {}
+
+    <<Boundary>> AdminRoutes
+    <<Boundary>> AdminController
+    <<Control>> AdminService
+    <<Control>> HospitalSetup
+    <<Gateway>> PrismaClient
+    <<External>> PostgresDB
+    <<Entity>> Ward
+    <<Entity>> Bed
+    <<Entity>> Patient
+    <<Entity>> PatientAlert
+
+    AdminRoutes ..> AdminController : delegates to
+    AdminController ..> AdminService : invokes
+    AdminService ..> HospitalSetup : updates config
+    AdminService ..> PrismaClient : mutates
+    PrismaClient o.. PostgresDB : calls
+
+    HospitalSetup ..> Ward : seeds
+    HospitalSetup ..> Bed : seeds
+    
+    AdminService ..> Ward : reads
+    AdminService ..> Bed : allocates/updates
+    AdminService ..> Patient : check-in/out
+    AdminService ..> PatientAlert : resolves
+
+    Ward "1" o-- "*" Bed : beds
+    Ward "1" o-- "*" Patient : patients
+    Bed "1" o-- "*" Patient : patients
+    Patient "1" o-- "*" PatientAlert : alerts

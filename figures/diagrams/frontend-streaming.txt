@@ -1,0 +1,27 @@
+---
+config:
+  layout: elk
+  themeVariables:
+    fontSize: '30px'
+---
+classDiagram
+direction LR
+    class DoctorDashboard {}
+    class CameraStreamer {}
+    class BackendConfig {}
+    class MediaDevices {}
+    class WebSocketClient {}
+    class WsServer {}
+
+    <<Boundary>> DoctorDashboard
+    <<Boundary>> CameraStreamer
+    <<Gateway>> BackendConfig
+    <<External>> MediaDevices
+    <<Boundary>> WebSocketClient
+    <<External>> WsServer
+
+    DoctorDashboard ..> CameraStreamer : emits probabilities
+    CameraStreamer ..> BackendConfig : BACKEND_WS_URL
+    CameraStreamer o..> MediaDevices : getUserMedia()
+    CameraStreamer *..> WebSocketClient : sends frames
+    WebSocketClient --> WsServer : connects to

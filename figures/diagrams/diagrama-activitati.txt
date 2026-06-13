@@ -1,0 +1,54 @@
+---
+config:
+  layout: fixed
+---
+flowchart TB
+    Start(["Start"]) --> Seed["ensureHospitalSeed()"]
+    Seed --> Validate["Validate input <br> (firstName, lastName, nationalId, bedId)"]
+    Validate --> Missing{"Missing required fields?"}
+    Missing -- Yes --> Err400["400 Bad Request <br> CHECKIN_FAILED"]
+    Missing -- No --> Tx["DB Transaction"]
+    Tx --> FindBed["Find Bed by bedId"]
+    FindBed --> BedFound{"Bed exists?"}
+    BedFound -- No --> ErrBed["404 Not Found <br>BED_NOT_FOUND"]
+    BedFound -- Yes --> WardMismatch{"wardId provided <br> and \nbed.wardId != wardId?"}
+    WardMismatch -- Yes --> ErrWard["400 Bad Request <br> BED_WARD_MISMATCH"]
+    WardMismatch -- No --> Occupied{"bed.isOccupied?"}
+    Occupied -- Yes --> ErrOcc["409 Conflict <br> BED_OCCUPIED"]
+    Occupied -- No --> FindPatient["Find Patient by nationalId"]
+    FindPatient --> Exists{"Patient exists?"}
+    Exists -- No --> Create["Create Patient <br> (assign wardId, bedId)"]
+    Exists -- Yes --> Archived{"patient.isArchived?"}
+    Archived -- No --> ErrAlready["409 Conflict <br> PATIENT_ALREADY_CHECKED_IN"]
+    Archived -- Yes --> Update["Update Patient <br> (re-activate + move bed/ward)"]
+    Create --> MarkBed["Update Bed <br> isOccupied = true"]
+    MarkBed --> Commit["Commit transaction"]
+    Commit --> Ok["Return patient payload"]
+    Ok --> End(["End"])
+    Tx -. unexpected error .-> Err500["500 Internal Server Error <br> CHECKIN_FAILED"]
+    Update --> MarkBed
+
+    style Start font-size:24px
+    style Seed font-size:24px
+    style Validate font-size:24px
+    style Missing font-size:24px
+    style Err400 font-size:24px
+    style Tx font-size:24px
+    style FindBed font-size:24px
+    style BedFound font-size:24px
+    style ErrBed font-size:24px
+    style WardMismatch font-size:24px
+    style ErrWard font-size:24px
+    style Occupied font-size:24px
+    style ErrOcc font-size:24px
+    style FindPatient font-size:24px
+    style Exists font-size:24px
+    style Create font-size:24px
+    style Archived font-size:24px
+    style ErrAlready font-size:24px
+    style Update font-size:24px
+    style MarkBed font-size:24px
+    style Commit font-size:24px
+    style Ok font-size:24px
+    style End font-size:24px
+    style Err500 font-size:24px

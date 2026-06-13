@@ -1,0 +1,30 @@
+---
+config:
+  layout: elk
+  themeVariables:
+    fontSize: '30px'
+---
+classDiagram
+    direction LR
+    class ServerBootstrap {}
+    class ExpressApp {}
+    class AuthRoutes {}
+    class DoctorRoutes {}
+    class AdminRoutes {}
+    class AuthMiddleware {}
+
+    <<Boundary>> ServerBootstrap
+    <<Boundary>> ExpressApp
+    <<Boundary>> AuthRoutes
+    <<Boundary>> DoctorRoutes
+    <<Boundary>> AdminRoutes
+    <<Boundary>> AuthMiddleware
+
+    ServerBootstrap ..> ExpressApp : creates
+    ExpressApp *-- AuthRoutes : mounts
+    ExpressApp *-- DoctorRoutes : mounts
+    ExpressApp *-- AdminRoutes : mounts
+
+    DoctorRoutes ..> AuthMiddleware : checks role
+    AdminRoutes ..> AuthMiddleware : checks role
+    AuthRoutes ..> AuthMiddleware : checks session

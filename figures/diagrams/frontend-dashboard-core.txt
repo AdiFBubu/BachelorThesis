@@ -1,0 +1,24 @@
+---
+config:
+  layout: elk
+  themeVariables:
+    fontSize: '30px'
+---
+classDiagram
+direction LR
+    class DoctorDashboard {}
+    class DashboardHeader {}
+    class useAuth {}
+    class BackendConfig {}
+    class BackendHTTP {}
+
+    <<Boundary>> DoctorDashboard
+    <<Boundary>> DashboardHeader
+    <<Control>> useAuth
+    <<Gateway>> BackendConfig
+    <<External>> BackendHTTP
+
+    DoctorDashboard ..> DashboardHeader
+    DoctorDashboard ..> useAuth : api()/logout()
+    DoctorDashboard ..> BackendConfig : backendPaths
+    DoctorDashboard ..> BackendHTTP : loads lists/detail, posts readings

@@ -5,48 +5,49 @@ Reallocating 'name_of_file' (item size: 1) to 6 items.
 The style file: alpha.bst
 Reallocating 'name_of_file' (item size: 1) to 11 items.
 Database file #1: references.bib
-Warning--empty publisher in hebb2002
+Warning--empty journal in bi1998synaptic
+Warning--empty booktitle in thorpe1998
 Warning--empty publisher in thorpe1998
 Warning--empty journal in rossum2000
-You've used 57 entries,
+You've used 50 entries,
             2543 wiz_defined-function locations,
-            889 strings with 14461 characters,
-and the built_in function-call counts, 24526 in all, are:
-= -- 2476
-> -- 1229
-< -- 25
-+ -- 435
-- -- 425
-* -- 1815
-:= -- 4026
-add.period$ -- 174
-call.type$ -- 57
-change.case$ -- 374
-chr.to.int$ -- 56
-cite$ -- 60
-duplicate$ -- 943
-empty$ -- 1721
-format.name$ -- 487
-if$ -- 4989
-int.to.chr$ -- 2
+            856 strings with 13907 characters,
+and the built_in function-call counts, 22046 in all, are:
+= -- 2233
+> -- 1145
+< -- 22
++ -- 409
+- -- 401
+* -- 1687
+:= -- 3650
+add.period$ -- 159
+call.type$ -- 50
+change.case$ -- 338
+chr.to.int$ -- 50
+cite$ -- 54
+duplicate$ -- 812
+empty$ -- 1514
+format.name$ -- 454
+if$ -- 4455
+int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 59
-newline$ -- 289
-num.names$ -- 171
-pop$ -- 307
+missing$ -- 51
+newline$ -- 254
+num.names$ -- 154
+pop$ -- 268
 preamble$ -- 1
-purify$ -- 436
+purify$ -- 392
 quote$ -- 0
-skip$ -- 823
+skip$ -- 689
 stack$ -- 0
-substring$ -- 1447
-swap$ -- 168
-text.length$ -- 25
-text.prefix$ -- 11
+substring$ -- 1314
+swap$ -- 133
+text.length$ -- 22
+text.prefix$ -- 10
 top$ -- 0
-type$ -- 440
-warning$ -- 3
-while$ -- 250
-width$ -- 60
-write$ -- 742
-(There were 3 warnings)
+type$ -- 388
+warning$ -- 4
+while$ -- 222
+width$ -- 53
+write$ -- 657
+(There were 4 warnings)

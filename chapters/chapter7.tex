@@ -6,7 +6,7 @@
 
 \subsection*{Actorii sistemului}
 
-Actorii reprezintă entitățile externe care interacționează cu sistemul. În cadrul platformei Neuro-Guardian, am identificat următoarele categorii:
+Actorii reprezintă entitățile externe care interacționează cu sistemul. În cadrul platformei Neuro-Guardian, sunt identificate următoarele categorii:
 
 \begin{itemize}[noitemsep]
     \item \textbf{Angajat Spital:} Actorul generic care include funcționalitățile de bază de autentificare (Înregistrare, Autentificare, Deconectare).
@@ -22,14 +22,14 @@ Diagrama cazurilor de utilizare, prezentată în Figura \ref{fig:diagrama_uml}, 
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.83\textwidth]{figures/diagrams/UseCaseDiagram.jpg}
+    \includegraphics[width=0.83\textwidth]{figures/diagrams/UseCaseDiagram.png}
     \caption{Diagrama cazurilor de utilizare - Sistemul Neuro-Guardian}
     \label{fig:diagrama_uml}
 \end{figure}
 
-\subsection*{Descrierea detaliată a unui caz de utilizare}
+\subsection*{Descrierea detaliată a cazului de utilizare - Gestionare Pacienți}
 
-În această secțiune este detaliat fluxul principal de interacțiune pentru cazul de utilizare \textbf{Gestionare Pacienți}, reprezentat grafic în Figura \ref{fig:diagrama_uml}. Acest caz de utilizare este central pentru activitatea clinică a medicului, asigurând tranziția între selecția pacienților și monitorizarea activă.
+Acest caz de utilizare, reprezentat grafic în Figura \ref{fig:diagrama_uml}, este central pentru activitatea clinică a medicului, asigurând tranziția între selecția pacienților și monitorizarea activă.
 
 \begin{table}[htbp]
 \centering
@@ -128,100 +128,147 @@ Cerințele nefuncționale definesc criteriile de calitate și constrângerile te
 \subsection*{Backend}
 \label{subsec:model-structural-backend}
 
-\begin{figure}[htbp]
-  \centering
+Organizarea structurală a backend-ului urmează modelul \textit{Entity--Control--Boundary} (ECB) extins cu straturi de izolare tip \textit{Gateway} și \textit{External}, fiind subdivizată pe module funcționale independente pentru asigurarea scalabilității și a unei lizibilități ridicate:
 
-  \begin{subfigure}[t]{0.99\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/diagrams/backend-class-diagram-1.pdf}
-    \caption{API-ul HTTP: Boundary (Express/Routes/Controllers/Middleware), Control (Services) și persistența prin Gateway/External.}
-    \label{fig:backend-ecb-api}
-  \end{subfigure}
-
-  \vspace{0.6em}
-
-  \begin{subfigure}[t]{0.99\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/diagrams/backend-class-diagram-2.png}
-    \caption{Canalul de inferență în timp real: WebSocket \texorpdfstring{$\leftrightarrow$}{<->} TCP (model extern).}
-    \label{fig:backend-ecb-stream}
-  \end{subfigure}
-
-  \caption{Modelul structural al backend-ului, conform ECB (Entity--Control--Boundary) extins cu Gateway și External.}
-  \label{fig:backend-ecb}
-\end{figure}
-
-Figura~\ref{fig:backend-ecb-api} și Figura~\ref{fig:backend-ecb-stream} ilustrează organizarea backend-ului bazată pe modelul arhitectural \textit{Entity--Control--Boundary} (ECB), structură care asigură o separare clară a responsabilităților:
 \begin{itemize}
-  \item \textit{Entity} reprezintă nucleul domeniului, adică modelele persistente gestionate în baza de date (ex.: \textit{User}, \textit{Patient}, \textit{EmotionReading}, \textit{PatientAlert}).
-  \item \textit{Control} concentrează logica de business și orchestrează fluxurile de lucru (serviciile aplicației).
-  \item \textit{Boundary} delimitează interfața către exterior și gestionează comunicarea cu clienții (rute, controllere, middleware, servere de transport).
+	\item \textbf{Rutare și securitate} (Figura~\ref{fig:backend-routing}): \textit{ServerBootstrap} inițializează \textit{ExpressApp}, configurând modulele principale de acces (\textit{AuthRoutes}, \textit{DoctorRoutes}, \textit{AdminRoutes}) și interceptorul global \textit{AuthMiddleware} responsabil de verificarea sesiunilor și validarea rolurilor.
+	
+	\item \textbf{Gestiune utilizatori} (Figura~\ref{fig:backend-auth}): Submodulul de autentificare centralizează logica de business în \textit{AuthService} (invocat direct din \textit{AuthController}). Acesta manipulează entitățile \textit{User} și \textit{RefreshToken}, delegând persistența către baza relațională (PostgreSQL) prin intermediul \textit{PrismaClient}.
+	
+	\item \textbf{Administrare infrastructură} (Figura~\ref{fig:backend-admin}): \textit{AdminService} gestionează organizarea fizică a unității spitalicești. Acesta colaborează cu \textit{HospitalSetup} pentru popularea inițială (seeding) a saloanelor (\textit{Ward}) și paturilor (\textit{Bed}), orchestrând totodată procesele de check-in/out ale pacienților și rezolvarea alertelor acestora la externare.
+	
+	\item \textbf{Monitorizare medicală și telemetrie} (Figura~\ref{fig:backend-doctor}): Reprezintă nucleul clinic, unde \textit{DoctorService} și \textit{MonitoringService} conlucrează pentru supravegherea pacienților. Fluxul utilizează o arhitectură hibridă de stocare: datele de context și alertele clinice (\textit{PatientAlert}) sunt salvate în PostgreSQL prin \textit{PrismaClient}, în timp ce fluxurile de date biometrice (\textit{EmotionReading}) sunt stocate asincron în baza de date temporală InfluxDB via \textit{InfluxGateway}, dar și in PostgreSQL pentru analiza ulterioară a istoricului pacienților și pentru asigurarea unei disponibilități ridicate \textit{High Availability} a sistemului.
+	
+	\item \textbf{Procesare în timp real} (Figura~\ref{fig:backend-ecb-stream}): Decuplat de arhitectura standard HTTP, acest canal utilizează un server dedicat (\textit{WsServer}) pentru menținerea conexiunilor full-duplex cu frontend-ul. Puntea \textit{WsTcpBridge} preia fluxurile și le serializează către un serviciu extern de inferență prin \textit{TcpModelClient}, garantând izolarea execuției modelului de inteligență artificială de restul logicii de aplicație.
 \end{itemize}
 
-Pentru integrarea cu infrastructura, arhitectura este extinsă cu etichetele \textit{Gateway} și \textit{External}, care izolează accesul la servicii externe și decuplează logica internă de detaliile tehnice (de exemplu, accesul la baze de date). În Figura~\ref{fig:backend-ecb-api}, inițializarea aplicației este realizată de \textit{ServerBootstrap} și \textit{ExpressApp}, care montează rutele (\textit{AuthRoutes}, \textit{DoctorRoutes}, \textit{AdminRoutes}) și aplică \textit{AuthMiddleware} pentru validarea sesiunii și a rolurilor. La nivelul stratului de expunere HTTP, componentele de tip controller (AuthController, DoctorController, AdminController) au fost proiectate conform paradigmei de 'thin controllers' (asigurând o logică minimală de procesare) și deleagă operațiile către servicii (\textit{AuthService}, \textit{DoctorService}, \textit{AdminService}), astfel încât regulile de business și validările specifice domeniului să fie centralizate și ușor de întreținut. Serviciile operează asupra entităților domeniului (de exemplu, \textit{AuthService} gestionează \textit{User}/\textit{RefreshToken}, \textit{DoctorService} gestionează \textit{Patient}/\textit{EmotionReading}/\textit{PatientAlert}, iar \textit{AdminService} gestionează \textit{Ward}/\textit{Bed}/\textit{Patient}).
+\begin{figure}[htbp]
+	\centering
+	
+	\begin{subfigure}[t]{0.79\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/diagrams/backend-routing.png}
+		\caption{Core Routing: rute și middleware.}
+		\label{fig:backend-routing}
+	\end{subfigure} \\[2.5ex]
 
-Persistența și integrarea sunt decuplate prin gateway-uri: \textit{PrismaClient} mediază accesul la baza de date relațională (PostgreSQL), iar \textit{InfluxGateway} asigură scrierea/citirea seriilor temporale în InfluxDB, pentru vizualizări și analiză istorică. Separat de fluxul HTTP, Figura~\ref{fig:backend-ecb-stream} prezintă canalul de procesare în timp real pentru inferență: \textit{WsServer} acceptă conexiuni de la clientul WebSocket al aplicației web, iar \textit{WsTcpBridge} orchestrează fluxul dintre WebSocket și modelul extern, trimițând frame-urile prin \textit{TcpModelClient} către \textit{TcpModelServer}. Rezultatele inferenței (probabilități) sunt retransmise către client, păstrând responsabilitățile de transport separate de logica de business și de mecanismele de stocare.
+	\begin{subfigure}[t]{0.99\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/diagrams/backend-auth.png}
+		\caption{Auth Domain: autentificare și utilizatori.}
+		\label{fig:backend-auth}
+	\end{subfigure} \\[2.5ex]
+	
+	\begin{subfigure}[t]{0.99\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/diagrams/backend-admin.png}
+		\caption{Admin Domain: administrare și structură spital.}
+		\label{fig:backend-admin}
+	\end{subfigure} \\[2.5ex]
+	
+	\begin{subfigure}[t]{0.99\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/diagrams/backend-doctor.png}
+		\caption{Doctor \& Telemetry: monitorizare clinică.}
+		\label{fig:backend-doctor}
+	\end{subfigure} \\[2.5ex]
+	
+	\begin{subfigure}[t]{0.99\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/diagrams/backend-class-diagram-2.png}
+		\caption{Canalul de inferență în timp real: WebSocket \texorpdfstring{$\leftrightarrow$}{<->} TCP (model extern).}
+		\label{fig:backend-ecb-stream}
+	\end{subfigure}
+	
+	\caption{Modelul structural descompus al backend-ului, conform paradigmiei ECB (Entity--Control--Boundary) extinse.}
+	\label{fig:backend-ecb}
+\end{figure}
 
 \subsection*{Frontend}
 \label{subsec:model-structural-frontend}
 
-% Necesită \usepackage{subcaption} în preambul (pentru subfigure).
+Modelul structural al frontend-ului (React + TypeScript) respectă arhitectura ECB, adaptată pentru stări de interfață dinamice: componentele \textit{Entity} definesc modele locale, structuri de date și DTO-uri, \textit{Control} concentrează logica de stare prin React hooks custom, iar \textit{Boundary} randează elementele vizuale (pagini și componente). Straturile \textit{Gateway} și \textit{External} decuplează transportul și interacțiunea cu API-urile native ale browserului.
+
+\begin{itemize}
+	\item \textbf{Autentificare și structură de bază} (Figurile~\ref{fig:frontend-ecb-auth} și~\ref{fig:frontend-dashboard-core}): Fundația aplicației randează interfața în funcție de sesiunea utilizatorului, starea globală fiind orchestrată de \textit{useAuth}. Tabloul principal (\textit{DoctorDashboard}) consumă configurările din \textit{BackendConfig} și rutele expuse de \textit{BackendHTTP}, servind drept container modular pentru restul componentelor clinice.
+	
+	\item \textbf{Contextul pacienților} (Figura~\ref{fig:frontend-patient-context}): Componenta \textit{PatientSidebar} afișează informații despre pacientul selectat de doctor pe baza DTO-ului simplificat \textit{DoctorPatientSummary}, care încapsulează referințele spațiale ale acestuia (\textit{WardRef}, \textit{BedRef}). Datele clinice detaliate sunt agregate în \textit{DoctorPatientDetailPayload}, model complex ce reunește informațiile despre pacient (\textit{DoctorPatientSummary}), liniile temporale de monitorizare (\textit{MonitoringPoint}) și alertele asociate (\textit{MonitoringAlert}).
+	
+	\item \textbf{Canalul de streaming video} (Figura~\ref{fig:frontend-streaming}): \textit{CameraStreamer} interfațează direct cu hardware-ul video prin API-ul nativ \textit{MediaDevices}. Aceasta instanțiază un \textit{WebSocketClient} dedicat pentru a transmite fluxul asincron de cadre către \textit{WsServer}-ul backend-ului, propagând ulterior probabilitățile de inferență recepționate înapoi în componentele vizuale.
+	
+	\item \textbf{Analiză și telemetrie clinică} (Figura~\ref{fig:frontend-analytics}): Starea emoțională curentă și istoricul biometric sunt monitorizate local prin hook-ul \textit{useEmotionData}, utilizând modelele \textit{EmotionData}, \textit{EmotionSnapshot} (care conține în plus și momentul înregistrării emoțților) și \textit{ClinicalEvent} (alertele). Afișarea probabilităților asociate fiecărei emoții are loc prin intermediul componentei \textit{SentimentDistribution}, iar graficele evolutive sunt generate dinamic de componenta \textit{LiveSpikeMonitor}, care folosește biblioteca grafică \textit{Recharts}.
+	
+	\item \textbf{Fluxul administrativ} (Figura~\ref{fig:frontend-ecb-admin}): Acest modul izolează complet operațiunile de check-in/out, managementul saloanelor și alocarea paturilor. Deși utilizează DTO-uri specifice domeniului administrativ, componenta partajează aceeași infrastructură comună de transport, securitate și configurare ca și restul aplicației.
+\end{itemize}
 
 \begin{figure}[htbp]
-  \centering
-
-  \begin{subfigure}[t]{0.7\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/diagrams/frontend-class-diagram-1.pdf}
-    \caption{Bootstrap și autentificare (App Shell).}
-    \label{fig:frontend-ecb-auth}
-  \end{subfigure}
-
-  \vspace{0.6em}
-
-  \begin{subfigure}[t]{0.7\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/diagrams/frontend-class-diagram-2.pdf}
-    \caption{Fluxul medicului: monitorizare, vizualizare și streaming live.}
-    \label{fig:frontend-ecb-doctor}
-  \end{subfigure}
-
-  \vspace{0.6em}
-
-  \begin{subfigure}[t]{0.65\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/diagrams/frontend-class-diagram-3.pdf}
-    \caption{Fluxul administrativ: management secții/paturi/pacienți.}
-    \label{fig:frontend-ecb-admin}
-  \end{subfigure}
-
-  \caption{Modelul structural al frontend-ului, conform ECB (Entity--Control--Boundary), extins cu Gateway și External.}
-  \label{fig:frontend-ecb}
+	\centering
+	
+	\begin{subfigure}[t]{0.99\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/diagrams/frontend-class-diagram-1.png}
+		\caption{Bootstrap și autentificare (App Shell).}
+		\label{fig:frontend-ecb-auth}
+	\end{subfigure} \\[2.5ex]
+	
+	\begin{subfigure}[t]{0.67\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/diagrams/frontend-patient-context.png}
+		\caption{Gestiunea pacienților și structura de date.}
+		\label{fig:frontend-patient-context}
+	\end{subfigure} \\[2.5ex]
+	
+	\begin{subfigure}[t]{0.48\textwidth}
+		\centering
+		\includegraphics[width=0.5\textwidth]{figures/diagrams/frontend-dashboard-core.png}
+		\caption{Structura Core a Dashboard-ului.}
+		\label{fig:frontend-dashboard-core}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[t]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/diagrams/frontend-streaming.png}
+		\caption{Captură video și streaming în timp real.}
+		\label{fig:frontend-streaming}
+	\end{subfigure} \\[2.5ex]
+	
+	\begin{subfigure}[t]{0.46\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/diagrams/frontend-analytics.png}
+		\caption{Monitorizare, grafice și insights clinice.}
+		\label{fig:frontend-analytics}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[t]{0.52\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/diagrams/frontend-class-diagram-3.png}
+		\caption{Fluxul administrativ (saloane/paturi).}
+		\label{fig:frontend-ecb-admin}
+	\end{subfigure}
+	
+	\caption{Modelul structural descompus al frontend-ului, bazat pe paradigma ECB (Entity--Control--Boundary) adaptată pentru client SPA.}
+	\label{fig:frontend-ecb}
 \end{figure}
 
-Figura~\ref{fig:frontend-ecb} prezintă structura frontend-ului (React + TypeScript) folosind aceeași separare ECB ca în backend, însă cu o nuanță importantă: \textit{Entity} reprezintă în principal \textbf{modele de date/DTO-uri și stări UI} (de ex. \textit{AuthUser}, \textit{DoctorPatientSummary}, \textit{MonitoringPoint}), nu entități persistate direct în aplicația client. \textit{Control} grupează logica de orchestrare (hook-uri precum \textit{useAuth}, \textit{useEmotionData} și provider-ul \textit{AuthProvider}), iar \textit{Boundary} include paginile și componentele UI (de ex. \textit{App}, \textit{DoctorDashboard}, \textit{CameraStreamer}, \textit{LiveSpikeMonitor}). Pentru integrare, sunt evidențiate și componente \textit{Gateway}/\textit{External}, care izolează accesul la resurse de infrastructură (configurația către backend, transport HTTP/WS, API-uri ale browserului).
-
-În Figura~\ref{fig:frontend-ecb-auth} este surprinsă fundația aplicației: \textit{ReactRoot} compune \textit{AuthProvider} peste \textit{App}, iar aplicația decide ruta principală în funcție de sesiune și rol. \textit{AuthProvider} centralizează autentificarea și persistă token-urile în \textit{LocalStorage}, oferind un API unificat pentru cereri HTTP (prin \textit{FetchAPI} și configurarea adreselor prin \textit{BackendConfig}). Această separare reduce duplicarea și menține componentele de UI independente de detaliile de transport.
-
-Figura~\ref{fig:frontend-ecb-doctor} descrie fluxul principal al medicului: \textit{DoctorDashboard} încarcă lista de pacienți și detaliile de monitorizare din backend (DTO-uri precum \textit{DoctorPatientDetailPayload}, \textit{MonitoringPoint}, \textit{MonitoringAlert}), apoi compune componente specializate pentru vizualizare și suport decizional. Starea „live” a sesiunii este gestionată de \textit{useEmotionData} (entități UI precum \textit{EmotionData}, \textit{EmotionSnapshot}, \textit{ClinicalEvent}), în timp ce \textit{CameraStreamer} folosește \textit{MediaDevices} pentru captură și un \textit{WebSocketClient} dedicat pentru trimiterea frame-urilor către backend. Probabilitățile primite sunt propagate către dashboard pentru actualizarea UI și, periodic, pentru persistență prin endpoint-urile HTTP (ex. trimiterea de readings).
-
-În Figura~\ref{fig:frontend-ecb-admin} este reprezentat fluxul administrativ, unde \textit{AdminDashboard} gestionează operațiile de check-in/check-out și statusul secțiilor/paturilor folosind DTO-uri precum \textit{WardStatus}, \textit{WardBedStatus} și \textit{AdminPatient}. Ca și în cazul medicului, comunicarea cu backend-ul este abstractizată prin \textit{useAuth} și aceeași infrastructură de transport/configurare, menținând UI-ul concentrat pe logică de prezentare și pe interacțiunile specifice rolului.
-
-\subsection*{Diagrama entitate--relație (ER)}
-\label{subsec:model-structural-er}
+\subsection*{Modelul Conceptual al Datelor (MCD)}
+\label{subsec:model-conceptual-mcd}
 
 \begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.9\textwidth]{figures/diagrams/entity_relationship_diagram.png}
-  \caption{Diagrama entitate--relație (ER) a bazei de date.}
-  \label{fig:backend-er}
+	\centering
+	\includegraphics[width=0.99\textwidth]{figures/diagrams/conceptual_data_model.png}
+	\caption{Modelul conceptual al datelor (MCD) al aplicației.}
+	\label{fig:backend-conceptual}
 \end{figure}
 
-Figura~\ref{fig:backend-er} prezintă modelul relațional al datelor persistente utilizate de aplicație, complementând diagramele ECB. Dacă în modelul structural \textit{Entity} apare ca „nucleu al domeniului”, diagrama ER detaliază modul în care acest nucleu este implementat în baza de date: chei primare, chei străine, constrângeri de unicitate și relațiile dintre entități (cardinalități).
+Figura~\ref{fig:backend-conceptual} ilustrează modelul conceptual al datelor (Conceptual Data Model), evidențiind principalele entități din domeniul clinic și regulile de business care guvernează interacțiunea dintre acestea.
 
-Zona de autentificare este compusă din \textit{User} și \textit{RefreshToken}: fiecare utilizator poate emite mai multe refresh token-uri (relația \textit{User}--\textit{RefreshToken}), iar câmpul \textit{role} (\textit{UserRole}) diferențiază fluxurile și permisiunile din aplicație (medic vs. administrator). La nivel operațional, aceste entități susțin sesiuni persistente și controlul accesului pe roluri.
+Actorii sistemului sunt reprezentați de entitatea \textit{User}, unde permisiunile și fluxurile specifice sunt determinate de proprietatea \textit{role}, definită prin tipul enumerat \textit{UserRole} (cu valorile \textit{DOCTOR} și \textit{ADMIN}). Din punct de vedere organizatoric, structura spitalului este modelată prin secții (\textit{Ward}), fiecare secție având în dotare mai multe paturi (\textit{Bed}) destinate monitorizării video.
 
-Modelarea spitalului și a monitorizării este structurată în jurul entității \textit{Patient}, care este asociată cu o secție (\textit{Ward}) și un pat (\textit{Bed}), iar opțional poate fi asignată unui medic (\textit{User}). Starea clinică în timp este capturată prin \textit{EmotionReading} (seturi de valori pe emoții + scoruri agregate), legate de pacient, iar evenimentele de risc sunt reprezentate prin \textit{PatientAlert} (tip, severitate, activ/rezolvat). În acest fel, baza de date relațională păstrează atât structura organizațională (secții/paturi/pacienți), cât și istoricul și semnalările necesare fluxurilor din interfața medicului și a administratorului.
+Managementul clinic gravitează în jurul entității \textit{Patient}. Un pacient este cazat într-un anumit pat (\textit{Bed}) și poate fi asignat unui medic curant (\textit{User}). Evoluția stării pacientului este capturată prin două concepte esențiale:
+\begin{itemize}
+	\item \textit{EmotionReading}: reprezintă seturile de date colectate periodic. Probabilitățile emoțiilor de bază sunt stocate sub forma unui vector ce conține 7 numere reale (\textit{emotionScores}) --- câte unul pentru fiecare emoție ---, acesta fiind completat de scorurile agregate pentru distress (\textit{distressScore}) și pain (\textit{painScore}).
+	\item \textit{PatientAlert}: reprezintă evenimentele de risc generate automat, caracterizate prin tip, severitate, starea curentă (activă/rezolvată), detalii și momentul de\-clan\-șă\-rii, respectiv încheierii alertei.
+\end{itemize}
 
 \section{Modelul dinamic al sistemului}
 \label{sec:model-dinamic}
@@ -231,7 +278,7 @@ Modelarea spitalului și a monitorizării este structurată în jurul entități
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.99\textwidth]{figures/diagrams/diagrama-SD.pdf}
+  \includegraphics[width=0.99\textwidth]{figures/diagrams/diagrama-SD.png}
   \caption{Diagrama de secvență pentru use case-ul \textit{Monitorizare live}: captură video, transmitere prin WebSocket și inferență în model extern (TCP).}
   \label{fig:seq-monitor-live}
 \end{figure}
@@ -247,19 +294,19 @@ La nivel de UI, probabilitățile primite sunt folosite pentru actualizarea stă
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.7\textwidth]{figures/diagrams/diagrama-CD.pdf}
+  \includegraphics[width=0.85\textwidth]{figures/diagrams/diagrama-CD.png}
   \caption{Diagrama de comunicare pentru use case-ul \textit{Vizualizare timeline}.}
   \label{fig:comm-timeline}
 \end{figure}
 
-Figura~\ref{fig:comm-timeline} evidențiază participanții și dependențele dintre ei pentru afișarea timeline-ului clinic. Interfața medicului declanșează cererea \texttt{/detail}, autorizată prin token JWT, proces prin care backend-ul orchestrează încărcarea metadatelor pacientului și a istoricului de monitorizare. Datele istorice, denumite \texttt{timelineHistory}, sunt preluate preferențial din \textit{InfluxDB} via \textit{gateway}, aplicându-se un mecanism de \textit{fallback} pe \textit{PostgreSQL} în cazul indisponibilității bazei de date temporale. La fiecare nouă inferență de emoții aceste date istorice sunt actualizate prin adăugarea ultimelor probabilități primite. Pentru a asigura continuitatea vizuală a graficului și o experiență de utilizare fluidă, sistemul implementează un mecanism de eșantionare locală la nivelul interfeței. Astfel, la fiecare $500$ ms, buffer-ul local de memorie, \texttt{emotionHistory} — care reține datele din ultimele $65$ de minute — este actualizat prin adăugarea de noi puncte de date. În intervalele în care nu sunt recepționate cadre noi de la motorul de inferență AI, valorile emoțiilor sunt menținute constante, corespunzând ultimelor probabilități identificate. Matematic \ref{eq:zoh_emotions}, acest comportament este echivalent cu un filtru de menținere de ordin zero (\textit{Zero-Order Hold}), unde valoarea funcției de stare $E(t)$ rămâne invariantă între două momente de detecție succesive $t_n$ și $t_{n+1}$.
+Figura~\ref{fig:comm-timeline} evidențiază participanții și dependențele dintre ei pentru afișarea timeline-ului clinic. Interfața medicului declanșează cererea \texttt{/detail}, autorizată prin token JWT, proces prin care backend-ul orchestrează încărcarea metadatelor pacientului și a istoricului de monitorizare. Datele istorice, denumite \texttt{timelineHistory}, sunt preluate preferențial din \textit{InfluxDB} via \textit{gateway}, aplicându-se un mecanism de \textit{fallback} pe \textit{PostgreSQL} în cazul indisponibilității bazei de date temporale. La fiecare nouă inferență de emoții aceste date istorice sunt actualizate prin adăugarea ultimelor probabilități primite. Pentru a asigura continuitatea vizuală a graficului și o experiență de utilizare fluidă, sistemul implementează un mecanism de eșantionare locală la nivelul interfeței. Astfel, la fiecare $500$ ms, buffer-ul local de memorie, \texttt{emotionHistory} — care reține datele din ultimele $65$ de minute — este actualizat prin adăugarea de noi puncte de date. În intervalele în care nu sunt recepționate cadre noi de la motorul de inferență AI, valorile emoțiilor sunt menținute constante, corespunzând ultimelor probabilități identificate. Matematic, acest comportament este echivalent cu un filtru de menținere de ordin zero (\textit{Zero-Order Hold}), unde valoarea funcției de stare $E(t)$ rămâne invariantă între două momente de detecție succesive $t_n$ și $t_{n+1}$, după cum se poate observa în relația \eqref{eq:zoh_emotions}.
 
 \begin{equation}
-	E(t) = E(t_n), \quad \text{pentru} \quad t_n \leq t < t_{n+1}
+	E(t) = E(t_n), \quad \text{pentru} \quad t_n \leq t < t_{n+1}.
 	\label{eq:zoh_emotions}
 	\end{equation}
 
-În final, payload-ul vizualizat de medic reprezintă o concatenare (\textit{mergedMonitorHistory}) a celor două fluxuri: \texttt{timelineHistory} (datele persistate) și \texttt{emotionHistory} (datele curente din memoria volatilă). Acest set de date unificat este mapat către componenta \textit{LiveSpikeMonitor}, care utilizează biblioteca \textit{Recharts} pentru randarea graficului în timp real, oferind o rezoluție de $0.5$ secunde. Un exemplu vizual intuitiv este oferit în Figura~\ref{fig:visual-timeline}. Alertele actualizate sunt folosite de mecanismul de notificări pentru a anunța doctorul schimbări importante legate de starea emoțională a pacientului. 
+În final, payload-ul vizualizat de medic reprezintă o concatenare (\textit{mergedMonitorHistory}) a celor două fluxuri: \texttt{timelineHistory} (datele persistate) și \newline\texttt{emotionHistory} (datele curente din memoria volatilă). Acest set de date unificat este mapat către componenta \textit{LiveSpikeMonitor}, care utilizează biblioteca \textit{Recharts} pentru randarea graficului în timp real, oferind o rezoluție de $0.5$ secunde. Un exemplu vizual intuitiv este oferit în Figura~\ref{fig:visual-timeline}. Alertele actualizate sunt folosite de mecanismul de notificări pentru a anunța doctorul schimbări importante legate de starea emoțională a pacientului. 
 
 \begin{figure}[htbp]
   \centering
@@ -273,12 +320,12 @@ Figura~\ref{fig:comm-timeline} evidențiază participanții și dependențele di
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.99\textwidth]{figures/diagrams/diagrama-deployment.pdf}
+  \includegraphics[width=0.99\textwidth]{figures/diagrams/diagrama-deployment.png}
   \caption{Diagrama de deployment: noduri de execuție și protocoale de comunicare (REST/HTTP, WebSocket, TCP).}
   \label{fig:deployment}
 \end{figure}
 
-Figura~\ref{fig:deployment} evidențiază distribuția fizică a sistemului: aplicația web rulează în browser (interfața React) și comunică cu backend-ul Node.js atât sincron prin REST/ HTTP (pentru operații CRUD și încărcarea datelor), cât și asincron prin WebSocket (pentru streaming de cadre și rezultate). Backend-ul accesează persistența relațională în PostgreSQL prin Prisma și utilizează InfluxDB ca depozit time-series pentru timeline-uri, iar inferența este externalizată către un server de model dedicat, accesat prin TCP. Între TCP și WS există o punte de legătură (\textit{TsTcpBridge}) ce asigură comunicarea între cele 2 protocoale.
+Figura~\ref{fig:deployment} evidențiază distribuția fizică a sistemului: aplicația web rulează în browser (interfața React) și comunică cu backend-ul Node.js atât sincron prin REST/ HTTP (pentru operații CRUD și încărcarea datelor), cât și asincron prin WebSocket (pentru streaming de cadre și rezultate). Backend-ul accesează persistența relațională în PostgreSQL prin Prisma și utilizează InfluxDB ca depozit time-series pentru timeline-uri, iar inferența este externalizată către un server de model dedicat în Python, accesat prin TCP. Între TCP și WS există o punte de legătură (\textit{WsTcpBridge}) ce asigură comunicarea între cele 2 protocoale.
 
 \subsubsection{Motivația utilizării PostgreSQL + InfluxDB}
 \label{subsubsec:postgres-influx-motivatie}
@@ -305,10 +352,7 @@ Pentru persistență am ales o abordare hibridă, separând datele \textbf{tranz
 \end{itemize}
 
 \noindent\textbf{Eficiență și izolare a performanței.}
-Deși datele time-series pot fi păstrate și într-o bază relațională, pe măsură ce crește frecvența de eșantionare și retenția,
-tabelele mari pot introduce costuri suplimentare (indexuri mai voluminoase, operații de mentenanță, impact asupra latențelor OLTP).
-Prin utilizarea InfluxDB pentru timeline-uri, încărcarea asociată interogărilor temporale este mutată către un motor dedicat,
-menținând backend-ul și baza relațională responsive pentru operațiile critice (CRUD și tranzacții).
+Deși datele time-series pot fi păstrate și într-o bază relațională, pe măsură ce crește frecvența de eșantionare și retenția, tabelele mari pot introduce costuri suplimentare (indexuri mai voluminoase, operații de mentenanță, impact asupra latențelor OLTP). Prin utilizarea InfluxDB pentru timeline-uri, încărcarea asociată interogărilor temporale este mutată către un motor dedicat, menținând backend-ul și baza relațională responsive pentru operațiile critice (CRUD și tranzacții).
 
 \noindent\textbf{Robustețe operațională (fallback).}
 Arhitectura permite ca timeline-ul să fie citit cu prioritate din InfluxDB (dacă este disponibil și are puncte),
@@ -330,28 +374,28 @@ Figura~\ref{fig:state-patientalert} descrie ciclul de viață al unei alerte cli
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/histerezis_alerte.pdf}
-    \caption{Reprezentarea grafică a mecanismului de histerezis aplicat sistemului de alerte. Activarea se produce la depășirea pragului de $70$, în timp ce revenirea la starea inactivă necesită scăderea scorului sub $55$.}
+    \caption{Reprezentarea grafică a mecanismului de histerezis aplicat sistemului de alerte.}
     \label{fig:histerezis_logic}
 \end{figure}
 
 Calculul severității se bazează pe două metrici fundamentale, derivate din vectorul stărilor emoționale detectate ($V$). Prima metrică, scorul de \textbf{Distress} ($S_D$), este calculată ca medie aritmetică a stărilor de furie, frică și tristețe, conform ecuației~\eqref{eq:distress_score}:
 
 \begin{equation}
-    S_D = \text{clamp}\left(\frac{V_{\text{anger}} + V_{\text{fear}} + V_{\text{sadness}}}{3}, 0, 100\right)
+    S_D = \text{clamp}\left(\frac{V_{\text{anger}} + V_{\text{fear}} + V_{\text{sadness}}}{3}, 0, 100\right).
     \label{eq:distress_score}
 \end{equation}
 
 Cea de-a doua metrică, scorul de \textbf{Pain} ($S_P$), reprezintă o medie ponderată ce prioritizează frica și tristețea ca indicatori non-verbali ai suferinței fizice, fiind definită în relația~\eqref{eq:pain_score}:
 
 \begin{equation}
-    S_P = \text{clamp}\left(0.45 \cdot V_{\text{fear}} + 0.4 \cdot V_{\text{sadness}} + 0.15 \cdot V_{\text{disgust}}, 0, 100\right)
+    S_P = \text{clamp}\left(0.45 \cdot V_{\text{fear}} + 0.4 \cdot V_{\text{sadness}} + 0.15 \cdot V_{\text{disgust}}, 0, 100\right).
     \label{eq:pain_score}
 \end{equation}
 
-În scenariul în care ambele scoruri calculate prin formulele~\eqref{eq:distress_score} și \eqref{eq:pain_score} depășesc pragul critic de activare ($T_{high}$), sistemul aplică o logică de arbitrare prin selecția valorii maxime. Astfel, intensitatea și eticheta alertei sunt determinate de scorul final ($S_{final}$), determinat conform relației~\eqref{eq:final_score}:
+În scenariul în care ambele scoruri calculate prin formulele~\eqref{eq:distress_score} și \eqref{eq:pain_score} depășesc pragul critic de activare ($T_{high}$), sistemul aplică o regulă de decizie bazată pe selecția valorii maxime. Astfel, intensitatea și eticheta alertei sunt determinate de scorul final ($S_{final}$), determinat conform relației~\eqref{eq:final_score}:
 
 \begin{equation}
-    S_{final} = \max(S_D, S_P)
+    S_{final} = \max(S_D, S_P).
     \label{eq:final_score}
 \end{equation}
 
@@ -362,10 +406,10 @@ Toate aceste actualizări au loc la persistarea unui nou reading de emoții, bac
     \item \texttt{MEDIUM} dacă $\text{score} \ge 72$,
     \item \texttt{LOW} în caz contrar.
   \end{itemize}
-În interfață, aceste alerte sunt afișate în \textit{Clinical Insights} la secțiunea \textit{Current Alerts} (Figura~\ref{fig:current-alerts}) și reprezintă starea clinică persistată pentru pacient (pe intervalele recente de funcționare).
+În interfață, aceste alerte sunt afișate în \textit{Clinical Insights}, la secțiunea \textit{Current Alerts} (Figura~\ref{fig:current-alerts}) și reprezintă starea clinică persistată pentru pacient (pe intervalele recente de funcționare).
 
 Sistemul calculează și alerte \textbf{derivate} (nepersistate), pe baza unui \textit{timeline} de emoții pe o fereastră de timp
-(ex. 24h sau 7d). Aceste alerte urmăresc episoade susținute, nu doar vârfuri scurte:
+(ex. 24h sau 7d). Aceste alerte urmăresc episoade susținute, nu doar spike-uri scurte:
 
 \begin{itemize}[noitemsep]
   \item Se generează o alertă de tip \texttt{DISTRESS} sau \texttt{PAIN} dacă scorul corespunzător rămâne peste \textbf{65\%}
@@ -381,14 +425,14 @@ obținere a unui nou \textit{snapshot} de monitorizare din backend.
     \centering
     \begin{minipage}{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/app/current-alerts.png}
+        \includegraphics[width=0.75\textwidth]{figures/app/current-alerts.png}
         \caption{Secțiunea \textit{Current Alerts} - vizualizarea alertelor persistente.}
         \label{fig:current-alerts}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/app/prolonged-alerts.png}
+        \includegraphics[width=0.75\textwidth]{figures/app/prolonged-alerts.png}
         \caption{Secțiunea \textit{Prolonged Alerts} - vizualizarea alertelor de durată.}
         \label{fig:prolonged-alerts}
     \end{minipage}
@@ -399,12 +443,12 @@ obținere a unui nou \textit{snapshot} de monitorizare din backend.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[height=0.45\textheight, keepaspectratio]{figures/diagrams/diagrama-activitati.pdf}
+  \includegraphics[height=0.49\textheight, keepaspectratio]{figures/diagrams/diagrama-activitati.png}
   \caption{Diagrama de activități pentru use case-ul \textit{Check-in pacient}.}
   \label{fig:activity-checkin}
 \end{figure}
 
-Figura~\ref{fig:activity-checkin} prezintă fluxul operațional de internare (check-in) și deciziile principale care garantează consistența datelor: validarea câmpurilor obligatorii, verificarea existenței patului, compatibilitatea pat--secție (când se indică o secție), și prevenirea ocupării simultane. Operația este tratată tranzacțional, astfel încât înregistrarea/actualizarea pacientului și marcarea patului ca ocupat să fie aplicate atomic. În cazul unui pacient deja internat se returnează un răspuns de tip conflict, iar pentru erori neprevăzute se semnalizează eșecul operației.
+Figura~\ref{fig:activity-checkin} prezintă fluxul operațional de internare (check-in) și deciziile principale care garantează consistența datelor: validarea câmpurilor obligatorii, verificarea existenței patului, compatibilitatea pat--secție (când se indică o secție), și prevenirea ocupării simultane. Operația este tratată tranzacțional, astfel încât înregistrarea/\newline actualizarea pacientului și marcarea patului ca ocupat să fie aplicate atomic. În cazul unui pacient deja internat se returnează un răspuns de tip conflict, iar pentru erori neprevăzute se semnalizează eșecul operației.
 
 \section{Sistemul de alerte și notificări}
 \label{sec:sistem-alerte-notificari}
@@ -422,11 +466,11 @@ La recepționarea fiecărui vector de probabilități de la modelul de inferenț
 \text{Trigger} = \begin{cases} 
 \text{generare eveniment}, & \text{daca} \text{ } \max(V_{\text{emotii}}) > 60 \\ 
 \text{stare latenta}, & \text{altfel} 
-\end{cases}
+\end{cases}.
 \label{eq:clinical_event_trigger}
 \end{equation}
 
-Structura și comportamentul acestor evenimente sunt definite prin următoarele caracteristici tehnice, așa cum reiese și din detaliile surprinse în figurile de mai jos:
+Structura și comportamentul acestor evenimente sunt definite prin următoarele caracteristici tehnice, așa cum reiese și din detaliile surprinse în Figura \ref{fig:clinical-events-panel}:
 
 \begin{itemize}[noitemsep]
   \item \textbf{Trigger}: $\max(\text{emotii}) > 60\%$.
@@ -461,10 +505,11 @@ Pentru a facilita monitorizarea rapidă și eficientă a stării pacientului, in
 \subsubsection{Clinical Risk Level (Low / Medium / High)}
 \label{subsubsec:clinical-risk-level}
 
-În \textit{Patient Sidebar} se afișează nivelul rezumat de risc clinic (\textit{Clinical Risk Level}), derivat din media emoțiilor negative:
+În \textit{Patient Sidebar} se afișează nivelul rezumat de risc clinic (\textit{Clinical Risk Level}), derivat din media emoțiilor negative, conform ecuațiilor \eqref{eq:avg_neg} și \eqref{eq:risk_level}:
 
 \begin{equation}
-  \text{avgNegative} = \frac{\text{Anger} + \text{Fear} + \text{Sadness}}{3}
+  \text{avgNegative} = \frac{\text{Anger} + \text{Fear} + \text{Sadness}}{3},
+  \label{eq:avg_neg}
 \end{equation}
 
 \begin{equation}
@@ -473,7 +518,8 @@ Pentru a facilita monitorizarea rapidă și eficientă a stării pacientului, in
 \text{High}, & \text{dacă } \text{avgNegative} > 50 \\
 \text{Medium}, & \text{dacă } \text{avgNegative} > 25 \\
 \text{Low}, & \text{altfel}
-\end{cases}
+\end{cases}.
+\label{eq:risk_level}
 \end{equation}
 
 Exemplele vizuale pentru cele trei niveluri sunt prezentate în Figura~\ref{fig:risk-levels}.
@@ -510,8 +556,8 @@ Acesta este determinat combinând alertele clinice și emoțiile curente:
 
 \begin{itemize}
   \item \textbf{High-risk}: dacă există cel puțin o alertă cu severitate \texttt{HIGH} (din \textit{Current} sau \textit{Prolonged Alerts})
-        \textbf{sau} dacă $\text{Anger} > 60$ și $\text{Fear} > 60$.
-  \item \textbf{Positive}: dacă $\text{Happiness} > 50$ și $\text{Surprise} > 30$.
+        \textbf{sau} dacă $\text{Anger} > 60$ \textbf{sau} dacă $\text{Fear} > 60$.
+  \item \textbf{Positive}: dacă $\text{Happiness} > 50$ \textbf{sau} dacă $\text{Surprise} > 30$.
   \item \textbf{Normal}: în celelalte situații.
 \end{itemize}
 
@@ -544,7 +590,7 @@ Exemplele vizuale pentru cele trei tipuri sunt prezentate în Figura~\ref{fig:se
 \subsection*{Notificare la schimbarea nivelului de risc}
 \label{subsec:risk-change-notification}
 
-Sistemul urmărește dinamica lui \textit{riskLevel} și notifică medicul \textbf{doar când există o schimbare}:
+Sistemul urmărește dinamica lui \textit{Risk Level} și notifică medicul \textbf{doar când există o schimbare}:
 \begin{itemize}
   \item \textbf{Risk Increased} (degradare): când nivelul trece de la Low $\rightarrow$ Medium/High sau Medium $\rightarrow$ High.
   \item \textbf{Risk Decreased} (îmbunătățire): când nivelul scade (High $\rightarrow$ Medium/Low sau Medium $\rightarrow$ Low).
@@ -588,12 +634,11 @@ Pe lângă alertarea clinică, aplicația comunică și stări/erori operaționa
 \subsection*{Testare white-box}
 \label{subsec:whitebox-compact}
 
-\subsubsection{Metoda analizata}
 Analiza white-box a fost realizată pe metoda \texttt{deriveProlongedAlert} din serviciul de monitorizare, care se ocupă cu detectarea perioadelor de suferință prelungită (durere sau stres) ale unui pacient, analizând un istoric de date (timeline). Această funcție include ramificatii multiple, mai multe iterații și o funcție auxiliară (\texttt{flushStreak}) care influențează direct decizia de generare a alertelor.
 
 \subsubsection{Complexitate ciclomatrică}
 
-Pentru metoda analizată, au fost identificate 8 predicate de decizie ($D$), care determină ramificarea fluxului de execuție, după cum se poate remarca în Tabelul \ref{tab:complexitate-ciclomatica}.
+Pentru metoda analizată, au fost identificate 8 predicate de decizie ($D$), care determină ramificarea fluxului de execuție, după cum se poate remarca în Tabela~\ref{tab:complexitate-ciclomatica}.
 
 \begin{table}[htbp]
 	\centering
@@ -613,7 +658,7 @@ Pentru metoda analizată, au fost identificate 8 predicate de decizie ($D$), car
 	\label{tab:complexitate-ciclomatica}
 \end{table}
 
-Determinarea complexității ciclomatrice ($CC$) se bazează pe teoria grafurilor aplicată fluxului de control al programului. Relația fundamentală utilizată este formula lui McCabe, introdusă de Thomas McCabe în lucrarea sa fundamentală din 1976 \cite{mccabe1976}, fiind definită în ecuația \ref{eq:mccabe}:
+Determinarea complexității ciclomatrice ($CC$) se bazează pe teoria grafurilor aplicată fluxului de control al programului. Relația fundamentală utilizată este formula lui McCabe, introdusă de Thomas McCabe în lucrarea sa fundamentală din 1976 \cite{mccabe1976}, fiind definită în ecuația \eqref{eq:mccabe}:
 
 \begin{equation} \label{eq:mccabe}
 	CC = E - N + 2P,
@@ -626,7 +671,7 @@ Aplicând această metodologie asupra grafului de flux de control (CFG) generat 
 \begin{itemize}[noitemsep]
 	\item CC = \text{numărul de regiuni planare ale grafului} = 9 
 	\item CC = D + 1 = 8 + 1 = 9
-	\item \text{Conform ecuației \ref{eq:mccabe}: } CC = 37 - 30 + 2 * 1 = 9
+	\item \text{Conform ecuației \eqref{eq:mccabe}: } CC = 37 - 30 + 2 * 1 = 9
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -636,7 +681,7 @@ Aplicând această metodologie asupra grafului de flux de control (CFG) generat 
   \label{fig:cfg-derive-prolonged-alert}
 \end{figure}
 
-Pentru CFG-ul metodei, complexitatea ciclomatrica este $CC=9$, deci exista 9 drumuri independente teoretice  care trebuie parcurse în faza de testare unitară pentru a asigura o acoperire completă la nivel de decizie. În Tabelul \ref{tab:mapare-testare} este un set practic de drumuri independente descrise prin semnătura deciziilor $D_1 \ldots D_8$.
+Pentru CFG-ul metodei, complexitatea ciclomatrica este $CC=9$, deci exista 9 drumuri independente teoretice  care trebuie parcurse în faza de testare unitară pentru a asigura o acoperire completă la nivel de decizie. În Tabela~\ref{tab:mapare-testare} este ilustrat un set practic de drumuri independente descrise prin semnătura deciziilor $D_1 \ldots D_8$.
 
 
 \begin{table}[htbp]
@@ -646,7 +691,7 @@ Pentru CFG-ul metodei, complexitatea ciclomatrica este $CC=9$, deci exista 9 dru
 	\begin{tabular}{|l|p{4cm}|p{8cm}|}
 		\hline
 		\rowcolor[HTML]{EFEFEF} 
-		\textbf{Scenariu} & \textbf{Descriere} & \textbf{Condiții Logice Corecte} \\ \hline
+		\textbf{Scenariu} & \textbf{Descriere} & \textbf{Condiții logice corecte} \\ \hline
 		R1 & Early return (Timeline gol) & $D_1=T$ \\ \hline
 		R2 & Final cu streak lung (Alertă creată la flush-ul final) & $D_1=F, D_2=F, D_6=F, D_8=T$ \\ \hline
 		R3 & Nicio activitate (loop terminat, niciun streak găsit) & $D_1=F, D_2=F, D_6=T$ \\ \hline
@@ -659,7 +704,7 @@ Pentru CFG-ul metodei, complexitatea ciclomatrica este $CC=9$, deci exista 9 dru
 	\end{tabular}
 \end{table}
 
-Pentru funcția analizată, setul de teste white-box, ilustrat în Tabelul \ref{tab:whitebox-io-compact}, a fost construit astfel încât fiecare drum independent din CFG să fie acoperit de cel puțin un test.
+Pentru funcția analizată, setul de teste white-box, prezentat în Tabela~\ref{tab:whitebox-io-compact}, a fost construit astfel încât fiecare drum independent din CFG să fie acoperit de cel puțin un test.
 
 \begin{table}[htbp]
 	\centering
@@ -691,18 +736,19 @@ Pentru funcția analizată, setul de teste white-box, ilustrat în Tabelul \ref{
 	\textit{Notă:} În coloana „Drumuri asociate”, am listat succesiunea de ramificări logice prin care trece execuția. De exemplu, R5 $\rightarrow$ R7 $\rightarrow$ R2 înseamnă: deschidere streak în buclă , actualizare peak la a doua iterație și generare alertă la ieșirea finală din funcție.
 \end{table}
 
-\section{Testarea de integrare (Top-down, Depth-first)}
+\subsection*{Testarea de integrare (Top-down, Depth-first)}
 \label{sec:testare-integrare}
 
 Validarea sistemului a fost realizată printr-o abordare incrementală de tip \textit{Top-down, Depth-first}. Această metodă a permis verificarea timpurie a fluxului critic de date, asigurându-se că integrarea componentelor respectă arhitectura definită și că datele circulă corect de la interfața HTTP până la nivelul de persistență.
 
-Obiectivul principal a fost validarea completă a endpoint-ului \newline \texttt{POST /api/doctor/patients/:patientId/readings}, care reprezintă nucleul funcțional al aplicației (colectarea de telemetrie și generarea de alerte). Strategia adoptată a presupus integrarea progresivă a componentelor conform următorului lanț de dependențe:
+Obiectivul principal a fost validarea completă a endpoint-ului \texttt{POST} referitor la motorul principal de procesare a datelor de monitorizare, care reprezintă nucleul funcțional al aplicației (colectarea de telemetrie și generarea de alerte). Strategia adoptată a presupus integrarea progresivă a componentelor conform lanțului de dependențe \eqref{eq:chain}.
 
-\[
+\begin{equation}
 \text{App} \rightarrow \text{Route} \rightarrow \text{Middleware} \rightarrow \text{Controller} \rightarrow \text{Service} \rightarrow \{\text{Prisma/Postgres},\ \text{InfluxDB}\}
-\]
+\label{eq:chain}
+\end{equation}
 
-Procesul a fost structurat în cinci etape distincte, detaliate în \textbf{Tabelul \ref{tab:integration-depth-first-steps}}. Fiecare pas a vizat extinderea razei de testare prin înlocuirea progresivă a componentelor simulate (\textit{stubs} și \textit{mocks}) cu implementări reale, până la obținerea unui sistem complet funcțional.
+Procesul a fost structurat în cinci etape distincte, detaliate în Tabela~\ref{tab:integration-depth-first-steps}. Fiecare pas a vizat extinderea razei de testare prin înlocuirea progresivă a componentelor simulate (\textit{stubs} și \textit{mocks}) cu implementări reale, până la obținerea unui sistem complet funcțional.
 
 \begin{table}[htbp]
 	\centering
@@ -723,7 +769,7 @@ Procesul a fost structurat în cinci etape distincte, detaliate în \textbf{Tabe
 
 Pentru fiecare etapă definită anterior, au fost stabilite seturi riguroase de date de intrare și rezultate așteptate. Această trasabilitate asigură faptul că nicio componentă nouă introdusă în lanț nu alterează logica validată anterior.
 
-Corelarea dintre input-ul simulat și răspunsul sistemului pentru fiecare pas de integrare este sintetizată în \textbf{Tabelul \ref{tab:integration-depth-first-io}}. Se observă tranziția de la un simplu răspuns de tip \textit{hook} (Step 1) către o validare complexă a stării bazei de date și a consistenței telemetriei (Step 5).
+Corelarea dintre input-ul simulat și răspunsul sistemului pentru fiecare pas de integrare este sintetizată în Tabela~\ref{tab:integration-depth-first-io}. Se observă tranziția de la un simplu răspuns de tip \textit{hook} (Step 1) către o validare complexă a stării bazei de date și a consistenței telemetriei (Step 5).
 
 \begin{table}[htbp]
 	\centering
@@ -742,7 +788,7 @@ Corelarea dintre input-ul simulat și răspunsul sistemului pentru fiecare pas d
 	\end{tabular}
 \end{table}
 
-\subsubsection{Mediu de Testare și Infrastructură}
+\subsubsection{Mediu de testare și infrastructură}
 
 Pentru a garanta fidelitatea testelor față de mediul de producție, s-a renunțat la bazele de date \textit{in-memory} în favoarea unor instanțe reale rulate în containere. Suita de teste utilizează următoarele instrumente:
 
@@ -764,8 +810,7 @@ Utilizarea este organizată pe două roluri:
 	\item \textbf{DOCTOR} (personal medical): preia pacienți disponibili și urmărește tabloul de monitorizare (vizualizări, alerte, trenduri).
 \end{itemize}
 
-Aplicația se accesează dintr-un browser modern (Chrome/Edge/Firefox), prin adresa pusă la dispoziție în rulare locală).
-După autentificare, interfața este afișată automat în funcție de rol (ADMIN sau DOCTOR).
+Aplicația se accesează dintr-un browser modern (Chrome/Edge/Firefox), prin adresa pusă la dispoziție în rulare locală. După autentificare, interfața este afișată automat în funcție de rol (ADMIN sau DOCTOR).
 
 \subsection*{Autentificare și creare cont}
 
@@ -778,17 +823,17 @@ Pentru înregistrare se introduc e-mailul și parola, apoi se selectează rolul 
 \begin{figure}[htbp]
 	\centering
 	% Prima imagine (Login)
-	\begin{subfigure}[b]{0.40\textwidth}
+	\begin{subfigure}[b]{0.48\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{figures/app/login.png}
+		\includegraphics[width=0.6\textwidth]{figures/app/login.png}
 		\caption{Interfața de autentificare}
 		\label{fig:login}
 	\end{subfigure}
 	\hfill % Adaugă spațiu elastic între imagini
 	% A doua imagine (Create Account)
-	\begin{subfigure}[b]{0.36\textwidth}
+	\begin{subfigure}[b]{0.48\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{figures/app/create-account.png}
+		\includegraphics[width=0.57\textwidth]{figures/app/create-account.png}
 		\caption{Interfața de creare cont}
 		\label{fig:create-account}
 	\end{subfigure}
@@ -798,10 +843,9 @@ Pentru înregistrare se introduc e-mailul și parola, apoi se selectează rolul 
 \end{figure}
 
 \subsection*{Modul ADMIN: Administrative Dashboard}
-După autentificare cu rolul ADMIN, utilizatorul accesează \textit{Administrative Dashboard}, care include următoarele funcționalități principale:
+După autentificare cu rolul ADMIN, utilizatorul accesează \textit{Administrative Dashboard} (Figura \ref{fig:admin-dash}), care include următoarele funcționalități principale:
 
-\subsubsection{Reîmprospătare și deconectare}
-În partea superioară există:
+\subsubsection{Reîmprospătare și deconectare}: În partea superioară există:
 \begin{itemize}
 	\item \textbf{Refresh}: reîncarcă listele de secții/paturi și pacienții activi.
 	\item \textbf{Logout}: închide sesiunea curentă.
@@ -822,7 +866,7 @@ Aplicația nu permite alocarea unui pat deja ocupat (paturile disponibile sunt f
 Pentru externarea unui pacient se apasă butonul \textit{Check-out} corespunzător.
 
 \subsubsection{Management secții/paturi (Ward Management)}
-Secțiunea \textit{Ward Management} oferă o vedere de ansamblu asupra:
+Secțiunea \textit{Ward Management} (Figura \ref{fig:ward-mgmt}) oferă o vedere de ansamblu asupra:
 \begin{itemize}
 	\item gradului de ocupare (paturi libere/ocupate),
 	\item stării camerei asociate patului (\textit{ONLINE/OFFLINE/MAINTENANCE}),
@@ -855,7 +899,7 @@ Secțiunea \textit{Ward Management} oferă o vedere de ansamblu asupra:
 După autentificare cu rolul DOCTOR, utilizatorul poate gestiona pacienții disponibili și poate accesa tabloul de monitorizare.
 
 \subsubsection{Lista pacienților și preluare (Take patient)}
-În \textit{Doctor Panel} sunt afișate două liste:
+În \textit{Doctor Panel} (Figura \ref{fig:manual-doctor-panel}) sunt afișate două liste:
 \begin{itemize}
 	\item \textbf{Available Patients}: pacienți nealocați; pot fi preluați prin \textit{Take patient}.
 	\item \textbf{My Patients}: pacienți alocați doctorului; pot fi selectați pentru monitorizare.
@@ -864,38 +908,35 @@ Butonul \textit{Refresh patients} reîncarcă listele. Dacă nu există pacienț
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.3\textwidth]{figures/app/doctor-panel.png}
-	\caption{Modul DOCTOR: preluarea și selectarea pacienților.}
-	\label{fig:manual-doctor-panel}
+	\begin{minipage}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=0.58\textwidth]{figures/app/doctor-panel.png}
+		\caption{Modul DOCTOR: preluarea și selectarea pacienților.}
+		\label{fig:manual-doctor-panel}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.65\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/app/monitoring-dashboard.png}
+		\caption{Modul DOCTOR: tabloul de monitorizare și instrumentele de analiză.}
+		\label{fig:manual-monitoring}
+	\end{minipage}
 \end{figure}
 
 \subsubsection{Tabloul de monitorizare (Monitoring Dashboard)}
-După selectarea unui pacient, aplicația afișează tabloul de monitorizare, care include:
+După selectarea unui pacient, aplicația afișează tabloul de monitorizare (Figura \ref{fig:manual-monitoring}), care include:
 \begin{itemize}
 	\item \textbf{Header de sesiune}: status (\textit{Normal Session}, \textit{High Risk: Agitation}, \textit{Positive Engagement}),
 	butoanele \textit{Live Monitor}, \textit{Insights}, afișare/ascundere panou și \textit{Logout}.
-	\item \textbf{Patient Sidebar}: informații despre pacient și nivelul de risc curent (Low/Medium/High).
+	\item \textbf{Patient Sidebar}: informații despre pacient și nivelul de risc curent (Low\newline/Medium/High).
 	\item \textbf{Zona principală}: flux camera (stream) și distribuția emoțiilor curente.
 \end{itemize}
 
 \subsubsection{Live Monitor (vizualizare istoric și spike-uri)}
-Prin butonul \textit{Live Monitor} se deschide o fereastră peste ecran (overlay) care prezintă un grafic cu istoricul emoțiilor, o figură reprezentativă fiind \ref{fig:visual-timeline}. Fereastra se închide cu butonul \textit{Close} sau prin click în afara zonei.
+Prin butonul \textit{Live Monitor} se deschide o fereastră peste ecran (overlay) care prezintă un grafic cu istoricul emoțiilor, reprezentativă în acest sens fiind Figura~\ref{fig:visual-timeline}. Fereastra se închide cu butonul \textit{Close} sau prin click în afara zonei.
 
 \subsubsection{Insights (alerte și interpretare clinică)}
-Prin butonul \textit{Insights} se deschide un panou lateral cu:
-\begin{itemize}
-	\item alerte curente și alerte prelungite (prolonged),
-	\item evenimente clinice derivate (listate cronologic).
-\end{itemize}
-Scopul este de a sintetiza situațiile relevante (ex. creșteri susținute ale indicatorilor negativi).
+Prin butonul \textit{Insights} se deschide un panou lateral cu: alerte curente și alerte prelungite (prolonged), respectiv evenimente clinice derivate (listate cronologic). Scopul este de a sintetiza situațiile relevante (ex. creșteri susținute ale indicatorilor negativi).
 
 \subsubsection{Notificări de risc}
-La schimbarea nivelului de risc, aplicația afișează o notificare scurtă (\textit{Risk Increased} / \textit{Risk Decreased}) cu tranziția dintre niveluri.
-Notificarea dispare automat după câteva secunde.
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.88\textwidth]{figures/app/monitoring-dashboard.png}
-	\caption{Modul DOCTOR: tabloul de monitorizare și instrumentele de analiză.}
-	\label{fig:manual-monitoring}
-\end{figure}
+La schimbarea nivelului de risc, aplicația afișează o notificare scurtă (\textit{Risk Increased} / \textit{Risk Decreased}) cu tranziția dintre niveluri. Notificarea dispare automat după câteva secunde.

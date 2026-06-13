@@ -1,0 +1,40 @@
+---
+config:
+  layout: fixed
+---
+flowchart TB
+    Doctor(["Medic"]) -- 1: selectează pacient + fereastră --> UI["DoctorDashboard (UI)"]
+    UI -- "2: api(GET /detail?window=7d)" --> Auth["AuthProvider"]
+    Auth -- "2.1: fetch(toBackendUrl)" --> Fetch["FetchAPI"]
+    Fetch -- "2.2: HTTP GET /api/doctor/patients/{id}/detail?window=7d" --> API["Backend HTTP API (Express)"]
+    API -- 3: requireAuth + requireRole(DOCTOR) --> MW["AuthMiddleware"]
+    API -- 4: handler route --> DC["DoctorController"]
+    DC -- 5: getPatientDetailService() --> DS["DoctorService"]
+    DS -- "5.1: patient.findUnique(include ward, bed)" --> Prisma["PrismaClient"]
+    Prisma -- "5.1.1: SELECT patient+relations" --> PG[("PostgreSQL")]
+    DS -- "5.2: getMonitoringSnapshot(patientId, window)" --> MS["MonitoringService"]
+    MS -- "5.2.1: readPatientEmotionTimeline()" --> InfluxG["InfluxGateway"]
+    InfluxG -- "5.2.1.1: query timeline" --> Influx[("InfluxDB")]
+    MS -. "5.2.2 [fallback]: emotionReading.findMany()" .-> Prisma
+    Prisma -. "5.2.2.1: SELECT readings" .-> PG
+    MS -- "5.2.3: patientAlert.findMany(active)" --> Prisma
+    Prisma -- "5.2.3.1: SELECT alerts" --> PG
+    API -- 6: 200 OK (DoctorPatientDetailPayload) --> UI
+    UI -- "7: timeline -> props" --> Chart["LiveSpikeMonitor"]
+    Chart -- 8: render chart (downsample/brush) --> Recharts["Recharts"]
+
+    style Doctor font-size:24px
+    style UI font-size:24px
+    style Auth font-size:24px
+    style Fetch font-size:24px
+    style API font-size:24px
+    style MW font-size:24px
+    style DC font-size:24px
+    style DS font-size:24px
+    style Prisma font-size:24px
+    style PG font-size:24px
+    style MS font-size:24px
+    style InfluxG font-size:24px
+    style Influx font-size:24px
+    style Chart font-size:24px
+    style Recharts font-size:24px

@@ -1,0 +1,35 @@
+---
+config:
+  layout: elk
+---
+classDiagram
+direction LR
+    class DoctorDashboard {}
+    class PatientSidebar {}
+    class DoctorPatientSummary {}
+    class DoctorPatientDetailPayload {}
+    class WardRef {}
+    class BedRef {}
+    class MonitoringPoint {}
+    class MonitoringAlert {}
+
+    <<Boundary>> DoctorDashboard
+    <<Boundary>> PatientSidebar
+    <<Entity>> DoctorPatientSummary
+    <<Entity>> DoctorPatientDetailPayload
+    <<Entity>> WardRef
+    <<Entity>> BedRef
+    <<Entity>> MonitoringPoint
+    <<Entity>> MonitoringAlert
+
+    DoctorDashboard ..> PatientSidebar
+    DoctorDashboard ..> DoctorPatientSummary : patients[]
+    DoctorDashboard ..> DoctorPatientDetailPayload : patientDetail
+    
+    PatientSidebar ..> DoctorPatientSummary : displays
+    
+    DoctorPatientDetailPayload "1" o-- "*" DoctorPatientSummary : patient
+    DoctorPatientDetailPayload "1" o-- "*" MonitoringPoint : timeline[]
+    DoctorPatientDetailPayload "1" o-- "*" MonitoringAlert : alerts[]
+    DoctorPatientSummary "1" o-- "*" WardRef : ward
+    DoctorPatientSummary "1" o-- "*" BedRef : bed

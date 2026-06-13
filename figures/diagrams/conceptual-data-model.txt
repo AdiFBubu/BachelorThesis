@@ -1,0 +1,94 @@
+---
+config:
+  layout: elk
+  themeVariables:
+    fontSize: 15px
+---
+classDiagram
+direction LR
+    class User {
+	    String email
+	    UserRole role
+    }
+
+    class DateTime {
+	    Integer hour
+	    Integer minute
+	    Integer second
+	    Integer day
+	    Integer month
+	    Integer year
+    }
+
+    class Ward {
+	    String name
+    }
+
+    
+
+    class Bed {
+	    String label
+	    String cameraStatus
+	    Boolean isOccupied
+    }
+
+    class Patient {
+	    String nationalId
+	    String lastName
+	    String firstName
+	    Boolean isArchived
+	    DateTime checkedInAt
+	    DateTime checkedOutAt
+    }
+
+        class UserRole {
+        <<enumeration>>
+        DOCTOR
+        ADMIN
+    }
+
+    class EmotionReading {
+	    DateTime timestamp
+	    Float[7] emotionScores
+	    Float distressScore
+	    Float painScore
+    }
+
+    class PatientAlert {
+	    String type
+	    String severity
+	    String message
+	    Boolean active
+	    DateTime createdAt
+	    DateTime resolvedAt
+    }
+
+	<<dataType>> DateTime
+	<<enumeration>> UserRole
+
+    User "1" --> "0..*" Patient : monitors
+    Ward "1" --> "1..*" Bed : contains
+    Bed "1" --> "0..1" Patient : hosts
+    Patient "1" --> "0..*" EmotionReading : has
+    Patient "1" --> "0..*" PatientAlert : triggers
+
+    %% Relații și Multiplicități
+    User "1" --> "0..*" Patient : monitors
+    Ward "1" --> "1..*" Bed : contains
+    Bed "1" --> "0..1" Patient : hosts
+    Patient "1" --> "0..*" EmotionReading : has
+    Patient "1" --> "0..*" PatientAlert : triggers
+
+    %% Stiluri pentru clasele principale (Pastel Blue)
+    style User fill:#E3F2FD,stroke:#1E88E5,stroke-width:2px
+    style Ward fill:#E3F2FD,stroke:#1E88E5,stroke-width:2px
+    style Bed fill:#E3F2FD,stroke:#1E88E5,stroke-width:2px
+    style Patient fill:#E3F2FD,stroke:#1E88E5,stroke-width:2px
+    style EmotionReading fill:#E3F2FD,stroke:#1E88E5,stroke-width:2px
+    style PatientAlert fill:#E3F2FD,stroke:#1E88E5,stroke-width:2px
+
+    %% Stil pentru Enumerare (Pastel Green)
+    style UserRole fill:#E8F5E9,stroke:#43A047,stroke-width:2px
+
+    %% Stil pentru Data Type (Pastel Orange)
+    style DateTime fill:#FFF3E0,stroke:#FB8C00,stroke-width:2px

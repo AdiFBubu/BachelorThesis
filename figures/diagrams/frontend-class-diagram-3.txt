@@ -1,0 +1,64 @@
+---
+config:
+  layout: elk
+  themeVariables:
+    fontSize: '30px'
+---
+classDiagram
+direction LR
+    class AdminDashboard {
+    }
+
+    class useAuth {
+    }
+
+    class BackendConfig {
+    }
+
+    class BackendHTTP {
+    }
+
+    class WardStatus {
+    }
+
+    class WardBedStatus {
+    }
+
+    class AdminPatient {
+    }
+
+    class DoctorPatientSummary {
+    }
+
+    class WardRef {
+    }
+
+    class BedRef {
+    }
+
+    class CameraStatus {
+    }
+
+	<<Boundary>> AdminDashboard
+	<<Control>> useAuth
+	<<Gateway>> BackendConfig
+	<<External>> BackendHTTP
+	<<Entity>> WardStatus
+	<<Entity>> WardBedStatus
+	<<Entity>> AdminPatient
+	<<Entity>> DoctorPatientSummary
+	<<Entity>> WardRef
+	<<Entity>> BedRef
+	<<Entity>> CameraStatus
+
+    AdminDashboard ..> useAuth : api()/logout()
+    AdminDashboard ..> BackendConfig : backendPaths
+    AdminDashboard ..> BackendHTTP : loads wards/patients, check-in/out
+    AdminDashboard ..> WardStatus : wards[]
+    AdminDashboard ..> AdminPatient : patients[]
+    WardStatus "1" o-- "*" WardBedStatus : beds[]
+    WardBedStatus ..> CameraStatus : cameraStatus
+    AdminPatient --|> DoctorPatientSummary : extends
+    DoctorPatientSummary "1" o-- "*" WardRef : ward
+    DoctorPatientSummary "1" o-- "*" BedRef : bed
+    BedRef ..> CameraStatus : cameraStatus

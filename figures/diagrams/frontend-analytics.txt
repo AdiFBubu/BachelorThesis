@@ -1,0 +1,50 @@
+---
+config:
+  layout: elk
+  themeVariables:
+    fontSize: '30px'
+---
+classDiagram
+direction LR
+    class DoctorDashboard {}
+    class LiveSpikeMonitor {}
+    class SentimentDistribution {}
+    class ClinicalInsights {}
+    class useEmotionData {}
+    class EmotionData {}
+    class EmotionSnapshot {}
+    class ClinicalEvent {}
+    class EmotionType {}
+    class MonitoringAlert {}
+    class Recharts {}
+
+    <<Boundary>> DoctorDashboard
+    <<Boundary>> LiveSpikeMonitor
+    <<Boundary>> SentimentDistribution
+    <<Boundary>> ClinicalInsights
+    <<Control>> useEmotionData
+    <<Entity>> EmotionData
+    <<Entity>> EmotionSnapshot
+    <<Entity>> ClinicalEvent
+    <<Entity>> EmotionType
+    <<Entity>> MonitoringAlert
+    <<External>> Recharts
+
+    DoctorDashboard ..> LiveSpikeMonitor
+    DoctorDashboard ..> SentimentDistribution
+    DoctorDashboard ..> ClinicalInsights
+    DoctorDashboard ..> useEmotionData : reads/updates emotions
+
+    useEmotionData ..> EmotionData : currentEmotions
+    useEmotionData "1" o-- "*" EmotionSnapshot : emotionHistory[]
+    useEmotionData "1" o-- "*" ClinicalEvent : clinicalEvents[]
+    EmotionSnapshot --|> EmotionData : extends
+
+    LiveSpikeMonitor ..> EmotionSnapshot : plots
+    LiveSpikeMonitor ..> Recharts : charting
+    
+    SentimentDistribution ..> EmotionData : bars
+    SentimentDistribution ..> EmotionType : labels
+    
+    ClinicalInsights ..> ClinicalEvent : renders
+    ClinicalInsights ..> MonitoringAlert : renders

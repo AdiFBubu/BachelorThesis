@@ -2,7 +2,7 @@
 
 \section{Setul de date}
 
-În cadrul acestui proiect, pentru evaluarea performanței modelului propus, a fost utilizat setul de date \textbf{CK+ (Cohn-Kanade Extended Dataset)}, unul dintre cele mai utilizate seturi de date publice pentru recunoașterea expresiilor faciale în mediul controlat.
+În cadrul acestui proiect, pentru evaluarea performanței modelului propus, a fost utilizat setul de date \textbf{CK+ (Cohn-Kanade Extended Dataset)}, unul dintre cele mai utilizate seturi de date publice pentru recunoașterea expresiilor faciale în mediul controlat. Alegerea acestuia, în detrimentul unor alternative mai extinse sau \textit{in-the-wild} (precum AffectNet sau RAF-DB), este justificată de caracterul exploratoriu al prezentei lucrări. Scopul principal a fost observarea și izolarea comportamentului SNN sub influența diferitelor tehnici de sampling. Mediul controlat de laborator oferit de CK+ constituie un punct de plecare ideal (baseline), permițând validarea riguroasă a ipotezelor și optimizarea arhitecturii fără interferența zgomotului de fond specific imaginilor necontrolate. Această etapă reprezintă un fundament necesar, urmând ca, în cercetările viitoare, modelul validat să fie extins și testat pe seturi de date cu un grad ridicat de complexitate.
 
 \subsection*{Descrierea datelor}
 Setul de date CK+ conține înregistrări faciale reale, fiind compus din secvențe video ce surprind trecerea de la o expresie neutră la vârful (apexul) unei emoții specifice. 
@@ -16,7 +16,7 @@ Caracteristicile principale ale subsetului utilizat sunt:
 \end{itemize}
 
 \subsection*{Distribuția datelor pe fold-uri}
-Pentru a asigura o evaluare robustă, s-a utilizat o strategie de \textbf{10-fold cross-validation}, folosind seed-ul 42 pentru reproductibilitate. Distribuția celor 309 secvențe pe cele 10 fold-uri este prezentată în Tabelul \ref{tab:distributie_date}.
+Pentru a asigura o evaluare robustă, s-a utilizat o strategie de \textbf{10-fold cross-validation}, folosind seed-ul 42 pentru reproductibilitate. Distribuția celor 309 secvențe pe cele 10 fold-uri este prezentată în Tabela~\ref{tab:distributie_date}.
 
 \begin{table}[h!]
 	\centering
@@ -41,132 +41,303 @@ Pentru a asigura o evaluare robustă, s-a utilizat o strategie de \textbf{10-fol
 
 \section{Metodologie de antrenare și evaluare}
 
-\subsection*{Arhitectura modelului și paradigma de învățare}
 Modelul implementat se bazează pe o rețea neuronală cu impulsuri (\textit{Spiking Neural Network} - SNN) cu o arhitectură convoluțională 3D, capabilă să proceseze atât informația spațială, cât și pe cea temporală din secvențele video.
 
-Paradigma de învățare utilizată este una de tip \textbf{STDP (Spike-Timing-Dependent Plasticity)}, specific regula \textit{Biological STDP}. Aceasta permite ajustarea greutăților sinaptice în funcție de corelația temporală a impulsurilor dintre neuronii pre-sinaptici și post-sinaptici.
+Paradigma de învățare utilizată este una de tip \textbf{STDP (Spike-Timing-Dependent Plasticity)}, mai exact regula \textit{Biological STDP}. Aceasta permite ajustarea greutăților sinaptice în funcție de corelația temporală a impulsurilor dintre neuronii pre-sinaptici și post-sinaptici.
 
 \subsection*{Preprocesarea datelor}
-Înainte de a fi introduse în rețea, datele trec prin următoarele etape:
-\begin{enumerate}
-	\item \textbf{Filtrare On/Off:} Utilizarea unui \texttt{DefaultOnOffFilter} pentru evidențierea contrastelor și a marginilor (mărime filtru 7, parametri 0.1 și 1.0).
-	\item \textbf{MaxScaling:} Normalizarea intensității pixelilor.
-	\item \textbf{Latency Coding:} Conversia pixelilor în impulsuri (spikes), unde intensitatea este codificată prin latența temporală a primului impuls.
-\end{enumerate}
+Înainte de a fi introduse în rețea, datele parcurg un pipeline de preprocesare structurat secvențial, menit să optimizeze reprezentarea informației vizuale și să o adapteze la specificul rețelelor neuromorfice. În prima etapă, se aplică o filtrare de tip On/Off prin intermediul unui nucleu de dimensiune $7 \times 7$, având parametrii de deviație standard stabiliți la $0.1$ și $1.0$, cu scopul de a evidenția contrastele locale și marginile geometrice din cadrul secvențelor. Ulterior, se utilizează tehnica \textit{MaxScaling} pentru normalizarea intensității pixelilor, asigurând alinierea dinamică a amplitudinilor rezultate din filtrare. În final, prin mecanismul de codificare prin latență (\textit{Latency Coding}), aceste valori continue sunt convertite în fluxuri de impulsuri discrete (\textit{spikes}), unde intensitatea fiecărui pixel este transpusă direct în domeniul temporal prin intermediul latenței de declanșare a primului impuls.
 
-\subsection*{Configurarea stratului convoluțional și hiper-parametri}
-Nucleul modelului este reprezentat de un strat de convoluție 3D (\texttt{Convolution3D}). Parametrii utilizați pentru antrenare sunt detaliați în Tabelul \ref{tab:hiperparametri}.
+\subsection*{Mecanisme de control și dinamică parametrială în 3D-CSNN}
+Modulul de convoluție tridimensională introduce o serie de mecanisme specifice de optimizare, homeostazie și control al densității semnalului. În faza de antrenare, convergența este controlată prin ajustarea dinamică a pragurilor interne ($\mathbf{th}$) în raport cu timpul obiectiv $t_{obj}$, interzicând scăderea acestora sub limita rigidă $th_{min}$ pentru a bloca activările spontane cauzate de zgomot. Totodată, la finalul fiecărei epoci se aplică o strategie de tip \textit{simulated annealing}, prin care parametrul de control $\alpha_{annealing}$ reduce multiplicativ atât rata de învățare a pragului ($\eta_{th}$), cât și parametrii interni ai regulii STDP, această atenuare progresivă având rolul de a stabiliza ponderile sinaptice pe măsură ce rețeaua avansează în procesul de învățare.
 
-\begin{table}[h!]
-	\centering
-	\caption{Hiper-parametrii rețelei SNN}
-	\label{tab:hiperparametri}
-	\begin{tabular}{ll}
-		\toprule
-		\textbf{Parametru} & \textbf{Valoare} \\ \midrule
-		Număr de filtre & 64 \\
-		Dimensiune filtru (WxHxD) & $5 \times 5 \times 3$ \\
-		Număr de epoci & 800 \\
-		Threshold inițial ($\theta$) & 4.0 \\
-		$t_{obj}$ (Time Objective) & 0.80 \\
-		Learning rate Threshold ($\mu_{th}$) & 0.09 \\
-		Learning rate Greutăți ($\mu_{w}$) & 0.009 \\
-		Spatial Pooling (output size) & $4 \times 4$ \\
-		Temporal Pooling (output size) & 2 \\
-		\bottomrule
-	\end{tabular}
-\end{table}
-
-\subsection*{Evaluarea și Clasificarea}
-După extragerea trăsăturilor prin stratul convoluțional SNN și aplicarea metodelor de \textit{SumPooling} și \textit{TemporalPooling}, reprezentările finale sunt clasificate folosind un algoritm \textbf{SVM (Support Vector Machine)}. Evaluarea se face prin cross-validation pe cele 10 fold-uri menționate anterior.
+\subsection*{Evaluarea și clasificarea}
+După extragerea trăsăturilor prin stratul convoluțional SNN, decodificarea lor prin metoda de \textit{declin liniar} (care a demonstrat o stabilitate superioară în faza de convergență și a condus experimental la cele mai ridicate rate de acuratețe) și aplicarea metodelor de \textit{SumPooling} și \textit{TemporalPooling}, reprezentările finale sunt clasificate folosind un algoritm \textbf{SVM (Support Vector Machine)}. Evaluarea se face prin cross-validation pe cele 10 fold-uri menționate anterior.
 
 \section{Metrici de evaluare}
+\label{sec:metrici}
 
-\begin{itemize}\item \textbf{Metrici Globale de Clasificare:}\begin{itemize}\item \textbf{Acuratețea (Accuracy):} Proporția predicțiilor corecte din totalul eșantioanelor:
-		
-		\[ \text{Accuracy} = \frac{N_{correct}}{N_{total}} \times 100\% \]
-		
-		\textbf{Matricea de Confuzie:} Reprezentare tabelară pentru identificarea erorilor sistematice între emoții similare (ex. \textit{fear} vs \textit{surprise}).\end{itemize}
+\subsection*{Metrici globale de clasificare}
+Aceste metrici sunt utilizate pentru a evalua performanța finală a modelului în sarcina de recunoaștere a emoțiilor, privind rețeaua ca pe un sistem de tip intrare-ieșire:
+
+\begin{itemize}
+	\item \textbf{Acuratețea (Accuracy):} Reprezintă proporția predicțiilor corecte din totalul eșantioanelor testate și se calculează conform relației \eqref{eq:accuracy}:
+	\begin{equation}
+		\label{eq:accuracy}
+		\text{Accuracy} = \frac{N_{\text{correct}}}{N_{\text{total}}} \times 100\%
+	\end{equation}
 	
-	\item \textbf{Metrici Specifice Straturilor SNN (Per Layer Analysis):}
-	\begin{itemize}
-		\item \textbf{Activitatea Neuronală (Activity):} Reprezintă rata de declanșare a spike-urilor în cadrul stratului. 
-		\begin{itemize}
-			\item \textit{Importanță:} Un neuron care emite un spike tinde să își reducă la tăcere vecinii (inhibiție laterală). Analiza activității este esențială pentru menținerea stării de \textbf{homeostazie} a rețelei.
-		\end{itemize}
-		\item \textbf{Coerența (Coherence):} Măsoară gradul de redundanță al trăsăturilor învățate. 
-		\begin{itemize}
-			\item \textit{Interpretare:} O coerență scăzută indică faptul că SNN-ul a învățat o varietate mare de trăsături distincte. Antrenamentul eficient trebuie să tindă spre o anumită \textbf{incoerență} pentru a maximiza capacitatea de reprezentare.
-		\end{itemize}
-	\end{itemize}
+	\item \textbf{Matricea de confuzie:} Reprezentare tabelară esențială pentru identificarea erorilor sistematice și a gradului de confuzie între clase de emoții cu manifestări similare (de exemplu, \textit{fear} vs. \textit{surprise}).
 \end{itemize}
 
-\subsubsection{Activitatea Neuronală (Activity)}
-Reprezintă dinamica de descărcare a spike-urilor în raport cu topologia stratului.
+\subsection*{Metrici specifice straturilor SNN}
+Pentru a înțelege dinamica internă, eficiența energetică și calitatea reprezentărilor învățate, se analizează activitatea neuronală și diversitatea filtrelor la nivelul fiecărui strat convoluțional de tip spiking.
+
+\subsubsection{Activitatea neuronală (Activity)}
+Această metrică urmărește rata și densitatea de descărcare a spike-urilor în raport cu topologia stratului. Deoarece un neuron care emite un impuls tinde să își reducă la tăcere vecinii prin mecanisme de inhibiție laterală, monitorizarea activității este critică pentru menținerea stării de \textbf{homeostazie} a rețelei. Dinamica sa este evaluată prin trei indicatori principali:
 
 \begin{itemize}
 	\item \textbf{Sparsity (Raritatea):} Se calculează pe baza raportului dintre norma $L_1$ și norma $L_2$ a activărilor. 
 	\begin{itemize}
-		\item \textit{Interval optim:} O valoare cuprinsă între \textbf{0.7 și 0.9} este ideală. O raritate prea mare (spre 1.0) indică o rețea "moartă", în timp ce o valoare mică indică o activitate densă, care anulează avantajul energetic al SNN.
+		\item \textit{Interval optim:} O valoare cuprinsă între \textbf{0.7 și 0.9} este ideală. O raritate extremă (spre 1.0) indică o rețea „moartă” (inactivă), în timp ce o valoare prea mică denotă o activitate densă, care anulează avantajul energetic nativ al SNN.
 	\end{itemize}
-	\item \textbf{Active Units (\%):} Procentul de neuroni care emit cel puțin un spike per eșantion.
+	\item \textbf{Active Units (\%):} Procentul de neuroni unici care emit cel puțin un spike pe parcursul procesării unui eșantion.
 	\begin{itemize}
-		\item \textit{Interval optim:} Pentru straturi convoluționale, o activitate de \textbf{1\% - 5\%} este considerată biologic plauzibilă și eficientă computațional.
+		\item \textit{Interval optim:} Pentru straturile convoluționale, o valoare de \textbf{1\% - 5\%} este considerată biologic plauzibilă și eficientă computațional.
 	\end{itemize}
-	\item \textbf{Quiet (\%):} Procentul de eșantioane pentru care stratul nu a generat niciun spike.
+	\item \textbf{Quiet (\%):} Procentul de eșantioane din setul de date pentru care un strat întreg nu a generat niciun spike.
 	\begin{itemize}
-		\item \textit{Interpretare:} Această valoare trebuie să fie cât mai aproape de \textbf{0\%}. O valoare ridicată (ex. >10\%) sugerează că pragul de activare (\textit{threshold}) este prea înalt sau că datele de intrare nu sunt normalizate corect.
+		\item \textit{Interpretare:} Ideal, această valoare trebuie să fie cât mai aproape de \textbf{0\%}. O valoare ridicată (ex. $>10\%$) sugerează că pragul de activare (\textit{threshold}) este setat prea sus sau că datele de intrare nu sunt normalizate corect.
 	\end{itemize}
 \end{itemize}
 
-\subsubsection{Coerența Trăsăturilor (Coherence)}
-Măsoară similitudinea spectrală între nucleele (kernel-urile) de convoluție prin calcularea similitudinii cosinus între vectorii de ponderi $w_i$ și $w_j$.
+\subsubsection{Coerența trăsăturilor (Coherence)}
+Măsoară gradul de redundanță al trăsăturilor învățate prin evaluarea similitudinii spectrale între nucleele (kernel-urile) de convoluție. Matematic, se folosește similitudinea cosinus între vectorii de ponderi sinaptice $w_i$ și $w_j$, conform relației \eqref{eq:coherence}:
 
 \begin{equation}
+	\label{eq:coherence}
 	\text{Coherence}(w_i, w_j) = \frac{w_i \cdot w_j}{\|w_i\| \|w_j\| + \epsilon}
 \end{equation}
 
 \begin{itemize}
-	\item \textbf{Interpretarea Cuartilelor (Q1, Q2, Q3):}
+	\item \textbf{Interpretarea cuartilelor (Q1, Q2, Q3):}
 	\begin{itemize}
-		\item \textit{Interval optim (Mediana/Q2):} O valoare sub \textbf{0.3 - 0.5} indică o rețea sănătoasă care a învățat trăsături diverse (margini, texturi diferite). 
-		\item \textit{Riscuri:} Dacă \textit{Max} și \textit{Q3} tind spre \textbf{0.9 - 1.0}, rețeaua suferă de redundanță extremă (mai mulți neuroni au învățat exact aceeași trăsătură), ceea ce limitează capacitatea de discriminare a emoțiilor.
+		\item \textit{Interval optim (Mediana/Q2):} O valoare sub \textbf{0.3 - 0.5} indică o rețea sănătoasă care a reușit să învețe trăsături diverse și complementare (margini, orientări și texturi diferite). 
+		\item \textit{Riscuri:} Dacă valorile maxime (\textit{Max}) și cuartila superioară (\textit{Q3}) tind spre \textbf{0.9 - 1.0}, rețeaua suferă de redundanță extremă (mai multe filtre au învățat exact aceeași trăsătură), limitând sever capacitatea de discriminare a emoțiilor faciale.
 	\end{itemize}
-	\item \textbf{Importanța Incoerenței:} Un grad ridicat de decorelare între filtre este esențial pentru ca algoritmul de clasificare ulterior (SVM sau FC) să poată extrage informație utilă din spațiul trăsăturilor.
+	\item \textbf{Importanța incoerenței:} Antrenamentul eficient trebuie să tindă spre o anumită \textbf{incoerență} (decorelare maximă între filtre). Acest lucru este esențial pentru ca algoritmul de clasificare final (SVM sau stratul complet conectat) să primească un spațiu bogat de trăsături, maximizând astfel capacitatea de reprezentare a modelului.
 \end{itemize}
 
 
-\section{Rezultate obținute și analiză}
+\section{Optimizarea hiperparametrilor prin căutare multi-stage cu Optuna}
 
-În această secțiune sunt prezentate performanțele obținute în urma procesului de cross-validation, precum și o analiză detaliată a comportamentului rețelei la nivel de distribuție a datelor și a impulsurilor (\textit{spikes}).
+Performanța arhitecturilor de tip \textit{Convolutional Spiking Neural Networks} este puternic dependentă de alegerea hiperparametrilor, atât cei asociați mecanismului de procesare spațio-temporală, cât și celor care controlează dinamica învățării nesupervizate STDP. Din acest motiv, în locul unei selecții manuale sau al unei căutări exhaustive brute (\textit{grid search}), a fost adoptată o strategie de optimizare multi-stage bazată pe biblioteca \textit{Optuna}, capabilă să exploreze eficient spații mari de căutare folosind optimizare bayesiană adaptivă.
 
-\subsection*{Performanța pe fold-uri}
+Pentru a evita contaminarea evaluării finale și supraînvățarea pe setul de testare, optimizarea a fost realizată utilizând o procedură de validare încrucișată ierarhică (\textit{nested cross-validation}). Astfel, fold-ul selectat pentru testare a rămas complet ascuns pe parcursul optimizării hiperparametrilor și a fost utilizat exclusiv în etapa finală de evaluare.
 
-Rezultatele clasificării pentru fiecare dintre cele 10 fold-uri sunt centralizate în Tabelul \ref{tab:rezultate_folds}. Rata medie de clasificare obținută este de aproximativ \textbf{48.02\%}.
+Procesul de optimizare a fost împărțit în trei etape succesive (\textit{stages}), fiecare având rolul de a reduce progresiv spațiul de căutare și de a rafina hiperparametrii relevanți.
 
-\begin{table}[h!]
+\subsection*{Stage 1 -- Optimizarea parametrilor geometrici și temporali}
+
+În prima etapă, optimizarea a fost realizată independent pentru fiecare strategie de eșantionare (\textit{sampler}) și pentru fiecare fold selectat drept set de testare.
+
+Pentru fiecare iterație, un fold a fost exclus complet și rezervat evaluării finale (\textit{test fold}), iar pe celelalte 9 fold-uri s-a efectuat un proces iterativ de validare încrucișată. Mai precis, fiecare dintre cele 9 fold-uri a fost selectat pe rând ca set de validare, restul fiind utilizate pentru antrenare. Această strategie poate fi interpretată drept un proces de validare de tip: $9 \times (8\text{-train},1\text{-validation})$ pentru fiecare configurație de hiperparametri propusă de algoritmul Optuna.
+
+În această etapă au fost optimizați hiperparametrii care controlează granularitatea spațială și temporală a extragerii trăsăturilor: timpul obiectiv al latenței neuronale ($t_{obj}$), dimensiunea filtrului convoluțional ($f_{size}$), gradul de pooling spațial, gradul de pooling temporal. Spațiul de căutare utilizat este prezentat în Tabela~\ref{tab:spatiu_cautare}.
+
+\begin{table}[htbp]
 	\centering
-	\caption{Acuratețea clasificării pe fiecare fold}
-	\label{tab:rezultate_folds}
-	\begin{tabular}{@{}ccc@{}}
+	\caption{Definirea spațiului de căutare pentru optimizarea hiperparametrilor în Stage 1}
+	\label{tab:spatiu_cautare}
+	\resizebox{\columnwidth}{!}{
+	\begin{tabular}{|c|p{5.5cm}|c|c|c|}
+		\hline
+		\textbf{Hiperparametru} & \textbf{Semnificație / Rol} & \textbf{Tip de date} & \textbf{Interval (Min, Max)} & \textbf{Pas (Step)} \\ \hline
+		\texttt{t\textsubscript{obj}} & Timpul obiectiv (țintă) estimat pentru declanșarea impulsului neuronal. & Float (Continuu) & $[0.75, 0.95]$ & - \\ \hline
+		\texttt{filter size} & Dimensiunea metrică (lungime și lățime) a nucleului convoluțional. & Int (Discret) & $[3, 9]$ & 2 \\ \hline
+		\texttt{spatial pooling} & Dimensiunea metrică (lungime și lățime) a hărților de caracteristici de ieșire în urma operației de pooling spațial. & Int (Discret) & $[2, 8]$ & 2 \\ \hline
+		\texttt{temporal pooling} & Numărul de cadre de ieșire obținute în urma pooling-ului temporal. & Int (Discret) & $[2, 8]$ & 1 \\ \hline
+	\end{tabular}
+}
+\end{table}
+
+Pentru fiecare configurație au fost calculate media acurateții (\textit{mean accuracy}) și deviația standard (\textit{standard deviation}) rezultate din cele 9 validări interne, fiind evaluate aproximativ 120 de configurații pentru fiecare combinație sampler--fold de testare.
+
+La finalul etapei, pentru fiecare fold rezervat testării au fost selectate configurațiile optime de hiperparametri și s-a realizat antrenarea pe toate cele 9 fold-uri disponibile, urmată de evaluarea pe fold-ul de testare rămas complet nevăzut până în acel moment. Rezultatele obținute pentru \textit{stage 1} sunt ilustrate în Tabela~\ref{tab:combined_stages_results}.
+
+\begin{table}[htbp]
+	\centering
+	\caption{Rezultatele comparative ale acurateții pentru Stage 1 și Stage 2 detaliate pe folduri și toate cele patru metode de eșantionare (Sampler).}
+	\label{tab:combined_stages_results}
+	\small
+	\begin{tabular}{llcc}
 		\toprule
-		\textbf{Fold} & \textbf{Rata de clasificare (\%)} & \textbf{Corecte / Total} \\ \midrule
-		Fold 1 & 58.82\% & 20/34 \\
-		Fold 2 & 47.05\% & 16/34 \\
-		Fold 3 & 51.51\% & 17/33 \\
-		Fold 4 & 45.45\% & 15/33 \\
-		Fold 5 & 41.93\% & 13/31 \\
-		Fold 6 & 53.33\% & 16/30 \\
-		Fold 7 & 50.00\% & 15/30 \\
-		Fold 8 & 48.27\% & 14/29 \\
-		Fold 9 & 35.71\% & 10/28 \\
-		Fold 10 & 48.14\% & 13/27 \\ \midrule
-		\textbf{Medie} & \textbf{48.02\%} & \textbf{159 / 309} \\ \bottomrule
+		\textbf{Sampler} & \textbf{Fold} & \textbf{Stage 1 (\%)} & \textbf{Stage 2 (\%)} \\
+		\midrule
+		\multirow{11}{*}{Landmark} 
+		& 1  & 50.0000 & 61.7647 \\
+		& 2  & 47.0588 & 47.0588 \\
+		& 3  & 45.4545 & 54.5455 \\
+		& 4  & 42.4242 & 42.4242 \\
+		& 5  & 45.1613 & 45.1613 \\
+		& 6  & 56.6667 & 56.6667 \\
+		& 7  & 60.0000 & 60.0000 \\
+		& 8  & 51.7241 & 51.7241 \\
+		& 9  & 50.0000 & 46.4286 \\
+		& 10 & 51.8519 & 48.1481 \\
+		\cmidrule{2-4}
+		& \textbf{Mean $\pm$ Std Dev} & \textbf{50.0341 $\pm$ 5.3847} & \textbf{51.3922 $\pm$ 6.6059} \\
+		\midrule
+		\multirow{11}{*}{Random} 
+		& 1  & 55.8824 & 55.8824 \\
+		& 2  & 47.0588 & 38.2353 \\
+		& 3  & 60.6061 & 54.5455 \\
+		& 4  & 36.3636 & 39.3939 \\
+		& 5  & 51.6129 & 48.3871 \\
+		& 6  & 50.0000 & 53.3333 \\
+		& 7  & 63.3333 & 60.0000 \\
+		& 8  & 58.6207 & 65.5172 \\
+		& 9  & 60.7143 & 60.7143 \\
+		& 10 & 29.6296 & 40.7407 \\
+		\cmidrule{2-4}
+		& \textbf{Mean $\pm$ Std Dev} & \textbf{51.3822 $\pm$ 11.0907} & \textbf{51.6750 $\pm$ 9.6213} \\
+		\midrule
+		\multirow{11}{*}{BoundingBox} 
+		& 1  & 67.6471 & 61.7647 \\
+		& 2  & 47.0588 & 44.1176 \\
+		& 3  & 48.4848 & 51.5152 \\
+		& 4  & 48.4848 & 42.4242 \\
+		& 5  & 45.1613 & 48.3871 \\
+		& 6  & 53.3333 & 53.3333 \\
+		& 7  & 56.6667 & 56.6667 \\
+		& 8  & 37.9310 & 48.2759 \\
+		& 9  & 50.0000 & 42.8571 \\
+		& 10 & 40.7407 & 40.7407 \\
+		\cmidrule{2-4}
+		& \textbf{Mean $\pm$ Std Dev} & \textbf{49.5508 $\pm$ 8.3866} & \textbf{49.0083 $\pm$ 6.8374} \\
+		\midrule
+		\multirow{11}{*}{OnOffSaliency} 
+		& 1  & 55.8824 & 52.9412 \\
+		& 2  & 47.0588 & 41.1765 \\
+		& 3  & 48.4848 & 45.4545 \\
+		& 4  & 42.4242 & 42.4242 \\
+		& 5  & 51.6129 & 41.9355 \\
+		& 6  & 53.3333 & 50.0000 \\
+		& 7  & 66.6667 & 63.3333 \\
+		& 8  & 44.8276 & 48.2759 \\
+		& 9  & 50.0000 & 50.0000 \\
+		& 10 & 40.7407 & 40.7407 \\
+		\cmidrule{2-4}
+		& \textbf{Mean $\pm$ Std Dev} & \textbf{50.1031 $\pm$ 7.5042} & \textbf{47.6282 $\pm$ 6.9907} \\
+		\bottomrule
 	\end{tabular}
 \end{table}
 
+\subsection*{Stage 2 -- Optimizarea hiperparametrilor de învățare STDP}
+
+În a doua etapă, optimizarea s-a concentrat asupra parametrilor care influențează dinamica învățării sinaptice și capacitatea de reprezentare a rețelei.
+
+Pentru a reduce dimensionalitatea spațiului de căutare, valorile optime pentru: $f_{size}, spatial pooling, temporal pooling$, identificate în Stage 1, au fost păstrate fixe pentru fiecare sampler.
+
+În schimb, s-a efectuat optimizarea următorilor hiperparametri: timpul obiectiv al latenței ($t_{obj}$) într-un interval local rafinat folosind valoarea optimă rezultată în prima etapă; rata de învățare STDP ($w_{lr}$); numărul de filtre convoluționale; numărul de epoci de antrenare și adâncimea temporală a filtrului. Spațiul de căutare utilizat este prezentat în Tabela~\ref{tab:spatiu_cautare_v2}:
+
+\begin{table}[htbp]
+	\centering
+	\caption{Definirea spațiului secundar de căutare pentru optimizarea hiperparametrilor în Stage 2}
+	\label{tab:spatiu_cautare_v2}
+	\resizebox{\columnwidth}{!}{
+		\begin{tabular}{|c|p{5.5cm}|c|c|c|}
+			\hline
+			\textbf{Hiperparametru} & \textbf{Semnificație / Rol} & \textbf{Tip de date} & \textbf{Interval (Min, Max)} & \textbf{Pas / Scară} \\ \hline
+			\texttt{t\textsubscript{obj}} & Timpul obiectiv (țintă) estimat pentru declanșarea impulsului neuronal, ajustat pe baza valorii obținute în Stage 1. & Float (Continuu) & ajustat individual & - \\ \hline
+			\texttt{w\textsubscript{lr}} & Rata de învățare sinaptică (\textit{learning rate}) utilizată pentru actualizarea ponderilor prin regula STDP. & Float (Logaritmic) & $[0.005, 0.025]$ & Scară logaritmică \\ \hline
+			\texttt{filter number} & Numărul total de filtre convoluționale (nuclee/canale de ieșire) din cadrul stratului 3D-CSNN. & Int (Discret) & $[32, 128]$ & 32 \\ \hline
+			\texttt{epochs} & Numărul total de epoci alocate antrenării rețelei. & Int (Discret) & $[400, 1250]$ & 50 \\ \hline
+			\texttt{filter depth} & Adâncimea temporală a nucleului convoluțional (numărul de cadre consecutive procesate simultan). & Int (Discret) & $[2, 8]$ & 1 \\ \hline
+		\end{tabular}
+	}
+\end{table}
+
+Intervalele pentru parametrul $t_{obj}$ au fost ajustate individual pentru fiecare sampler și fold de test astfel încât să încadreze cât mai bine valorile optime identificate în Stage 1.
+
+În mod similar etapei precedente, aproximativ 120 de configurații au fost evaluate pentru fiecare fold rezervat testării, rezultând distribuții ale valorilor de \textit{mean accuracy} și \textit{standard deviation} pentru fiecare configurație.
+
+Selecția configurației finale nu s-a realizat exclusiv pe baza celei mai mari acurateți, ci printr-un compromis între performanță și stabilitate. Astfel, pentru fiecare sampler a fost construit un clasament (\textit{Top-10 configurations}) ce urmărea maximizarea acurateții medii în raport cu o deviație standard redusă. Clasamentul rezultat a fost ulterior supus unei etape de validare manuală.
+
+Ulterior, configurațiile selectate au fost evaluate prin antrenare pe cele 9 fold-uri și testare pe fold-ul ascuns, rezultatele pentru \textit{stage 2} fiind sintetizate în Tabela~\ref{tab:combined_stages_results}.
+
+\subsection*{Stage 3 -- Rafinarea locală a spațiului de căutare}
+
+În ultima etapă s-a urmărit identificarea unor intervale locale de căutare mai relevante pentru fiecare sampler, indiferent de fold. Pentru aceasta, au fost agregate toate configurațiile evaluate în etapele anterioare pentru fiecare metodă de eșantionare. Pornind de la aceste date, a fost antrenat un model \textit{Random Forest Regressor}, utilizat pentru estimarea importanței parametrilor și pentru identificarea intervalelor locale de valori asociate performanțelor ridicate. Această analiză a permis restrângerea spațiului de căutare în jurul zonelor promițătoare ale hiperparametrilor, evitând explorarea inutilă a configurațiilor suboptime. Ulterior, a fost reluat procesul de optimizare utilizând strategia de validare încrucișată: $9\text{-train} + 1\text{-validation}$, pentru toate fold-urile considerate succesiv drept set de testare.
+
+La finalul acestei etape au fost extrase configurațiile generale, optime și finale pentru fiecare sampler, împreună cu valorile asociate de \textit{mean accuracy} și \textit{standard deviation}, rezultatele fiind sintetizate în Tabela~\ref{tab:stage3_results}.
+
+În ansamblu, strategia multi-stage adoptată a permis reducerea graduală a spațiului hiperparametrilor și identificarea unor configurații robuste, capabile să generalizeze între fold-uri fără a introduce bias asupra setului de testare.
+
+\begin{table}[htbp]
+	\centering
+	\caption{Configurațiile optime finale și performanțele obținute pentru fiecare metodă de eșantionare (Sampler).}
+	\label{tab:stage3_results}
+	\small
+	\begin{tabular}{lcccc}
+		\toprule
+		\textbf{Sampler / Parameters} & \textbf{\shortstack{Landmark\\Sampler}} & \textbf{\shortstack{BoundingBox\\Sampler}} & \textbf{\shortstack{Random\\Sampler}} & \textbf{\shortstack{OnOffSaliency\\Sampler}} \\
+		\midrule
+		\textbf{Accuracy CV} & 52.31\% & 51.33\% & \textbf{56.10\%} & 52.34\% \\
+		\textbf{Std Dev}     & 7.08\%  & 5.98\%  & 7.13\%           & \textbf{4.40\%} \\
+		\midrule
+		\texttt{t\textsubscript{obj}}            & 0.8001 & 0.8346 & 0.7962 & 0.8227 \\
+		\texttt{w\textsubscript{lr}}             & 0.0162 & 0.0147 & 0.0141 & 0.0121 \\
+		\texttt{epochs}            & 600    & 400    & 1150   & 850    \\
+		\texttt{filter number}    & 32     & 96     & 128    & 96     \\
+		\texttt{filter depth}     & 2      & 3      & 3      & 3      \\
+		\texttt{filter size}      & 7      & 5      & 3      & 5      \\
+		\texttt{spatial pooling}  & 4      & 4      & 4      & 4      \\
+		\texttt{temporal pooling} & 8      & 4      & 8      & 8      \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\section{Rezultate obținute și analiză}
+
+În această secțiune sunt prezentate performanțele obținute folosind \textit{Random Sampler} --- care a obținut acuratețea cea mai ridicată în comparație cu celelalte tipuri de eșantionare --- în urma procesului de cross-validation, precum și o analiză detaliată a comportamentului rețelei la nivel de distribuție a datelor și a impulsurilor (\textit{spikes}). Deși la prima vedere această metodă de eșantionare aleatorie ar putea părea ineficientă din cauza includerii unor regiuni cu relevanță semantică redusă (precum fundalul), rezultatele experimentale demonstrează contrariul. Prin expunerea modelului la o întreagă diversitate de volume spațio-temporale, această abordare funcționează ca un mecanism puternic de regularizare implicită. Aceasta previne supraajustarea (overfitting) pe micro-expresiile locale și forțează rețeaua spiking să extragă trăsături globale mult mai robuste, conducând în final la cele mai ridicate rate de acuratețe în recunoașterea emoțiilor.
+
+\subsection*{Performanța pe folduri și hiperparametrii}
+
+Rezultatele clasificării efectuate în urma ultimei etape de optimizare a hiperparametrilor, pentru fiecare dintre cele 10 fold-uri, sunt centralizate în Tabela~\ref{tab:rezultate_folds}, iar configurația exactă a rețelei SNN este prezentată în Tabela~\ref{tab:hiperparametri}. Media aritmetică a acurateții pe fold-uri (\textit{media macro}) este de \textbf{56.10\%}, în timp ce acuratețea globală, calculată la nivelul întregului set de date (\textit{media micro}), este de \textbf{55.99\%} (173/309).
+
+\begin{table}[h!]
+	\centering
+	\small
+	
+	\begin{minipage}[t]{0.43\textwidth}
+		\centering
+		\caption{Hiper-parametrii rețelei SNN}
+		\label{tab:hiperparametri}
+		\vspace{2mm}
+		\setlength{\tabcolsep}{3pt}
+		\begin{tabular}{ll}
+			\toprule
+			\textbf{Parametru} & \textbf{Valoare} \\ \midrule
+			Număr de filtre & 128 \\
+			Dimensiune filtru (WxHxD) & $3 \times 3 \times 3$ \\
+			Număr de epoci & 1150 \\
+			Threshold inițial ($\theta$) & 4.0 \\
+			t\textsubscript{obj} (Time Obj.) & 0.79 \\
+			LR Threshold ($\mu_{th}$) & 0.14 \\
+			LR Greutăți ($\mu_{w}$) & 0.014 \\
+			Spatial Pooling (out) & $4 \times 4$ \\
+			Temporal Pooling (out) & 8 \\
+			\bottomrule
+		\end{tabular}
+	\end{minipage}
+	\hfill %
+	\begin{minipage}[t]{0.53\textwidth}
+		\centering
+		\caption{Acuratețea pe fold-uri}
+		\label{tab:rezultate_folds}
+		\vspace{2mm}
+		\setlength{\tabcolsep}{4pt}
+		\begin{tabular}{@{}ccc@{}}
+			\toprule
+			\textbf{Fold} & \textbf{Acuratețe (\%)} & \textbf{Corecte/Total} \\ \midrule
+			Fold 1 & 61.76\% & 21/34 \\
+			Fold 2 & 50.00\% & 17/34 \\
+			Fold 3 & 57.58\% & 19/33 \\
+			Fold 4 & 42.42\% & 14/33 \\
+			Fold 5 & 54.84\% & 17/31 \\
+			Fold 6 & 56.67\% & 17/30 \\
+			Fold 7 & 66.67\% & 20/30 \\
+			Fold 8 & 58.62\% & 17/29 \\
+			Fold 9 & 64.29\% & 18/28 \\
+			Fold 10 & 48.15\% & 13/27 \\ \midrule
+			\textbf{Medie} & \textbf{55.99\%} & \textbf{173/309} \\ \bottomrule
+		\end{tabular}
+	\end{minipage}
+\end{table}
+
 \subsection*{Analiza detaliată pe Fold 1}
-Fold-ul 1 a înregistrat cea mai ridicată performanță (58.82\%). Pentru a înțelege punctele forte și limitările modelului, matricea de confuzie pentru Fold 1 (Tabelul \ref{tab:confusion_matrix}), surprinde corelarea etichetelor reale (\textit{True Label}) cu probabilitățile maxime generate de clasificatorul SVM.
+Pentru a înțelege punctele forte și limitările modelului, matricea de confuzie pentru Fold 1 (prezentată în Tabela~\ref{tab:confusion_matrix}), surprinde corelarea etichetelor reale (\textit{True Label}) cu probabilitățile maxime generate de clasificatorul SVM.
 
 \begin{table}[h!]
 	\centering
@@ -175,36 +346,35 @@ Fold-ul 1 a înregistrat cea mai ridicată performanță (58.82\%). Pentru a în
 	\begin{tabular}{r|ccccccc|c}
 		\toprule
 		\textbf{Real \textbackslash Prezis} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{Recall \%} \\ \midrule
-		\textbf{1 (Anger)}     & 0 & 0 & 5 & 0 & 0 & 0 & 0 & 0.0\% \\
-		\textbf{2 (Contempt)}  & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0.0\% \\
-		\textbf{3 (Disgust)}   & 0 & 0 & \textbf{6} & 0 & 0 & 0 & 0 & 100.0\% \\
+		\textbf{1 (Anger)}     & \textbf{1} & 0 & 4 & 0 & 0 & 0 & 0 & 20.0\% \\
+		\textbf{2 (Contempt)}  & 0 & \textbf{1} & 1 & 0 & 0 & 0 & 0 & 50.0\% \\
+		\textbf{3 (Disgust)}   & 0 & 0 & \textbf{5} & 0 & 1 & 0 & 0 & 83.3\% \\
 		\textbf{4 (Fear)}      & 0 & 0 & 0 & 0 & 0 & 0 & 3 & 0.0\% \\
 		\textbf{5 (Happiness)} & 0 & 0 & 0 & 0 & \textbf{7} & 0 & 0 & 100.0\% \\
 		\textbf{6 (Sadness)}   & 1 & 0 & 2 & 0 & 0 & 0 & 0 & 0.0\% \\
-		\textbf{7 (Surprise)}  & 0 & 0 & 1 & 0 & 0 & 0 & \textbf{7} & 87.5\% \\ \midrule
-		\textbf{Precision \%}  & 0.0\% & 0.0\% & 40.0\% & 0.0\% & 100.0\% & 0.0\% & 70.0\% & \textbf{Acc: 58.8\%} \\
+		\textbf{7 (Surprise)}  & 0 & 0 & 0 & 0 & 1 & 0 & \textbf{7} & 87.5\% \\ \midrule
+		\textbf{Precision \%}  & 50.0\% & 100.0\% & 41.7\% & 0.0\% & 77.8\% & 0.0\% & 70.0\% & \textbf{Acc: 61.8\%} \\
 		\bottomrule
 	\end{tabular}
 \end{table}
 
-\subsubsection{Interpretarea erorilor de clasificare}
-Analiza probabilităților individuale relevă câteva fenomene tipice pentru procesarea imaginilor faciale prin SNN:
 
+Analiza probabilităților individuale relevă câteva fenomene tipice pentru procesarea imaginilor faciale prin SNN:
 \begin{itemize}
-	\item \textbf{Suprapunerea caracteristicilor Furie-Dezgust:} Toate secvențele de \textit{Anger} (clasa 1) au primit probabilitatea maximă pentru \textit{Disgust} (clasa 3). Acest lucru se explică prin similitudinea morfologică a acestor expresii (încrețirea nasului și coborârea sprâncenelor), pe care filtrele convoluționale actuale le extrag ca fiind identice.
-	\item \textbf{Dificultatea detectării Fricii:} Emoția \textit{Fear} (clasa 4) a fost clasificată sistematic drept \textit{Surprise} (clasa 7). Din punct de vedere vizual, ambele emoții implică deschiderea largă a ochilor și ridicarea sprâncenelor. Rezultatele sugerează că modelul reușește să detecteze activarea musculară, dar nu și subtilitatea temporală care diferențiază frica de surpriză.
-	\item \textbf{Performanță Robustă la Emoții Extreme:} Clasele \textit{Happiness} și \textit{Disgust} au un \textit{recall} de 100\%, indicând faptul că arhitectura SNN propusă este extrem de eficientă în izolarea trăsăturilor de intensitate mare (zâmbet larg, respectiv contracție nazală pronunțată).
-	\item \textbf{Clasele sub-reprezentate:} \textit{Contempt} și \textit{Sadness} au înregistrat performanțe slabe, fiind confundate cu emoții negative mai „puternice”. Aceasta este o limitare cunoscută a setului de date CK+, unde aceste clase au mult mai puține exemple de antrenament.
+	\item \textbf{Polarizarea erorilor către clasa Dezgust:} Se observă o tendință pronunțată a modelului de a confunda alte emoții negative cu clasa 3 (\textit{Disgust}). Astfel, 4 din cele 5 secvențe de \textit{Anger} (clasa 1) și 2 din cele 3 secvențe de \textit{Sadness} (clasa 6) au fost clasificate ca fiind \textit{Disgust}. Acest fenomen transformă clasa 3 într-un „atractor” pentru trăsăturile negative, fapt confirmat și de valoarea scăzută a preciziei pentru această clasă (41.7\%), cauzată de numărul mare de alarme false.
+	\item \textbf{Eșecul critic în detectarea Fricii și Tristeții:} Atât \textit{Fear} (clasa 4), cât și \textit{Sadness} (clasa 6) înregistrează un \textit{recall} penalizator de 0.0\%. Toate secvențele de \textit{Fear} sunt clasificate eronat ca \textit{Surprise} (clasa 7), fenomen explicabil prin incapacitatea filtrării SNN de a diferenția dinamica temporală a deschiderii ochilor și gurii (comună ambelor stări). În cazul tristeții, absența unor repere geometrice de intensitate mare determină rețeaua să confunde semnalele slabe cu furia sau dezgustul.
+	\item \textbf{Performanță robustă la emoții expansive:} Clasele \textit{Happiness} (clasa 5), \textit{Surprise} (clasa 7) și \textit{Disgust} (clasa 3) înregistrează cele mai solide rezultate, cu un \textit{recall} de 100.0\%, 87.5\%, respectiv 83.3\%. Acest lucru demonstrează că rețeaua SNN izolează extrem de eficient trăsăturile caracterizate prin vectori de mișcare cu amplitudine ridicată și intensitate musculară pronunțată (zâmbetul larg pentru fericire, deschiderea largă a gurii și ridicarea sprâncenelor pentru surpriză, încrețirea caracteristică a nasului pentru dezgust).
+	\item \textbf{Sensibilitatea claselor sub-reprezentate:} Clasa \textit{Contempt} (clasa 2) evidențiază un comportament statistic instabil din cauza numărului redus de eșantioane (doar 2 secvențe reale). Deși obține o precizie de 100.0\% (rețeaua nu a generat nicio alarmă falsă pentru această clasă), o singură confuzie cu clasa \textit{Disgust} a fost suficientă pentru a prăbuși rata de \textit{recall} la 50.0\%.
 \end{itemize}
 
 \subsection*{Analiza distribuției valorilor și a impulsurilor}
-Pentru a înțelege modul în care stratul convoluțional procesează informația, am extras distribuția globală a valorilor înainte și după aplicarea stratului de convoluție 3D.
+Pentru a înțelege modul în care stratul convoluțional procesează informația, a fost extrasă distribuția globală a timestamp-urilor impulsurilor înainte și după aplicarea stratului de convoluție 3D, utilizând un eșantion de test din Fold 1.
 
-\subsubsection{Distribuția după Latency Encoding (Input)}
-În faza de preprocesare, valorile sunt codificate temporal. Distribuția prezentată în Tabelul \ref{tab:dist_input} arată o concentrație masivă a valorilor în intervalul $[0.9 - 1.0]$ (peste 72\%), ceea ce indică faptul că majoritatea neuronilor de intrare generează impulsuri cu latență mare.
+În faza de preprocesare, intensitățile pixelilor sunt convertite în momente de timp prin mecanismul de \textit{Latency Coding}, unde o intensitate mică generează un impuls târziu (latență mare, aproape de $1.0$), iar o intensitate mare generează un impuls timpuriu (latență mică, aproape de $0.0$). 
 
-\subsubsection{Distribuția după Stratul Convoluțional (Spikes)}
-După trecerea prin stratul de convoluție, se observă o menținere a densității în zona superioară, dar cu o ușoară redistribuire. Această activitate intensă în intervalul $[0.8 - 1.0]$ sugerează că filtrele convoluționale au identificat numeroase corelații spațio-temporale în secvențele video de intrare.
+Distribuția prezentată în Tabela~\ref{tab:dist_input} arată o concentrație masivă a valorilor în intervalul $[0.9 - 1.0]$ ($72.68\%$). Acest profil indică faptul că marea majoritate a rețelei de intrare este dominată de activări slabe (pixelii de fundal sau zonele faciale statice), care generează \textit{spikes} foarte târziu în fereastra de simulare. În schimb, impulsurile instantanee (intervalul $[0.0 - 0.1]$) reprezintă doar $0.06\%$, confirmând că stimulii vizuali de intensitate maximă sunt extrem de preciși și rari.
+
+După trecerea datelor prin stratul de convoluție, se observă o dinamică interesantă: densitatea din intervalul târziu $[0.9 - 1.0]$ scade semnificativ, de la $72.68\%$ la $50.14\%$. Această diferență este redistribuită aproape integral către intervalele medii-superioare: intervalul $[0.8 - 0.9]$ crește de la $14.01\%$ la $19.27\%$, iar $[0.7 - 0.8]$ se dublează, ajungând de la $6.57\%$ la $12.57\%$, ca urmare a convergenței către $t_{obj}$.
 
 \begin{table}[h!]
 	\centering
@@ -213,43 +383,43 @@ După trecerea prin stratul de convoluție, se observă o menținere a densită�
 	\begin{tabular}{@{}ccc@{}}
 		\toprule
 		\textbf{Interval} & \textbf{Înainte de Conv (Input) \%} & \textbf{După Conv (Spikes) \%} \\ \midrule
-		$[0.0 - 0.5]$ & 1.66\% & 0.01\% \\
-		$[0.5 - 0.6]$ & 1.71\% & 0.14\% \\
-		$[0.6 - 0.7]$ & 3.37\% & 1.24\% \\
-		$[0.7 - 0.8]$ & 6.57\% & 6.34\% \\
-		$[0.8 - 0.9]$ & 14.01\% & 22.49\% \\
-		$[0.9 - 1.0]$ & 72.68\% & 69.78\% \\ \bottomrule
+		$[0.0 - 0.1]$ & 0.06\% & 0.15\% \\
+		$[0.1 - 0.2]$ & 0.11\% & 0.37\% \\
+		$[0.2 - 0.3]$ & 0.22\% & 0.73\% \\
+		$[0.3 - 0.4]$ & 0.42\% & 1.41\% \\
+		$[0.4 - 0.5]$ & 0.85\% & 2.73\% \\
+		$[0.5 - 0.6]$ & 1.71\% & 4.73\% \\
+		$[0.6 - 0.7]$ & 3.37\% & 7.90\% \\
+		$[0.7 - 0.8]$ & 6.57\% & 12.57\% \\
+		$[0.8 - 0.9]$ & 14.01\% & 19.27\% \\
+		$[0.9 - 1.0]$ & 72.68\% & 50.14\% \\ \bottomrule
 	\end{tabular}
 \end{table}
-
-\subsection*{Interpretarea rezultatelor}
-Analiza distribuției arată că rețeaua nu suferă de \textit{vanishing spikes}, având o activitate susținută. Totuși, rata de clasificare medie sugerează că, deși anumite emoții cu trăsături faciale distincte (precum fericirea sau surpriza) sunt ușor de separat, distincția între emoțiile subtile (furie vs. dezgust) necesită o rafinare a hiper-parametrilor sau o creștere a numărului de filtre pentru a surprinde diferențe mai fine de textură și mișcare.
-Deși rata medie de 48.02\% indică un potențial ridicat pentru recunoașterea emoțiilor de intensitate mare (Happiness, Disgust), se observă o dificultate în discriminarea stărilor afective subtile. Această limitare este pusă pe seama numărului redus de eșantioane pentru clase precum Contempt, dar și pe natura nesupervizată a algoritmului STDP, care prioritizează frecvența trăsăturilor în detrimentul discriminabilității lor. Optimizarea viitoare a pragului de activare ($\theta$) și a ratei de învățare a pragului ($\mu_{th}$) ar putea conduce la o mai bună specializare a filtrelor.
 
 \subsection*{Vizualizarea și analiza hărților de trăsături (Feature Maps)}
 
 Pentru a investiga modul în care modelul \textit{Convolutional SNN} extrage informația din secvențele video, au fost vizualizate hărțile de trăsături (\textit{feature maps}) generate de stratul convoluțional. Această analiză este esențială pentru a valida capacitatea regulii de învățare STDP de a codifica tipare spațio-temporale relevante fără supraveghere.
 
-\subsubsection{Impactul mecanismului TimeObjectiveOutput}
+\subsubsection{Impactul mecanismului Time Objective}
 
-O componentă critică în arhitectura propusă este etapa de conversie a output-ului. În Figura \ref{fig:anger_before_after} este ilustrat efectul aplicării transformării \texttt{OutputConverter.TimeObjectiveOutput} asupra unei secvențe de \textit{Anger}.
+O componentă critică în arhitectura propusă este etapa de conversie a output-ului. În Figura \ref{fig:anger_before_after} este ilustrat efectul aplicării decodificării de tip \textit{Linear Decay} (prezentate în subsecțiunea~\ref{subsection:linear_decay}) asupra unei secvențe de \textit{Anger}.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.9\textwidth]{figures/models/feature_maps_csnn/selection/anger-before-after.png}
-	\caption{Vizualizarea hărților de trăsături pentru clasa Anger: Sus - activări brute (pre-procesare); Jos - activări după aplicarea TimeObjectiveOutput.}
+	\caption{Vizualizarea hărților de trăsături pentru clasa Anger: Sus - activări brute (imediat după stratul de convoluție); Jos - activări după aplicarea decodificării.}
 	\label{fig:anger_before_after}
 \end{figure}
 
 Analiza vizuală relevă următoarele aspecte:
 \begin{itemize}
-	\item \textbf{Normalizarea Latenței:} În varianta brută, activările sunt difuze, având un raport semnal-zgomot scăzut. Aplicarea \texttt{TimeObjectiveOutput} forțează latențele spre valoarea țintă $t_{obj}=0.8$, rezultând într-o reprezentare mult mai clară a contururilor faciale.
-	\item \textbf{Evidențierea Dinamicii:} După procesare, se observă o focalizare a impulsurilor în zonele cu mișcare musculară intensă (frunte, ochi, gură). Această „curățare” a semnalului permite clasificatorului SVM să lucreze cu trăsături mai bine definite, minimizând redundanța spațială.
+	\item \textbf{Adaptarea dinamică a pragului (Homeostazie):} În varianta brută, activările sunt difuze, având un raport semnal-zgomot scăzut. Aplicarea \texttt{homeostaziei} forțează latențele spre valoarea țintă $t_{obj}=0.79$, rezultând într-o reprezentare mult mai clară a contururilor faciale.
+	\item \textbf{Evidențierea dinamicii:} După procesare, se observă o focalizare a impulsurilor în zonele cu mișcare musculară intensă (frunte, ochi, gură). Această „curățare” a semnalului permite clasificatorului SVM să lucreze cu trăsături mai bine definite, minimizând redundanța spațială.
 \end{itemize}
 
 \subsection*{Analiza calitativă a hărților de trăsături per emoție}
 
-În Figurile \ref{fig:fmaps_1} și \ref{fig:fmaps_2} sunt prezentate seturile de hărți de trăsături extrase pentru cele 7 categorii de emoții. Fiecare eșantion este reprezentat printr-o succesiune de cadre ce reflectă intensitatea activării neuronale. În paradigma \textit{Latency Coding}, zonele albe (pixeli cu intensitate mare) corespund unor latențe mici, indicând o declanșare rapidă a impulsurilor ca răspuns la trăsături faciale proeminente.
+În Figurile \ref{fig:fmaps_1} și \ref{fig:fmaps_2} sunt prezentate seturile de hărți de trăsături extrase pentru restul de 6 categorii de emoții. Fiecare eșantion este reprezentat printr-o succesiune de cadre ce reflectă intensitatea activării neuronale. În paradigma \textit{Latency Coding}, zonele albe (pixeli cu intensitate mare) corespund unor latențe mici, indicând o declanșare rapidă a impulsurilor ca răspuns la trăsături faciale proeminente.
 
 \begin{figure}[h!]
 	\centering
@@ -266,53 +436,54 @@ Analiza vizuală relevă următoarele aspecte:
 \end{figure}
 
 \subsubsection{Corelația dintre trăsături și performanța clasificării}
-
-Observarea hărților de trăsături permite explicarea rezultatelor obținute în matricea de confuzie:
+Observarea hărților de trăsături \ref{fig:fmaps_1}, \ref{fig:fmaps_2} permite explicarea fundamentului vizual și biologic al rezultatelor numerice obținute în matricea de confuzie pentru Fold 1:
 
 \begin{itemize}
-	\item \textbf{Happiness și Disgust:} Aceste clase prezintă zone de activare extrem de bine localizate (comisurile bucale pentru fericire și zona nazală pentru dezgust). Caracterul distinctiv al acestor impulsuri timpurii explică rata de \textit{recall} de 100\% pentru aceste clase.
-	\item \textbf{Surprise vs. Fear:} Hărțile de trăsături confirmă similitudinea vizuală între cele două emoții. În ambele cazuri, filtrele SNN detectează deschiderea largă a ochilor, însă distribuția spațială a impulsurilor este aproape identică, ceea ce conduce la clasificarea sistematică a fricii drept surpriză.
-	\item \textbf{Sadness și Contempt:} Aceste emoții generează hărți cu o densitate mai mică a impulsurilor („pete” mai întunecate), indicând o mișcare facială de intensitate redusă. Această activitate rarefiată face ca trăsăturile extrase să fie mai puțin robuste în fața zgomotului, explicând performanța scăzută pe aceste clase.
+	\item \textbf{Semnătura unică a Fericirii și Surprizei:} În Figura \ref{fig:fmaps_2}, clasa \textit{Happiness} prezintă o activare intensă, localizată strict în zona pomeților și a extensiei laterale a buzelor (asociată mușchiului zigomatic mare), lăsând restul feței liber de zgomot. Similar, clasa \textit{Surprise} evidențiază o topologie unică, puternic alungită pe verticală, cauzată de coborârea pronunțată a mandibulei și ridicarea ochilor. Aceste tipare extrem de curate explică ratele de \textit{recall} de $100.0\%$ și $87.5\%$: filtrele SNN converg imediat pe aceste macro-expresii datorită contrastului lor structural izbitor.
+	
+	\item \textbf{Mecanismul de atracție al clasei Dezgust:} Harta de trăsături pentru clasa \textit{Disgust} (Figura \ref{fig:fmaps_1}) evidențiază o mască de activare masivă, densă și continuă pe tot parcursul secvenței temporale, concentrată în regiunea nazolabială și extinsă pe întreaga axă central-facială. Privind succesiunea de cadre, se observă că acest filtru dezvoltă o amprentă extrem de „grea” și rigidă structural, acoperind uniform zona mediană. Acest șablon dominant tinde să asimileze orice dinamică musculară din centrul feței, oferind o explicație vizuală directă pentru slaba precizie a clasei ($41.7\%$): secvențele de \textit{Anger} și \textit{Sadness} (care implică mișcări de coborâre a sprâncenelor și contracții nazale ce converg structural tot spre această zonă centrală) sunt complet „absorbite” de această zonă hiperactivă.
+	
+	\item \textbf{Confuzia totală între Frică și Surpriză:} Analiza comparativă între harta clasei \textit{Fear} (Figura~\ref{fig:fmaps_1}) și cea a clasei \textit{Surprise} (Figura~\ref{fig:fmaps_2}) dezvăluie o similitudine structurală ridicată la nivelul filtrelor spațiale. Ambele clase activează aceleași regiuni eliptice din jurul ochilor și conturul gurii. Deși din punct de vedere uman frica implică o retragere laterală a buzelor, filtrele convoluționale actuale extrag doar macro-conturul geometric general. În absența unei discriminări fine, rețeaua clasifică toate cele 3 secvențe de \textit{Fear} drept \textit{Surprise}, prăbușind \textit{recall}-ul fricii la $0.0\%$.
+	
+	\item \textbf{Lipsa reperelor geometrice în Tristețe și discrepanța Disprețului:} Clasa \textit{Sadness} (Figura~\ref{fig:fmaps_2}) generează o hartă de trăsături difuză, cu margini groase și fără un punct focal de intensitate mare (cum este zâmbetul la fericire). Această absență a unor repere geometrice clare face ca semnalele slabe ale tristeții să fie interpretate greșit ca fiind macro-activări de dezgust sau furie. În ceea ce privește clasa \textit{Contempt} (Figura~\ref{fig:fmaps_1}), deși filtrul reușește să schițeze o asimetrie facială destul de bine definită, volumul critic de doar 2 eșantioane penalizează capacitatea de generalizare, lăsând clasa expusă la confuzia cu tiparul mai puternic al dezgustului.
+	
 \end{itemize}
 
-Această analiză vizuală demonstrează că modelul SNN propus a învățat să acționeze ca un extractor de trăsături fiziologice, reușind să mapeze corelările spațio-temporale din clipurile video în latențe neuronale discriminative.
+În concluzie, hărțile de trăsături demonstrează că arhitectura SNN actuală este un excelent detector de topologii faciale de mare intensitate, însă suferă de o „miopie spațială” atunci când două emoții distincte (cum sunt frica și surpriza) partajează aceiași macro-vectori de mișcare musculară.
 
-\subsubsection{Vizualizarea nucleelor convoluționale (Greutăți Sinaptice)}
+\subsubsection{Vizualizarea nucleelor convoluționale (greutăți sinaptice)}
 
-Pentru o înțelegere aprofundată a modului în care s-a realizat adaptarea sinaptică prin procesul STDP nesupervizat, au fost extrase greutățile sinaptice ale celor 64 de filtre după cele 800 de epoci de antrenament pe Fold 1. Vizualizarea acestor nuclee (\textit{kernels}) de dimensiune $5 \times 5 \times 3$ este prezentată în Figura \ref{fig:kernels_fold_1}. Deoarece un nucleu este tridimensional (spatial $5 \times 5$ pe o adâncime temporală $3$), vizualizarea este o proiecție color a volumului de greutăți.
+Pentru o înțelegere aprofundată a modului în care s-a realizat adaptarea sinaptică prin procesul STDP nesupervizat, au fost extrase greutățile sinaptice ale celor 128 de filtre după cele 1150 de epoci de antrenament pe Fold 1. Vizualizarea acestor nuclee (\textit{kernels}) de dimensiune $5 \times 5 \times 2$ este prezentată în Figura \ref{fig:kernels_fold_1}. 
+
+Deoarece fiecare nucleu procesează simultan cele două canale polare generate în etapa de filtrare On/Off, s-a utilizat o codificare color în spațiul RGB pentru a reda selectivitatea sinaptică a neuronilor: componenta albastră reprezintă ponderile conectate la canalul \textit{On} (creșteri de contrast), componenta verde corespunde canalului \textit{Off} (scăderi de contrast), în timp ce nuanțele de turcoaz (\textit{cyan}) indică filtre mixte, sensibile la ambele tipuri de tranziții. Pixelii au fost redimensionați printr-o interpolare liniară pentru a facilita observarea organizării structurale a topologiei învățate.
 
 \begin{figure}[h!]
 	\centering
-	% Asigură-te că imaginea ta este redenumită sau salvată sub acest nume în folderul proiectului
-	\includegraphics[width=0.6\textwidth]{figures/models/kernels_csnn/kernels_fold_1.png} 
-	\caption{Vizualizarea celor 64 de nuclee convoluționale ($8 \times 8$ filtre) învățate de SNN pe Fold 1. Culoarea reprezintă magnitudinea și polaritatea greutăților sinaptice (nivele de potențiere și depresie).}
+	\includegraphics[width=0.4\textwidth]{figures/models/kernels_csnn/kernels_fold_1.png} 
+	\caption{Vizualizarea celor 128 de nuclee convoluționale învățate de SNN pe Fold 1. Cele 4 pătrate complet negre din colțul dreapta-jos al grilei constituie doar elemente de umplere a celor 4 spații libere din cadrul matricii de $11 \times 12 = 132$ poziții.}
 	\label{fig:kernels_fold_1}
 \end{figure}
 
-Analiza calitativă a Figura \ref{fig:kernels_fold_1} relevă tipare caracteristice învățării STDP nesupervizate pe secvențe video:
+Observarea directă a topologiei acestor nuclee permite extragerea următoarelor concluzii privind procesul de învățare:
 
 \begin{itemize}
-	\item \textbf{High-Frequency Spatial Variance:} Nucleele prezintă o variație spațială ridicată, aspectul lor fiind aparent zgomotos. Acest fenomen este caracteristic etapelor inițiale de specializare a filtrelor în SNN-uri nesupervizate. În loc să învețe margini orientate generice (cum ar fi filtrele Gabor), STDP-ul tinde să specializeze nucleele pe tipare foarte locale și specifice de corelații temporale de impulsuri, prezente în datele de intrare.
-	\item \textbf{Validarea Incoerenței:} Aspectul divers și aparent aleatoriu al filtrelor este, paradoxal, un rezultat dorit. Așa cum s-a menționat în secțiunea \ref{sec:metrici} (definiția coerenței), antrenamentul eficient trebuie să tindă spre o incoerență ridicată. Faptul că filtrele nu sunt identice și nu prezintă trăsături repetitive validează succesul regulii de învățare STDP în a evita redundanța și în a acoperi un spectru larg de variații ale datelor.
-	\item \textbf{Limitările învățării trăsăturilor globale:} Absența unor structuri globale clar definite în kernels explică performanța scăzută pe clasele subtile. Filtrele sunt suficient de discriminate pentru a distinge între schimbări majore de intensitate (zâmbet vs. contracție nazală), dar nu au învățat încă să reprezinte deformări fine ale feței pe care clasificatorul liniar ulterior (SVM) să le poată separa eficient.
+	
+	\item \textbf{Convergența și specializarea filtrelor prin STDP:} Filtrele nu prezintă tipare aleatoare sau zgomot de fond numeric (caracteristic unor greutăți neantrenate), ci au „cristalizat” în structuri geometrice bine definite, cu zone compacte și netede de intensitate. Aceasta este o dovadă directă a eficienței algoritmului STDP nesupervizat, care a reușit să extragă și să consolideze corelații repetitive din secvențele video cu fețe, forțând sinapsele să se specializeze autonom.
+	
+	\item \textbf{Filtrele ca detectori de margini spațiale și polaritate (Spatial Edge and Polarity Detectors):} Predominanța nuanțelor de verde și albastru, dispuse adesea în sub-blocuri complementare în cadrul aceluiași nucleu de $5 \times 5$, arată că rețeaua a dezvoltat o selectivitate ridicată la orientarea marginilor și la direcția contrastului local. Structurile de tip „jumătate verde (\textit{Off}) / jumătate albastru (\textit{On})” acționează ca detectori de frontiere de contrast, fiind ideale pentru izolarea liniilor de expresie dinamice (cum sunt marginile buzelor sau pliurile nazolabiale) în momentul apariției stimulilor.
+	
+	\item \textbf{Explicația redundanței și corelația cu erorile de clasificare:} Deși filtrele sunt clar structurate, se observă un grad ridicat de redundanță vizuală, multe nuclee partajând șabloane cromatice și orientări extrem de similare (de exemplu, grupuri mari de filtre sensibile exclusiv la canalul \textit{Off} sau cu orientări identice). Deoarece învățarea STDP este pur nesupervizată, rețeaua tinde natural să își aloce majoritatea resurselor sinaptice pentru cele mai frecvente și mai intense trăsături din setul de date. Această redundanță structurală explică matematic de ce macro-expresiile (precum zâmbetul de la fericire sau contracția nazală pronunțată de la dezgust) domină reprezentarea internă, în timp ce detaliile geometrice fine și subtile (necesare pentru discriminarea fricii și tristeții) nu beneficiază de suficiente nuclee dedicate unice.
+	
 \end{itemize}
 
-\section{Analiză Comparativă și Validarea Modelului}
+\section{Analiză comparativă și validarea modelului}
 
 Pentru a evalua relevanța trăsăturilor extrase de stratul convoluțional SNN, a fost realizat un experiment de control (baseline). În cadrul acestuia, clasificatorul SVM a fost antrenat direct pe pixelii imaginilor brute (\textit{raw pixels}), eliminând complet componenta de spiking și procesarea STDP.
 
 \subsection*{Configurația modelului de referință (Baseline)}
-Modelul de referință utilizează un strat de tip \texttt{layer::Stream}, care acționează ca o funcție identitate, pasând datele de intrare direct către etapele de pooling, fără nicio preprocesare sau filtrare temporală. Configurația utilizată este următoarea:
+Modelul de referință utilizează un strat care acționează ca o funcție identitate, pasând datele de intrare direct către etapele de pooling, fără nicio preprocesare sau filtrare temporală. În această configurație, datele de intrare (\textit{input}) sunt reprezentate direct de pixeli raw, fără aplicarea unei codificări de tip \textit{Latency Coding}. Procesul de pooling integrează operațiile de \texttt{SumPooling} ($4 \times 4$) și \texttt{TemporalPooling} (8), o alegere menținută identică cu cea din modelul SNN pentru a asigura o comparație echitabilă a spațiului de trăsături. În final, clasificarea datelor este realizată tot prin intermediul unui clasificator de tip SVM liniar.
 
-\begin{itemize}
-	\item \textbf{Input:} Pixeli raw (fără \textit{Latency Coding}).
-	\item \textbf{Pooling:} \texttt{SumPooling} ($4 \times 4$) și \texttt{TemporalPooling} (2), identic cu modelul SNN pentru a asigura o comparație echitabilă a spațiului de trăsături.
-	\item \textbf{Clasificator:} SVM liniar.
-\end{itemize}
-
-\subsection*{Rezultate comparative}
-
-Rezultatele obținute prin cross-validation pentru ambele abordări sunt centralizate în Tabelul \ref{tab:comparatie_rezultate}.
+Rezultatele obținute prin cross-validation pentru ambele abordări sunt centralizate în Tabela~\ref{tab:comparatie_rezultate}.
 
 \begin{table}[h!]
 	\centering
@@ -321,56 +492,63 @@ Rezultatele obținute prin cross-validation pentru ambele abordări sunt central
 	\begin{tabular}{@{}ccc@{}}
 		\toprule
 		\textbf{Fold} & \textbf{SVM Pixeli Raw (\%)} & \textbf{SNN + SVM (Propus) (\%)} \\ \midrule
-		Fold 1 & 44.11\% & 58.82\% \\
-		Fold 2 & 38.23\% & 47.05\% \\
-		Fold 3 & 54.54\% & 51.51\% \\
-		Fold 4 & 39.39\% & 45.45\% \\
-		Fold 5 & 38.70\% & 41.93\% \\
-		Fold 6 & 36.66\% & 53.33\% \\
-		Fold 7 & 43.33\% & 50.00\% \\
-		Fold 8 & 44.82\% & 48.27\% \\
-		Fold 9 & 39.28\% & 35.71\% \\
-		Fold 10 & 37.03\% & 48.14\% \\ \midrule
-		\textbf{Medie} & \textbf{41.61\%} & \textbf{48.02\%} \\ \bottomrule
+		Fold 1  & 35.29\% & 61.76\% \\
+		Fold 2  & 29.41\% & 50.00\% \\
+		Fold 3  & 39.39\% & 57.58\% \\
+		Fold 4  & 42.42\% & 42.42\% \\
+		Fold 5  & 45.16\% & 54.84\% \\
+		Fold 6  & 33.33\% & 56.67\% \\
+		Fold 7  & 46.67\% & 66.67\% \\
+		Fold 8  & 31.03\% & 58.62\% \\
+		Fold 9  & 32.14\% & 64.29\% \\
+		Fold 10 & 29.63\% & 48.15\% \\ \midrule
+		\textbf{Medie} & \textbf{36.57\%} & \textbf{56.10\%} \\ \bottomrule
 	\end{tabular}
 \end{table}
 
 \subsection*{Interpretarea superiorității modelului SNN}
 
-Compararea performanțelor evidențiază un câștig net de \textbf{6.41\%} în favoarea arhitecturii bazate pe SNN. Această diferență, deși aparent modestă în cifre absolute, este semnificativă din punct de vedere al procesării bio-inspirate:
+Compararea performanțelor evidențiază un câștig net substanțial, de \textbf{19.53\%} în favoarea arhitecturii bazate pe SNN (o medie generală de 56.10\% față de doar 36.57\% pentru baseline). Această diferență remarcabilă confirmă avantajele majore ale procesării bio-inspirate în raport cu metodele statistice clasice aplicate direct pe imagine:
 
 \begin{enumerate}
-	\item \textbf{Extracția de trăsături (Feature Extraction):} Diferența de performanță confirmă faptul că nucleele învățate prin STDP nu sunt aleatorii; ele reușesc să distileze informația vizuală în „puncte de interes” temporale care sunt mai ușor de separat liniar de către un SVM decât pixelii bruti.
-	\item \textbf{Reducerea zgomotului:} În timp ce pixelii raw conțin multă informație redundantă (fundal, variații de iluminare), SNN-ul, prin filtrarea On/Off și Latency Coding, se concentrează pe marginile dinamice (schimbările de expresie), oferind un input mai „curat” pentru clasificator.
-	\item \textbf{Analiza cazurilor particulare:} Se observă că în aproape toate fold-urile (cu excepția fold-ului 3 și 9), SNN-ul depășește baseline-ul. În Fold 1, saltul este de la 44.11\% la 58.82\% (+14.71\%), ceea ce indică faptul că pentru anumite secvențe video, reprezentarea prin impulsuri este net superioară celei spațiale clasice.
+	
+	\item \textbf{Extracția eficientă de trăsături (Feature Extraction):} Diferența masivă de performanță demonstrează clar că nucleele de convoluție învățate în mod nesupervizat prin STDP (Spike-Timing-Dependent Plasticity) distilează informația vizuală în „puncte de interes” spatio-temporale de înaltă calitate. Caracteristicile extrase de SNN oferă o separabilitate liniară net superioară în spațiul SVM, spre deosebire de analiza pixelilor bruti.
+	
+	\item \textbf{Reducerea zgomotului și a redundanței spațiale:} Pixelii raw introduc în clasificator o cantitate foarte mare de informație redundantă (fundal static, variații globale de iluminare, fizionomia specifică a subiectului). Prin contrast, SNN-ul, utilizând filtrarea On/Off și codificarea prin latență (\textit{Latency Coding}), reacționează exclusiv la tranzițiile de contrast și la marginile dinamice (dinamica mișcării musculaturii faciale), oferind un input optimizat și curățat de zgomot.
+	
+	\item \textbf{Analiza granulară pe fold-uri:} Modelul propus \textit{SNN + SVM} depășește baseline-ul în \textbf{9 din cele 10 fold-uri}, iar în Fold-ul 4 se înregistrează o paritate perfectă (42.42\%). Este important de evidențiat faptul că SVM-ul pe pixeli raw nu reușește să surclaseze arhitectura propusă în niciun subset de testare.
+	
 \end{enumerate}
 
-În concluzie, rezultatele demonstrează validitatea ipotezei de lucru: rețelele neuronale cu impulsuri, antrenate nesupervizat, sunt capabile să extragă trăsături temporale relevante pentru recunoașterea expresiilor faciale, îmbunătățind capacitatea de generalizare a sistemului față de procesarea directă a imaginilor.
+În concluzie, rezultatele comparative validează ferm ipoteza de lucru: rețelele neuronale cu impulsuri sunt capabile să extragă structuri temporale extrem de relevante pentru recunoașterea expresiilor faciale, îmbunătățind capacitatea de generalizare a întregului sistem față de procesarea directă a imaginilor brute.
 
-\section{Modelul de Înaltă Performanță: Arhitectura Hibridă CNN-LSTM}
+\section{Modelul de înaltă performanță: Arhitectura hibridă CNN-LSTM}
+\label{sc:cnn-lstm}
 
 Pentru a oferi un termen de comparație raportat la standardele actuale de \textit{Deep Learning} și pentru a echipa aplicația finală cu un motor de predicție robust, a fost implementată o arhitectură hibridă de tip \textbf{CNN-LSTM}. Acest model combină puterea de extracție a trăsăturilor spațiale ale unei rețele convoluționale pre-antrenate cu capacitatea rețelelor recurente de a modela evoluția temporală a emoțiilor.
 
-\subsection*{Descrierea Arhitecturii}
+\subsection*{Descrierea arhitecturii}
 
 Modelul propus utilizează un mecanism de \textit{Feature Extraction} urmat de un modul de memorie temporală:
 \begin{enumerate}
-	\item \textbf{Extractorul Spațial (Backbone):} S-a utilizat modelul \textbf{ResNet18}, pre-antrenat pe setul de date ImageNet. S-a păstrat structura până la stratul de \textit{Adaptive Average Pooling}, rezultând un vector de trăsături de dimensiune 512 pentru fiecare cadru video.
-	\item \textbf{Modulul Temporal (LSTM):} Trăsăturile extrase sunt introduse într-un strat \textbf{LSTM} (\textit{Long Short-Term Memory}) cu o dimensiune ascunsă de 256. Acesta analizează succesiunea celor 10 cadre pentru a identifica „apexul” emoției.
-	\item \textbf{Capul de Clasificare:} Un modul de tip \textit{Fully Connected} cu \textit{Dropout} (0.5) și activare ReLU realizează maparea finală către cele 7 clase de emoții.
+	\item \textbf{Extractorul spațial (Backbone):} S-a utilizat modelul \textbf{ResNet18}, pre-antrenat pe setul de date ImageNet. S-a păstrat structura până la stratul de \textit{Adaptive Average Pooling}, rezultând un vector de trăsături de dimensiune 512 pentru fiecare cadru video.
+	\item \textbf{Modulul temporal (LSTM):} Trăsăturile extrase sunt introduse într-un strat \textbf{LSTM} (\textit{Long Short-Term Memory}) cu o dimensiune ascunsă de 256. Acesta analizează succesiunea celor 10 cadre pentru a identifica „apexul” emoției.
+	\item \textbf{Capul de clasificare:} Un modul de tip \textit{Fully Connected} cu \textit{Dropout} (0.5) și activare ReLU realizează maparea finală către cele 7 clase de emoții.
 \end{enumerate}
+Hiperparametrii arhitecturii, precum rata de \textit{Dropout} de 0.5, au fost stabiliți în conformitate cu bunele practici din literatura de specialitate \cite{srivastava2014dropout} pentru prevenirea supra-antrenării (\textit{overfitting}) pe seturi de date de dimensiuni reduse.
 
-\subsection*{Strategia de Antrenament în Două Faze}
+\subsection*{Strategia de antrenament în două faze}
 
 Pentru a maximiza performanța pe un set de date de dimensiuni medii precum CK+, s-a adoptat o strategie de \textit{Transfer Learning} structurată în două etape:
 \begin{itemize}
 	\item \textbf{Faza 1 (Warm-up):} Înghețarea parametrilor CNN și antrenarea exclusivă a modulelor LSTM și FC timp de 10 epoci (LR=$10^{-3}$). Acest lucru permite modelului temporal să se adapteze la trăsăturile extrase de ResNet.
 	\item \textbf{Faza 2 (Fine-tuning):} Dezghețarea selectivă a ultimului bloc convoluțional (\textit{Layer 4}) din ResNet și antrenarea întregului ansamblu timp de 30 de epoci cu un \textit{Learning Rate} scăzut ($10^{-4}$) și \textit{Cosine Annealing}.
 \end{itemize}
+Configurația regimului de antrenament (numărul de epoci și valorile ratelor de învățare) a fost determinată în urma unor experimentări preliminare, urmărind stabilizarea procesului de optimizare și convergența lină a funcției de pierdere.
 
-\subsection*{Rezultate Obținute}
+\subsection*{Rezultate obținute}
 
-Performanța modelului CNN-LSTM, evaluată prin 10-fold cross-validation, este prezentată în Tabelul \ref{tab:rezultate_cnn_lstm}.
+Performanța modelului CNN-LSTM, evaluată prin 10-fold cross-validation, este prezentată în Tabela~\ref{tab:rezultate_cnn_lstm}.
 
 \begin{table}[h!]
 	\centering
@@ -388,9 +566,9 @@ Performanța modelului CNN-LSTM, evaluată prin 10-fold cross-validation, este p
 	\end{tabular}
 \end{table}
 
-\section{Sinteza Rezultatelor și Concluzii Experimentale}
+\section{Sinteza rezultatelor și concluzii experimentale}
 
-În Tabelul \ref{tab:sinteza_finala} este prezentată comparația finală între cele trei abordări investigate în cadrul acestei lucrări.
+În Tabela~\ref{tab:sinteza_finala} este prezentată comparația finală între cele trei abordări investigate în cadrul acestei lucrări.
 
 \begin{table}[h!]
 	\centering
@@ -399,8 +577,8 @@ Performanța modelului CNN-LSTM, evaluată prin 10-fold cross-validation, este p
 	\begin{tabular}{lccc}
 		\toprule
 		\textbf{Model} & \textbf{Paradigmă} & \textbf{Acuratețe Medie} & \textbf{Complexitate} \\ \midrule
-		SVM (Raw Pixels) & Baseline Statistic & 41.61\% & Minimă \\
-		\textbf{3D Conv SNN} & Bio-inspirat (STDP) & \textbf{48.02\%} & Medie \\
+		SVM (Raw Pixels) & Baseline Statistic & 36.57\% & Minimă \\
+		\textbf{3D Conv SNN} & Bio-inspirat (STDP) & \textbf{56.10\%} & Medie \\
 		CNN-LSTM (ResNet) & Deep Learning & \textbf{88.37\%} & Ridicată \\ \bottomrule
 	\end{tabular}
 \end{table}
@@ -410,119 +588,149 @@ Deși modelul CNN-LSTM oferă cea mai înaltă precizie, fiind soluția optimă 
 
 Diferența de performanță este explicată prin natura învățării: în timp ce CNN-LSTM beneficiază de pre-antrenare pe milioane de imagini și învățare supervizată prin \textit{backpropagation}, modelul SNN propus utilizează o regulă de învățare locală, nesupervizată (STDP), mult mai eficientă din punct de vedere energetic și biologic. Această lucrare demonstrează că SNN-ul poate extrage trăsături relevante care depășesc performanța unui clasificator liniar aplicat pe date brute, deschizând calea către sisteme de recunoaștere a emoțiilor implementabile pe hardware neuromorfic.
 
-\subsection*{Preprocesare și Augmentarea Datelor}
+\subsection*{Preprocesare și augmentarea datelor}
 
 Pentru modelul CNN-LSTM, strategia de pregătire a datelor a fost semnificativ mai complexă față de abordările SNN și SVM. Antrenarea s-a realizat exclusiv pe imagini focalizate strict pe zona feței (\textit{cropped faces}), eliminând astfel elementele de fundal care ar fi putut introduce zgomot în procesul de extracție a trăsăturilor.
 
-Spre deosebire de experimentele anterioare, unde s-au utilizat preprocesări minimale, aici s-a implementat o conductă de \textbf{augmentare a datelor} pentru a îmbunătăți generalizarea și a combate supra-antrenarea (\textit{overfitting}). Deoarece setul CK+ este monocrom, cadrele au fost convertite la 3 canale (RGB) pentru a fi compatibile cu arhitectura ResNet18, aplicându-se următoarele transformări: Resize(224, 224), Grayscale(num\_output\_channels=3), RandomHorizontalFlip(), RandomRotation(10), ColorJitter(brightness=0.2, contrast=0.2), Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]).
+Spre deosebire de experimentele anterioare, caracterizate prin preprocesări minimale, în această etapă s-a implementat o conductă avansată de \textbf{augmentare a datelor} cu scopul de a îmbunătăți capacitatea de generalizare și de a combate supra-antrenarea (\textit{overfitting}). 
 
-\subsection*{Analiza performanței pe Fold 5}
+Deoarece setul de date CK+ conține imagini monocrome, cadrele au fost convertite la 3 canale (RGB) pentru a asigura compatibilitatea nativă cu arhitectura ResNet18. Conducta de transformare aplicată secvențelor video include următoarele operații succesive: redimensionarea cadrelor la rezoluția standard de intrare a rețelei pre-antrenate; replicarea canalului monocrom pe cele 3 canale RGB; inversarea orizontală aleatorie a imaginilor pentru varietate geometrică; rotația aleatorie a cadrelor într-un interval de $\pm10^\circ$; variația aleatorie a luminozității și contrastului cu un factor de 20\%, asigurând robustețe la schimbările de iluminare; standardizarea pixelilor utilizând parametrii standard ImageNet (\textit{mean} = $[0.485, 0.456, 0.406]$, \textit{std} = $[0.229, 0.224, 0.225]$).
 
-Analiza detaliată a Fold-ului 5 relevă eficiența modelului CNN-LSTM, acesta obținând o acuratețe de 96.97\%. În Figura \ref{fig:cm_fold5} se poate observa că modelul a reușit să clasifice perfect 6 din cele 7 emoții.
+\subsection*{Analiza performanței pe Fold 1}
+
+Analiza detaliată a Fold-ului 1 evidențiază o robustețe remarcabilă în raport cu trăsăturile spațio-temporale dense, reușind clasificarea perfectă ($100\%$) a 4 din cele 7 emoții: \textbf{Anger}, \textbf{Disgust}, \textbf{Happy} și \textbf{Surprise}, după cum se poate observa în Figura~\ref{fig:cm_fold1}). Cu toate acestea, modelul întâmpină dificultăți în delimitarea claselor cu micro-expresii subtile, înregistrând o confuzie de $50\%$ între \textbf{Contempt} și \textbf{Fear}, în timp ce clasa \textbf{Sadness} se dovedește a fi cea mai instabilă, fiind distribuită simetric ($33.3\%$) între predicția corectă, \textbf{Anger} și \textbf{Fear}.
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\textwidth]{figures/models/confusion_matrix_fold_5.png}
-	\caption{Matricea de confuzie pentru CNN-LSTM (Fold 5). Se observă o singură eroare de clasificare.}
-	\label{fig:cm_fold5}
+	\includegraphics[width=0.7\textwidth]{figures/models/confusion_matrix_fold_1.png}
+	\caption{Matricea de confuzie pentru CNN-LSTM (Fold 1).}
+	\label{fig:cm_fold1}
 \end{figure}
-
-Singura eroare înregistrată a fost un eșantion din clasa \textbf{Sadness}, care a fost identificat eronat ca fiind \textbf{Anger}. Această confuzie este explicabilă prin tensiunea musculară similară în zona sprâncenelor (coborârea acestora) prezentă în ambele expresii în stadiul de apex.
 
 \subsection*{Interpretarea deciziilor prin Grad-CAM}
 
-Pentru a valida calitativ modelul, s-a utilizat tehnica \textbf{Grad-CAM (Gradient-weighted Class Activation Mapping)}. Aceasta permite vizualizarea zonelor feței pe care rețeaua s-a focalizat pentru a stabili eticheta emoțională. În Figura \ref{fig:gradcam_grid} sunt prezentate hărțile de activare pentru eșantioanele din Fold 5.
+Pentru a valida calitativ modelul, s-a utilizat tehnica \textbf{Grad-CAM (Gradient-weighted Class Activation Mapping)}. Aceasta permite vizualizarea zonelor feței pe care rețeaua s-a focalizat pentru a stabili eticheta emoțională. În Figura \ref{fig:gradcam_grid} sunt prezentate hărțile de activare pentru eșantioanele din Fold 1.
 
 \begin{figure}[h!]
 	\centering
 	\begin{subfigure}{0.24\textwidth}
-		\includegraphics[width=\textwidth]{figures/models/gradcam_cnn+lstm_fold5/anger_pass.jpg}
+		\includegraphics[width=\textwidth]{figures/models/gradcam_cnn+lstm_fold1/anger_pass.jpg}
 		\caption{Anger}
+		\label{fig:gradcam-a}
 	\end{subfigure}
 	\begin{subfigure}{0.24\textwidth}
-		\includegraphics[width=\textwidth]{figures/models/gradcam_cnn+lstm_fold5/contempt_pass.jpg}
-		\caption{Contempt}
+		\includegraphics[width=\textwidth]{figures/models/gradcam_cnn+lstm_fold1/contempt_fail_as_fear.jpg}
+		\caption{Contempt $\to$ Fear}
+		\label{fig:gradcam-b}
 	\end{subfigure}
 	\begin{subfigure}{0.24\textwidth}
-		\includegraphics[width=\textwidth]{figures/models/gradcam_cnn+lstm_fold5/disgust_pass.jpg}
+		\includegraphics[width=\textwidth]{figures/models/gradcam_cnn+lstm_fold1/disgust_pass.jpg}
 		\caption{Disgust}
+		\label{fig:gradcam-c}
 	\end{subfigure}
 	\begin{subfigure}{0.24\textwidth}
-		\includegraphics[width=\textwidth]{figures/models/gradcam_cnn+lstm_fold5/fear_pass.jpg}
-		\caption{Fear}
+		\includegraphics[width=\textwidth]{figures/models/gradcam_cnn+lstm_fold1/fear_fail_as_happy.jpg}
+		\caption{Fear $\to$ Happiness}
+		\label{fig:gradcam-d}
 	\end{subfigure}
 	
 	\vspace{0.2cm}
 	
 	\begin{subfigure}{0.24\textwidth}
-		\includegraphics[width=\textwidth]{figures/models/gradcam_cnn+lstm_fold5/happy_pass.jpg}
-		\caption{Happy}
+		\includegraphics[width=\textwidth]{figures/models/gradcam_cnn+lstm_fold1/happy_pass.jpg}
+		\caption{Happiness}
+		\label{fig:gradcam-e}
 	\end{subfigure}
 	\begin{subfigure}{0.24\textwidth}
-		\includegraphics[width=\textwidth]{figures/models/gradcam_cnn+lstm_fold5/sad_pass.jpg}
-		\caption{Sad (Corect)}
+		\includegraphics[width=\textwidth]{figures/models/gradcam_cnn+lstm_fold1/sad_fail_as_anger.jpg}
+		\caption{Sadness $\to$ Anger}
+		\label{fig:gradcam-f}
 	\end{subfigure}
 	\begin{subfigure}{0.24\textwidth}
-		\includegraphics[width=\textwidth]{figures/models/gradcam_cnn+lstm_fold5/sad_FAIL_as_Anger.jpg}
-		\caption{Sad $\to$ Anger}
+		\includegraphics[width=\textwidth]{figures/models/gradcam_cnn+lstm_fold1/sad_fail_as_fear.jpg}
+		\caption{Sadness $\to$ Fear}
+		\label{fig:gradcam-g}
 	\end{subfigure}
 	\begin{subfigure}{0.24\textwidth}
-		\includegraphics[width=\textwidth]{figures/models/gradcam_cnn+lstm_fold5/surprise_pass.jpg}
+		\includegraphics[width=\textwidth]{figures/models/gradcam_cnn+lstm_fold1/surprise_pass.jpg}
 		\caption{Surprise}
+		\label{fig:gradcam-h}
 	\end{subfigure}
-	\caption{Vizualizarea regiunilor de interes prin Grad-CAM (Fold 5).}
+	\caption{Vizualizarea regiunilor de interes prin Grad-CAM (Fold 1).}
 	\label{fig:gradcam_grid}
 \end{figure}
 
-\subsubsection{Observații privind regiunile de interes}
-
-Analiza hărților de activare a scos în evidență câteva aspecte contra-intuitive și interesante:
-
+\subsubsection*{Observații privind regiunile de interes și dinamica activărilor}
+Prin corelarea modului în care arhitectura nesupervizată \textbf{CSNN} extrage trăsăturile bazate pe impulsuri (Figurile \ref{fig:anger_before_after}, \ref{fig:fmaps_1} și \ref{fig:fmaps_2}) cu hărțile de activare \textbf{Grad-CAM} ale modelului supervizat \textbf{CNN-LSTM} (Figura~\ref{fig:gradcam_grid}), se pot extrage concluzii importante privind procesarea informației vizuale:
 \begin{itemize}
-	\item \textbf{Recunoașterea Fericirii (Happy):} Contrar așteptărilor, modelul nu se concentrează exclusiv pe zona gurii (zâmbet). Grad-CAM indică o activare intensă în \textbf{zona nasului} și a pliurilor nazolabiale. Acest lucru sugerează că modelul a învățat că lărgirea bazei nasului și ridicarea obrajilor sunt indicatori mai robuști pentru această clasă decât simpla deschidere a gurii.
-	\item \textbf{Eroarea Sad vs. Anger:} În cazul eșantionului clasificat greșit, se observă că activarea Grad-CAM este localizată puternic între sprâncene. Modelul a interpretat contracția mușchiului \textit{corrugator supercilii} ca fiind specifică furiei, ignorând indiciile mai subtile de tristețe din jurul ochilor.
-	\item \textbf{Surpriza:} Modelul prezintă o focalizare clară pe zona ochilor și a frunții, detectând ridicarea sprâncenelor, trăsătură anatomică definitorie pentru această emoție.
+	\item \textbf{Analiza clasei Happiness și eroarea Fear $\to$ Happiness:} În Figura~\ref{fig:gradcam-e}, modelul CNN-LSTM își concentrează atenția pe zona nazolabială pentru clasa \textbf{Happiness}. Cu toate acestea, în cazul erorii \textbf{Fear $\to$ Happiness} (Figura~\ref{fig:gradcam-d}), hotspot-ul migrează intens către etajul inferior, acoperind gura și extinzându-se spre gât. Privind hărțile CSNN din Figura~\ref{fig:fmaps_2} - \textit{Happiness} și Figura~\ref{fig:fmaps_1} - \textit{Fear}, se observă că ambele stări generează în mod natural o densitate ridicată de spike-uri de-a lungul conturului mandibular și al buzelor, datorită vitezei de mișcare a pixelilor. Deoarece extractorul nesupervizat capturează doar această dinamică brută fără conștientizarea contextului, se explică de ce și modelul supervizat CNN-LSTM este indus în eroare: straturile sale recurente confundă mișcarea rapidă a unei grimase de spaimă cu dinamica unui zâmbet larg.
+	\item \textbf{Fenomenul atipic în eroarea Sadness $\to$ Anger:} În Figura~\ref{fig:gradcam-f}, harta Grad-CAM relevă un comportament decizional neașteptat: activarea maximă părăsește trăsăturile faciale principale și se poziționează în \textbf{zona gâtului}. Acest lucru sugerează că modelul hibrid a învățat să caute indicii vizuale în regiuni secundare, însă a asociat eronat pliul bărbiei cu cel al frunții în cazul furiei. În schimb, hărțile CSNN pentru \textit{Anger} (Figura~\ref{fig:anger_before_after}) arată o izolare mult mai precisă a detaliilor geometrice de pe suprafața feței. Acest comportament demonstrează că rețeaua spiking rămâne fidelă structurii faciale exacte, spre deosebire de CNN-LSTM, care tinde să ia decizii pe baza unor regiuni dinamice mai extinse.
+	\item \textbf{Confuzia Sadness $\to$ Fear:} Pentru eșantionul de tristețe clasificat drept \textbf{Fear} (Figura~\ref{fig:gradcam-g}), atenția CNN-LSTM revine pe zona buzelor și a bărbiei. Corelarea cu hărțile de trăsături CSNN din Figura~\ref{fig:fmaps_1} (\textit{Fear}) și Figura~\ref{fig:fmaps_2} (\textit{Sadness}) sugerează o explicație bazată pe rezoluția temporală: micro-expresia de tremur al buzelor specifică tristeții generează local o succesiune rapidă de spike-uri care, din punct de vedere structural, seamănă izbitor cu faza de debut a retragerii buzelor din starea de frică. Astfel, hărțile nesupervizate confirmă că semnalele temporale brute ale celor două mișcări sunt extrem de apropiate, ceea ce explică eșecul clasificatorului supervizat.
+	\item \textbf{Eroarea Contempt $\to$ Fear:} În cazul eșantionului din Figura~\ref{fig:gradcam-b}, atenția modelului este focalizată pe buze și bărbie. Întrucât disprețul se manifestă printr-o acțiune musculară unilaterală, hărțile de trăsături ale CSNN (Figura~\ref{fig:fmaps_1} - \textit{Contempt}) surprind această asimetrie prin spike-uri localizate strict pe un singur flanc al feței. Totuși, CNN-LSTM eșuează în a păstra această specificitate spațială fină în straturile sale profunde, interpretând vectorul asimetric drept o deformare globală incipientă caracteristică clasei \textbf{Fear}.
 \end{itemize}
 
-\section{Modelul ANN Echivalent: Izolarea Impactului Paradigmei de Spiking}
+\section{Modelul ANN echivalent: Izolarea impactului paradigmei de spiking}
 
 Pentru a determina în ce măsură performanța modelului bio-inspirat este influențată de arhitectura sa convoluțională versus mecanismul de spiking, a fost implementat un model \textbf{ANN Echivalent (Equivalent Baseline ANN)}. 
 
-\subsection*{Arhitectură și Metodologie}
+\subsection*{Arhitectură și setodologie}
 Acest model păstrează topologia hărților de trăsături ale CSNN-ului, dar înlocuiește neuronii de tip \textit{Leaky Integrate-and-Fire} cu unități de activare standard și învățare prin \textit{backpropagation}.
 
 \begin{itemize}[noitemsep]
-	\item \textbf{Configurație:} Strat convoluțional 3D (64 filtre, kernel $3 \times 5 \times 5$), urmat de \textit{Batch Normalization} și activare ReLU.
-	\item \textbf{Pooling:} \texttt{AvgPool3d} ($2 \times 4 \times 4$), similar mecanismului de pooling din SNN.
-	\item \textbf{Antrenare:} S-a utilizat optimizatorul Adam și funcția de cost \textit{Cross-Entropy}, fără augmentare de date, pentru a menține condițiile experimentale ale CSNN-ului.
-	\item \textbf{Date de intrare:} S-au utilizat fețe pre-procesate (\textit{cropped}), eliminând fundalul pentru a permite modelului să conveargă rapid în absența augmentărilor.
+	\item \textbf{Configurație:} Strat convoluțional 3D (128 filtre, kernel $3 \times 3 \times 3$), urmat de \textit{Batch Normalization} și activare ReLU.
+	\item \textbf{Pooling:} \texttt{3D Adaptive Average Pooling} ($8 \times 4 \times 4$), similar mecanismului de pooling din SNN, asigurând o dimensiune fixă a vectorului de trăsături aplatizat.
+	\item \textbf{Antrenare:} S-a utilizat optimizatorul Adam și funcția de cost \textit{Cross-Entropy}, fără augmentare de date, pentru a menține condițiile experimentale ale CSNN-ului. Antrenarea pe fiecare fold a fost extinsă la un maximum de 50 de epoci, utilizând o strategie de oprire timpurie (\textit{Early Stopping}) cu o toleranță (\textit{patience}) de 10 epoci, reținându-se dinamic configurația cu performanța maximă pe setul de test.
+	\item \textbf{Date de intrare:} S-au utilizat atât imaginile complete, cât și fețe pre-procesate (\textit{cropped}), pentru a analiza influența  eliminării fundalului asupra arhitecturii echivalente ANN.
 \end{itemize}
 
-\subsection*{Rezultate Experimentale}
-Rezultatele pe cele 10 fold-uri sunt prezentate în Tabelul \ref{tab:rezultate_ann_echivalent}. Media obținută este de \textbf{73.23\%}, o valoare semnificativ superioară baseline-ului SVM, dar inferioară modelului complex CNN-LSTM.
+\subsection*{Rezultate experimentale}
+Rezultatele obținute în urma cross-validation-ului pe cele 10 fold-uri sunt detaliate în Tabela~\ref{tab:rezultate_ann_echivalent} și Tabela~\ref{tab:rezultate_ann_imagini_complete}. Modelul a atins o acuratețe medie de \textbf{75.97\% $\pm$ 5.93\%} pe datele decupate, acesta fiind superior baseline-ului SVM pe pixeli raw și modelului 3D CSNN. Cu  toate acestea, în cazul antrenării pe imaginile complete (cu zgomot de fundal) ale subiecților, modelul ANN a înregistrat cea mai mică acuratețe medie dintre aceste 3 arhitecturi: \textbf{30.55\% $\pm$ 3.05\%}.
 
 \begin{table}[h!]
 	\centering
-	\caption{Performanța modelului ANN echivalent (3D Conv + ReLU)}
-	\label{tab:rezultate_ann_echivalent}
-	\begin{tabular}{lc|lc}
-		\toprule
-		\textbf{Fold} & \textbf{Acuratețe (\%)} & \textbf{Fold} & \textbf{Acuratețe (\%)} \\ \midrule
-		Fold 1 & 75.76\% & Fold 6 & 67.86\% \\
-		Fold 2 & 80.00\% & Fold 7 & 71.88\% \\
-		Fold 3 & 72.73\% & Fold 8 & 65.52\% \\
-		Fold 4 & 84.38\% & Fold 9 & 71.43\% \\
-		Fold 5 & 69.70\% & Fold 10 & 73.08\% \\ \midrule
-		\textbf{Medie} & \multicolumn{3}{c}{\textbf{73.23\%}} \\ \bottomrule
-	\end{tabular}
+	\begin{minipage}[t]{0.49\textwidth}
+		\centering
+		\caption{Performanța modelului ANN echivalent (3D Conv + ReLU) pe imagini decupate (cropped)}
+		\label{tab:rezultate_ann_echivalent}
+		\resizebox{\columnwidth}{!}{
+		\begin{tabular}{lc|lc}
+			\toprule
+			\textbf{Fold} & \textbf{Acuratețe (\%)} & \textbf{Fold} & \textbf{Acuratețe (\%)} \\ \midrule
+			Fold 1 & 69.70\% & Fold 6  & 71.43\% \\
+			Fold 2 & 82.86\% & Fold 7  & 84.38\% \\
+			Fold 3 & 66.67\% & Fold 8  & 72.41\% \\
+			Fold 4 & 81.25\% & Fold 9  & 82.14\% \\
+			Fold 5 & 75.76\% & Fold 10 & 73.08\% \\ \midrule
+			\textbf{Medie} & \multicolumn{3}{c}{\textbf{75.97\% $\pm$ 5.93\%}} \\ \bottomrule
+		\end{tabular}
+	}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.49\textwidth}
+		\centering
+		\caption{Performanța modelului ANN echivalent (3D Conv + ReLU) pe imagini complete (cu fundal)}
+		\label{tab:rezultate_ann_imagini_complete}
+		\resizebox{\columnwidth}{!}{
+		\begin{tabular}{lc|lc}
+			\toprule
+			\textbf{Fold} & \textbf{Acuratețe (\%)} & \textbf{Fold} & \textbf{Acuratețe (\%)} \\ \midrule
+			Fold 1 & 30.30\% & Fold 6  & 32.14\% \\
+			Fold 2 & 31.43\% & Fold 7  & 25.00\% \\
+			Fold 3 & 30.30\% & Fold 8  & 34.48\% \\
+			Fold 4 & 28.12\% & Fold 9  & 35.71\% \\
+			Fold 5 & 27.27\% & Fold 10 & 30.77\% \\ \midrule
+			\textbf{Medie} & \multicolumn{3}{c}{\textbf{30.55\% $\pm$ 3.05\%}} \\ \bottomrule
+		\end{tabular}
+	}
+	\end{minipage}
 \end{table}
 
-\subsection*{Analiză Comparativă Finală}
+\subsection*{Analiză comparativă finală}
 
-Prezența acestui model în studiu permite o interpretare critică a rezultatelor:
+Prezența acestui model în studiu permite o interpretare critică a rezultatelor și o izolare clară a efectelor paradigmelor de calcul:
 
 \begin{enumerate}
-	\item \textbf{Importanța Focalizării (Cropping):} Experimentele preliminare au arătat că utilizarea imaginilor complete (cu fundal) scade performanța ANN-ului la aproximativ 30-40\%. Acest lucru subliniază un avantaj teoretic al CSNN-ului: prin filtrarea On/Off și Latency Coding, SNN-ul este inherent mai robust la zgomotul de fundal (pixelii statici nu generează spike-uri), în timp ce un ANN clasic are nevoie de decuparea feței sau de volume masive de date pentru a ignora fundalul.
-	\item \textbf{STDP vs. Backpropagation:} Diferența de la 48.02\% (SNN) la 73.23\% (ANN) reprezintă „costul” utilizării unei reguli de învățare locale și nesupervizate (STDP). Deși Backpropagation este mai precis, STDP oferă un avantaj major în termeni de eficiență energetică pe hardware neuromorfic și plauzibilitate biologică.
-	\item \textbf{Concluzie:} Modelul ANN echivalent demonstrează că topologia 3D Conv este extrem de potrivită pentru setul CK+, dar eficiența implementării spike-based depinde critic de rafinarea mecanismelor de homeostazie și a pragurilor de activare.
+	\item \textbf{Importanța focalizării (Cropping):} Experimentele au arătat că utilizarea imaginilor complete (cu fundal) scade dramatic performanța ANN-ului, conform rezultatelor detaliate în Tabela~\ref{tab:rezultate_ann_imagini_complete}. Pentru o comparație riguroasă, în acest caz s-au utilizat exact aceiași hiperparametri ca la antrenarea pe setul de date decupat. S-a observat că pentru marea majoritate a celor 10 cazuri de împărțire pe fold-uri, modelul își atingea plafonul maxim de acuratețe (convergea) extrem de rapid, după doar 5 epoci, rămânând blocat la o valoare foarte scăzută. Acest lucru subliniază un avantaj teoretic major al CSNN-ului: prin filtrarea On/Off și \textit{Latency Coding}, SNN-ul este inerent robust la zgomotul de fundal static deoarece pixelii neschimbați nu generează spike-uri. În schimb, un ANN clasic bazat pe intensități brute are nevoie de decuparea riguroasă a regiunii de interes (ROI) sau de volume masive de date augmentate pentru a învăța să ignore fundalul redundant.
+	\item \textbf{STDP vs. Backpropagation:} Diferența de performanță de la 56.10\% (SNN) la 75.97\% (ANN) reprezintă un „cost” matematic direct al utilizării unei reguli de învățare strict locale, biologice și nesupervizate (STDP), comparativ cu algoritmul global de optimizare \textit{Backpropagation}. Deși optimizarea prin gradient descendent folosind o funcție de cost explicită oferă o precizie superioară în sarcini stricte de clasificare, STDP-ul își menține relevanța fundamentală prin eficiența energetică masivă pe hardware-ul neuromorfic dedicat și prin eliminarea necesității etichetelor în etapa de extracție a trăsăturilor.
+	\item \textbf{Concluzie:} Modelul ANN echivalent demonstrează că topologia hărților con\-vo\-lu\-țio\-na\-le 3D utilizată este extrem de potrivită pentru dinamica setului CK+. Cu toate acestea, diferența de performanță indică faptul că eficiența implementării bazate pe impulsuri (SNN) depinde critic de rafinarea ulterioară a mecanismelor de homeostazie neuronală și de calibrarea fină a hiperparametrilor.
 \end{enumerate}

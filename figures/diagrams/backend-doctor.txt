@@ -1,0 +1,59 @@
+---
+config:
+  layout: elk
+  themeVariables:
+    fontSize: '30px'
+---
+classDiagram
+    direction LR
+    class DoctorRoutes {}
+    class DoctorController {}
+    class DoctorService {}
+    class MonitoringService {}
+    class HospitalSetup {}
+    class PrismaClient {}
+    class InfluxGateway {}
+    class PostgresDB {}
+    class InfluxDB {}
+    class User {}
+    class Patient {}
+    class EmotionReading {}
+    class PatientAlert {}
+
+    <<Boundary>> DoctorRoutes
+    <<Boundary>> DoctorController
+    <<Control>> DoctorService
+    <<Control>> MonitoringService
+    <<Control>> HospitalSetup
+    <<Gateway>> PrismaClient
+    <<Gateway>> InfluxGateway
+    <<External>> PostgresDB
+    <<External>> InfluxDB
+    <<Entity>> User
+    <<Entity>> Patient
+    <<Entity>> EmotionReading
+    <<Entity>> PatientAlert
+
+    DoctorRoutes ..> DoctorController : delegates to
+    DoctorController ..> DoctorService : invokes
+    DoctorService ..> MonitoringService : triggers
+    DoctorService ..> HospitalSetup : reads config
+    
+    DoctorService ..> PrismaClient : persists
+    MonitoringService ..> PrismaClient : queries
+    PrismaClient o.. PostgresDB : calls
+
+    DoctorService ..> InfluxGateway : writes emotion points
+    MonitoringService ..> InfluxGateway : reads timeline
+    InfluxGateway o.. InfluxDB : calls
+
+    DoctorService ..> Patient : assigns/reads
+    DoctorService ..> EmotionReading : creates
+    DoctorService ..> PatientAlert : upserts/resolves
+
+    MonitoringService ..> EmotionReading : reads
+    MonitoringService ..> PatientAlert : reads
+
+    User "1" o-- "*" Patient : assignedPatients
+    Patient "1" o-- "*" EmotionReading : emotionReadings
+    Patient "1" o-- "*" PatientAlert : alerts

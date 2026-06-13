@@ -7,37 +7,33 @@ Odată cu creșterea exponențială a volumelor de date vizuale și cu necesitat
 
 Rețelele neuronale cu impulsuri (\textit{Spiking Neural Networks} – SNN) constituie a treia generație a modelelor neuronale artificiale și se aseamănă mult mai fidel cu mecanismele biologice ale creierului uman. În aceste modele, informația este transmisă prin trenuri de impulsuri discrete, iar neuronii se activează rar, doar atunci când potențialul acumulat depășește un prag critic. Această caracteristică de activare rară (\textit{sparse activation}) reduce drastic numărul operațiilor de calcul față de rețelele clasice și face SNN-urile ideal potrivite pentru implementare pe hardware neuromorfic dedicat, cum ar fi Intel Loihi sau IBM NorthPole, unde consumul energetic poate fi redus cu până la 75\% față de echivalentele ANN \cite{wang2022}.
 
-\section*{Obiectivele lucrării}
-Prezenta lucrare de licență are ca obiectiv central investigarea potențialului rețelelor neuronale convoluționale de tip spiking (CSNN) în sarcina recunoașterii emoțiilor faciale, cu accent pe impactul preprocesării adaptive asupra calității trăsăturilor extrase. Concret, obiectivele urmărite sunt:
+Prezenta lucrare de licență are ca obiectiv investigarea potențialului rețelelor neuronale convoluționale de tip spiking (CSNN) în sarcina recunoașterii emoțiilor faciale, cu accent pe impactul învățării nesupervizate adaptive și al eșantionării asupra calității trăsăturilor extrase. În acest context, principalele obiective și contribuții ale lucrării sunt:
 
-\begin{itemize}
-	\item \textbf{Implementarea unui simulator CSNN 3D} cu învățare nesupervizată prin regula STDP (\textit{Spike Timing-Dependent Plasticity}), capabil să proceseze secvențe video ale expresiilor faciale.
-	\item \textbf{Proiectarea unui pipeline de preprocesare adaptivă} care permite eșantionarea locală, în jurul celor 68 de repere faciale, facilitând analiza dinamică a musculaturii feței pe parcursul cadrelor videoclipului.
-	\item \textbf{Evaluarea comparativă} a modelului SNN propus față de un clasificator SVM pe pixeli bruți, un ANN echivalent cu \textit{backpropagation} supervizat și o arhitectură hibridă CNN-LSTM.
-	\item \textbf{Dezvoltarea aplicației Neuro-Guardian}, un sistem clinic de monitorizare în timp real pentru urmărirea stărilor emoționale ale pacienților internați.
-\end{itemize}
-
-\section*{Contribuții proprii}
-Contribuțiile originale ale prezentei lucrări includ: 
 \begin{enumerate}
-	\item Proiectarea unui pipeline de preprocesare adaptivă bazat pe repere faciale, cu trei strategii de eșantionare (aleatorie, \textit{bounding-box} și \textit{landmark-centrată});
-	\item Studiul comparativ sistematic între patru paradigme de clasificare pe același set de date;
-	\item Proiectarea și implementarea completă a aplicației clinice \textbf{Neuro-Guardian}, incluzând canalul de inferență în timp real prin WebSocket–TCP și baza de date time-series InfluxDB.
+	\item Adaptarea unui simulator CSNN 3D cu învățare nesupervizată prin regula STDP (\textit{Spike Timing-Dependent Plasticity}), capabil să proceseze secvențe video ale expresiilor faciale;
+	
+	\item Proiectarea și implementarea unui pipeline de preprocesare adaptivă, incluzând patru strategii de eșantionare (\textit{aleatorie}, \textit{bounding-box}, \textit{landmark-centrată} și bazată pe \textit{activitatea neuronală}), pentru analiza dinamicii musculaturii faciale între cadre succesive;
+	
+	\item Realizarea unui studiu comparativ sistematic, atât între paradigmele de eșantionare propuse, cât și între modelul CSNN și alte arhitecturi relevante: un clasificator SVM pe pixeli bruți, un ANN echivalent antrenat prin \textit{backpropagation} supervizat și o arhitectură hibridă CNN-LSTM;
+	
+	\item Proiectarea și implementarea aplicației clinice \textbf{Neuro-Guardian}, destinată monitorizării în timp real a stărilor emoționale ale pacienților internați, incluzând mecanismul de inferență prin WebSocket–TCP și integrarea unei baze de date \textit{time-series} InfluxDB.
 \end{enumerate}
 
-\chapter*{Structura lucrării}
-\addcontentsline{toc}{chapter}{Structura lucrării}
+\section*{Utilizarea instrumentelor IA generative}
+În timpul elaborării acestei lucrări, autorul a folosit Gemini (Google) pentru reformularea și rafinarea textului în scopul obținerii unei clarități academice superioare și pentru îmbunătățirea fluxului argumentelor. După utilizarea acestui instrument, autorul a revizuit și editat conținutul generat și își asumă întreaga responsabilitate pentru conținutul lucrării.
 
-Lucrarea este organizată în opt capitole, după cum urmează:
+
+\chapter*{Structura lucrării}
+%\addcontentsline{toc}{chapter}{Structura lucrării}
+
+Lucrarea este organizată în cinci capitole, după cum urmează:
 
 \begin{description}
-	\item[Capitolul 1 – Formularea problemei] prezintă grupul țintă vizat de aplicație și datele de intrare-ieșire.
-	 
-	\item[Încadrarea în literatura de specialitate] trece în revistă cele mai relevante rezultate: capacitatea rețelelor bazate pe spike-uri neuronale de a integra date multimodale, de a utiliza dinamica mișcărilor faciale pentru a detecta cu succes persoane deghizate, robustețea și puterea de generalizare când antrenarea și testarea au loc pe seturi diferite de date, respectiv consumul redus de energie.
+	\item[Capitolul 1 – Formularea problemei și literatura de specialitate] prezintă grupul țin\-tă vizat de aplicație, datele de intrare-ieșire și rezultate definitorii rețelelor neuronale bazate pe spike-uri: capacitatea de a integra date multimodale, de a utiliza dinamica mișcărilor faciale pentru a detecta cu succes persoane deghizate, robustețea și puterea de generalizare când antrenarea și testarea au loc pe seturi diferite de date, respectiv consumul redus de energie.
+
+	\item[Capitolul 2 – Fundamente teoretice] prezintă baza matematică: mașini cu suport vectorial (SVM), tranziția de la ANN la SNN, modelele de neuron (Hodgkin-Huxley, Integrate-and-Fire), filtrarea On/Off, schemele de codificare (Rate, Latency, Rank Order), mecanismele de plasticitate sinaptică (STDP), arhitecturi CSNN, metode de eșantionare spațio-temporală și de decodificare a impulsurilor neuronale.
 	
-	\item[Capitolul 2 – Fundamente teoretice] prezintă baza matematică: tranziția de la ANN la SNN, modelele de neuron (Hodgkin-Huxley, Integrate-and-Fire), schemele de codificare (Rate, Latency, Rank Order) și mecanismele de plasticitate sinaptică (STDP).
-	
-	\item[Capitolul 3 – Experimente și analiza rezultatelor] constituie nucleul experimental. Include detaliile setului de date CK+, metodologia 10-fold cross-validation și rezultatele comparative (SNN: 48.02\% vs. CNN-LSTM: 88.37\%).
+	\item[Capitolul 3 – Experimente și analiza rezultatelor] constituie nucleul experimental. Include detaliile setului de date CK+, metodologia 10-fold cross-validation și rezultatele comparative.
 	
 	\item[Capitolul 4 - Neuro-Guardian] prezintă aplicația construită.
 	

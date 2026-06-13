@@ -1,0 +1,69 @@
+---
+config:
+  layout: elk
+  themeVariables:
+    fontSize: '30px'
+---
+classDiagram
+direction LR
+    class ReactRoot {}
+    class App {}
+
+    class AuthProvider {}
+    class useAuth {}
+    class AuthShell {}
+    class Login {}
+    class Register {}
+
+    class AdminDashboard {}
+    class DoctorDashboard {}
+
+    class BackendConfig {}
+    class LocalStorage {}
+    class FetchAPI {}
+    class BackendHTTP {}
+
+    %% Entities / DTOs
+    class AuthUser {}
+    class UserRole {}
+
+    <<Boundary>> ReactRoot
+    <<Boundary>> App
+    <<Control>> AuthProvider
+    <<Control>> useAuth
+    <<Boundary>> AuthShell
+    <<Boundary>> Login
+    <<Boundary>> Register
+    <<Boundary>> AdminDashboard
+    <<Boundary>> DoctorDashboard
+
+    <<Gateway>> BackendConfig
+    <<External>> LocalStorage
+    <<Boundary>> FetchAPI
+    <<External>> BackendHTTP
+
+    <<Entity>> AuthUser
+    <<Entity>> UserRole
+
+    ReactRoot ..> AuthProvider : wraps
+    ReactRoot ..> App : renders
+
+    App ..> useAuth : reads user/loading
+    useAuth ..> AuthProvider : reads context
+
+    App ..> AuthShell : unauthenticated
+    App ..> AdminDashboard : role=ADMIN
+    App ..> DoctorDashboard : role=DOCTOR
+
+    AuthShell ..> Login
+    AuthShell ..> Register
+    Login ..> useAuth : login()
+    Register ..> useAuth : register()
+
+    AuthProvider ..> LocalStorage : stores tokens
+    AuthProvider ..> FetchAPI : wraps fetch()
+    AuthProvider ..> BackendConfig : toBackendUrl()
+    FetchAPI ..> BackendHTTP : HTTP transport
+
+    AuthProvider ..> AuthUser : stores session
+    AuthUser ..> UserRole : role

@@ -1,0 +1,37 @@
+---
+config:
+  layout: elk
+  themeVariables:
+    fontSize: '30px'
+---
+classDiagram
+    direction LR
+    class AuthRoutes {}
+    class AuthMiddleware {}
+    class AuthController {}
+    class AuthService {}
+    class PrismaClient {}
+    class PostgresDB {}
+    class User {}
+    class RefreshToken {}
+
+    <<Boundary>> AuthRoutes
+    <<Boundary>> AuthMiddleware
+    <<Boundary>> AuthController
+    <<Control>> AuthService
+    <<Gateway>> PrismaClient
+    <<External>> PostgresDB
+    <<Entity>> User
+    <<Entity>> RefreshToken
+
+    AuthRoutes ..> AuthMiddleware : checks session
+    AuthRoutes ..> AuthController : delegates to
+    AuthController ..> AuthService : invokes
+    AuthService ..> PrismaClient : queries
+    AuthMiddleware ..> PrismaClient : verifies role
+    AuthMiddleware ..> User : loads role
+
+    PrismaClient o.. PostgresDB : calls
+    AuthService ..> User : manages
+    AuthService ..> RefreshToken : issues/rotates
+    User "1" o-- "*" RefreshToken : refreshTokens
