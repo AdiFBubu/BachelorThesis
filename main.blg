@@ -9,45 +9,45 @@ Warning--empty journal in bi1998synaptic
 Warning--empty booktitle in thorpe1998
 Warning--empty publisher in thorpe1998
 Warning--empty journal in rossum2000
-You've used 50 entries,
+You've used 51 entries,
             2543 wiz_defined-function locations,
-            856 strings with 13907 characters,
-and the built_in function-call counts, 22046 in all, are:
-= -- 2233
-> -- 1145
-< -- 22
-+ -- 409
-- -- 401
-* -- 1687
-:= -- 3650
-add.period$ -- 159
-call.type$ -- 50
-change.case$ -- 338
-chr.to.int$ -- 50
-cite$ -- 54
-duplicate$ -- 812
-empty$ -- 1514
-format.name$ -- 454
-if$ -- 4455
+            863 strings with 14056 characters,
+and the built_in function-call counts, 22402 in all, are:
+= -- 2271
+> -- 1153
+< -- 23
++ -- 411
+- -- 403
+* -- 1714
+:= -- 3706
+add.period$ -- 162
+call.type$ -- 51
+change.case$ -- 343
+chr.to.int$ -- 51
+cite$ -- 55
+duplicate$ -- 827
+empty$ -- 1544
+format.name$ -- 458
+if$ -- 4527
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 51
-newline$ -- 254
-num.names$ -- 154
-pop$ -- 268
+missing$ -- 52
+newline$ -- 259
+num.names$ -- 157
+pop$ -- 271
 preamble$ -- 1
-purify$ -- 392
+purify$ -- 398
 quote$ -- 0
-skip$ -- 689
+skip$ -- 700
 stack$ -- 0
-substring$ -- 1314
-swap$ -- 133
-text.length$ -- 22
-text.prefix$ -- 10
+substring$ -- 1346
+swap$ -- 134
+text.length$ -- 23
+text.prefix$ -- 11
 top$ -- 0
-type$ -- 388
+type$ -- 396
 warning$ -- 4
-while$ -- 222
-width$ -- 53
-write$ -- 657
+while$ -- 226
+width$ -- 54
+write$ -- 670
 (There were 4 warnings)

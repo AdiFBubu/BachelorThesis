@@ -131,7 +131,7 @@ Spre deosebire de modelele clasice, SNN-urile adoptă o abordare bazată pe even
 
 Spre deosebire de modelele generațiilor anterioare, rețelele neuronale cu impulsuri (SNN) utilizează ca unitate fundamentală de comunicare fluxuri de impulsuri discrete, cunoscute sub denumirea de \textit{spike trains}. Fiecare impuls reprezintă un potențial de acțiune, o descărcare electrică de scurtă durată care transportă informația prin rețea, imitând fidel procesele electro-chimice din creierul uman.
 
-Mecanismul de funcționare al unui neuron de tip \textit{spiking} este definit prin interacțiunea dintre potențialul de membrană și un prag de activare (\textit{firing threshold}). Procesul poate fi sintetizat în patru etape critice:
+Mecanismul de funcționare al unui neuron de tip \textit{spiking} este definit prin in\-te\-rac\-ți\-u\-nea dintre potențialul de membrană și un prag de activare (\textit{firing threshold}). Procesul poate fi sintetizat în patru etape critice:
 
 \begin{itemize}
     \item \textbf{Integrarea și acumularea:} Neuronul recepționează semnale de intrare prin sinapse și le cumulează în timp, ceea ce determină o creștere incrementală a potențialului de membrană.
@@ -174,7 +174,7 @@ f_s(x) =
 \end{cases}.
 \end{equation}
 
-Regula de actualizare a stării neuronului impune ca atunci când potențialul de membrană depășește pragul $V_{th}$, să aibă loc descărcarea, urmată de resetarea potențialului, așa cum reiese din relația \eqref{eq:reset_rule}:
+Regula de actualizare a stării neuronului impune ca atunci când potențialul de membrană depășește pragul $V_{th}$, să aibă loc descărcarea, urmată de resetarea po\-ten\-ți\-a\-lu\-lui, așa cum reiese din relația \eqref{eq:reset_rule}:
 
 \begin{equation}
 \label{eq:reset_rule}
@@ -187,7 +187,7 @@ Această abordare matematică permite procesarea eficientă a datelor asincrone,
 
 Înainte ca pixelii bruți ai imaginilor sau cadrelor video să fie transformați în impulsuri temporale, este necesară o etapă de preprocesare capabilă să extragă contrastele spațiale locale și să elimine redundanța informațională. În sistemul vizual biologic, dar și în cazul senzorilor de viziune bazați pe evenimente (DVS), această funcție este îndeplinită de celulele ganglionare retiniene cu structură de tip centru-periferie (\textit{center-surround}). 
 
-Pentru a simula digital acest comportament, se aplică o filtrare liniară bazată pe modelul \textbf{DoG} (\textit{Difference of Gaussians}), care extrage gradienții de contrast prin diferența a două funcții Gaussiene cu deviații standard distincte: una pentru regiunea centrală ($\sigma_{center}$) și una pentru regiunea înconjurătoare ($\sigma_{surround}$). Valoarea rezultată $v$ în urma convoluției imaginii cu filtrul DoG este apoi separată în două canale complet independente, dublând dimensiunea pe adâncime (\textit{depth}) a tensorului de date:
+Pentru a simula digital acest comportament, se aplică o filtrare liniară bazată pe modelul \textbf{DoG} (\textit{Difference of Gaussians})\cite{rodieck1965quantitative}, care extrage gradienții de contrast prin diferența a două funcții Gaussiene cu deviații standard distincte: una pentru regiunea centrală ($\sigma_{center}$) și una pentru regiunea înconjurătoare ($\sigma_{surround}$). Valoarea rezultată $v$ în urma convoluției imaginii cu filtrul DoG este apoi separată în două canale complet independente, dublând dimensiunea pe adâncime (\textit{depth}) a tensorului de date:
 
 \begin{itemize}[noitemsep]
 	\item \textbf{Canalul ON:} Reține exclusiv valorile pozitive ale contrastului, simulând activarea celulelor sensibile la tranziția de la întuneric la lumină (relația \eqref{eq:dog_on}):
@@ -283,7 +283,7 @@ Deși metoda este eficientă pentru obținerea unei precizii ridicate, ea rămâ
 
 Plasticitatea de tip Hebbian constituie un principiu fundamental în neuroștiințe, stipulând că intensitatea unei sinapse între doi neuroni este determinată de corelația activităților acestora. Conform celebrului postulat al lui Donald Hebb: „neuronii care se activează împreună, se conectează împreună” (\textit{neurons that fire together, wire together}) \cite{hebb2002}. În domeniul SNN, învățarea Hebbiană este utilizată pe scară largă pentru antrenarea rețelelor în regim supervizat \cite{lan2022pcsnn}, nesupervizat \cite{kheradpisheh2018stdp} sau auto-supervizat \cite{halvagal2023combination}.
 
-Mecanismul de bază presupune modificarea greutății sinaptice în funcție de corelația dintre activitatea pre-sinaptică (intrarea) și cea post-sinaptică (ieșirea). Deși există mai multe reguli de plasticitate, precum \textit{Spike-Driven Synaptic Plasticity} (SDSP), majoritatea aplicațiilor contemporane se bazează pe \textbf{Spike Timing-Dependent Plasticity (STDP)}, datorită robusteții sale în procesarea semnalelor temporale.
+Mecanismul de bază presupune modificarea greutății sinaptice în funcție de co\-re\-la\-ți\-a dintre activitatea pre-sinaptică (intrarea) și cea post-sinaptică (ieșirea). Deși există mai multe reguli de plasticitate, precum \textit{Spike-Driven Synaptic Plasticity} (SDSP), majoritatea aplicațiilor contemporane se bazează pe \textbf{Spike Timing-Dependent Plasticity (STDP)}, datorită robusteții sale în procesarea semnalelor temporale.
 
 STDP este o regulă de învățare cu înaltă plauzibilitate biologică \cite{song2000competitive} ce ajustează ponderile sinaptice pe baza diferenței temporale relative dintre impulsurile pre-sinaptice și cele post-sinaptice. Această metodă este esențială pentru implementările pe hardware neuromorfic cu consum redus, fiind capabilă să extragă trăsături complexe fără necesitatea unei supervizări externe.
 
@@ -293,7 +293,7 @@ Principiul de funcționare al STDP se bazează pe două fenomene opuse, așa cum
     \item \textbf{Depresia pe termen lung (Long-Term Depression - LTD):} Dacă impulsul post-sinaptic are loc înaintea celui pre-sinaptic, sinapsa este slăbită. Aceasta indică faptul că semnalul de intrare nu a avut un rol cauzal în declanșarea impulsului de ieșire.
 \end{itemize}
 
-Această dinamică permite rețelei să prioritizeze conexiunile care transportă informație relevantă pentru modelul identificat, ignorând în același timp zgomotul sau semnalele necorelate temporal.
+Această dinamică permite rețelei să prioritizeze conexiunile care transportă in\-for\-ma\-ți\-e relevantă pentru modelul identificat, ignorând în același timp zgomotul sau semnalele necorelate temporal.
 
 În funcție de complexitatea dorită și de constrângerile hardware, STDP poate fi implementată prin mai multe modele matematice:
 
@@ -373,7 +373,7 @@ unde $th_{min}$ reprezintă valoarea minimă admisă a pragului \cite{falez2019}
 
 \section{Arhitecturi Convolutional Spiking Neural Networks (CSNN)}
 
-Arhitecturile Convolutional Spiking Neural Networks (CSNN) combină capacitatea de extragere a trăsăturilor spațiale cu eficiența energetică a neuronilor de tip spiking. Este important de subliniat că dinamica antrenării variază esențial în funcție de paradigma de învățare aleasă. În timp ce abordările supervizate pot actualiza și propaga ponderile simultan într-un singur flux end-to-end prin intermediul gradienților surogat (\textit{surrogate gradients}), rețelele bazate pe învățare bio-inspirată nesupervizată impun o decuplare structurală. Astfel, pentru modelele CSNN nesupervizate (precum arhitectura investigată în prezenta lucrare), implementarea unui strat de convoluție presupune o metodologie ierarhică, structurată în două etape distincte:
+Arhitecturile Convolutional Spiking Neural Networks (CSNN) combină capacitatea de extragere a trăsăturilor spațiale cu eficiența energetică a neuronilor de tip spiking. Este important de subliniat că dinamica antrenării variază esențial în funcție de paradigma de învățare aleasă. În timp ce abordările supervizate pot actualiza și propaga ponderile simultan într-un singur flux end-to-end prin intermediul gradienților surogat (\textit{surrogate gradients}), rețelele bazate pe învățare bio-inspirată nesupervizată impun o decuplare structurală. Astfel, pentru modelele CSNN nesupervizate (precum arhitectura investigată în prezenta lucrare), implementarea unui strat de con\-vo\-lu\-ți\-e presupune o metodologie ierarhică, structurată în două etape distincte:
 
 1. \textbf{Etapa de învățare (Learning Phase):} Această fază se bazează în mod critic pe un proces de eșantionare locală. Un fragment de interes (\textit{patch}) este extras din fluxul de date de intrare, iar nucleele de convoluție (\textit{kernels}) concurente rulează un mecanism de competiție locală de tip \textit{auto-inhibiție} direct pe suprafața acestui sub-spațiu. Fiecare nucleu este asociat unui neuron specific, iar scopul competiției este adaptarea ponderilor sinaptice $W$ prin regula STDP, forțând filtrul învingător să se specializeze exclusiv pe tiparul vizual sau dinamic dominant din \textit{patch}-ul selectat. Acest mecanism local de eșantionare constituie pilonul central al prezentei lucrări și va fi tratat pe larg, cu toate implicațiile sale arhitecturale, în secțiunea~\ref{sc:sampling}.
 
@@ -442,9 +442,9 @@ Pentru a restrânge spațiul de căutare la regiunea facială (\textit{Region of
 
 \subsection*{Eșantionarea bazată pe landmark-uri faciale}
 
-Această metodă bazată pe puncte de reper faciale (\textit{facial landmarks}) se fundamentează pe ipoteza că emoțiile feței sunt reprezentate predominant prin variațiile micro-expresiilor localizate în jurul ochilor, sprâncenelor, nasului și gurii. În loc să selecteze volume în mod arbitrar, metoda prioritizează regiunile cu densitate informațională ridicată, imitând mecanismele biologice ale sistemului vizual uman.
+Această metodă bazată pe puncte de reper faciale (\textit{facial landmarks}) se fundamentează pe ipoteza că emoțiile feței sunt reprezentate predominant prin variațiile micro-expresiilor localizate în jurul ochilor, sprâncenelor, nasului și gurii. În loc să selecteze volume în mod arbitrar, metoda prioritizează regiunile cu densitate in\-for\-ma\-țio\-na\-lă ridicată, imitând mecanismele biologice ale sistemului vizual uman.
 
-Selecția punctelor de reper urmează schema standard de adnotare cu 68 de landmark-uri propusă în setul de date 300-W \cite{sagonas2013300w}, utilizată extensiv în biblioteci precum Dlib sau MediaPipe. Reprezentarea acestor puncte de reper faciale este ilustrată în Figura~\ref{fig:landmarks_68}, iar distribuția lor este prezentată în Tabela~\ref{tab:landmarks}.
+Selecția punctelor de reper urmează schema standard de adnotare cu 68 de land\-mark-uri propusă în setul de date 300-W \cite{sagonas2013300w}, utilizată extensiv în biblioteci precum Dlib sau MediaPipe. Reprezentarea acestor puncte de reper faciale este ilustrată în Figura~\ref{fig:landmarks_68}, iar distribuția lor este prezentată în Tabela~\ref{tab:landmarks}.
 
 \begin{figure}[htbp]
 	\centering

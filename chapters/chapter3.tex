@@ -103,7 +103,7 @@ Măsoară gradul de redundanță al trăsăturilor învățate prin evaluarea si
 	\item \textbf{Interpretarea cuartilelor (Q1, Q2, Q3):}
 	\begin{itemize}
 		\item \textit{Interval optim (Mediana/Q2):} O valoare sub \textbf{0.3 - 0.5} indică o rețea sănătoasă care a reușit să învețe trăsături diverse și complementare (margini, orientări și texturi diferite). 
-		\item \textit{Riscuri:} Dacă valorile maxime (\textit{Max}) și cuartila superioară (\textit{Q3}) tind spre \textbf{0.9 - 1.0}, rețeaua suferă de redundanță extremă (mai multe filtre au învățat exact aceeași trăsătură), limitând sever capacitatea de discriminare a emoțiilor faciale.
+		\item \textit{Riscuri:} Dacă valorile maxime (\textit{Max}) și cuartila superioară (\textit{Q3}) tind spre \textbf{0.9 - 1.0}, rețeaua suferă de redundanță extremă (mai multe filtre au învățat exact aceeași trăsătură), limitând sever capacitatea de discriminare a e\-mo\-ți\-i\-lor faciale.
 	\end{itemize}
 	\item \textbf{Importanța incoerenței:} Antrenamentul eficient trebuie să tindă spre o anumită \textbf{incoerență} (decorelare maximă între filtre). Acest lucru este esențial pentru ca algoritmul de clasificare final (SVM sau stratul complet conectat) să primească un spațiu bogat de trăsături, maximizând astfel capacitatea de reprezentare a modelului.
 \end{itemize}
@@ -512,9 +512,9 @@ Compararea performanțelor evidențiază un câștig net substanțial, de \textb
 
 \begin{enumerate}
 	
-	\item \textbf{Extracția eficientă de trăsături (Feature Extraction):} Diferența masivă de performanță demonstrează clar că nucleele de convoluție învățate în mod nesupervizat prin STDP (Spike-Timing-Dependent Plasticity) distilează informația vizuală în „puncte de interes” spatio-temporale de înaltă calitate. Caracteristicile extrase de SNN oferă o separabilitate liniară net superioară în spațiul SVM, spre deosebire de analiza pixelilor bruti.
+	\item \textbf{Extracția eficientă de trăsături (Feature Extraction):} Diferența masivă de per\-for\-man\-ță demonstrează clar că nucleele de convoluție învățate în mod nesupervizat prin STDP (Spike-Timing-Dependent Plasticity) distilează informația vizuală în „puncte de interes” spatio-temporale de înaltă calitate. Caracteristicile extrase de SNN oferă o separabilitate liniară net superioară în spațiul SVM, spre deosebire de analiza pixelilor bruti.
 	
-	\item \textbf{Reducerea zgomotului și a redundanței spațiale:} Pixelii raw introduc în clasificator o cantitate foarte mare de informație redundantă (fundal static, variații globale de iluminare, fizionomia specifică a subiectului). Prin contrast, SNN-ul, utilizând filtrarea On/Off și codificarea prin latență (\textit{Latency Coding}), reacționează exclusiv la tranzițiile de contrast și la marginile dinamice (dinamica mișcării musculaturii faciale), oferind un input optimizat și curățat de zgomot.
+	\item \textbf{Reducerea zgomotului și a redundanței spațiale:} Pixelii raw introduc în clasificator o cantitate foarte mare de informație redundantă (fundal static, variații globale de iluminare, fizionomia specifică a subiectului). Prin contrast, SNN-ul, utilizând filtrarea On/Off și codificarea prin latență (\textit{Latency Coding}), re\-ac\-ți\-o\-nea\-ză exclusiv la tranzițiile de contrast și la marginile dinamice (dinamica mișcării musculaturii faciale), oferind un input optimizat și curățat de zgomot.
 	
 	\item \textbf{Analiza granulară pe fold-uri:} Modelul propus \textit{SNN + SVM} depășește baseline-ul în \textbf{9 din cele 10 fold-uri}, iar în Fold-ul 4 se înregistrează o paritate perfectă (42.42\%). Este important de evidențiat faptul că SVM-ul pe pixeli raw nu reușește să surclaseze arhitectura propusă în niciun subset de testare.
 	

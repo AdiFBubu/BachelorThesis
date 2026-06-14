@@ -220,6 +220,12 @@ Damien Querlioz, Olivier Bichler, and Christian Gamrat.
 \newblock In {\em The 2011 International Joint Conference on Neural Networks,
   {IJCNN}}, pages 1775--1781. {IEEE}, 2011.
 
+\bibitem[Rod65]{rodieck1965quantitative}
+R.~W. Rodieck.
+\newblock Quantitative analysis of cat retinal ganglion cell response to visual
+  stimuli.
+\newblock {\em Vision Research}, 5(11):583--601, 1965.
+
 \bibitem[SGC15]{sariyanidi2015}
 Evangelos Sariyanidi, Hatice Gunes, and Andrea Cavallaro.
 \newblock Automatic analysis of facial affect: {A} survey of registration,

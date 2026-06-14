@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.4.17)  14 JUN 2026 06:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.4.17)  14 JUN 2026 20:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -966,11 +966,6 @@ l.17 	\item R
 [1
 
 ]
-Overfull \hbox (25.12811pt too wide) in paragraph at lines 17--18
-[]\OT1/ppl/m/n/12 Realizarea unui stu-diu com-pa-ra-tiv sis-te-ma-tic, at[]at [
-]^^Pntre pa-ra-dig-mele de e[]antionare
- []
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1158,17 +1153,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [16]
-Overfull \hbox (25.8455pt too wide) in paragraph at lines 134--135
-[]\OT1/ppl/m/n/12 Mecanismul de func[]ionare al unui ne-u-ron de tip \OT1/ppl/m
-/it/12 spi-king \OT1/ppl/m/n/12 este de-fi-nit prin interac[]iunea
- []
-
 <figures/dinamica_membranei.png, id=370, 585.387pt x 410.7345pt>
 File: figures/dinamica_membranei.png Graphic file (type png)
 <use figures/dinamica_membranei.png>
 Package pdftex.def Info: figures/dinamica_membranei.png  used on input line 147
 .
 (pdftex.def)             Requested size: 330.76329pt x 232.07796pt.
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 29.79388pt, for example:
@@ -1185,12 +1176,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [18 <./figures/dinamica_membranei.png>]
-Overfull \hbox (31.01552pt too wide) in paragraph at lines 177--178
-\OT1/ppl/m/n/12 mem-bran[]a dep[]a[]e[]te pra-gul $\OML/cmm/m/it/12 V[]$\OT1/pp
-l/m/n/12 , s[]a aib[]a loc desc[]arcarea, ur-mat[]a de re-se-ta-rea poten[]ialu
-lui,
- []
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 29.79388pt, for example:
@@ -1245,9 +1230,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [22]
-Overfull \hbox (19.75015pt too wide) in paragraph at lines 286--287
-[]\OT1/ppl/m/n/12 Mecanismul de baz[]a pre-su-pune mo-di-fi-ca-rea greut[]a[]ii
- si-nap-tice []^^Pn func[]ie de corela[]ia
+Overfull \hbox (2.80876pt too wide) in paragraph at lines 286--287
+\OT1/ppl/m/n/12 exist[]a mai multe re-guli de plas-ti-ci-tate, pre-cum \OT1/ppl
+/m/it/12 Spike-Driven Sy-nap-tic Plas-ti-city \OT1/ppl/m/n/12 (SDSP),
+ []
+
+
+Overfull \hbox (0.68655pt too wide) in paragraph at lines 286--287
+\OT1/ppl/m/n/12 ma-jo-ri-ta-tea aplica[]iilor con-tem-po-rane se ba-zeaz[]a pe 
+\OT1/ppl/b/n/12 Spike Timing-Dependent Plas-
  []
 
 
@@ -1261,12 +1252,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 Overfull \hbox (1.11787pt too wide) in paragraph at lines 293--294
 []\OT1/ppl/b/n/12 Depresia pe ter-men lung (Long-Term De-pres-sion - LTD): \OT1
 /ppl/m/n/12 Dac[]a im-pul-sul post-
- []
-
-
-Overfull \hbox (27.58548pt too wide) in paragraph at lines 296--297
-[]\OT1/ppl/m/n/12 Aceast[]a di-na-mic[]a per-mite re[]elei s[]a pri-o-ri-ti-zez
-e con-e-xiu-nile care trans-port[]a informa[]ie
  []
 
 
@@ -1301,12 +1286,6 @@ Overfull \hbox (2.43674pt too wide) in paragraph at lines 376--377
  []
 
 
-Overfull \hbox (19.46466pt too wide) in paragraph at lines 376--377
-\OT1/ppl/m/n/12 cum ar-hi-tec-tura in-ves-ti-gat[]a []^^Pn pre-zenta lu-crare),
- im-ple-men-ta-rea unui strat de convolu[]ie
- []
-
-
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 29.79388pt, for example:
 (fancyhdr)                \setlength{\headheight}{29.79388pt}.
@@ -1321,7 +1300,7 @@ Overfull \hbox (3.79948pt too wide) in paragraph at lines 389--391
 1/ppl/m/n/12 ma-peaz[]a co-or-do-na-tele spa[]iale
  []
 
-<figures/2d-csnn.png, id=525, 1597.97pt x 1315.91624pt>
+<figures/2d-csnn.png, id=527, 1597.97pt x 1315.91624pt>
 File: figures/2d-csnn.png Graphic file (type png)
 <use figures/2d-csnn.png>
 Package pdftex.def Info: figures/2d-csnn.png  used on input line 394.
@@ -1339,7 +1318,7 @@ Overfull \hbox (12.37294pt too wide) in paragraph at lines 408--410
 al pri-mar care r[]aspund la direc[]ii
  []
 
-<figures/3d-csnn.png, id=536, 968.61874pt x 874.26625pt>
+<figures/3d-csnn.png, id=538, 968.61874pt x 874.26625pt>
 File: figures/3d-csnn.png Graphic file (type png)
 <use figures/3d-csnn.png>
 Package pdftex.def Info: figures/3d-csnn.png  used on input line 413.
@@ -1372,19 +1351,7 @@ Overfull \hbox (3.52875pt too wide) in paragraph at lines 445--446
 pre-do-mi-nant prin varia[]iile micro-
  []
 
-
-Overfull \hbox (15.49303pt too wide) in paragraph at lines 445--446
-\OT1/ppl/m/n/12 teze vo-lume []^^Pn mod ar-bi-trar, me-toda pri-o-ri-ti-zeaz[]a
- re-giu-nile cu den-si-tate informa[]ional[]a
- []
-
-
-Overfull \hbox (23.06332pt too wide) in paragraph at lines 447--448
-[]\OT1/ppl/m/n/12 Selec[]ia punc-te-lor de re-per ur-meaz[]a schema stan-dard d
-e ad-no-tare cu 68 de landmark-
- []
-
-<figures/landmarks_68.png, id=555, 638.385pt x 516.7305pt>
+<figures/landmarks_68.png, id=557, 638.385pt x 516.7305pt>
 File: figures/landmarks_68.png Graphic file (type png)
 <use figures/landmarks_68.png>
 Package pdftex.def Info: figures/landmarks_68.png  used on input line 451.
@@ -1430,19 +1397,19 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [33]
-<figures/linear_decay_decoding.png, id=596, 714.7503pt x 426.393pt>
+<figures/linear_decay_decoding.png, id=598, 714.7503pt x 426.393pt>
 File: figures/linear_decay_decoding.png Graphic file (type png)
 <use figures/linear_decay_decoding.png>
 Package pdftex.def Info: figures/linear_decay_decoding.png  used on input line 
 554.
 (pdftex.def)             Requested size: 141.12889pt x 84.19054pt.
-<figures/rectangular_pulse_decoding.png, id=597, 714.7503pt x 426.393pt>
+<figures/rectangular_pulse_decoding.png, id=599, 714.7503pt x 426.393pt>
 File: figures/rectangular_pulse_decoding.png Graphic file (type png)
 <use figures/rectangular_pulse_decoding.png>
 Package pdftex.def Info: figures/rectangular_pulse_decoding.png  used on input 
 line 561.
 (pdftex.def)             Requested size: 141.12889pt x 84.19054pt.
-<figures/gaussian-based-decoding.png, id=598, 714.7503pt x 426.393pt>
+<figures/gaussian-based-decoding.png, id=600, 714.7503pt x 426.393pt>
 File: figures/gaussian-based-decoding.png Graphic file (type png)
 <use figures/gaussian-based-decoding.png>
 Package pdftex.def Info: figures/gaussian-based-decoding.png  used on input lin
@@ -1541,12 +1508,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 Overfull \hbox (7.93425pt too wide) in paragraph at lines 105--106
 \OT1/ppl/m/n/12 care a reu[]it s[]a []^^Pnve[]e tr[]as[]aturi di-verse []i com-
 ple-men-tare (mar-gini, orient[]ari
- []
-
-
-Overfull \hbox (20.88208pt too wide) in paragraph at lines 106--107
-\OT1/ppl/m/n/12 exact aceea[]i tr[]as[]atur[]a), li-mit[]and se-ver ca-pa-ci-ta
--tea de dis-cri-mi-nare a emo[]iilor
  []
 
 
@@ -1717,7 +1678,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [47]
-<figures/models/feature_maps_csnn/selection/anger-before-after.png, id=711, 414
+<figures/models/feature_maps_csnn/selection/anger-before-after.png, id=713, 414
 .348pt x 116.23425pt>
 File: figures/models/feature_maps_csnn/selection/anger-before-after.png Graphic
  file (type png)
@@ -1731,7 +1692,7 @@ Overfull \hbox (4.71771pt too wide) in paragraph at lines 416--417
 a-rea \OT1/pcr/m/n/12 homeostaziei
  []
 
-<figures/models/feature_maps_csnn/selection/feature-maps-1.png, id=714, 510.105
+<figures/models/feature_maps_csnn/selection/feature-maps-1.png, id=716, 510.105
 74pt x 185.493pt>
 File: figures/models/feature_maps_csnn/selection/feature-maps-1.png Graphic fil
 e (type png)
@@ -1742,7 +1703,7 @@ s-1.png  used on input line 426.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<figures/models/feature_maps_csnn/selection/feature-maps-2.png, id=715, 514.923
+<figures/models/feature_maps_csnn/selection/feature-maps-2.png, id=717, 514.923
 75pt x 186.6975pt>
 File: figures/models/feature_maps_csnn/selection/feature-maps-2.png Graphic fil
 e (type png)
@@ -1770,7 +1731,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [49 <./figures/models/feature_maps_csnn/selection/feature-maps-1.png> <./figure
 s/models/feature_maps_csnn/selection/feature-maps-2.png>]
-<figures/models/kernels_csnn/kernels_fold_1.png, id=740, 2409.0pt x 2208.25pt>
+<figures/models/kernels_csnn/kernels_fold_1.png, id=742, 2409.0pt x 2208.25pt>
 File: figures/models/kernels_csnn/kernels_fold_1.png Graphic file (type png)
 <use figures/models/kernels_csnn/kernels_fold_1.png>
 Package pdftex.def Info: figures/models/kernels_csnn/kernels_fold_1.png  used o
@@ -1809,18 +1770,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [52]
-Overfull \hbox (36.75769pt too wide) in paragraph at lines 515--516
-[]\OT1/ppl/b/n/12 Extrac[]ia efi-cient^^Ua de tr^^Uas^^Uaturi (Fe-a-ture Ex-tra
-c-tion): \OT1/ppl/m/n/12 Diferen[]a ma-siv[]a de performan[][]a
- []
-
-
-Overfull \hbox (31.14046pt too wide) in paragraph at lines 517--518
-\OT1/ppl/m/n/12 ul, uti-liz[]and fil-tra-rea On/Off []i co-di-fi-ca-rea prin la
-ten[][]a (\OT1/ppl/m/it/12 La-tency Co-ding\OT1/ppl/m/n/12 ), reac[]ioneaz[]a
- []
-
-
 Overfull \hbox (7.91975pt too wide) in paragraph at lines 519--520
 []\OT1/ppl/b/n/12 Analiza gra-nu-lar^^Ua pe fold-uri: \OT1/ppl/m/n/12 Mo-de-lul
  pro-pus \OT1/ppl/m/it/12 SNN + SVM \OT1/ppl/m/n/12 dep[]a[]e[]te baseline-
@@ -1866,7 +1815,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [55]
-<figures/models/confusion_matrix_fold_1.png, id=790, 661.7523pt x 561.5379pt>
+<figures/models/confusion_matrix_fold_1.png, id=792, 661.7523pt x 561.5379pt>
 File: figures/models/confusion_matrix_fold_1.png Graphic file (type png)
 <use figures/models/confusion_matrix_fold_1.png>
 Package pdftex.def Info: figures/models/confusion_matrix_fold_1.png  used on in
@@ -1886,7 +1835,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [56 <./figures/models/confusion_matrix_fold_1.png>]
-<figures/models/gradcam_cnn+lstm_fold1/anger_pass.jpg, id=800, 224.84pt x 224.8
+<figures/models/gradcam_cnn+lstm_fold1/anger_pass.jpg, id=802, 224.84pt x 224.8
 4pt>
 File: figures/models/gradcam_cnn+lstm_fold1/anger_pass.jpg Graphic file (type j
 pg)
@@ -1894,7 +1843,7 @@ pg)
 Package pdftex.def Info: figures/models/gradcam_cnn+lstm_fold1/anger_pass.jpg  
 used on input line 617.
 (pdftex.def)             Requested size: 105.84666pt x 105.84634pt.
-<figures/models/gradcam_cnn+lstm_fold1/contempt_fail_as_fear.jpg, id=801, 224.8
+<figures/models/gradcam_cnn+lstm_fold1/contempt_fail_as_fear.jpg, id=803, 224.8
 4pt x 224.84pt>
 File: figures/models/gradcam_cnn+lstm_fold1/contempt_fail_as_fear.jpg Graphic f
 ile (type jpg)
@@ -1902,7 +1851,7 @@ ile (type jpg)
 Package pdftex.def Info: figures/models/gradcam_cnn+lstm_fold1/contempt_fail_as
 _fear.jpg  used on input line 622.
 (pdftex.def)             Requested size: 105.84666pt x 105.84634pt.
-<figures/models/gradcam_cnn+lstm_fold1/disgust_pass.jpg, id=802, 224.84pt x 224
+<figures/models/gradcam_cnn+lstm_fold1/disgust_pass.jpg, id=804, 224.84pt x 224
 .84pt>
 File: figures/models/gradcam_cnn+lstm_fold1/disgust_pass.jpg Graphic file (type
  jpg)
@@ -1910,7 +1859,7 @@ File: figures/models/gradcam_cnn+lstm_fold1/disgust_pass.jpg Graphic file (type
 Package pdftex.def Info: figures/models/gradcam_cnn+lstm_fold1/disgust_pass.jpg
   used on input line 627.
 (pdftex.def)             Requested size: 105.84666pt x 105.84634pt.
-<figures/models/gradcam_cnn+lstm_fold1/fear_fail_as_happy.jpg, id=803, 224.84pt
+<figures/models/gradcam_cnn+lstm_fold1/fear_fail_as_happy.jpg, id=805, 224.84pt
  x 224.84pt>
 File: figures/models/gradcam_cnn+lstm_fold1/fear_fail_as_happy.jpg Graphic file
  (type jpg)
@@ -1918,7 +1867,7 @@ File: figures/models/gradcam_cnn+lstm_fold1/fear_fail_as_happy.jpg Graphic file
 Package pdftex.def Info: figures/models/gradcam_cnn+lstm_fold1/fear_fail_as_hap
 py.jpg  used on input line 632.
 (pdftex.def)             Requested size: 105.84666pt x 105.84634pt.
-<figures/models/gradcam_cnn+lstm_fold1/happy_pass.jpg, id=804, 224.84pt x 224.8
+<figures/models/gradcam_cnn+lstm_fold1/happy_pass.jpg, id=806, 224.84pt x 224.8
 4pt>
 File: figures/models/gradcam_cnn+lstm_fold1/happy_pass.jpg Graphic file (type j
 pg)
@@ -1926,7 +1875,7 @@ pg)
 Package pdftex.def Info: figures/models/gradcam_cnn+lstm_fold1/happy_pass.jpg  
 used on input line 640.
 (pdftex.def)             Requested size: 105.84666pt x 105.84634pt.
-<figures/models/gradcam_cnn+lstm_fold1/sad_fail_as_anger.jpg, id=805, 224.84pt 
+<figures/models/gradcam_cnn+lstm_fold1/sad_fail_as_anger.jpg, id=807, 224.84pt 
 x 224.84pt>
 File: figures/models/gradcam_cnn+lstm_fold1/sad_fail_as_anger.jpg Graphic file 
 (type jpg)
@@ -1934,7 +1883,7 @@ File: figures/models/gradcam_cnn+lstm_fold1/sad_fail_as_anger.jpg Graphic file
 Package pdftex.def Info: figures/models/gradcam_cnn+lstm_fold1/sad_fail_as_ange
 r.jpg  used on input line 645.
 (pdftex.def)             Requested size: 105.84666pt x 105.84634pt.
-<figures/models/gradcam_cnn+lstm_fold1/sad_fail_as_fear.jpg, id=806, 224.84pt x
+<figures/models/gradcam_cnn+lstm_fold1/sad_fail_as_fear.jpg, id=808, 224.84pt x
  224.84pt>
 File: figures/models/gradcam_cnn+lstm_fold1/sad_fail_as_fear.jpg Graphic file (
 type jpg)
@@ -1942,7 +1891,7 @@ type jpg)
 Package pdftex.def Info: figures/models/gradcam_cnn+lstm_fold1/sad_fail_as_fear
 .jpg  used on input line 650.
 (pdftex.def)             Requested size: 105.84666pt x 105.84634pt.
-<figures/models/gradcam_cnn+lstm_fold1/surprise_pass.jpg, id=807, 224.84pt x 22
+<figures/models/gradcam_cnn+lstm_fold1/surprise_pass.jpg, id=809, 224.84pt x 22
 4.84pt>
 File: figures/models/gradcam_cnn+lstm_fold1/surprise_pass.jpg Graphic file (typ
 e jpg)
@@ -2009,7 +1958,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [60]
 Capitolul 4.
-<figures/diagrams/UseCaseDiagram.png, id=852, 1733.47626pt x 1528.71124pt>
+<figures/diagrams/UseCaseDiagram.png, id=854, 1733.47626pt x 1528.71124pt>
 File: figures/diagrams/UseCaseDiagram.png Graphic file (type png)
 <use figures/diagrams/UseCaseDiagram.png>
 Package pdftex.def Info: figures/diagrams/UseCaseDiagram.png  used on input lin
@@ -2042,31 +1991,31 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [64]
-<figures/diagrams/backend-routing.png, id=888, 8222.72pt x 2673.99pt>
+<figures/diagrams/backend-routing.png, id=890, 8222.72pt x 2673.99pt>
 File: figures/diagrams/backend-routing.png Graphic file (type png)
 <use figures/diagrams/backend-routing.png>
 Package pdftex.def Info: figures/diagrams/backend-routing.png  used on input li
 ne 150.
 (pdftex.def)             Requested size: 348.40103pt x 113.26566pt.
-<figures/diagrams/backend-auth.png, id=889, 8222.72pt x 1643.13875pt>
+<figures/diagrams/backend-auth.png, id=891, 8222.72pt x 1643.13875pt>
 File: figures/diagrams/backend-auth.png Graphic file (type png)
 <use figures/diagrams/backend-auth.png>
 Package pdftex.def Info: figures/diagrams/backend-auth.png  used on input line 
 157.
 (pdftex.def)             Requested size: 436.60997pt x 87.22633pt.
-<figures/diagrams/backend-admin.png, id=890, 8222.72pt x 1461.46pt>
+<figures/diagrams/backend-admin.png, id=892, 8222.72pt x 1461.46pt>
 File: figures/diagrams/backend-admin.png Graphic file (type png)
 <use figures/diagrams/backend-admin.png>
 Package pdftex.def Info: figures/diagrams/backend-admin.png  used on input line
  164.
 (pdftex.def)             Requested size: 436.60997pt x 77.58188pt.
-<figures/diagrams/backend-doctor.png, id=891, 8221.71625pt x 2809.49625pt>
+<figures/diagrams/backend-doctor.png, id=893, 8221.71625pt x 2809.49625pt>
 File: figures/diagrams/backend-doctor.png Graphic file (type png)
 <use figures/diagrams/backend-doctor.png>
 Package pdftex.def Info: figures/diagrams/backend-doctor.png  used on input lin
 e 171.
 (pdftex.def)             Requested size: 436.60997pt x 149.18553pt.
-<figures/diagrams/backend-class-diagram-2.png, id=892, 8222.72pt x 1256.695pt>
+<figures/diagrams/backend-class-diagram-2.png, id=894, 8222.72pt x 1256.695pt>
 File: figures/diagrams/backend-class-diagram-2.png Graphic file (type png)
 <use figures/diagrams/backend-class-diagram-2.png>
 Package pdftex.def Info: figures/diagrams/backend-class-diagram-2.png  used on 
@@ -2091,66 +2040,52 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [66 <./figures/diagrams/backend-routing.png> <./figures/diagrams/backend-auth.p
 ng> <./figures/diagrams/backend-admin.png> <./figures/diagrams/backend-doctor.p
 ng> <./figures/diagrams/backend-class-diagram-2.png>]
-Overfull \hbox (22.0928pt too wide) in paragraph at lines 195--196
-[]\OT1/ppl/b/n/12 Contextul pacien[]ilor \OT1/ppl/m/n/12 (Fi-gura []4.3b[]): Co
-m-po-nenta \OT1/ppl/m/it/12 Pa-ti-ent-Si-de-bar \OT1/ppl/m/n/12 afi[]eaz[]a inf
-orma[]ii
+Overfull \hbox (3.91177pt too wide) in paragraph at lines 195--196
+\OT1/ppl/m/n/12 mo-del com-plex ce reune[]te informa[]iile des-pre pa-cient (\O
+T1/ppl/m/it/12 Doc-tor-Pa-ti-ent-Su-m-mary\OT1/ppl/m/n/12 ),
  []
 
-
-Overfull \hbox (22.29497pt too wide) in paragraph at lines 197--198
-\OT1/ppl/m/it/12 Ser-ver\OT1/ppl/m/n/12 -ul backend-ului, pro-pag[]and ul-te-ri
-or pro-ba-bi-lit[]a[]ile de inferen[][]a recep[]ionate
- []
-
-
-Overfull \hbox (36.10771pt too wide) in paragraph at lines 199--200
-\OT1/ppl/m/n/12 mo-de-lele \OT1/ppl/m/it/12 Emo-tion-Data\OT1/ppl/m/n/12 , \OT1
-/ppl/m/it/12 Emo-tion-S-nap-shot \OT1/ppl/m/n/12 (care con[]ine []^^Pn plus []i
- mo-men-tul []^^Pnregistr[]arii
- []
-
-<figures/diagrams/frontend-class-diagram-1.png, id=914, 8222.72pt x 1905.1175pt
+<figures/diagrams/frontend-class-diagram-1.png, id=916, 8222.72pt x 1905.1175pt
 >
 File: figures/diagrams/frontend-class-diagram-1.png Graphic file (type png)
 <use figures/diagrams/frontend-class-diagram-1.png>
 Package pdftex.def Info: figures/diagrams/frontend-class-diagram-1.png  used on
  input line 209.
 (pdftex.def)             Requested size: 436.60997pt x 101.13353pt.
-<figures/diagrams/frontend-patient-context.png, id=915, 5845.84pt x 2173.11874p
+<figures/diagrams/frontend-patient-context.png, id=917, 5845.84pt x 2173.11874p
 t>
 File: figures/diagrams/frontend-patient-context.png Graphic file (type png)
 <use figures/diagrams/frontend-patient-context.png>
 Package pdftex.def Info: figures/diagrams/frontend-patient-context.png  used on
  input line 216.
 (pdftex.def)             Requested size: 295.48106pt x 109.82286pt.
-<figures/diagrams/frontend-dashboard-core.png, id=916, 4797.925pt x 3505.095pt>
+<figures/diagrams/frontend-dashboard-core.png, id=918, 4797.925pt x 3505.095pt>
 
 File: figures/diagrams/frontend-dashboard-core.png Graphic file (type png)
 <use figures/diagrams/frontend-dashboard-core.png>
 Package pdftex.def Info: figures/diagrams/frontend-dashboard-core.png  used on 
 input line 223.
 (pdftex.def)             Requested size: 105.8433pt x 77.28346pt.
-<figures/diagrams/frontend-streaming.png, id=917, 8222.72pt x 2299.59125pt>
+<figures/diagrams/frontend-streaming.png, id=919, 8222.72pt x 2299.59125pt>
 File: figures/diagrams/frontend-streaming.png Graphic file (type png)
 <use figures/diagrams/frontend-streaming.png>
 Package pdftex.def Info: figures/diagrams/frontend-streaming.png  used on input
  line 230.
 (pdftex.def)             Requested size: 211.68661pt x 59.19496pt.
-<figures/diagrams/frontend-analytics.png, id=918, 8222.72pt x 3708.85625pt>
+<figures/diagrams/frontend-analytics.png, id=920, 8222.72pt x 3708.85625pt>
 File: figures/diagrams/frontend-analytics.png Graphic file (type png)
 <use figures/diagrams/frontend-analytics.png>
 Package pdftex.def Info: figures/diagrams/frontend-analytics.png  used on input
  line 237.
 (pdftex.def)             Requested size: 202.87111pt x 91.4535pt.
-<figures/diagrams/frontend-class-diagram-3.png, id=919, 8222.72pt x 3643.6125pt
+<figures/diagrams/frontend-class-diagram-3.png, id=921, 8222.72pt x 3643.6125pt
 >
 File: figures/diagrams/frontend-class-diagram-3.png Graphic file (type png)
 <use figures/diagrams/frontend-class-diagram-3.png>
 Package pdftex.def Info: figures/diagrams/frontend-class-diagram-3.png  used on
  input line 244.
 (pdftex.def)             Requested size: 229.3311pt x 101.57567pt.
-<figures/diagrams/conceptual_data_model.png, id=920, 6761.26pt x 3146.75626pt>
+<figures/diagrams/conceptual_data_model.png, id=922, 6761.26pt x 3146.75626pt>
 File: figures/diagrams/conceptual_data_model.png Graphic file (type png)
 <use figures/diagrams/conceptual_data_model.png>
 Package pdftex.def Info: figures/diagrams/conceptual_data_model.png  used on in
@@ -2175,7 +2110,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 end-patient-context.png> <./figures/diagrams/frontend-dashboard-core.png> <./fi
 gures/diagrams/frontend-streaming.png> <./figures/diagrams/frontend-analytics.p
 ng> <./figures/diagrams/frontend-class-diagram-3.png>]
-<figures/diagrams/diagrama-SD.png, id=939, 8222.72pt x 4331.18124pt>
+<figures/diagrams/diagrama-SD.png, id=941, 8222.72pt x 4331.18124pt>
 File: figures/diagrams/diagrama-SD.png Graphic file (type png)
 <use figures/diagrams/diagrama-SD.png>
 Package pdftex.def Info: figures/diagrams/diagrama-SD.png  used on input line 2
@@ -2195,7 +2130,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [69 <./figures/diagrams/conceptual_data_model.png>]
-<figures/diagrams/diagrama-CD.png, id=948, 8222.72pt x 4765.805pt>
+<figures/diagrams/diagrama-CD.png, id=950, 8222.72pt x 4765.805pt>
 File: figures/diagrams/diagrama-CD.png Graphic file (type png)
 <use figures/diagrams/diagrama-CD.png>
 Package pdftex.def Info: figures/diagrams/diagrama-CD.png  used on input line 2
@@ -2210,9 +2145,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [70 <./figures/diagrams/diagrama-SD.png>]
-Overfull \hbox (21.58556pt too wide) in paragraph at lines 302--303
+Overfull \hbox (1.86995pt too wide) in paragraph at lines 302--303
 []\OT1/ppl/m/n/12 Figura []4.6[] eviden[]iaz[]a participan[]ii []i dependen[]el
-e din-tre ei pen-tru afi[]area timeline-
+e din-tre ei pen-tru afi[]area time-
  []
 
 
@@ -2223,13 +2158,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [71 <./figures/diagrams/diagrama-CD.png>]
-<figures/app/live-spike-monitor.png, id=967, 936.49875pt x 433.01775pt>
+<figures/app/live-spike-monitor.png, id=969, 936.49875pt x 433.01775pt>
 File: figures/app/live-spike-monitor.png Graphic file (type png)
 <use figures/app/live-spike-monitor.png>
 Package pdftex.def Info: figures/app/live-spike-monitor.png  used on input line
  313.
 (pdftex.def)             Requested size: 436.60997pt x 201.87975pt.
-<figures/diagrams/diagrama-deployment.png, id=968, 8222.72pt x 2252.415pt>
+<figures/diagrams/diagrama-deployment.png, id=970, 8222.72pt x 2252.415pt>
 File: figures/diagrams/diagrama-deployment.png Graphic file (type png)
 <use figures/diagrams/diagrama-deployment.png>
 Package pdftex.def Info: figures/diagrams/diagrama-deployment.png  used on inpu
@@ -2267,7 +2202,7 @@ Overfull \hbox (0.33583pt too wide) in paragraph at lines 338--344
 e (ex. pa-cient f[]ar[]a pat/ward
  []
 
-<figures/diagrams/diagrama-stari.pdf, id=978, 2902.845pt x 1340.1267pt>
+<figures/diagrams/diagrama-stari.pdf, id=980, 2902.845pt x 1340.1267pt>
 File: figures/diagrams/diagrama-stari.pdf Graphic file (type pdf)
 <use figures/diagrams/diagrama-stari.pdf>
 Package pdftex.def Info: figures/diagrams/diagrama-stari.pdf  used on input lin
@@ -2281,7 +2216,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [73]
-<figures/histerezis_alerte.pdf, id=989, 578.16pt x 289.08pt>
+<figures/histerezis_alerte.pdf, id=991, 578.16pt x 289.08pt>
 File: figures/histerezis_alerte.pdf Graphic file (type pdf)
 <use figures/histerezis_alerte.pdf>
 Package pdftex.def Info: figures/histerezis_alerte.pdf  used on input line 376.
@@ -2296,24 +2231,24 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [74 <./figures/diagrams/diagrama-stari.pdf> <./figures/histerezis_alerte.pdf>]
-Overfull \hbox (13.27196pt too wide) in paragraph at lines 418--419
+Overfull \hbox (4.11626pt too wide) in paragraph at lines 418--419
 []\OT1/ppl/m/n/12 Severitatea este cal-cu-lat[]a dup[]a aceea[]i lo-gic[]a (HIG
-H/MEDIUM/LOW) []^^Pn func[]ie
+H/MEDIUM/LOW) []^^Pn func-
  []
 
-<figures/app/current-alerts.png, id=1137, 233.673pt x 250.536pt>
+<figures/app/current-alerts.png, id=1139, 233.673pt x 250.536pt>
 File: figures/app/current-alerts.png Graphic file (type png)
 <use figures/app/current-alerts.png>
 Package pdftex.def Info: figures/app/current-alerts.png  used on input line 428
 .
 (pdftex.def)             Requested size: 158.76495pt x 170.22076pt.
-<figures/app/prolonged-alerts.png, id=1138, 236.082pt x 255.95625pt>
+<figures/app/prolonged-alerts.png, id=1140, 236.082pt x 255.95625pt>
 File: figures/app/prolonged-alerts.png Graphic file (type png)
 <use figures/app/prolonged-alerts.png>
 Package pdftex.def Info: figures/app/prolonged-alerts.png  used on input line 4
 35.
 (pdftex.def)             Requested size: 158.76495pt x 172.1303pt.
-<figures/diagrams/diagrama-activitati.png, id=1139, 6952.97626pt x 8222.72pt>
+<figures/diagrams/diagrama-activitati.png, id=1141, 6952.97626pt x 8222.72pt>
 File: figures/diagrams/diagrama-activitati.png Graphic file (type png)
 <use figures/diagrams/diagrama-activitati.png>
 Package pdftex.def Info: figures/diagrams/diagrama-activitati.png  used on inpu
@@ -2336,13 +2271,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [76 <./figures/app/current-alerts.png> <./figures/app/prolonged-alerts.png> <./
 figures/diagrams/diagrama-activitati.png>]
-Overfull \hbox (29.6641pt too wide) in paragraph at lines 479--480
+Overfull \hbox (1.32054pt too wide) in paragraph at lines 479--480
 []\OT1/ppl/b/n/12 Feedback vi-zual\OT1/ppl/m/n/12 : emo[]ia de-tec-tat[]a este 
-eviden[]iat[]a tem-po-rar (efect de tip \OT1/ppl/m/it/12 flash/pulse\OT1/ppl/m/
-n/12 ). 
+eviden[]iat[]a tem-po-rar (efect de tip \OT1/ppl/m/it/12 flash/-
  []
 
-<figures/app/sentiment-distribution.png, id=1157, 269.808pt x 409.53pt>
+<figures/app/sentiment-distribution.png, id=1159, 269.808pt x 409.53pt>
 File: figures/app/sentiment-distribution.png Graphic file (type png)
 <use figures/app/sentiment-distribution.png>
 Package pdftex.def Info: figures/app/sentiment-distribution.png  used on input 
@@ -2358,7 +2292,7 @@ Underfull \hbox (badness 1895) in paragraph at lines 487--487
 \OT1/ppl/m/n/12 emo[]iilor []i a in-ten-sit[]a[]ilor
  []
 
-<figures/app/clinical-events.png, id=1158, 232.4685pt x 207.77625pt>
+<figures/app/clinical-events.png, id=1160, 232.4685pt x 207.77625pt>
 File: figures/app/clinical-events.png Graphic file (type png)
 <use figures/app/clinical-events.png>
 Package pdftex.def Info: figures/app/clinical-events.png  used on input line 49
@@ -2372,20 +2306,20 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [77]
-<figures/app/low-clinical-risk-level.png, id=1169, 219.219pt x 82.50826pt>
+<figures/app/low-clinical-risk-level.png, id=1171, 219.219pt x 82.50826pt>
 File: figures/app/low-clinical-risk-level.png Graphic file (type png)
 <use figures/app/low-clinical-risk-level.png>
 Package pdftex.def Info: figures/app/low-clinical-risk-level.png  used on input
  line 531.
 (pdftex.def)             Requested size: 136.71442pt x 51.45924pt.
-<figures/app/medium-clinical-risk-level.png, id=1170, 215.00325pt x 72.87225pt>
+<figures/app/medium-clinical-risk-level.png, id=1172, 215.00325pt x 72.87225pt>
 
 File: figures/app/medium-clinical-risk-level.png Graphic file (type png)
 <use figures/app/medium-clinical-risk-level.png>
 Package pdftex.def Info: figures/app/medium-clinical-risk-level.png  used on in
 put line 537.
 (pdftex.def)             Requested size: 149.94441pt x 50.82118pt.
-<figures/app/high-clinical-risk-level.png, id=1171, 215.6055pt x 78.89474pt>
+<figures/app/high-clinical-risk-level.png, id=1173, 215.6055pt x 78.89474pt>
 File: figures/app/high-clinical-risk-level.png Graphic file (type png)
 <use figures/app/high-clinical-risk-level.png>
 Package pdftex.def Info: figures/app/high-clinical-risk-level.png  used on inpu
@@ -2401,31 +2335,31 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [78 <./figures/app/sentiment-distribution.png> <./figures/app/clinical-events.p
 ng>]
-<figures/app/normal-session.png, id=1182, 141.52875pt x 36.73724pt>
+<figures/app/normal-session.png, id=1184, 141.52875pt x 36.73724pt>
 File: figures/app/normal-session.png Graphic file (type png)
 <use figures/app/normal-session.png>
 Package pdftex.def Info: figures/app/normal-session.png  used on input line 570
 .
 (pdftex.def)             Requested size: 119.07666pt x 30.91006pt.
-<figures/app/positive-engagement-session.png, id=1183, 176.45924pt x 38.544pt>
+<figures/app/positive-engagement-session.png, id=1185, 176.45924pt x 38.544pt>
 File: figures/app/positive-engagement-session.png Graphic file (type png)
 <use figures/app/positive-engagement-session.png>
 Package pdftex.def Info: figures/app/positive-engagement-session.png  used on i
 nput line 576.
 (pdftex.def)             Requested size: 141.12889pt x 30.82759pt.
-<figures/app/high-risk-session.png, id=1184, 171.039pt x 37.94176pt>
+<figures/app/high-risk-session.png, id=1186, 171.039pt x 37.94176pt>
 File: figures/app/high-risk-session.png Graphic file (type png)
 <use figures/app/high-risk-session.png>
 Package pdftex.def Info: figures/app/high-risk-session.png  used on input line 
 582.
 (pdftex.def)             Requested size: 141.12889pt x 31.30753pt.
-<figures/app/risk-increased.png, id=1186, 137.91525pt x 62.03175pt>
+<figures/app/risk-increased.png, id=1188, 137.91525pt x 62.03175pt>
 File: figures/app/risk-increased.png Graphic file (type png)
 <use figures/app/risk-increased.png>
 Package pdftex.def Info: figures/app/risk-increased.png  used on input line 606
 .
 (pdftex.def)             Requested size: 116.42828pt x 52.36754pt.
-<figures/app/risk-decreased.png, id=1187, 160.1985pt x 62.03175pt>
+<figures/app/risk-decreased.png, id=1189, 160.1985pt x 62.03175pt>
 File: figures/app/risk-decreased.png Graphic file (type png)
 <use figures/app/risk-decreased.png>
 Package pdftex.def Info: figures/app/risk-decreased.png  used on input line 612
@@ -2466,7 +2400,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [80 <./figures/app/risk-increased.png> <./figures/app/risk-decreased.png>]
-<figures/diagrams/cfg.pdf, id=1213, 2902.845pt x 2902.845pt>
+<figures/diagrams/cfg.pdf, id=1215, 2902.845pt x 2902.845pt>
 File: figures/diagrams/cfg.pdf Graphic file (type pdf)
 <use figures/diagrams/cfg.pdf>
 Package pdftex.def Info: figures/diagrams/cfg.pdf  used on input line 679.
@@ -2597,12 +2531,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [85]
-<figures/app/login.png, id=1389, 457.10776pt x 350.5095pt>
+<figures/app/login.png, id=1391, 457.10776pt x 350.5095pt>
 File: figures/app/login.png Graphic file (type png)
 <use figures/app/login.png>
 Package pdftex.def Info: figures/app/login.png  used on input line 828.
 (pdftex.def)             Requested size: 127.01326pt x 97.39322pt.
-<figures/app/create-account.png, id=1390, 457.10776pt x 387.849pt>
+<figures/app/create-account.png, id=1392, 457.10776pt x 387.849pt>
 File: figures/app/create-account.png Graphic file (type png)
 <use figures/app/create-account.png>
 Package pdftex.def Info: figures/app/create-account.png  used on input line 836
@@ -2617,19 +2551,19 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [86 <./figures/app/login.png> <./figures/app/create-account.png>]
-<figures/app/administrative-dashboard.png, id=1407, 1138.85475pt x 497.4585pt>
+<figures/app/administrative-dashboard.png, id=1409, 1138.85475pt x 497.4585pt>
 File: figures/app/administrative-dashboard.png Graphic file (type png)
 <use figures/app/administrative-dashboard.png>
 Package pdftex.def Info: figures/app/administrative-dashboard.png  used on inpu
 t line 881.
 (pdftex.def)             Requested size: 189.63438pt x 82.82857pt.
-<figures/app/ward-management.png, id=1408, 1083.44775pt x 366.77025pt>
+<figures/app/ward-management.png, id=1410, 1083.44775pt x 366.77025pt>
 File: figures/app/ward-management.png Graphic file (type png)
 <use figures/app/ward-management.png>
 Package pdftex.def Info: figures/app/ward-management.png  used on input line 88
 9.
 (pdftex.def)             Requested size: 246.96884pt x 83.59985pt.
-<figures/app/doctor-panel.png, id=1410, 347.49825pt x 540.8205pt>
+<figures/app/doctor-panel.png, id=1412, 347.49825pt x 540.8205pt>
 File: figures/app/doctor-panel.png Graphic file (type png)
 <use figures/app/doctor-panel.png>
 Package pdftex.def Info: figures/app/doctor-panel.png  used on input line 913.
@@ -2644,7 +2578,7 @@ Underfull \hbox (badness 4108) in paragraph at lines 914--914
 \OT1/ppl/m/n/12 DOC-TOR: pre-lu-a-rea []i
  []
 
-<figures/app/monitoring-dashboard.png, id=1411, 1154.51324pt x 541.42274pt>
+<figures/app/monitoring-dashboard.png, id=1413, 1154.51324pt x 541.42274pt>
 File: figures/app/monitoring-dashboard.png Graphic file (type png)
 <use figures/app/monitoring-dashboard.png>
 Package pdftex.def Info: figures/app/monitoring-dashboard.png  used on input li
@@ -2727,7 +2661,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [94]
-Underfull \hbox (badness 1132) in paragraph at lines 237--241
+Underfull \hbox (badness 1132) in paragraph at lines 243--247
 \OT1/ppl/m/n/12 ne-o-cor-ti-cal pyra-mi-dal ce-lls me-di-a-ted by Mar-ti-notti 
 ce-lls.  \OT1/ppl/m/it/12 Ne-u-ron\OT1/ppl/m/n/12 ,
  []
@@ -2756,10 +2690,10 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 967F531FAE43BBD208F0B09959D2786F;7814.
  ) 
 Here is how much of TeX's memory you used:
- 26455 strings out of 467690
- 508361 string characters out of 5415934
- 937945 words of memory out of 5000000
- 54611 multiletter control sequences out of 15000+600000
+ 26457 strings out of 467690
+ 508414 string characters out of 5415934
+ 937996 words of memory out of 5000000
+ 54612 multiletter control sequences out of 15000+600000
  670829 words of font info for 149 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  90i,18n,104p,1855b,647s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2788,9 +2722,9 @@ eX/fonts/type1/urw/palatino/uplbi8a.pfb><C:/Users/Adi/AppData/Local/Programs/Mi
 KTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/Adi/AppData/Local/Programs/M
 iKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/Adi/AppData/Local/Programs/
 MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (102 pages, 11296987 bytes).
+Output written on main.pdf (102 pages, 11297595 bytes).
 PDF statistics:
- 1656 PDF objects out of 1728 (max. 8388607)
- 422 named destinations out of 1000 (max. 500000)
+ 1658 PDF objects out of 1728 (max. 8388607)
+ 423 named destinations out of 1000 (max. 500000)
  571 words of extra memory for PDF output out of 10000 (max. 10000000)
 
