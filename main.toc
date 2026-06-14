@@ -1,10 +1,10 @@
 \babel@toc {romanian}{}\relax 
 \contentsline {chapter}{Introducere}{1}{chapter*.3}%
 \contentsline {chapter}{\numberline {1}Motivația și formularea problemei}{4}{chapter.1}%
-\contentsline {chapter}{\numberline {2}Fundamente teoretice despre inteligența artificială și rețele neuromorfice}{11}{chapter.2}%
+\contentsline {chapter}{\numberline {2}Repere teoretice în inteligența artificială și calculul neuromorfic}{11}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Modele de învățare automată și rețele artificiale de a doua generație}{11}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Trecerea de la ANN la Spiking Neural Networks (SNN)}{16}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Modelarea matematică a neuronului cu impulsuri}{17}{section.2.3}%
+\contentsline {section}{\numberline {2.3}Modelarea matematică a neuronului cu impulsuri}{16}{section.2.3}%
 \contentsline {section}{\numberline {2.4}Filtrarea bio-inspirată On/Off}{19}{section.2.4}%
 \contentsline {section}{\numberline {2.5}Codificarea informației neurale}{20}{section.2.5}%
 \contentsline {subsubsection}{Rank Order Coding}{21}{section*.28}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.4.17)  14 JUN 2026 01:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.4.17)  14 JUN 2026 06:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1086,10 +1086,10 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [12]
 <images/neuron_artificial.jpg, id=315, 596.2275pt x 317.185pt>
@@ -1105,18 +1105,18 @@ n-form mo-de-lu-lui des-cris []^^Pn ecua[]ia
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [13 <./images/neuron_artificial.jpg>]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [14]
 Overfull \hbox (10.24675pt too wide) in paragraph at lines 83--84
@@ -1132,13 +1132,13 @@ Underfull \hbox (badness 3000) in paragraph at lines 103--103
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [15]
-<figures/artificial_vs_spiking_neuron.png, id=357, 370.38374pt x 396.2805pt>
+<figures/artificial_vs_spiking_neuron.png, id=358, 370.38374pt x 396.2805pt>
 File: figures/artificial_vs_spiking_neuron.png Graphic file (type png)
 <use figures/artificial_vs_spiking_neuron.png>
 Package pdftex.def Info: figures/artificial_vs_spiking_neuron.png  used on inpu
@@ -1152,10 +1152,10 @@ Overfull \hbox (5.35344pt too wide) in paragraph at lines 132--133
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [16]
 Overfull \hbox (25.8455pt too wide) in paragraph at lines 134--135
@@ -1171,18 +1171,18 @@ Package pdftex.def Info: figures/dinamica_membranei.png  used on input line 147
 (pdftex.def)             Requested size: 330.76329pt x 232.07796pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [17 <./figures/artificial_vs_spiking_neuron.png>]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [18 <./figures/dinamica_membranei.png>]
 Overfull \hbox (31.01552pt too wide) in paragraph at lines 177--178
@@ -1193,10 +1193,10 @@ lui,
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [19]
 Overfull \hbox (0.63pt too wide) in paragraph at lines 218--219
@@ -1213,10 +1213,10 @@ u-lui de in-trare $\OML/cmm/m/it/12 x \OMS/cmsy/m/n/12 2 \OT1/cmr/m/n/12 [0\OML
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [20]
 Overfull \hbox (9.7091pt too wide) in paragraph at lines 237--238
@@ -1226,10 +1226,10 @@ Overfull \hbox (9.7091pt too wide) in paragraph at lines 237--238
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [21]
 Overfull \hbox (7.05696pt too wide) in paragraph at lines 253--254
@@ -1239,10 +1239,10 @@ Overfull \hbox (7.05696pt too wide) in paragraph at lines 253--254
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [22]
 Overfull \hbox (19.75015pt too wide) in paragraph at lines 286--287
@@ -1252,10 +1252,10 @@ Overfull \hbox (19.75015pt too wide) in paragraph at lines 286--287
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [23]
 Overfull \hbox (1.11787pt too wide) in paragraph at lines 293--294
@@ -1271,10 +1271,10 @@ e con-e-xiu-nile care trans-port[]a informa[]ie
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [24]
 Overfull \hbox (7.37865pt too wide) in paragraph at lines 341--342
@@ -1284,10 +1284,10 @@ an-tre-nare este me-ca-nis-mul \OT1/ppl/m/it/12 Winner-
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [25]
 Overfull \hbox (8.36287pt too wide) in paragraph at lines 374--374
@@ -1308,10 +1308,10 @@ Overfull \hbox (19.46466pt too wide) in paragraph at lines 376--377
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [26]
 Overfull \hbox (3.79948pt too wide) in paragraph at lines 389--391
@@ -1328,10 +1328,10 @@ Package pdftex.def Info: figures/2d-csnn.png  used on input line 394.
 (pdftex.def)             Requested size: 308.71106pt x 254.22325pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [27]
 Overfull \hbox (12.37294pt too wide) in paragraph at lines 408--410
@@ -1346,18 +1346,18 @@ Package pdftex.def Info: figures/3d-csnn.png  used on input line 413.
 (pdftex.def)             Requested size: 330.76329pt x 298.54059pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [28 <./figures/2d-csnn.png>]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [29 <./figures/3d-csnn.png>]
 Overfull \hbox (11.03973pt too wide) in paragraph at lines 436--438
@@ -1394,18 +1394,18 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [30]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [31 <./figures/landmarks_68.png>]
 Overfull \hbox (8.25066pt too wide) in paragraph at lines 508--510
@@ -1416,18 +1416,18 @@ ului. []In absen[]a co-di-fic[]arii prin laten[][]a,
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [32]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [33]
 <figures/linear_decay_decoding.png, id=596, 714.7503pt x 426.393pt>
@@ -1456,10 +1456,10 @@ e-rind o pe-na-li-zare propor[]ional[]a
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [34 <./figures/linear_decay_decoding.png> <./figures/rectangular_pulse_decoding
 .png> <./figures/gaussian-based-decoding.png>]) (chapters/chapter3.tex
@@ -1470,10 +1470,10 @@ n-te-lor te-o-re-tice, marc[]and tranzi[]ia
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 27.35799pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.35799pt}.
+(fancyhdr)                Make it at least 29.79388pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.79388pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-15.35799pt}.
+(fancyhdr)                \addtolength{\topmargin}{-17.79388pt}.
 
 [35]
 Capitolul 3.
@@ -2753,12 +2753,12 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2026-03-20>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 4DA89647ABF82AEA3C1BB447AEFABDDA;7849.
+(rerunfilecheck)             Checksum: 967F531FAE43BBD208F0B09959D2786F;7814.
  ) 
 Here is how much of TeX's memory you used:
  26455 strings out of 467690
  508361 string characters out of 5415934
- 937952 words of memory out of 5000000
+ 937945 words of memory out of 5000000
  54611 multiletter control sequences out of 15000+600000
  670829 words of font info for 149 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -2788,7 +2788,7 @@ eX/fonts/type1/urw/palatino/uplbi8a.pfb><C:/Users/Adi/AppData/Local/Programs/Mi
 KTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/Adi/AppData/Local/Programs/M
 iKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/Adi/AppData/Local/Programs/
 MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (102 pages, 11296795 bytes).
+Output written on main.pdf (102 pages, 11296987 bytes).
 PDF statistics:
  1656 PDF objects out of 1728 (max. 8388607)
  422 named destinations out of 1000 (max. 500000)
